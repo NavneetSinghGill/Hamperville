@@ -1,0 +1,14 @@
+//
+//  RealHampervilleAPI.h
+//  Hamperville
+//
+//  Created by stplmacmini11 on 07/04/16.
+//  Copyright © 2016 Systango. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "IHampervilleAPIInteractor.h"
+
+@interface RealHampervilleAPI : NSObject<IHampervilleAPIInteractor>
+
+@end

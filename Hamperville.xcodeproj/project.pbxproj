@@ -1,0 +1,965 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04EA82A275AB45466DB9B180 /* libPods-Hamperville.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA7285666675FF78131008 /* libPods-Hamperville.a */; };
+		3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */; };
+		3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */; };
+		3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */; };
+		3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */; };
+		3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */; };
+		3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB51CBBC87900D7B208 /* HomePageViewController.m */; };
+		3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */; };
+		3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */; };
+		3BCD37C41CBE270400DE4E91 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C31CBE270400DE4E91 /* User.m */; };
+		3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C81CBE27ED00DE4E91 /* Util.m */; };
+		3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37CB1CBE2B2300DE4E91 /* UserInterface.m */; };
+		3BCD37CF1CBE2B4000DE4E91 /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37CE1CBE2B4000DE4E91 /* UserRequest.m */; };
+		3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE21E751CBCD7C900F5EB80 /* LeftMenuViewController.m */; };
+		3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE45CA01CBF727400C03369 /* ForgotPasswordViewController.m */; };
+		3BE603C91CB5188400E0F997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603C81CB5188400E0F997 /* main.m */; };
+		3BE603CC1CB5188400E0F997 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603CB1CB5188400E0F997 /* AppDelegate.m */; };
+		3BE603D21CB5188400E0F997 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE603D01CB5188400E0F997 /* Main.storyboard */; };
+		3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603D31CB5188400E0F997 /* Hamperville.xcdatamodeld */; };
+		3BE603D71CB5188400E0F997 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BE603D61CB5188400E0F997 /* Image.xcassets */; };
+		3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BE603D81CB5188400E0F997 /* LaunchScreen.storyboard */; };
+		3BE603E51CB5188400E0F997 /* HampervilleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603E41CB5188400E0F997 /* HampervilleTests.m */; };
+		3BE603F01CB5188500E0F997 /* HampervilleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603EF1CB5188400E0F997 /* HampervilleUITests.m */; };
+		3BE604021CB520CC00E0F997 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE604011CB520CC00E0F997 /* Constants.m */; };
+		3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7B98E1CB7871B00564F49 /* NetworkHttpClient.m */; };
+		3BE7B9931CB7CFB200564F49 /* HampervilleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7B9921CB7CFB200564F49 /* HampervilleViewController.m */; };
+		3BE961331CBB7CCA005D0BCA /* NetworkConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE961321CBB7CCA005D0BCA /* NetworkConstants.m */; };
+		3BE961381CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE961371CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m */; };
+		3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */; };
+		3BE961431CBBC401005D0BCA /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */; };
+		3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */; };
+		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
+		3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824A1CB650E900E1CB3E /* SignupInterface.m */; };
+		3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824D1CB68C9500E1CB3E /* Request.m */; };
+		3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182501CB68CC900E1CB3E /* SignupRequest.m */; };
+		3BF182551CB69CEA00E1CB3E /* RealHampervilleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182541CB69CEA00E1CB3E /* RealHampervilleAPI.m */; };
+		3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182571CB69CFC00E1CB3E /* TestHampervilleAPI.m */; };
+		3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */; };
+		3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3BE603E11CB5188400E0F997 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BE603BC1CB5188400E0F997 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3BE603C31CB5188400E0F997;
+			remoteInfo = Hamperville;
+		};
+		3BE603EC1CB5188400E0F997 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3BE603BC1CB5188400E0F997 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3BE603C31CB5188400E0F997;
+			remoteInfo = Hamperville;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29CA7285666675FF78131008 /* libPods-Hamperville.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hamperville.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B08B7DC1CBCEF69001862FF /* SchedulePickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchedulePickupViewController.h; sourceTree = "<group>"; };
+		3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchedulePickupViewController.m; sourceTree = "<group>"; };
+		3B4BB6C31CBD0E04005BC322 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
+		3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
+		3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
+		3B4BB6CE1CBD2C00005BC322 /* LeftMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTableViewCell.h; sourceTree = "<group>"; };
+		3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTableViewCell.m; sourceTree = "<group>"; };
+		3B6D8DB21CBBC87900D7B208 /* HomePageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageContentViewController.h; sourceTree = "<group>"; };
+		3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageContentViewController.m; sourceTree = "<group>"; };
+		3B6D8DB41CBBC87900D7B208 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		3B6D8DB51CBBC87900D7B208 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		3B6D8DB61CBBC87900D7B208 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		3BCD37C21CBE270400DE4E91 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		3BCD37C31CBE270400DE4E91 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3BCD37C71CBE27ED00DE4E91 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Util.h; path = Hamperville/Util.h; sourceTree = SOURCE_ROOT; };
+		3BCD37C81CBE27ED00DE4E91 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Util.m; path = Hamperville/Util.m; sourceTree = SOURCE_ROOT; };
+		3BCD37CA1CBE2B2300DE4E91 /* UserInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInterface.h; sourceTree = "<group>"; };
+		3BCD37CB1CBE2B2300DE4E91 /* UserInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInterface.m; sourceTree = "<group>"; };
+		3BCD37CD1CBE2B4000DE4E91 /* UserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRequest.h; sourceTree = "<group>"; };
+		3BCD37CE1CBE2B4000DE4E91 /* UserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRequest.m; sourceTree = "<group>"; };
+		3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HampervillePrefixHeader.pch; sourceTree = "<group>"; };
+		3BE21E741CBCD7C900F5EB80 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		3BE21E751CBCD7C900F5EB80 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		3BE45C9F1CBF727400C03369 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		3BE45CA01CBF727400C03369 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		3BE603C41CB5188400E0F997 /* Hamperville.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hamperville.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE603C81CB5188400E0F997 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3BE603CA1CB5188400E0F997 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3BE603CB1CB5188400E0F997 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3BE603D11CB5188400E0F997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3BE603D41CB5188400E0F997 /* Hamperville.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hamperville.xcdatamodel; sourceTree = "<group>"; };
+		3BE603D61CB5188400E0F997 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
+		3BE603D91CB5188400E0F997 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3BE603DB1CB5188400E0F997 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BE603E01CB5188400E0F997 /* HampervilleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HampervilleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE603E41CB5188400E0F997 /* HampervilleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HampervilleTests.m; sourceTree = "<group>"; };
+		3BE603E61CB5188400E0F997 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BE603EB1CB5188400E0F997 /* HampervilleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HampervilleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BE603EF1CB5188400E0F997 /* HampervilleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HampervilleUITests.m; sourceTree = "<group>"; };
+		3BE603F11CB5188500E0F997 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BE604001CB520CC00E0F997 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		3BE604011CB520CC00E0F997 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		3BE604031CB520F600E0F997 /* NetworkConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkConstants.h; sourceTree = "<group>"; };
+		3BE7B98D1CB7871B00564F49 /* NetworkHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHttpClient.h; sourceTree = "<group>"; };
+		3BE7B98E1CB7871B00564F49 /* NetworkHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHttpClient.m; sourceTree = "<group>"; };
+		3BE7B9911CB7CFB200564F49 /* HampervilleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HampervilleViewController.h; sourceTree = "<group>"; };
+		3BE7B9921CB7CFB200564F49 /* HampervilleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HampervilleViewController.m; sourceTree = "<group>"; };
+		3BE961321CBB7CCA005D0BCA /* NetworkConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkConstants.m; sourceTree = "<group>"; };
+		3BE961361CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+hasValueForKey.h"; sourceTree = "<group>"; };
+		3BE961371CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+hasValueForKey.m"; sourceTree = "<group>"; };
+		3BE9613D1CBBC38F005D0BCA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		3BF182461CB64D2E00E1CB3E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
+		3BF182471CB64D2E00E1CB3E /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
+		3BF182491CB650E900E1CB3E /* SignupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupInterface.h; sourceTree = "<group>"; };
+		3BF1824A1CB650E900E1CB3E /* SignupInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupInterface.m; sourceTree = "<group>"; };
+		3BF1824C1CB68C9500E1CB3E /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		3BF1824D1CB68C9500E1CB3E /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		3BF1824F1CB68CC900E1CB3E /* SignupRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupRequest.h; sourceTree = "<group>"; };
+		3BF182501CB68CC900E1CB3E /* SignupRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupRequest.m; sourceTree = "<group>"; };
+		3BF182521CB69CB200E1CB3E /* IHampervilleAPIInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IHampervilleAPIInteractor.h; sourceTree = "<group>"; };
+		3BF182531CB69CEA00E1CB3E /* RealHampervilleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealHampervilleAPI.h; sourceTree = "<group>"; };
+		3BF182541CB69CEA00E1CB3E /* RealHampervilleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealHampervilleAPI.m; sourceTree = "<group>"; };
+		3BF182561CB69CFC00E1CB3E /* TestHampervilleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHampervilleAPI.h; sourceTree = "<group>"; };
+		3BF182571CB69CFC00E1CB3E /* TestHampervilleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHampervilleAPI.m; sourceTree = "<group>"; };
+		3BF182591CB69D1100E1CB3E /* APIInteractorProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIInteractorProvider.h; sourceTree = "<group>"; };
+		3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIInteractorProvider.m; sourceTree = "<group>"; };
+		3BF2BED71CBE0CBA00DF6297 /* PersonalDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDetailsViewController.h; sourceTree = "<group>"; };
+		3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDetailsViewController.m; sourceTree = "<group>"; };
+		6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.release.xcconfig"; sourceTree = "<group>"; };
+		DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3BE603C11CB5188400E0F997 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04EA82A275AB45466DB9B180 /* libPods-Hamperville.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603DD1CB5188400E0F997 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603E81CB5188400E0F997 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B4BB6C71CBD2961005BC322 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */,
+				3B4BB6CE1CBD2C00005BC322 /* LeftMenuTableViewCell.h */,
+				3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		3B6D8DB11CBBC87900D7B208 /* HomePageAndLogin */ = {
+			isa = PBXGroup;
+			children = (
+				3B6D8DB21CBBC87900D7B208 /* HomePageContentViewController.h */,
+				3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */,
+				3B6D8DB41CBBC87900D7B208 /* HomePageViewController.h */,
+				3B6D8DB51CBBC87900D7B208 /* HomePageViewController.m */,
+				3B6D8DB61CBBC87900D7B208 /* LoginViewController.h */,
+				3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */,
+				3BE45C9F1CBF727400C03369 /* ForgotPasswordViewController.h */,
+				3BE45CA01CBF727400C03369 /* ForgotPasswordViewController.m */,
+			);
+			path = HomePageAndLogin;
+			sourceTree = "<group>";
+		};
+		3BCD37C11CBE26F300DE4E91 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3BCD37C21CBE270400DE4E91 /* User.h */,
+				3BCD37C31CBE270400DE4E91 /* User.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3BCD37C61CBE27C500DE4E91 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				3BCD37C71CBE27ED00DE4E91 /* Util.h */,
+				3BCD37C81CBE27ED00DE4E91 /* Util.m */,
+			);
+			name = Util;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3BE21E731CBCD78C00F5EB80 /* LeftMenuAndChildScreens */ = {
+			isa = PBXGroup;
+			children = (
+				3BE21E741CBCD7C900F5EB80 /* LeftMenuViewController.h */,
+				3BE21E751CBCD7C900F5EB80 /* LeftMenuViewController.m */,
+				3B08B7DC1CBCEF69001862FF /* SchedulePickupViewController.h */,
+				3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */,
+				3BF2BED71CBE0CBA00DF6297 /* PersonalDetailsViewController.h */,
+				3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */,
+			);
+			path = LeftMenuAndChildScreens;
+			sourceTree = "<group>";
+		};
+		3BE603BB1CB5188400E0F997 = {
+			isa = PBXGroup;
+			children = (
+				3BE603C61CB5188400E0F997 /* Hamperville */,
+				3BE603E31CB5188400E0F997 /* HampervilleTests */,
+				3BE603EE1CB5188400E0F997 /* HampervilleUITests */,
+				3BE603C51CB5188400E0F997 /* Products */,
+				9462428FB116991D2A9936F4 /* Pods */,
+				AA90ADB7EC3FFB5643D79FDF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3BE603C51CB5188400E0F997 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3BE603C41CB5188400E0F997 /* Hamperville.app */,
+				3BE603E01CB5188400E0F997 /* HampervilleTests.xctest */,
+				3BE603EB1CB5188400E0F997 /* HampervilleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3BE603C61CB5188400E0F997 /* Hamperville */ = {
+			isa = PBXGroup;
+			children = (
+				3BE603CA1CB5188400E0F997 /* AppDelegate.h */,
+				3BE603CB1CB5188400E0F997 /* AppDelegate.m */,
+				3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */,
+				3BE961401CBBC3B8005D0BCA /* CustomFont */,
+				3BF182411CB64D1400E1CB3E /* Network manager */,
+				3BF182401CB64D0800E1CB3E /* Controllers */,
+				3BE603FD1CB5202900E0F997 /* Constants */,
+				3B4BB6C71CBD2961005BC322 /* TableViewCells */,
+				3BCD37C11CBE26F300DE4E91 /* Models */,
+				3BCD37C61CBE27C500DE4E91 /* Util */,
+				3BE961341CBB7E77005D0BCA /* Extensions */,
+				3BE603D01CB5188400E0F997 /* Main.storyboard */,
+				3BE603D61CB5188400E0F997 /* Image.xcassets */,
+				3BE603D81CB5188400E0F997 /* LaunchScreen.storyboard */,
+				3BE603DB1CB5188400E0F997 /* Info.plist */,
+				3BE603D31CB5188400E0F997 /* Hamperville.xcdatamodeld */,
+				3BE603C71CB5188400E0F997 /* Supporting Files */,
+			);
+			path = Hamperville;
+			sourceTree = "<group>";
+		};
+		3BE603C71CB5188400E0F997 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3BE603C81CB5188400E0F997 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3BE603E31CB5188400E0F997 /* HampervilleTests */ = {
+			isa = PBXGroup;
+			children = (
+				3BE603E41CB5188400E0F997 /* HampervilleTests.m */,
+				3BE603E61CB5188400E0F997 /* Info.plist */,
+			);
+			path = HampervilleTests;
+			sourceTree = "<group>";
+		};
+		3BE603EE1CB5188400E0F997 /* HampervilleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3BE603EF1CB5188400E0F997 /* HampervilleUITests.m */,
+				3BE603F11CB5188500E0F997 /* Info.plist */,
+			);
+			path = HampervilleUITests;
+			sourceTree = "<group>";
+		};
+		3BE603FD1CB5202900E0F997 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3BE604001CB520CC00E0F997 /* Constants.h */,
+				3BE604011CB520CC00E0F997 /* Constants.m */,
+				3BE604031CB520F600E0F997 /* NetworkConstants.h */,
+				3BE961321CBB7CCA005D0BCA /* NetworkConstants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		3BE961341CBB7E77005D0BCA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3BE961361CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.h */,
+				3BE961371CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		3BE961401CBBC3B8005D0BCA /* CustomFont */ = {
+			isa = PBXGroup;
+			children = (
+				3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */,
+				3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */,
+				3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */,
+			);
+			path = CustomFont;
+			sourceTree = "<group>";
+		};
+		3BF182401CB64D0800E1CB3E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3B4BB6C31CBD0E04005BC322 /* InitialViewController.h */,
+				3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */,
+				3BE9613D1CBBC38F005D0BCA /* HomeViewController.h */,
+				3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */,
+				3BE7B9911CB7CFB200564F49 /* HampervilleViewController.h */,
+				3BE7B9921CB7CFB200564F49 /* HampervilleViewController.m */,
+				3B6D8DB11CBBC87900D7B208 /* HomePageAndLogin */,
+				3BE21E731CBCD78C00F5EB80 /* LeftMenuAndChildScreens */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		3BF182411CB64D1400E1CB3E /* Network manager */ = {
+			isa = PBXGroup;
+			children = (
+				3BF182421CB64D1400E1CB3E /* APIHelpers */,
+				3BF182431CB64D1400E1CB3E /* APIManagers */,
+				3BF182441CB64D1400E1CB3E /* Requests */,
+				3BF182451CB64D1400E1CB3E /* Services */,
+			);
+			path = "Network manager";
+			sourceTree = "<group>";
+		};
+		3BF182421CB64D1400E1CB3E /* APIHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				3BF182591CB69D1100E1CB3E /* APIInteractorProvider.h */,
+				3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */,
+				3BF182521CB69CB200E1CB3E /* IHampervilleAPIInteractor.h */,
+				3BF182531CB69CEA00E1CB3E /* RealHampervilleAPI.h */,
+				3BF182541CB69CEA00E1CB3E /* RealHampervilleAPI.m */,
+				3BF182561CB69CFC00E1CB3E /* TestHampervilleAPI.h */,
+				3BF182571CB69CFC00E1CB3E /* TestHampervilleAPI.m */,
+				3BE7B98D1CB7871B00564F49 /* NetworkHttpClient.h */,
+				3BE7B98E1CB7871B00564F49 /* NetworkHttpClient.m */,
+			);
+			path = APIHelpers;
+			sourceTree = "<group>";
+		};
+		3BF182431CB64D1400E1CB3E /* APIManagers */ = {
+			isa = PBXGroup;
+			children = (
+				3BF182461CB64D2E00E1CB3E /* RequestManager.h */,
+				3BF182471CB64D2E00E1CB3E /* RequestManager.m */,
+			);
+			path = APIManagers;
+			sourceTree = "<group>";
+		};
+		3BF182441CB64D1400E1CB3E /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				3BF1824C1CB68C9500E1CB3E /* Request.h */,
+				3BF1824D1CB68C9500E1CB3E /* Request.m */,
+				3BF1824F1CB68CC900E1CB3E /* SignupRequest.h */,
+				3BF182501CB68CC900E1CB3E /* SignupRequest.m */,
+				3BCD37CD1CBE2B4000DE4E91 /* UserRequest.h */,
+				3BCD37CE1CBE2B4000DE4E91 /* UserRequest.m */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		3BF182451CB64D1400E1CB3E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3BF182491CB650E900E1CB3E /* SignupInterface.h */,
+				3BF1824A1CB650E900E1CB3E /* SignupInterface.m */,
+				3BCD37CA1CBE2B2300DE4E91 /* UserInterface.h */,
+				3BCD37CB1CBE2B2300DE4E91 /* UserInterface.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9462428FB116991D2A9936F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */,
+				6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA90ADB7EC3FFB5643D79FDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29CA7285666675FF78131008 /* libPods-Hamperville.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3BE603C31CB5188400E0F997 /* Hamperville */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BE603F41CB5188500E0F997 /* Build configuration list for PBXNativeTarget "Hamperville" */;
+			buildPhases = (
+				BFF442884E5DDB4995DDDC6C /* Check Pods Manifest.lock */,
+				3BE603C01CB5188400E0F997 /* Sources */,
+				3BE603C11CB5188400E0F997 /* Frameworks */,
+				3BE603C21CB5188400E0F997 /* Resources */,
+				6B33EA994B9C5C755022E6E9 /* Embed Pods Frameworks */,
+				C74B3EBFC452B75BC5651C72 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hamperville;
+			productName = Hamperville;
+			productReference = 3BE603C41CB5188400E0F997 /* Hamperville.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3BE603DF1CB5188400E0F997 /* HampervilleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BE603F71CB5188500E0F997 /* Build configuration list for PBXNativeTarget "HampervilleTests" */;
+			buildPhases = (
+				3BE603DC1CB5188400E0F997 /* Sources */,
+				3BE603DD1CB5188400E0F997 /* Frameworks */,
+				3BE603DE1CB5188400E0F997 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3BE603E21CB5188400E0F997 /* PBXTargetDependency */,
+			);
+			name = HampervilleTests;
+			productName = HampervilleTests;
+			productReference = 3BE603E01CB5188400E0F997 /* HampervilleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3BE603EA1CB5188400E0F997 /* HampervilleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3BE603FA1CB5188500E0F997 /* Build configuration list for PBXNativeTarget "HampervilleUITests" */;
+			buildPhases = (
+				3BE603E71CB5188400E0F997 /* Sources */,
+				3BE603E81CB5188400E0F997 /* Frameworks */,
+				3BE603E91CB5188400E0F997 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3BE603ED1CB5188400E0F997 /* PBXTargetDependency */,
+			);
+			name = HampervilleUITests;
+			productName = HampervilleUITests;
+			productReference = 3BE603EB1CB5188400E0F997 /* HampervilleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3BE603BC1CB5188400E0F997 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Systango;
+				TargetAttributes = {
+					3BE603C31CB5188400E0F997 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					3BE603DF1CB5188400E0F997 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 3BE603C31CB5188400E0F997;
+					};
+					3BE603EA1CB5188400E0F997 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = 3BE603C31CB5188400E0F997;
+					};
+				};
+			};
+			buildConfigurationList = 3BE603BF1CB5188400E0F997 /* Build configuration list for PBXProject "Hamperville" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3BE603BB1CB5188400E0F997;
+			productRefGroup = 3BE603C51CB5188400E0F997 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3BE603C31CB5188400E0F997 /* Hamperville */,
+				3BE603DF1CB5188400E0F997 /* HampervilleTests */,
+				3BE603EA1CB5188400E0F997 /* HampervilleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3BE603C21CB5188400E0F997 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
+				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
+				3BE603D71CB5188400E0F997 /* Image.xcassets in Resources */,
+				3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */,
+				3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */,
+				3BE961431CBBC401005D0BCA /* Roboto-Light.ttf in Resources */,
+				3BE603D21CB5188400E0F997 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603DE1CB5188400E0F997 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603E91CB5188400E0F997 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6B33EA994B9C5C755022E6E9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFF442884E5DDB4995DDDC6C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C74B3EBFC452B75BC5651C72 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3BE603C01CB5188400E0F997 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BCD37C41CBE270400DE4E91 /* User.m in Sources */,
+				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
+				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,
+				3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */,
+				3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */,
+				3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */,
+				3BE7B9931CB7CFB200564F49 /* HampervilleViewController.m in Sources */,
+				3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */,
+				3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */,
+				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
+				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
+				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
+				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,
+				3BF182551CB69CEA00E1CB3E /* RealHampervilleAPI.m in Sources */,
+				3BE603CC1CB5188400E0F997 /* AppDelegate.m in Sources */,
+				3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */,
+				3BE603C91CB5188400E0F997 /* main.m in Sources */,
+				3BCD37CF1CBE2B4000DE4E91 /* UserRequest.m in Sources */,
+				3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */,
+				3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */,
+				3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */,
+				3BE961381CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m in Sources */,
+				3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */,
+				3BE961331CBB7CCA005D0BCA /* NetworkConstants.m in Sources */,
+				3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */,
+				3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */,
+				3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */,
+				3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */,
+				3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603DC1CB5188400E0F997 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE603E51CB5188400E0F997 /* HampervilleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3BE603E71CB5188400E0F997 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BE603F01CB5188500E0F997 /* HampervilleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3BE603E21CB5188400E0F997 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3BE603C31CB5188400E0F997 /* Hamperville */;
+			targetProxy = 3BE603E11CB5188400E0F997 /* PBXContainerItemProxy */;
+		};
+		3BE603ED1CB5188400E0F997 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3BE603C31CB5188400E0F997 /* Hamperville */;
+			targetProxy = 3BE603EC1CB5188400E0F997 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3BE603D01CB5188400E0F997 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BE603D11CB5188400E0F997 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3BE603D81CB5188400E0F997 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3BE603D91CB5188400E0F997 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3BE603F21CB5188500E0F997 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3BE603F31CB5188500E0F997 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3BE603F51CB5188500E0F997 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = Hamperville/HampervillePrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
+				);
+				INFOPLIST_FILE = Hamperville/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"SWRevealViewController\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.Hamperville;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3BE603F61CB5188500E0F997 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = Hamperville/HampervillePrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
+				);
+				INFOPLIST_FILE = Hamperville/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"SWRevealViewController\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.Hamperville;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3BE603F81CB5188500E0F997 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HampervilleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.HampervilleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hamperville.app/Hamperville";
+			};
+			name = Debug;
+		};
+		3BE603F91CB5188500E0F997 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = HampervilleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.HampervilleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hamperville.app/Hamperville";
+			};
+			name = Release;
+		};
+		3BE603FB1CB5188500E0F997 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HampervilleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.HampervilleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Hamperville;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		3BE603FC1CB5188500E0F997 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = HampervilleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Systango.HampervilleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Hamperville;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3BE603BF1CB5188400E0F997 /* Build configuration list for PBXProject "Hamperville" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BE603F21CB5188500E0F997 /* Debug */,
+				3BE603F31CB5188500E0F997 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BE603F41CB5188500E0F997 /* Build configuration list for PBXNativeTarget "Hamperville" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BE603F51CB5188500E0F997 /* Debug */,
+				3BE603F61CB5188500E0F997 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BE603F71CB5188500E0F997 /* Build configuration list for PBXNativeTarget "HampervilleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BE603F81CB5188500E0F997 /* Debug */,
+				3BE603F91CB5188500E0F997 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3BE603FA1CB5188500E0F997 /* Build configuration list for PBXNativeTarget "HampervilleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3BE603FB1CB5188500E0F997 /* Debug */,
+				3BE603FC1CB5188500E0F997 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3BE603D31CB5188400E0F997 /* Hamperville.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3BE603D41CB5188400E0F997 /* Hamperville.xcdatamodel */,
+			);
+			currentVersion = 3BE603D41CB5188400E0F997 /* Hamperville.xcdatamodel */;
+			path = Hamperville.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3BE603BC1CB5188400E0F997 /* Project object */;
+}
