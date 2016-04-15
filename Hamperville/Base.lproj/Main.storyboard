@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="7zz-6q-pNE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QsR-VB-5Fw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
@@ -10,6 +10,10 @@
             <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
+            <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
@@ -32,6 +36,27 @@
         </mutableArray>
     </customFonts>
     <scenes>
+        <!--Initial View Controller-->
+        <scene sceneID="4V6-Mr-Zu8">
+            <objects>
+                <viewController storyboardIdentifier="InitialViewController" id="QsR-VB-5Fw" customClass="InitialViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o56-KI-eDZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="SDa-oL-xT6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2yo-fr-TsK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="7zz-6q-pNE" kind="modal" identifier="toSWController" id="N73-TL-GP7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="26k-3W-HtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1953" y="944"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -165,7 +190,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="5ac-h9-EDZ">
             <objects>
-                <viewController id="7zz-6q-pNE" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SWRevealViewController" id="7zz-6q-pNE" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jp2-N0-IhC"/>
                         <viewControllerLayoutGuide type="bottom" id="FD1-aS-kTQ"/>
@@ -330,11 +355,92 @@
                         <outlet property="logoutButton" destination="Wg8-pR-4TW" id="Esv-7O-P5f"/>
                         <outlet property="primaryPhoneTextField" destination="kL7-hq-C0q" id="JeE-vf-TuH"/>
                         <outlet property="yourInfoTopConstraint" destination="c0n-fH-PEx" id="506-IC-hXb"/>
+                        <segue destination="Ktp-sg-060" kind="push" id="siL-SM-0oT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C05-Gl-AXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-154" y="1707"/>
+        </scene>
+        <!--Change Password View Controller-->
+        <scene sceneID="ieN-A8-8yv">
+            <objects>
+                <viewController storyboardIdentifier="ChangePasswordViewController" id="Ktp-sg-060" customClass="ChangePasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I9n-yr-s9b"/>
+                        <viewControllerLayoutGuide type="bottom" id="X3c-Tf-jVf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bJx-eU-eQY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Current password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tO6-sS-LLv" userLabel="Current password TF">
+                                <rect key="frame" x="30" y="86" width="260" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="htE-Uq-mJS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWD-AP-H37" userLabel="New password TF">
+                                <rect key="frame" x="30" y="141" width="260" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="mXb-cc-S8C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfc-32-Zg8" userLabel="Re-Enter password TF">
+                                <rect key="frame" x="30" y="196" width="260" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dVQ-jA-T9f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6P-gx-XAl">
+                                <rect key="frame" x="30" y="266" width="260" height="40"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.62352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="V4h-PB-06A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="15"/>
+                                <state key="normal" title="Save Password">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="aBO-iU-t3S" eventType="touchUpInside" id="ioY-TU-4AR"/>
+                                    <action selector="savePasswordButtonTapped:" destination="Ktp-sg-060" eventType="touchUpInside" id="5uL-5e-yRb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tO6-sS-LLv" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="0yF-xd-z9b"/>
+                            <constraint firstAttribute="trailing" secondItem="OWD-AP-H37" secondAttribute="trailing" constant="30" id="8t7-Oj-es8"/>
+                            <constraint firstItem="N6P-gx-XAl" firstAttribute="top" secondItem="bfc-32-Zg8" secondAttribute="bottom" constant="30" id="Yvo-o3-RcU"/>
+                            <constraint firstItem="bfc-32-Zg8" firstAttribute="top" secondItem="OWD-AP-H37" secondAttribute="bottom" constant="15" id="bS0-xG-oFB"/>
+                            <constraint firstItem="OWD-AP-H37" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="dTr-wf-jax"/>
+                            <constraint firstItem="tO6-sS-LLv" firstAttribute="top" secondItem="I9n-yr-s9b" secondAttribute="bottom" constant="22" id="hPm-gc-TCL"/>
+                            <constraint firstItem="bfc-32-Zg8" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="kj5-hp-5fM"/>
+                            <constraint firstItem="N6P-gx-XAl" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="sFh-xA-Ryr"/>
+                            <constraint firstAttribute="trailing" secondItem="tO6-sS-LLv" secondAttribute="trailing" constant="30" id="teA-zU-fRi"/>
+                            <constraint firstAttribute="trailing" secondItem="bfc-32-Zg8" secondAttribute="trailing" constant="30" id="uaz-zG-6Hs"/>
+                            <constraint firstAttribute="trailing" secondItem="N6P-gx-XAl" secondAttribute="trailing" constant="30" id="wNz-AJ-3e2"/>
+                            <constraint firstItem="OWD-AP-H37" firstAttribute="top" secondItem="tO6-sS-LLv" secondAttribute="bottom" constant="15" id="xHc-q1-gbr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="oRg-FJ-OrM"/>
+                    <connections>
+                        <outlet property="currentPassTextField" destination="tO6-sS-LLv" id="YVW-yN-7GI"/>
+                        <outlet property="nwPassTextField" destination="OWD-AP-H37" id="7Qe-sT-5zr"/>
+                        <outlet property="reEnterNwPassTextField" destination="bfc-32-Zg8" id="uBb-S2-nvW"/>
+                        <outlet property="savePassword" destination="N6P-gx-XAl" id="dQj-s8-Tec"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KeP-Yz-FUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="241" y="1707"/>
         </scene>
         <!--Schedule Pickup View Controller-->
         <scene sceneID="HqY-uv-vMO">
@@ -673,4 +779,7 @@
         <image name="PasswordLock" width="14" height="15"/>
         <image name="UsernameIcon" width="14" height="15"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="N73-TL-GP7"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -46,6 +46,7 @@
 		3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182571CB69CFC00E1CB3E /* TestHampervilleAPI.m */; };
 		3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */; };
 		3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */; };
+		3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,8 @@
 		3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIInteractorProvider.m; sourceTree = "<group>"; };
 		3BF2BED71CBE0CBA00DF6297 /* PersonalDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDetailsViewController.h; sourceTree = "<group>"; };
 		3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDetailsViewController.m; sourceTree = "<group>"; };
+		3BFB9C981CC0B85900B0996A /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.release.xcconfig"; sourceTree = "<group>"; };
 		DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -223,6 +226,8 @@
 				3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */,
 				3BF2BED71CBE0CBA00DF6297 /* PersonalDetailsViewController.h */,
 				3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */,
+				3BFB9C981CC0B85900B0996A /* ChangePasswordViewController.h */,
+				3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */,
 			);
 			path = LeftMenuAndChildScreens;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
 				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,
+				3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */,
 				3BF182551CB69CEA00E1CB3E /* RealHampervilleAPI.m in Sources */,
 				3BE603CC1CB5188400E0F997 /* AppDelegate.m in Sources */,
 				3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */,
@@ -782,7 +788,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
 				);
 				INFOPLIST_FILE = Hamperville/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -827,7 +833,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SWRevealViewController\"",
 				);
 				INFOPLIST_FILE = Hamperville/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",

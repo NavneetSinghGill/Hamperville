@@ -115,6 +115,14 @@
     [self registerNib];
 }
 
+- (void)refreshUser {
+    User *user = [[Util sharedInstance]getUser];
+    NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
+    self.allHeadings[0] = userName;
+    
+    [self.tableView reloadData];
+}
+
 - (void)registerNib {
     UINib *nib = [UINib nibWithNibName:kLeftMenuTableViewCellNibName bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:kLeftMenuTableViewCellIdentifier];

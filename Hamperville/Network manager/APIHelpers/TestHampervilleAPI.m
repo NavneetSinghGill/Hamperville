@@ -30,4 +30,8 @@
     
 }
 
+- (void)putChangePassWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 @end

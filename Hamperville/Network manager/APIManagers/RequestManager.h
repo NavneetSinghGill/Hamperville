@@ -18,7 +18,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)loginWithUserEmail:(NSString *)email andPassword:(NSString *)password withCompletionBlock:(requestCompletionBlock)block;
 
 #pragma mark - User
-- (void)postUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
+- (void)postUser:(User *)user shouldUpdate:(BOOL)shouldUpdate withCompletionBlock:(requestCompletionBlock)block;
 - (void)getUserWithID:(NSString *)user withCompletionBlock:(requestCompletionBlock)block;
 - (void)postForgotPasswordWithEmail:(NSString *)email withCompletionBlock:(requestCompletionBlock)block;
+- (void)putChangePasswordWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass withCompletionBlock:(requestCompletionBlock)block;
 @end

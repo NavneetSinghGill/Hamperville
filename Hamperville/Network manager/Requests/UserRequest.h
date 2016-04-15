@@ -13,9 +13,10 @@
 
 @property(strong, nonatomic) User *user;
 
-- (id)initWithUser:(User *)user;
+- (id)initWithUser:(User *)user shouldUpdate:(BOOL)shouldUpdate;
 - (id)initWithUserID:(NSString *)userID;
 - (id)initWithEmail:(NSString *)email;
+- (id)initWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass;
 
 - (NSDictionary *)getParams;
 

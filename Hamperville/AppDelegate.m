@@ -22,13 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
-        HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-        self.window.rootViewController = homeViewController;
-        [self.window makeKeyAndVisible];
-    }
+//    if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
+//        HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+//        self.window.rootViewController = homeViewController;
+//        [self.window makeKeyAndVisible];
+//    }
     
     [self setupNetworkMonitoring];
     return YES;

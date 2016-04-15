@@ -18,11 +18,15 @@ typedef enum {
 @interface HampervilleViewController : UIViewController
 
 - (void)showOrHideLeftMenu;
-- (UIBarButtonItem *)menuButton;
-- (void)setLeftMenuButtons:(NSArray *)barButtons;
 
+- (UIBarButtonItem *)menuButton;
+- (UIBarButtonItem *)backButton;
+
+- (void)setLeftMenuButtons:(NSArray *)barButtons;
 - (void)setNavigationBarButtonTitle:(NSString *)title andColor:(UIColor *)color;
+
 - (void)centerTitleButtonTapped;
+- (void)backButtonTapped;
 
 - (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition;
 

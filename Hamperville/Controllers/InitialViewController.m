@@ -8,6 +8,7 @@
 
 #import "InitialViewController.h"
 #import "HomeViewController.h"
+#import <SWRevealViewController.h>
 
 @interface InitialViewController ()
 
@@ -18,15 +19,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
-        HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-        [self initWithRootViewController:homeViewController];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
+        HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+        homeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:homeViewController animated:YES completion:nil];
+    } else {
+        [self performSegueWithIdentifier:kToSWController sender:self];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kToSWController]) {
+        segue.destinationViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    }
 }
 
 @end

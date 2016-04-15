@@ -17,7 +17,7 @@
     id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
     [apiInteractorProvider postUserDetailsWithRequest:userRequest
                             andCompletionBlock:^(BOOL success, id response) {
-                                [self parseUserResponse:response];
+                                [self parseGeneralResponse:response];
                             }];
 }
 
@@ -26,7 +26,7 @@
     id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
     [apiInteractorProvider getUserWithRequest:userRequest
                            andCompletionBlock:^(BOOL success, id response) {
-                               [self parseResponse:response];
+                               [self parseGetUserResponse:response];
                            }];
 }
 
@@ -39,25 +39,37 @@
                                   }];
 }
 
+- (void)putChangePasswordWithRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider putChangePassWithRequest:userRequest
+                                 andCompletionBlock:^(BOOL success, id response) {
+                                     [self parseForgotPasswordResponse:response];
+                                 }];
+}
+
 #pragma mark - Parsing methods
 
-- (void)parseUserResponse:(id)response
+- (void)parseGeneralResponse:(id)response
 {
     if ([response isKindOfClass:[NSDictionary class]])
     {
-        if ([response hasValueForKey:@"user_id"])
-        {
-            NSString *userId =  [response valueForKey:@"user_id"];
-            self.block(YES, userId);
-        }
-        else
-        {
-            NSString *errorMessage = nil;
-            if([response hasValueForKey:@"message"])
+        NSString *success = nil;
+        if ([response hasValueForKey:kSuccessStatus]) {
+            success = [response valueForKey:kSuccessStatus];
+            if (success == kSuccess)
             {
-                errorMessage = [response valueForKey:@"message"];
+                self.block(YES, [response valueForKey:@"message"]);
             }
-            _block(NO, errorMessage);
+            else
+            {
+                NSString *errorMessage = nil;
+                if([response hasValueForKey:@"message"])
+                {
+                    errorMessage = [response valueForKey:@"message"];
+                }
+                _block(NO, errorMessage);
+            }
         }
     }
     else if([response isKindOfClass:[NSError class]])
@@ -71,7 +83,7 @@
     }
 }
 
-- (void)parseResponse:(id)response {
+- (void)parseGetUserResponse:(id)response {
     if ([response isKindOfClass:[NSDictionary class]])
     {
         if ([response hasValueForKey:@"data"])

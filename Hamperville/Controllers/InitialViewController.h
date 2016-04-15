@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HampervilleViewController.h"
 
-@interface InitialViewController : UINavigationController
+@interface InitialViewController : HampervilleViewController
 
 @end

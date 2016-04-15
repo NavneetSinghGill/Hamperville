@@ -10,4 +10,6 @@
 
 @interface LeftMenuViewController : HampervilleViewController
 
+- (void)refreshUser;
+
 @end

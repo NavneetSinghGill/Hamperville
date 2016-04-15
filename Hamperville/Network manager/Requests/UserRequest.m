@@ -16,7 +16,7 @@
 
 @implementation UserRequest
 
-- (id)initWithUser:(User *)user {
+- (id)initWithUser:(User *)user shouldUpdate:(BOOL)shouldUpdate{
     self = [super init];
     if (self) {
         _user = user;
@@ -36,7 +36,11 @@
             [_parameters setValue:user.alternativePhone forKey:@"alternative_phone"];
         }
         
-        self.urlPath = [NSString stringWithFormat:@"%@%@",apiPostUserUrl, user.userID];
+        if (shouldUpdate) {
+            self.urlPath = [NSString stringWithFormat:@"%@%@/update/",apiPostUserUrl, user.userID];
+        } else {
+            self.urlPath = [NSString stringWithFormat:@"%@%@",apiPostUserUrl, user.userID];
+        }
     }
     return self;
 }
@@ -56,6 +60,17 @@
         _parameters = [NSMutableDictionary dictionary];
         [_parameters setValue:email forKey:@"email"];
         self.urlPath = [NSString stringWithFormat:@"%@",apiForgotPassword];
+    }
+    return self;
+}
+
+- (id)initWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:oldPass forKey:@"old_password"];
+        [_parameters setValue:nwPass forKey:@"new_password"];
+        self.urlPath = [NSString stringWithFormat:@"%@",apiChangePassword];
     }
     return self;
 }

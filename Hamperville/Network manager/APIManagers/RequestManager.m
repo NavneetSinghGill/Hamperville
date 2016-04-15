@@ -31,9 +31,9 @@
 
 #pragma mark - User
 
-- (void)postUser:(User *)user withCompletionBlock:(requestCompletionBlock)block {
+- (void)postUser:(User *)user shouldUpdate:(BOOL)shouldUpdate withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
-        [[UserInterface alloc] postUserDetailsWithRequest:[[UserRequest alloc] initWithUser:user]
+        [[UserInterface alloc] postUserDetailsWithRequest:[[UserRequest alloc] initWithUser:user shouldUpdate:shouldUpdate]
                                 andCompletionBlock:^(BOOL success, id response) {
                                     block(success, response);
                                 }];
@@ -56,6 +56,16 @@
 - (void)postForgotPasswordWithEmail:(NSString *)email withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
         [[UserInterface alloc] postForgotPasswordWithRequest:[[UserRequest alloc] initWithEmail:email] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO,kNoNetworkAvailable);
+    }
+}
+
+- (void)putChangePasswordWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] putChangePasswordWithRequest:[[UserRequest alloc] initWithOldPassword:oldPass andNwPassword:nwPass] andCompletionBlock:^(BOOL success, id response) {
             block(success, response);
         }];
     } else {

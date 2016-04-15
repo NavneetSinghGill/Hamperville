@@ -49,6 +49,13 @@
                 }];
 }
 
+- (void)putChangePassWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPutObject:userRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
 #pragma mark - API interactor methods
 
 - (void)interactAPIWithPostObject:(Request *)postObject withCompletionBlock:(apiInteractorCompletionBlock)block {
@@ -71,6 +78,22 @@
     [self initialSetupWithRequest:getObject requestType:RequestGET];
     [[NetworkHttpClient sharedInstance] getAPIcallWithUrl:getObject.urlPath
                                                    params:[getObject getParams]
+                                         withSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                             [self handleSuccessResponse:task
+                                                                response:responseObject
+                                                               withBlock:block];
+                                         }
+                                          andFailureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                              [self handleError:error
+                                                      operation:task
+                                                      withBlock:block];
+                                          }];
+}
+
+- (void)interactAPIWithPutObject:(Request *)putObject withCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self initialSetupWithRequest:putObject requestType:RequestPUT];
+    [[NetworkHttpClient sharedInstance] putAPIcallWithUrl:putObject.urlPath
+                                                   params:[putObject getParams]
                                          withSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                              [self handleSuccessResponse:task
                                                                 response:responseObject

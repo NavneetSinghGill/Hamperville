@@ -9,6 +9,8 @@
 #import "PersonalDetailsViewController.h"
 #import "RequestManager.h"
 #import "User.h"
+#import "ChangePasswordViewController.h"
+#import "LeftMenuViewController.h"
 
 @interface PersonalDetailsViewController ()<UITextFieldDelegate>
 
@@ -45,7 +47,8 @@
 #pragma mark - IBAction methods
 
 - (IBAction)changePasswordButtonTapped:(id)sender {
-    
+    ChangePasswordViewController *changePasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
+    [self.navigationController pushViewController:changePasswordViewController animated:YES];
 }
 
 - (IBAction)logoutButtonTapped:(id)sender {
@@ -61,31 +64,37 @@
             [self initTextFieldsWithUserInfo];
         }];
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            User *userToUpdate = [User new];
-            userToUpdate.firstName = self.firstNameTextField.text;
-            userToUpdate.lastName = self.lastNameTextField.text;
-            userToUpdate.primaryPhone = self.primaryPhoneTextField.text;
-            userToUpdate.alternativePhone = self.alternativePhoneTextField.text;
-            userToUpdate.userID = [[[Util sharedInstance] getUser]userID];
-            
-            [[RequestManager alloc] postUser:userToUpdate
-                         withCompletionBlock:^(BOOL success, id response) {
-                             if (success) {
-                                 
-                             } else {
-                                 [self initTextFieldsWithUserInfo];
-                             }
-                         }];
+            [self postUserAPI];
+        }];
+        [alertController addAction:alertActionNo];
+        [alertController addAction:alertActionYes];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    self.editButton.selected = !self.editButton.selected;
+    [self setUserinteractionForTextFields];
+}
+
+- (void)showOrHideLeftMenu {
+    [self dismissKeyboardIfOpen];
+    if (self.editButton.isSelected) {
+        UIAlertController *alertController = [[UIAlertController alloc]init];
+        alertController.title = @"Do you want to save your data?";
+        UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self initTextFieldsWithUserInfo];
+            [self.editButton setSelected:NO];
+            [super showOrHideLeftMenu];
+        }];
+        UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [super showOrHideLeftMenu];
+            [self.editButton setSelected:NO];
+            [self postUserAPI];
         }];
         [alertController addAction:alertActionNo];
         [alertController addAction:alertActionYes];
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
-        [self.firstNameTextField becomeFirstResponder];
+        [super showOrHideLeftMenu];
     }
-    self.editButton.selected = !self.editButton.selected;
-    [self setUserinteractionForTextFields];
 }
 
 #pragma mark - TextField Delegate methods
@@ -101,6 +110,11 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    return  YES;
 }
 
 #pragma mark - Private methods
@@ -157,6 +171,29 @@
 
 - (void)setUserinteractionForTextFields {
     self.firstNameTextField.userInteractionEnabled = self.lastNameTextField.userInteractionEnabled = self.primaryPhoneTextField.userInteractionEnabled = self.alternativePhoneTextField.userInteractionEnabled = self.editButton.selected;
+}
+
+- (void)postUserAPI {
+    User *userToUpdate = [User new];
+    userToUpdate.firstName = self.firstNameTextField.text;
+    userToUpdate.lastName = self.lastNameTextField.text;
+    userToUpdate.primaryPhone = self.primaryPhoneTextField.text;
+    userToUpdate.alternativePhone = self.alternativePhoneTextField.text;
+    userToUpdate.userID = [[[Util sharedInstance] getUser]userID];
+    
+    [[RequestManager alloc] postUser:userToUpdate shouldUpdate:YES
+                 withCompletionBlock:^(BOOL success, id response) {
+                     if (success) {
+                         [[Util sharedInstance]saveUser:userToUpdate];
+                         if ([self.revealViewController.rearViewController isKindOfClass:[LeftMenuViewController class]]) {
+                             LeftMenuViewController *leftMenuViewController = (LeftMenuViewController *)self.revealViewController.rearViewController;
+                             [leftMenuViewController refreshUser];
+                         }
+                     } else {
+                         [self initTextFieldsWithUserInfo];
+                         [self showToastWithText:response on:Top];
+                     }
+                 }];
 }
 
 #pragma mark - Notification methods

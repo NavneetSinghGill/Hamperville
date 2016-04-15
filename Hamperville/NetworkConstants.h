@@ -16,3 +16,4 @@ extern NSString *kFailure;
 extern NSString *kLoginUrl;
 extern NSString *apiPostUserUrl;
 extern NSString *apiForgotPassword;
+extern NSString *apiChangePassword;
