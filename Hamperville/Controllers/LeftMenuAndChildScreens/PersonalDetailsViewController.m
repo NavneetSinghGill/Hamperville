@@ -11,6 +11,7 @@
 #import "User.h"
 #import "ChangePasswordViewController.h"
 #import "LeftMenuViewController.h"
+#import "SignupInterface.h"
 
 @interface PersonalDetailsViewController ()<UITextFieldDelegate>
 
@@ -47,12 +48,12 @@
 #pragma mark - IBAction methods
 
 - (IBAction)changePasswordButtonTapped:(id)sender {
-    ChangePasswordViewController *changePasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
-    [self.navigationController pushViewController:changePasswordViewController animated:YES];
+//    ChangePasswordViewController *changePasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
+//    [self.navigationController pushViewController:changePasswordViewController animated:YES];
 }
 
 - (IBAction)logoutButtonTapped:(id)sender {
-    
+//    [[SignupInterface alloc] clearSavedSessionCookies];
 }
 
 - (IBAction)editButtonTapped:(id)sender {

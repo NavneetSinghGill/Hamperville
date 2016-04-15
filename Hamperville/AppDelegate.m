@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <AFNetworkReachabilityManager.h>
 #import "HomeViewController.h"
+#import "SignupInterface.h"
 
 @interface AppDelegate ()
 
@@ -22,13 +23,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-//    if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
-//        HomeViewController *homeViewController = [storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-//        self.window.rootViewController = homeViewController;
-//        [self.window makeKeyAndVisible];
-//    }
+    [[SignupInterface alloc] setSavedSessionCookies];
     
     [self setupNetworkMonitoring];
     return YES;
@@ -67,6 +62,7 @@
             case AFNetworkReachabilityStatusReachableViaWiFi:
                 NSLog(@"online");
                 self.isNetworkAvailable = YES;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkAvailablability object:nil];
 //                [[ALAlertBannerManager sharedManager] hideAllAlertBanners];
                 
 //                [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:kAvailableNetwork];
@@ -79,6 +75,7 @@
             case AFNetworkReachabilityStatusNotReachable:
             default:
                 self.isNetworkAvailable = NO;
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkAvailablability object:nil];
                 // Save response in MobiLogger
 //                [[SMobiLogger sharedInterface] error:@"Network UnAvailable." withDescription:nil];
                 
@@ -94,10 +91,6 @@
 - (BOOL)hasNetworkAvailable
 {
     NSLog(@"Info: isNetworkAvailable: %d", self.isNetworkAvailable);
-    if(!self.isNetworkAvailable)
-    {
-        return !self.isNetworkAvailable;
-    }
     return self.isNetworkAvailable;
 }
 

@@ -17,4 +17,12 @@ typedef void (^signupInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)loginWithRequest:(SignupRequest *)signupRequest andCompletionBlock:(signupInterfaceCompletionBlock)block;
 
+- (NSMutableArray *)getSavedSessionCookies;
+
+- (BOOL)setSavedSessionCookies;
+
+- (void)saveSessionCookies:(NSString *)urlPath;
+
+- (void)clearSavedSessionCookies;
+
 @end

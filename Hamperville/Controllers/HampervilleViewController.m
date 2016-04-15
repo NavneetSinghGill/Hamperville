@@ -11,6 +11,23 @@
 
 @implementation HampervilleViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkAvailability)
+                                                 name:kNetworkAvailablability
+                                               object:nil];
+}
+
+- (void)networkAvailability {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+//        [self showToastWithText:@"Network online" on:Top];
+    } else {
+//        [self showToastWithText:@"Network offline" on:Top];
+    }
+}
+
 - (void)showOrHideLeftMenu {
     [self.revealViewController performSelector:@selector(revealToggle:) withObject:nil];
 }

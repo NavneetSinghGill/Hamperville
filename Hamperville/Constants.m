@@ -12,6 +12,10 @@ NSString *kEmptyString = @"";
 
 NSString *kUserID = @"UserID";
 
+NSString *kSessionCookies = @"SessionCookies";
+
+NSString *kNetworkAvailablability = @"NetworkAvailablability";
+
 #pragma mark - TableViewCell constants
 
 NSString *kLeftMenuTableViewCellNibName = @"LeftMenuTableViewCell";

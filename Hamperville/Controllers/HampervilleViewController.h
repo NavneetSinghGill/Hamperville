@@ -18,6 +18,7 @@ typedef enum {
 @interface HampervilleViewController : UIViewController
 
 - (void)showOrHideLeftMenu;
+- (void)networkAvailability;
 
 - (UIBarButtonItem *)menuButton;
 - (UIBarButtonItem *)backButton;

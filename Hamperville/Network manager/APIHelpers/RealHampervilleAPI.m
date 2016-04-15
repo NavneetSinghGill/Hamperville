@@ -11,6 +11,7 @@
 #import "AFHTTPSessionManager.h"
 #import "NetworkHttpClient.h"
 #import "Constants.h"
+#import "SignupInterface.h"
 
 @implementation RealHampervilleAPI {
     BOOL isForbiddenRetry;
@@ -66,6 +67,7 @@
                                               [self handleSuccessResponse:task
                                                                  response:responseObject
                                                                 withBlock:block];
+                                              [[SignupInterface alloc] saveSessionCookies:postObject.urlPath];
                                           }
                                            andFailureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                [self handleError:error
@@ -82,6 +84,7 @@
                                              [self handleSuccessResponse:task
                                                                 response:responseObject
                                                                withBlock:block];
+                                             [[SignupInterface alloc] saveSessionCookies:getObject.urlPath];
                                          }
                                           andFailureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                               [self handleError:error
@@ -92,6 +95,7 @@
 
 - (void)interactAPIWithPutObject:(Request *)putObject withCompletionBlock:(apiInteractorCompletionBlock)block {
     [self initialSetupWithRequest:putObject requestType:RequestPUT];
+    [[SignupInterface alloc] setSavedSessionCookies];
     [[NetworkHttpClient sharedInstance] putAPIcallWithUrl:putObject.urlPath
                                                    params:[putObject getParams]
                                          withSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {

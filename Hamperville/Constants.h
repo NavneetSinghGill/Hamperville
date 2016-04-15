@@ -19,6 +19,10 @@ extern NSString *kEmptyString;
 
 extern NSString *kUserID;
 
+extern NSString *kSessionCookies;
+
+extern NSString *kNetworkAvailablability;
+
 #pragma mark - TableViewCell constants
 
 extern NSString *kLeftMenuTableViewCellNibName;
