@@ -57,7 +57,8 @@
 }
 
 - (IBAction)editButtonTapped:(id)sender {
-    if (self.editButton.selected == YES) {
+    BOOL invalidEntries = false;
+    if (self.editButton.selected == YES && self.primaryPhoneTextField.text.length == 10 && (self.alternativePhoneTextField.text.length == 0 || self.alternativePhoneTextField.text.length == 10)) {
         [self dismissKeyboardIfOpen];
         UIAlertController *alertController = [[UIAlertController alloc]init];
         alertController.title = @"Do you want to save your data?";
@@ -70,9 +71,14 @@
         [alertController addAction:alertActionNo];
         [alertController addAction:alertActionYes];
         [self presentViewController:alertController animated:YES completion:nil];
+    } else if (self.primaryPhoneTextField.text.length != 10) {
+        [self showToastWithText:@"Please re-check your entries" on:Top];
+        invalidEntries = YES;
     }
-    self.editButton.selected = !self.editButton.selected;
-    [self setUserinteractionForTextFields];
+    if (!invalidEntries) {
+        self.editButton.selected = !self.editButton.selected;
+        [self setUserinteractionForTextFields];
+    }
 }
 
 - (void)showOrHideLeftMenu {
@@ -86,9 +92,13 @@
             [super showOrHideLeftMenu];
         }];
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [super showOrHideLeftMenu];
-            [self.editButton setSelected:NO];
-            [self postUserAPI];
+            if (self.primaryPhoneTextField.text.length == 10 && (self.alternativePhoneTextField.text.length == 0 || self.alternativePhoneTextField.text.length == 10)) {
+                [super showOrHideLeftMenu];
+                [self.editButton setSelected:NO];
+                [self postUserAPI];
+            } else {
+                [self showToastWithText:@"Please re-check your entries" on:Top];
+            }
         }];
         [alertController addAction:alertActionNo];
         [alertController addAction:alertActionYes];

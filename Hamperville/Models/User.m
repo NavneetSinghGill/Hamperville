@@ -14,7 +14,10 @@
     User *user = [User new];
     
     if ([dict hasValueForKey:@"alternative_phone"]) {
-        user.alternativePhone = [dict valueForKey:@"alternative_phone"];
+        NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+        [nonNumberCharacterSet invert];
+        
+        user.alternativePhone = [[[dict valueForKey:@"alternative_phone"] componentsSeparatedByCharactersInSet:nonNumberCharacterSet] componentsJoinedByString:@""];
     }
     if ([dict hasValueForKey:@"email"]) {
         user.email = [dict valueForKey:@"email"];
@@ -29,7 +32,10 @@
         user.lastName = [dict valueForKey:@"last_name"];
     }
     if ([dict hasValueForKey:@"primary_phone"]) {
-        user.primaryPhone = [dict valueForKey:@"primary_phone"];
+            NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+            [nonNumberCharacterSet invert];
+            
+            user.primaryPhone = [[[dict valueForKey:@"primary_phone"] componentsSeparatedByCharactersInSet:nonNumberCharacterSet] componentsJoinedByString:@""];
     }
     return user;
 }
