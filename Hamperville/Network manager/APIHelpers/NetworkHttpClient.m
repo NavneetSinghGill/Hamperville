@@ -57,4 +57,14 @@
       }];
 }
 
+- (void)deleteAPIcallWithUrl:(NSString *)url params:(NSDictionary *)params withSuccessBlock:(successBlock)success andFailureBlock:(failureBlock)failure {
+    [self DELETE:url
+      parameters:params
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+             success(task, responseObject);
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             failure(task, error);
+         }];
+}
+
 @end

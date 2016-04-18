@@ -17,6 +17,7 @@
 - (id)initWithUserID:(NSString *)userID;
 - (id)initWithEmail:(NSString *)email;
 - (id)initWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass;
+- (id)initWithUserToLogout:(User *)user;
 
 - (NSDictionary *)getParams;
 

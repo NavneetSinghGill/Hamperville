@@ -23,4 +23,6 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)putChangePasswordWithRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)logoutUserWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 @end

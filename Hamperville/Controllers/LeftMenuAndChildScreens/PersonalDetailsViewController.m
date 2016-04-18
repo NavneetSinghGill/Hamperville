@@ -48,12 +48,17 @@
 #pragma mark - IBAction methods
 
 - (IBAction)changePasswordButtonTapped:(id)sender {
-//    ChangePasswordViewController *changePasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
-//    [self.navigationController pushViewController:changePasswordViewController animated:YES];
+    ChangePasswordViewController *changePasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangePasswordViewController"];
+    [self.navigationController pushViewController:changePasswordViewController animated:YES];
 }
 
 - (IBAction)logoutButtonTapped:(id)sender {
-//    [[SignupInterface alloc] clearSavedSessionCookies];
+    [[RequestManager alloc]logoutUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
+        [[SignupInterface alloc] clearSavedSessionCookies];
+    }];
+    [[Util sharedInstance]saveUser:[User new]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LNDismissLoginController object:nil];
+    [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)editButtonTapped:(id)sender {
@@ -202,7 +207,12 @@
                          }
                      } else {
                          [self initTextFieldsWithUserInfo];
-                         [self showToastWithText:response on:Top];
+                         if ([response isKindOfClass:[NSArray class]]) {
+                             NSArray *responseArray = (NSArray *) response;
+                             [self showToastWithText:[NSString stringWithFormat:@"%@\n%@", responseArray[0], responseArray[1]] on:Top];
+                         } else {
+                             [self showToastWithText:response on:Top];
+                         }
                      }
                  }];
 }

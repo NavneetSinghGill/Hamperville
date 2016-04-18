@@ -34,4 +34,14 @@
     
 }
 
+- (void)logoutUserWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+#pragma mark - Pickup
+
+- (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 @end

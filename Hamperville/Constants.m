@@ -28,3 +28,8 @@ NSString *kToSWController = @"toSWController";
 #pragma mark - Messages
 
 NSString *kNoNetworkAvailable = @"No Network available";
+
+#pragma mark - Local notifications
+
+NSString *LNDismissLoginController = @"DismissLoginController";
+

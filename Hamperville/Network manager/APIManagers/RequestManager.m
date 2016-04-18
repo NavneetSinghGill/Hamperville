@@ -15,6 +15,9 @@
 #import "UserInterface.h"
 #import "UserRequest.h"
 
+#import "PickupInterface.h"
+#import "PickupRequest.h"
+
 @implementation RequestManager
 
 #pragma mark - Login
@@ -70,6 +73,28 @@
         }];
     } else {
         block(NO,kNoNetworkAvailable);
+    }
+}
+
+- (void)logoutUser:(User *)user withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc]logoutUserWithUserRequest:[[UserRequest alloc] initWithUserToLogout:user] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+#pragma mark - Pickup
+
+- (void)getSchedulePickup:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[PickupInterface alloc] getSchedulePickupWithPickupRequest:[[PickupRequest alloc] initWithSchedulePickup] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
     }
 }
 

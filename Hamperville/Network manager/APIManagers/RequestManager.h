@@ -22,4 +22,10 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)getUserWithID:(NSString *)user withCompletionBlock:(requestCompletionBlock)block;
 - (void)postForgotPasswordWithEmail:(NSString *)email withCompletionBlock:(requestCompletionBlock)block;
 - (void)putChangePasswordWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass withCompletionBlock:(requestCompletionBlock)block;
+- (void)logoutUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
+
+#pragma mark - Pickup
+
+- (void)getSchedulePickup:(requestCompletionBlock)block;
+
 @end

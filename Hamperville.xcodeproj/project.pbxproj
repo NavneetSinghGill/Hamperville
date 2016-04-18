@@ -38,6 +38,8 @@
 		3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */; };
 		3BE961431CBBC401005D0BCA /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */; };
 		3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */; };
+		3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */; };
+		3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */; };
 		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
 		3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824A1CB650E900E1CB3E /* SignupInterface.m */; };
 		3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824D1CB68C9500E1CB3E /* Request.m */; };
@@ -124,6 +126,10 @@
 		3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		3BEB70C81CC4C2A6008BEEC7 /* PickupRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupRequest.h; sourceTree = "<group>"; };
+		3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupRequest.m; sourceTree = "<group>"; };
+		3BEB70CB1CC4C2F1008BEEC7 /* PickupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupInterface.h; sourceTree = "<group>"; };
+		3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupInterface.m; sourceTree = "<group>"; };
 		3BF182461CB64D2E00E1CB3E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		3BF182471CB64D2E00E1CB3E /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		3BF182491CB650E900E1CB3E /* SignupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupInterface.h; sourceTree = "<group>"; };
@@ -394,6 +400,8 @@
 				3BF182501CB68CC900E1CB3E /* SignupRequest.m */,
 				3BCD37CD1CBE2B4000DE4E91 /* UserRequest.h */,
 				3BCD37CE1CBE2B4000DE4E91 /* UserRequest.m */,
+				3BEB70C81CC4C2A6008BEEC7 /* PickupRequest.h */,
+				3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -405,6 +413,8 @@
 				3BF1824A1CB650E900E1CB3E /* SignupInterface.m */,
 				3BCD37CA1CBE2B2300DE4E91 /* UserInterface.h */,
 				3BCD37CB1CBE2B2300DE4E91 /* UserInterface.m */,
+				3BEB70CB1CC4C2F1008BEEC7 /* PickupInterface.h */,
+				3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -621,6 +631,7 @@
 				3BE7B9931CB7CFB200564F49 /* HampervilleViewController.m in Sources */,
 				3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */,
 				3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */,
+				3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */,
 				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
@@ -638,6 +649,7 @@
 				3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */,
 				3BE961331CBB7CCA005D0BCA /* NetworkConstants.m in Sources */,
 				3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */,
+				3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */,
 				3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */,
 				3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */,
 				3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */,

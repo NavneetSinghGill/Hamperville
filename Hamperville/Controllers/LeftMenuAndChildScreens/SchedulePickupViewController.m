@@ -7,8 +7,14 @@
 //
 
 #import "SchedulePickupViewController.h"
+#import "RequestManager.h"
 
 @interface SchedulePickupViewController ()
+
+@property(strong, nonatomic) NSMutableArray *dropOffSlots;
+@property(strong, nonatomic) NSMutableArray *pickupUpSlots;
+@property(strong, nonatomic) NSMutableArray *services;
+@property(strong, nonatomic) NSMutableArray *universalCoupons;
 
 @end
 
@@ -21,9 +27,17 @@
     [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self schedulePickupAPIcall];
+}
+
+- (void)schedulePickupAPIcall {
+    [[RequestManager alloc] getSchedulePickup:^(BOOL success, id response) {
+        if (success) {
+            
+        }
+    }];
 }
 
 @end

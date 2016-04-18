@@ -48,6 +48,15 @@
                                  }];
 }
 
+- (void)logoutUserWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider logoutUserWithRequest:userRequest
+                              andCompletionBlock:^(BOOL success, id response) {
+                                  [self parseGeneralResponse:response];
+                              }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralResponse:(id)response

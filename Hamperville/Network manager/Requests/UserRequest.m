@@ -59,7 +59,7 @@
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
         [_parameters setValue:email forKey:@"email"];
-        self.urlPath = [NSString stringWithFormat:@"%@",apiForgotPassword];
+        self.urlPath = apiForgotPassword;
     }
     return self;
 }
@@ -70,7 +70,17 @@
         _parameters = [NSMutableDictionary dictionary];
         [_parameters setValue:oldPass forKey:@"old_password"];
         [_parameters setValue:nwPass forKey:@"new_password"];
-        self.urlPath = [NSString stringWithFormat:@"%@",apiChangePassword];
+        self.urlPath = apiChangePassword;
+    }
+    return self;
+}
+
+- (id)initWithUserToLogout:(User *)user {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:user.userID forKey:@"user_id"];
+        self.urlPath = apiLogout;
     }
     return self;
 }

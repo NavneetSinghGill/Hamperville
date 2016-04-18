@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QsR-VB-5Fw">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -10,6 +11,7 @@
             <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
@@ -380,7 +382,7 @@
                                     <constraint firstAttribute="height" constant="40" id="htE-Uq-mJS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWD-AP-H37" userLabel="New password TF">
                                 <rect key="frame" x="30" y="141" width="260" height="40"/>
@@ -388,15 +390,7 @@
                                     <constraint firstAttribute="height" constant="40" id="mXb-cc-S8C"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfc-32-Zg8" userLabel="Re-Enter password TF">
-                                <rect key="frame" x="30" y="196" width="260" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="dVQ-jA-T9f"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N6P-gx-XAl">
                                 <rect key="frame" x="30" y="266" width="260" height="40"/>
@@ -413,6 +407,14 @@
                                     <action selector="savePasswordButtonTapped:" destination="Ktp-sg-060" eventType="touchUpInside" id="5uL-5e-yRb"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Re-enter new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfc-32-Zg8" userLabel="Re-Enter password TF">
+                                <rect key="frame" x="30" y="196" width="260" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dVQ-jA-T9f"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -453,7 +455,66 @@
                     <view key="view" contentMode="scaleToFill" id="4Ox-0z-Ugp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVw-iu-XcV">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BEs-LZ-xY4" userLabel="SuperView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="728"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IIh-aA-o2C" userLabel="PickUp View">
+                                                <rect key="frame" x="0.0" y="24" width="320" height="36"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRO-gs-mjS">
+                                                        <rect key="frame" x="30" y="9" width="49" height="19"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="760-6C-NZw"/>
+                                                    <constraint firstItem="jRO-gs-mjS" firstAttribute="centerY" secondItem="IIh-aA-o2C" secondAttribute="centerY" id="oPj-Dg-hxp"/>
+                                                    <constraint firstItem="jRO-gs-mjS" firstAttribute="leading" secondItem="IIh-aA-o2C" secondAttribute="leading" constant="30" id="u07-kM-e59"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxW-FF-nnF" userLabel="PickupContent View">
+                                                <rect key="frame" x="0.0" y="60" width="320" height="170"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="170" id="uXj-Ug-48s"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="xxW-FF-nnF" firstAttribute="leading" secondItem="BEs-LZ-xY4" secondAttribute="leading" id="BBm-aa-1E3"/>
+                                            <constraint firstItem="xxW-FF-nnF" firstAttribute="top" secondItem="IIh-aA-o2C" secondAttribute="bottom" id="QFa-If-qYv"/>
+                                            <constraint firstAttribute="trailing" secondItem="xxW-FF-nnF" secondAttribute="trailing" id="Veu-nh-68a"/>
+                                            <constraint firstAttribute="trailing" secondItem="IIh-aA-o2C" secondAttribute="trailing" id="b2X-8Z-f7R"/>
+                                            <constraint firstItem="IIh-aA-o2C" firstAttribute="leading" secondItem="BEs-LZ-xY4" secondAttribute="leading" id="cb9-N6-8ya"/>
+                                            <constraint firstItem="IIh-aA-o2C" firstAttribute="top" secondItem="BEs-LZ-xY4" secondAttribute="top" constant="24" id="rdz-JF-YCH"/>
+                                            <constraint firstAttribute="height" constant="728" id="utQ-2J-xjb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BEs-LZ-xY4" firstAttribute="centerX" secondItem="RVw-iu-XcV" secondAttribute="centerX" id="39o-B6-5eg"/>
+                                    <constraint firstItem="BEs-LZ-xY4" firstAttribute="top" secondItem="RVw-iu-XcV" secondAttribute="top" id="4KJ-f9-qzE"/>
+                                    <constraint firstAttribute="trailing" secondItem="BEs-LZ-xY4" secondAttribute="trailing" id="Dyf-kw-TvM"/>
+                                    <constraint firstAttribute="bottom" secondItem="BEs-LZ-xY4" secondAttribute="bottom" constant="-100" id="MAz-62-z2s"/>
+                                    <constraint firstItem="BEs-LZ-xY4" firstAttribute="leading" secondItem="RVw-iu-XcV" secondAttribute="leading" id="fM4-0m-Uai"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RVw-iu-XcV" secondAttribute="trailing" id="F2t-64-C3B"/>
+                            <constraint firstItem="RVw-iu-XcV" firstAttribute="leading" secondItem="4Ox-0z-Ugp" secondAttribute="leading" id="YGe-vl-uSY"/>
+                            <constraint firstItem="A99-7n-rT9" firstAttribute="top" secondItem="RVw-iu-XcV" secondAttribute="bottom" id="bzG-as-gur"/>
+                            <constraint firstItem="RVw-iu-XcV" firstAttribute="top" secondItem="BcB-aJ-2Dn" secondAttribute="bottom" id="yOb-NT-Jch"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xu5-MQ-vHS"/>
                 </viewController>

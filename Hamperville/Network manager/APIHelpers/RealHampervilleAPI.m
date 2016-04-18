@@ -57,6 +57,22 @@
                }];
 }
 
+- (void)logoutUserWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithDeleteObject:userRequest
+                  withCompletionBlock:^(BOOL success, id response) {
+                      block(success, response);
+                  }];
+}
+
+#pragma mark - Pickup
+
+- (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:pickupRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
 #pragma mark - API interactor methods
 
 - (void)interactAPIWithPostObject:(Request *)postObject withCompletionBlock:(apiInteractorCompletionBlock)block {
@@ -108,6 +124,22 @@
                                                       operation:task
                                                       withBlock:block];
                                           }];
+}
+
+- (void)interactAPIWithDeleteObject:(Request *)deleteObject withCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self initialSetupWithRequest:deleteObject requestType:RequestDELETE];
+    [[NetworkHttpClient sharedInstance] deleteAPIcallWithUrl:deleteObject.urlPath
+                                                      params:[deleteObject getParams]
+                                            withSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                                [self handleSuccessResponse:task
+                                                                   response:responseObject
+                                                                  withBlock:block];
+                                            }
+                                             andFailureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                                 [self handleError:error
+                                                         operation:task
+                                                         withBlock:block];
+                                             }];
 }
 
 #pragma mark - Private methods
