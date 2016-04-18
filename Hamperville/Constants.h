@@ -38,5 +38,3 @@ extern NSString *kNoNetworkAvailable;
 
 #pragma mark - Local notifications
 
-extern NSString *LNDismissLoginController;
-

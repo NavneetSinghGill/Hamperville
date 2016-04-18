@@ -34,7 +34,9 @@
     [self initialSetup];
     
     [self generateSubViewWithImages];
-    
+    if (self.navigationController != nil) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
 }
 
 
@@ -157,7 +159,7 @@
 - (IBAction)logInButtonTapped:(id)sender {    
     
     LoginViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    [self presentViewController:loginViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
 - (IBAction)signUpButtonTapped:(id)sender {

@@ -57,7 +57,6 @@
         [[SignupInterface alloc] clearSavedSessionCookies];
     }];
     [[Util sharedInstance]saveUser:[User new]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LNDismissLoginController object:nil];
     [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
 }
 

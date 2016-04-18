@@ -18,7 +18,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setAppropriateController) name:LNDismissLoginController object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -31,8 +30,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
             HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-            homeViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentViewController:homeViewController animated:YES completion:nil];
+            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
+            navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:navController animated:YES completion:nil];
         } else {
             [self performSegueWithIdentifier:kToSWController sender:self];
         }

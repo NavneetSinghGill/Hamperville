@@ -60,7 +60,7 @@
 }
 
 - (IBAction)backButtonTapped:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -24,12 +24,13 @@
     [super viewDidLoad];
     
     [self setNavigationBarButtonTitle:@"Request Pickup" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
-    [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self schedulePickupAPIcall];
+    [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
 }
 
 - (void)schedulePickupAPIcall {

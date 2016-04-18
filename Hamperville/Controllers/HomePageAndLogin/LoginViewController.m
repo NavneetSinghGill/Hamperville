@@ -31,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(dismissSelf) name:LNDismissLoginController object:nil];
     [self initialSetup];
 }
 
@@ -68,7 +67,7 @@
 
 - (IBAction)forgotPasswordButtonTapped:(id)sender {
     ForgotPasswordViewController *forgotPasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForgotPasswordViewController"];
-    [self presentViewController:forgotPasswordViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:forgotPasswordViewController animated:YES];
 }
 
 #pragma mark - Private methods
@@ -80,8 +79,7 @@
                           if (success) {
                               User *user = (User *)response;
                               [[Util sharedInstance] saveUser:user];
-                              
-                              [self performSegueWithIdentifier:kToSWController sender:self];
+                              [self.navigationController dismissViewControllerAnimated:NO completion:nil];
                           } else {
                               [self showToastWithText:response on:Bottom];
                           }
@@ -111,12 +109,6 @@
     [self.passwordView.layer setBorderColor:[UIColor colorWithRed:134/255.0f green:134/255.0f blue:134/255.0f alpha:1.0].CGColor];
     
     self.loginButton.layer.cornerRadius = 3;
-}
-
-- (void)dismissSelf {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self dismissViewControllerAnimated:NO completion:nil];
-    });
 }
 
 #pragma mark - TextField Delegate methods
