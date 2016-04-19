@@ -19,4 +19,6 @@
 
 - (void)saveUser:(User *)user;
 
+- (NSString *)getNumberAsStringFromString:(NSString *)string;
+
 @end

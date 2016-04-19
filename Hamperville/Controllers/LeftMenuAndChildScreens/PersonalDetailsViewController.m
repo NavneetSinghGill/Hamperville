@@ -54,20 +54,23 @@
 
 - (IBAction)logoutButtonTapped:(id)sender {
     [[RequestManager alloc]logoutUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
-        [[SignupInterface alloc] clearSavedSessionCookies];
+        
     }];
+    [[SignupInterface alloc] clearSavedSessionCookies];
     [[Util sharedInstance]saveUser:[User new]];
     [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)editButtonTapped:(id)sender {
     BOOL invalidEntries = false;
-    if (self.editButton.selected == YES && self.primaryPhoneTextField.text.length == 10 && (self.alternativePhoneTextField.text.length == 0 || self.alternativePhoneTextField.text.length == 10)) {
+    if (self.editButton.selected == YES) {
         [self dismissKeyboardIfOpen];
         UIAlertController *alertController = [[UIAlertController alloc]init];
         alertController.title = @"Do you want to save your data?";
         UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self initTextFieldsWithUserInfo];
+            [self.editButton setSelected:NO];
+            [self setUserinteractionForTextFields];
         }];
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self postUserAPI];
@@ -75,7 +78,7 @@
         [alertController addAction:alertActionNo];
         [alertController addAction:alertActionYes];
         [self presentViewController:alertController animated:YES completion:nil];
-    } else if (self.primaryPhoneTextField.text.length != 10) {
+    } else if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length != 10) {
         [self showToastWithText:@"Please re-check your entries" on:Top];
         invalidEntries = YES;
     }
@@ -94,12 +97,16 @@
             [self initTextFieldsWithUserInfo];
             [self.editButton setSelected:NO];
             [super showOrHideLeftMenu];
+            [self setUserinteractionForTextFields];
         }];
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (self.primaryPhoneTextField.text.length == 10 && (self.alternativePhoneTextField.text.length == 0 || self.alternativePhoneTextField.text.length == 10)) {
-                [super showOrHideLeftMenu];
-                [self.editButton setSelected:NO];
-                [self postUserAPI];
+            if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length == 10 &&
+                ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 0 ||
+                 [[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10)) {
+                    [super showOrHideLeftMenu];
+                    [self.editButton setSelected:NO];
+                    [self postUserAPI];
+                    [self setUserinteractionForTextFields];
             } else {
                 [self showToastWithText:@"Please re-check your entries" on:Top];
             }
@@ -129,7 +136,79 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
+    if (textField == self.primaryPhoneTextField || textField == self.alternativePhoneTextField) {
+        if (string.length > 0) {
+            NSString *number = [[Util sharedInstance]getNumberAsStringFromString:string];
+            if (number.length == 0) {
+                return NO;
+            }
+        } else {
+            NSString *currentNumber = [[Util sharedInstance]getNumberAsStringFromString:textField.text];
+            if (currentNumber.length == 0) {
+                return NO;
+            }
+        }
+        
+        NSString *currentNumber = [[Util sharedInstance]getNumberAsStringFromString:textField.text];
+        if ((string.length > 0 && currentNumber.length == 10) || (string.length == 0 && currentNumber.length == 0)) {
+            return NO;
+        }
+        if (string.length == 0) {
+            currentNumber = [currentNumber substringToIndex:currentNumber.length - 1];
+        } else {
+            currentNumber = [NSString stringWithFormat:@"%@%@",currentNumber, string];
+        }
+        
+        NSInteger cursorLocation = 0;
+        //Create resultant string
+        NSString *resultantStringToSet = @"(";
+        for (int count = 0; count < 10; count++) {
+            if (count < currentNumber.length) {
+                NSRange range = NSMakeRange(count, 1);
+                resultantStringToSet = [NSString stringWithFormat:@"%@%@",resultantStringToSet, [currentNumber substringWithRange:range]];
+                if (count == 2) {
+                    resultantStringToSet = [NSString stringWithFormat:@"%@) ",resultantStringToSet];
+                } else if (count == 5) {
+                    resultantStringToSet = [NSString stringWithFormat:@"%@-",resultantStringToSet];
+                }
+                cursorLocation = count + 1;
+            } else {
+                resultantStringToSet = [NSString stringWithFormat:@"%@_ ",resultantStringToSet];
+                if (count == 2) {
+                    resultantStringToSet = [NSString stringWithFormat:@"%@) ",resultantStringToSet];
+                } else if (count == 5) {
+                    resultantStringToSet = [NSString stringWithFormat:@"%@-",resultantStringToSet];
+                }
+            }
+        }
+        if (cursorLocation > 6) {
+            cursorLocation = cursorLocation + 4;
+        } else if (cursorLocation > 3) {
+            cursorLocation = cursorLocation + 3;
+        } else if (cursorLocation > 0){
+            cursorLocation = cursorLocation + 1;
+        } else {
+            cursorLocation = 1;
+        }
+        //Set resultant string
+        textField.text = resultantStringToSet;
+        if (textField == self.alternativePhoneTextField && [[Util sharedInstance]getNumberAsStringFromString:textField.text].length == 0) {
+            textField.text = kEmptyString;
+        }
+        //Set textfield cursor position
+        [self selectTextForInput:textField atRange:NSMakeRange(cursorLocation, 0)];
+        return NO;
+    }
+    
     return  YES;
+}
+
+- (void)selectTextForInput:(UITextField *)input atRange:(NSRange)range {
+    UITextPosition *start = [input positionFromPosition:[input beginningOfDocument]
+                                                 offset:range.location];
+    UITextPosition *end = [input positionFromPosition:start
+                                               offset:range.length];
+    [input setSelectedTextRange:[input textRangeFromPosition:start toPosition:end]];
 }
 
 #pragma mark - Private methods

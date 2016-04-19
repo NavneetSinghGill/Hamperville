@@ -45,4 +45,13 @@
     [defaults synchronize];
 }
 
+- (NSString *)getNumberAsStringFromString:(NSString *)string {
+    NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+    [nonNumberCharacterSet invert];
+    
+    //Get all numbers before updation
+    NSString *currentNumber = [[string componentsSeparatedByCharactersInSet:nonNumberCharacterSet] componentsJoinedByString:@""];
+    return currentNumber;
+}
+
 @end
