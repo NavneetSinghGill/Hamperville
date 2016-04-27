@@ -9,6 +9,11 @@
 #import "SchedulePickupViewController.h"
 #import "RequestManager.h"
 
+typedef enum {
+    Pickup = 0,
+    DropOff
+}Task;
+
 @interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property(weak, nonatomic) IBOutlet UIButton *pickupLeftArrowButton;
@@ -52,6 +57,11 @@
 @property(assign, nonatomic) NSInteger dropOffDayCount;
 @property(strong, nonatomic) NSMutableArray *dropOffSlots;
 
+@property(strong, nonatomic) NSDate *currentPickupDate;
+@property(strong, nonatomic) NSDate *currentDropOffDate;
+
+@property(assign, nonatomic) NSInteger difference;
+
 @property(strong, nonatomic) NSMutableArray *services;
 @property(strong, nonatomic) NSMutableArray *universalCoupons;
 
@@ -74,7 +84,7 @@
     [super viewDidAppear:animated];
 }
 
-#pragma mark - Private methods
+#pragma mark - PRIVATE METHODS -
 
 - (void)schedulePickupAPIcall {
     [[RequestManager alloc] getSchedulePickup:^(BOOL success, id response) {
@@ -90,7 +100,10 @@
             
             // Setup for first pickup date
             self.pickupLeftArrowButton.hidden = YES;
+            self.dropOffLeftArrowButton.hidden = YES;
             self.pickupDayCount = 1;
+            self.dropOffDayCount = 1;
+            self.difference = 1;
             [self setupPickupEntriesForDayCount:self.pickupDayCount];
         }
     }];
@@ -113,6 +126,8 @@
     self.dayInSeconds = (double)(60*60*24);
 }
 
+#pragma mark Initial Setup method
+
 - (void)setupPickupEntriesForDayCount:(NSInteger)dayCount {
     NSDate *currentDate = [NSDate date];
     
@@ -120,18 +135,55 @@
     dateFormatter.dateFormat = @"EEEE";
     NSString *dayName = [[dateFormatter stringFromDate:currentDate] lowercaseString];
     
-    //Arrange pickupdays according to present day
-    [self rearrangePickupDaysForDay:dayName];
+    //Calculation for Pickup-----------------------------
+    NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
     
-    //DayCount indicates the number of day
-    NSDate *nextDate = [self getPickupDateWithDayCount:dayCount - 1];
-    [self setPickupEntriesForDate:nextDate];
+    //Calculation for DropOff-----------------------------
+    [self refreshDropOffEntriesWithNextDate:nextDate andDayCount:self.dropOffDayCount];
 }
 
-- (void)rearrangePickupDaysForDay:(NSString *)day {
+#pragma mark Refresh Variables for any task
+
+- (NSDate *)refreshPickupEntriesWithDayName:(NSString *)dayName andDayCount:(NSInteger)dayCount{
+    //Arrange pickupdays according to present day
+    [self rearrangeTaskDaysForDay:dayName withTask:Pickup];
+    
+    //DayCount indicates the number of day
+    NSDate *nextDate = [self getTaskDateWithDayCount:dayCount - 1 withTask:Pickup];
+    [self setPickupEntriesForDate:nextDate];
+    self.currentPickupDate = nextDate;
+    return nextDate;
+}
+
+- (NSDate *)refreshDropOffEntriesWithNextDate:(NSDate *)nextDate andDayCount:(NSInteger)dayCount{
+    //Calculation for dropOff----------------------------
+    
+    //    nextDate = [nextDate dateByAddingTimeInterval:_difference * _dayInSeconds];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"EEEE";
+    NSString *dayName = [[dateFormatter stringFromDate:nextDate] lowercaseString];
+    //Arrange pickupdays according to present day
+    [self rearrangeTaskDaysForDay:dayName withTask:DropOff];
+    
+    //DayCount indicates the number of day
+    nextDate = [self getTaskDateWithDayCount:dayCount withTask:DropOff];
+    [self setDropOffEntriesForDate:nextDate];
+    self.currentDropOffDate = nextDate;
+    return nextDate;
+}
+
+#pragma mark Common method
+
+- (void)rearrangeTaskDaysForDay:(NSString *)day withTask:(Task)task {
     NSMutableArray *newPickupDays = [NSMutableArray array];
     day = [day lowercaseString];
-    if (self.pickupDays.count != 0) {
+    NSMutableArray *taskDays = nil;
+    if (task == Pickup) {
+        taskDays = self.pickupDays;
+    } else {
+        taskDays = self.dropOffDays;
+    }
+    if (taskDays.count != 0) {
         NSMutableArray *normalDays = [NSMutableArray arrayWithObjects:@"monday", @"tuesday", @"wednesday", @"thursday", @"friday", @"saturday", @"sunday", nil];
         for (;;) {
             if (![normalDays[0] isEqualToString:day]) {
@@ -143,14 +195,18 @@
             }
         }
         for (NSString *dayParse in normalDays) {
-            for (NSString *pickupDay in self.pickupDays) {
+            for (NSString *pickupDay in taskDays) {
                 if ([[pickupDay lowercaseString] isEqualToString:[dayParse lowercaseString]]) {
                     [newPickupDays addObject:pickupDay];
                     break;
                 }
             }
         }
-        self.pickupDays = newPickupDays;
+        if (task == Pickup) {
+            self.pickupDays = newPickupDays;
+        } else {
+            self.dropOffDays = newPickupDays;
+        }
     }
 }
 
@@ -158,14 +214,25 @@
     return [[dayName substringToIndex:3] uppercaseString];
 }
 
-- (NSDate *)getPickupDateWithDayCount:(NSInteger)dayCount {
-    NSInteger loop = dayCount / self.pickupDays.count;
-    dayCount = dayCount % self.pickupDays.count;
+- (NSDate *)getTaskDateWithDayCount:(NSInteger)dayCount withTask:(Task)task {
+    NSMutableArray *taskDays = nil;
+    if (task == Pickup) {
+        taskDays = self.pickupDays;
+    } else {
+        taskDays = self.dropOffDays;
+    }
+    NSInteger loop = dayCount / taskDays.count;
+    dayCount = dayCount % taskDays.count;
     
-    NSString *pickupDay = self.pickupDays[dayCount];
+    NSString *pickupDay = taskDays[dayCount];
 
     
-    NSDate *currentDate = [NSDate date];
+    NSDate *currentDate = nil;
+    if (task == Pickup) {
+        currentDate = [NSDate date];
+    } else {
+        currentDate = self.currentPickupDate;
+    }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"EEEE";
     NSString *todaysDay = [[dateFormatter stringFromDate:currentDate] lowercaseString];
@@ -195,11 +262,13 @@
             break;
         }
     }
-    [self setPickupTimeSlotsForDay:pickupDay];
+    [self setPickupTimeSlotsForDay:pickupDay withTask:task];
     NSTimeInterval totalDaysToAdd = (((double)dayCountToAdd * (double)self.dayInSeconds) + ((double)loop * (double)self.weekInSeconds));
-    NSDate *nextPickupDate = [currentDate dateByAddingTimeInterval:totalDaysToAdd];
-    return nextPickupDate;
+    NSDate *nextDate = [currentDate dateByAddingTimeInterval:totalDaysToAdd];
+    return nextDate;
 }
+
+#pragma mark UI update for a Date (Both task)
 
 - (void)setPickupEntriesForDate:(NSDate *)date {
     
@@ -212,12 +281,28 @@
     self.pickupMonthLabel.text = [[dateFormatter stringFromDate:date] uppercaseString];
 }
 
-- (void)setPickupTimeSlotsForDay:(NSString *)day {
-    self.pickupSlots = [self.pickupDaysWithSlots objectForKey:day];
-    [self.pickupPickerView reloadAllComponents];
+- (void)setDropOffEntriesForDate:(NSDate *)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"EEEE";
+    self.dropOffDayLabel.text = [self shortDay:[dateFormatter stringFromDate:date]];
+    dateFormatter.dateFormat = @"dd";
+    self.dropOffDateLabel.text = [dateFormatter stringFromDate:date];
+    dateFormatter.dateFormat = @"MMM";
+    self.dropOffMonthLabel.text = [[dateFormatter stringFromDate:date] uppercaseString];
 }
 
-#pragma mark - IBAction methods
+- (void)setPickupTimeSlotsForDay:(NSString *)day withTask:(Task)task {
+    if (task == Pickup) {
+        self.pickupSlots = [self.pickupDaysWithSlots objectForKey:day];
+        [self.pickupPickerView reloadAllComponents];
+    } else {
+        self.dropOffSlots = [self.dropOffDaysWithSlots objectForKey:day];
+        [self.dropOffPickerView reloadAllComponents];
+    }
+}
+
+#pragma mark - IBAction methods -
 
 - (IBAction)pickUpLeftArrowButtonTapped:(id)sender {
     NSInteger count = self.pickupDayCount - 1;
@@ -228,6 +313,10 @@
         }
         self.pickupRightArrowButton.hidden = NO;
         self.pickupDayCount--;
+        self.dropOffLeftArrowButton.hidden = YES;
+        self.dropOffRightArrowButton.hidden = NO;
+        self.dropOffDayCount = 1;
+        [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:self.dropOffDayCount];
     }
 }
 
@@ -240,44 +329,71 @@
         }
         self.pickupLeftArrowButton.hidden = NO;
         self.pickupDayCount++;
+        self.dropOffLeftArrowButton.hidden = YES;
+        self.dropOffRightArrowButton.hidden = NO;
+        self.dropOffDayCount = 1;
+        [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:self.dropOffDayCount];
     }
 }
 
 - (IBAction)pickUpUpArrowButtonTapped:(id)sender {
-    NSInteger index = [self.pickupPickerView selectedRowInComponent:0];
-    if (index < self.pickupSlots.count - 1) {
-        [self.pickupPickerView selectRow:index + 1 inComponent:0 animated:YES];
-    }
-}
-
-- (IBAction)pickUpDownArrowButtonTapped:(id)sender {
     NSInteger index = [self.pickupPickerView selectedRowInComponent:0];
     if (index > 0) {
         [self.pickupPickerView selectRow:index - 1 inComponent:0 animated:YES];
     }
 }
 
+- (IBAction)pickUpDownArrowButtonTapped:(id)sender {
+    NSInteger index = [self.pickupPickerView selectedRowInComponent:0];
+    if (index < self.pickupSlots.count - 1) {
+        [self.pickupPickerView selectRow:index + 1 inComponent:0 animated:YES];
+    }
+}
+
 - (IBAction)dropOffLeftArrowButtonTapped:(id)sender {
-    
+    NSInteger count = self.dropOffDayCount - 1;
+    if (count >= 1) {
+        [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:count];
+        if (count == 1) {
+            self.dropOffLeftArrowButton.hidden = YES;
+        }
+        self.dropOffRightArrowButton.hidden = NO;
+        self.dropOffDayCount--;
+    }
 }
 
 - (IBAction)dropOffRightArrowButtonTapped:(id)sender {
-    
+    NSInteger count = self.dropOffDayCount + 1;
+    if (count <= 10) {
+//        [self setupPickupEntriesForDayCount:count];
+        [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:count];
+        if (count == 10) {
+            self.dropOffRightArrowButton.hidden = YES;
+        }
+        self.dropOffLeftArrowButton.hidden = NO;
+        self.dropOffDayCount++;
+    }
 }
 
 - (IBAction)dropOffUpArrowButtonTapped:(id)sender {
-    
+    NSInteger index = [self.dropOffPickerView selectedRowInComponent:0];
+    if (index > 0) {
+        [self.dropOffPickerView selectRow:index - 1 inComponent:0 animated:YES];
+    }
 }
 
 - (IBAction)dropOffDownArrowButtonTapped:(id)sender {
-    
+    NSInteger index = [self.dropOffPickerView selectedRowInComponent:0];
+    if (index < self.dropOffSlots.count - 1) {
+        [self.dropOffPickerView selectRow:index + 1 inComponent:0 animated:YES];
+    }
 }
 
 - (IBAction)requestPickupButtonTapped:(id)sender {
     
 }
 
-#pragma mark - PickerView Delegate and Datasource methods
+#pragma mark - PickerView Delegate and Datasource methods -
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
@@ -287,7 +403,7 @@
     if (pickerView == self.pickupPickerView) {
         return self.pickupSlots.count;
     } else {
-        return 0;
+        return self.dropOffSlots.count;
     }
 }
 
@@ -296,7 +412,8 @@
         NSDictionary *singleTimeSlot = self.pickupSlots[row];
         return [singleTimeSlot valueForKey:@"time_slot"];
     } else {
-        return @"drop";
+        NSDictionary *singleTimeSlot = self.dropOffSlots[row];
+        return [singleTimeSlot valueForKey:@"time_slot"];
     }
 }
 
@@ -312,6 +429,9 @@
     // Fill the label text here
     if (pickerView == self.pickupPickerView) {
         NSDictionary *singleTimeSlot = self.pickupSlots[row];
+        tView.text = [singleTimeSlot valueForKey:@"time_slot"];
+    } else {
+        NSDictionary *singleTimeSlot = self.dropOffSlots[row];
         tView.text = [singleTimeSlot valueForKey:@"time_slot"];
     }
     return tView;

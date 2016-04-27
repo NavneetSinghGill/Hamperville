@@ -1118,7 +1118,7 @@
                                 <rect key="frame" x="142" y="266" width="37" height="37"/>
                                 <color key="color" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK3-dp-BOw">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK3-dp-BOw">
                                 <rect key="frame" x="10" y="30" width="46" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="UxS-uF-GTp"/>
@@ -1128,9 +1128,6 @@
                                 <state key="normal" title="Back">
                                     <color key="titleColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="backButtonTapped:" destination="86b-sV-CHt" eventType="touchUpInside" id="DYI-Zb-g7u"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1338,6 +1335,6 @@
         <image name="wash_press_select" width="52" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="N73-TL-GP7"/>
+        <segue reference="Mqd-6s-KXp"/>
     </inferredMetricsTieBreakers>
 </document>
