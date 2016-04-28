@@ -6,6 +6,17 @@
 //  Copyright © 2016 Systango. All rights reserved.
 //
 
+/*********
+ 
+ Wheneven we will do pickup or dropoff calculation, then we
+ will pass DayCount - 1. This is for removing the confusing
+ whether dayCount = 0 is the first day or DayCount = 1.
+ Though DayCount = 1 is the first day but in calculations
+ daycount - 1 is the first day, keeping in mind the first index
+ of array which is 0.
+ 
+ **********/
+
 #import "SchedulePickupViewController.h"
 #import "RequestManager.h"
 #import "ServicesCollectionViewCell.h"
@@ -103,7 +114,7 @@ typedef enum {
             self.pickupDayCount = 1;
             self.dropOffDayCount = 1;
             self.difference = 1;
-            [self setupPickupEntriesForDayCount:self.pickupDayCount];
+            [self setupEntriesForDayCount:self.pickupDayCount];
         }
     }];
 }
@@ -133,7 +144,7 @@ typedef enum {
 
 #pragma mark Initial Setup method
 
-- (void)setupPickupEntriesForDayCount:(NSInteger)dayCount {
+- (void)setupEntriesForDayCount:(NSInteger)dayCount {
     NSDate *currentDate = [NSDate date];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -163,7 +174,7 @@ typedef enum {
 - (NSDate *)refreshDropOffEntriesWithNextDate:(NSDate *)nextDate andDayCount:(NSInteger)dayCount{
     //Calculation for dropOff----------------------------
     
-    //    nextDate = [nextDate dateByAddingTimeInterval:_difference * _dayInSeconds];
+    nextDate = [nextDate dateByAddingTimeInterval:(self.difference) * self.dayInSeconds];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"EEEE";
     NSString *dayName = [[dateFormatter stringFromDate:nextDate] lowercaseString];
@@ -171,7 +182,7 @@ typedef enum {
     [self rearrangeTaskDaysForDay:dayName withTask:DropOff];
     
     //DayCount indicates the number of day
-    nextDate = [self getTaskDateWithDayCount:dayCount withTask:DropOff];
+    nextDate = [self getTaskDateWithDayCount:dayCount - 1 withTask:DropOff];
     [self setDropOffEntriesForDate:nextDate];
     self.currentDropOffDate = nextDate;
     return nextDate;
@@ -180,7 +191,7 @@ typedef enum {
 #pragma mark Common method
 
 - (void)rearrangeTaskDaysForDay:(NSString *)day withTask:(Task)task {
-    NSMutableArray *newPickupDays = [NSMutableArray array];
+    NSMutableArray *newTaskDays = [NSMutableArray array];
     day = [day lowercaseString];
     NSMutableArray *taskDays = nil;
     if (task == Pickup) {
@@ -202,15 +213,15 @@ typedef enum {
         for (NSString *dayParse in normalDays) {
             for (NSString *pickupDay in taskDays) {
                 if ([[pickupDay lowercaseString] isEqualToString:[dayParse lowercaseString]]) {
-                    [newPickupDays addObject:pickupDay];
+                    [newTaskDays addObject:pickupDay];
                     break;
                 }
             }
         }
         if (task == Pickup) {
-            self.pickupDays = newPickupDays;
+            self.pickupDays = newTaskDays;
         } else {
-            self.dropOffDays = newPickupDays;
+            self.dropOffDays = newTaskDays;
         }
     }
 }
@@ -229,7 +240,7 @@ typedef enum {
     NSInteger loop = dayCount / taskDays.count;
     dayCount = dayCount % taskDays.count;
     
-    NSString *pickupDay = taskDays[dayCount];
+    NSString *taskDay = taskDays[dayCount];
 
     
     NSDate *currentDate = nil;
@@ -237,6 +248,7 @@ typedef enum {
         currentDate = [NSDate date];
     } else {
         currentDate = self.currentPickupDate;
+        currentDate = [currentDate dateByAddingTimeInterval:(self.difference) * self.dayInSeconds];
     }
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"EEEE";
@@ -258,7 +270,7 @@ typedef enum {
     NSInteger dayCountToAdd = 0;
     //Now calculate day count
     for (;;) {
-        if (![normalDays[0] isEqualToString:pickupDay]) {
+        if (![normalDays[0] isEqualToString:taskDay]) {
             NSString *object = normalDays[0];
             [normalDays removeObject:normalDays[0]];
             [normalDays addObject:object];
@@ -267,7 +279,7 @@ typedef enum {
             break;
         }
     }
-    [self setPickupTimeSlotsForDay:pickupDay withTask:task];
+    [self setTaskTimeSlotsForDay:taskDay withTask:task];
     NSTimeInterval totalDaysToAdd = (((double)dayCountToAdd * (double)self.dayInSeconds) + ((double)loop * (double)self.weekInSeconds));
     NSDate *nextDate = [currentDate dateByAddingTimeInterval:totalDaysToAdd];
     return nextDate;
@@ -297,7 +309,7 @@ typedef enum {
     self.dropOffMonthLabel.text = [[dateFormatter stringFromDate:date] uppercaseString];
 }
 
-- (void)setPickupTimeSlotsForDay:(NSString *)day withTask:(Task)task {
+- (void)setTaskTimeSlotsForDay:(NSString *)day withTask:(Task)task {
     if (task == Pickup) {
         self.pickupSlots = [self.pickupDaysWithSlots objectForKey:day];
         [self.pickupPickerView reloadAllComponents];
@@ -312,7 +324,7 @@ typedef enum {
 - (IBAction)pickUpLeftArrowButtonTapped:(id)sender {
     NSInteger count = self.pickupDayCount - 1;
     if (count >= 1) {
-        [self setupPickupEntriesForDayCount:count];
+        [self setupEntriesForDayCount:count];
         if (count == 1) {
             self.pickupLeftArrowButton.hidden = YES;
         }
@@ -328,7 +340,7 @@ typedef enum {
 - (IBAction)pickUpRightArrowButtonTapped:(id)sender {
     NSInteger count = self.pickupDayCount + 1;
     if (count <= 10) {
-        [self setupPickupEntriesForDayCount:count];
+        [self setupEntriesForDayCount:count];
         if (count == 10) {
             self.pickupRightArrowButton.hidden = YES;
         }
@@ -455,6 +467,14 @@ typedef enum {
     cell.serviceDictionary = [self.services objectAtIndex:indexPath.row];
     [cell setContent];
     return cell;
+}
+
+#pragma mark Delegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    ServicesCollectionViewCell *cell = (ServicesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.difference = cell.difference;
+    [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:1];
 }
 
 @end
