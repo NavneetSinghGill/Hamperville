@@ -31,6 +31,8 @@
 		3BE603E51CB5188400E0F997 /* HampervilleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603E41CB5188400E0F997 /* HampervilleTests.m */; };
 		3BE603F01CB5188500E0F997 /* HampervilleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603EF1CB5188400E0F997 /* HampervilleUITests.m */; };
 		3BE604021CB520CC00E0F997 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE604011CB520CC00E0F997 /* Constants.m */; };
+		3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE6E2931CD0D7C800901B94 /* ServicesCollectionViewCell.m */; };
+		3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BE6E2941CD0D7C800901B94 /* ServicesCollectionViewCell.xib */; };
 		3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7B98E1CB7871B00564F49 /* NetworkHttpClient.m */; };
 		3BE7B9931CB7CFB200564F49 /* HampervilleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE7B9921CB7CFB200564F49 /* HampervilleViewController.m */; };
 		3BE961331CBB7CCA005D0BCA /* NetworkConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE961321CBB7CCA005D0BCA /* NetworkConstants.m */; };
@@ -115,6 +117,9 @@
 		3BE604001CB520CC00E0F997 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		3BE604011CB520CC00E0F997 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		3BE604031CB520F600E0F997 /* NetworkConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkConstants.h; sourceTree = "<group>"; };
+		3BE6E2921CD0D7C800901B94 /* ServicesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesCollectionViewCell.h; sourceTree = "<group>"; };
+		3BE6E2931CD0D7C800901B94 /* ServicesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesCollectionViewCell.m; sourceTree = "<group>"; };
+		3BE6E2941CD0D7C800901B94 /* ServicesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicesCollectionViewCell.xib; sourceTree = "<group>"; };
 		3BE7B98D1CB7871B00564F49 /* NetworkHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkHttpClient.h; sourceTree = "<group>"; };
 		3BE7B98E1CB7871B00564F49 /* NetworkHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkHttpClient.m; sourceTree = "<group>"; };
 		3BE7B9911CB7CFB200564F49 /* HampervilleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HampervilleViewController.h; sourceTree = "<group>"; };
@@ -271,6 +276,7 @@
 				3BF182401CB64D0800E1CB3E /* Controllers */,
 				3BE603FD1CB5202900E0F997 /* Constants */,
 				3B4BB6C71CBD2961005BC322 /* TableViewCells */,
+				3BE6E2911CD0D79A00901B94 /* CollectionViewCells */,
 				3BCD37C11CBE26F300DE4E91 /* Models */,
 				3BCD37C61CBE27C500DE4E91 /* Util */,
 				3BE961341CBB7E77005D0BCA /* Extensions */,
@@ -319,6 +325,16 @@
 				3BE961321CBB7CCA005D0BCA /* NetworkConstants.m */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		3BE6E2911CD0D79A00901B94 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				3BE6E2921CD0D7C800901B94 /* ServicesCollectionViewCell.h */,
+				3BE6E2931CD0D7C800901B94 /* ServicesCollectionViewCell.m */,
+				3BE6E2941CD0D7C800901B94 /* ServicesCollectionViewCell.xib */,
+			);
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		3BE961341CBB7E77005D0BCA /* Extensions */ = {
@@ -545,6 +561,7 @@
 			files = (
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
+				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
 				3BE603D71CB5188400E0F997 /* Image.xcassets in Resources */,
 				3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */,
 				3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */,
@@ -624,6 +641,7 @@
 			files = (
 				3BCD37C41CBE270400DE4E91 /* User.m in Sources */,
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
+				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
 				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,
 				3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */,
 				3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */,

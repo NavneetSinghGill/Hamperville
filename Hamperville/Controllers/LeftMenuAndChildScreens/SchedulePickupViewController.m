@@ -8,13 +8,14 @@
 
 #import "SchedulePickupViewController.h"
 #import "RequestManager.h"
+#import "ServicesCollectionViewCell.h"
 
 typedef enum {
     Pickup = 0,
     DropOff
 }Task;
 
-@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property(weak, nonatomic) IBOutlet UIButton *pickupLeftArrowButton;
 @property(weak, nonatomic) IBOutlet UIButton *pickupRightArrowButton;
@@ -34,9 +35,7 @@ typedef enum {
 @property(weak, nonatomic) IBOutlet UILabel *dropOffDayLabel;
 @property(weak, nonatomic) IBOutlet UILabel *dropOffMonthLabel;
 
-@property(weak, nonatomic) IBOutlet UIButton *washAndFoldServiceButton;
-@property(weak, nonatomic) IBOutlet UIButton *washAndPressServiceButton;
-@property(weak, nonatomic) IBOutlet UIButton *dryCleanServiceButton;
+@property(weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @property(weak, nonatomic) IBOutlet UIView *couponView;
 @property(weak, nonatomic) IBOutlet UITextField *couponTextField;
@@ -47,13 +46,11 @@ typedef enum {
 
 @property(strong, nonatomic) NSMutableDictionary *pickupDaysWithSlots;
 @property(strong, nonatomic) NSMutableArray *pickupDays;
-//@property(assign, nonatomic) NSInteger pickupLoopCount;
 @property(assign, nonatomic) NSInteger pickupDayCount;
 @property(strong, nonatomic) NSMutableArray *pickupSlots;
 
 @property(strong, nonatomic) NSMutableDictionary *dropOffDaysWithSlots;
 @property(strong, nonatomic) NSMutableArray *dropOffDays;
-//@property(assign, nonatomic) NSInteger dropOffLoopCount;
 @property(assign, nonatomic) NSInteger dropOffDayCount;
 @property(strong, nonatomic) NSMutableArray *dropOffSlots;
 
@@ -98,6 +95,8 @@ typedef enum {
             self.services = [response valueForKey:@"services"];
             self.universalCoupons = [response valueForKey:@"universal_coupons"];
             
+            [self.collectionView reloadData];
+            
             // Setup for first pickup date
             self.pickupLeftArrowButton.hidden = YES;
             self.dropOffLeftArrowButton.hidden = YES;
@@ -124,6 +123,12 @@ typedef enum {
     
     self.weekInSeconds = (double)(60*60*24*7);
     self.dayInSeconds = (double)(60*60*24);
+    
+    UINib *collectionViewNib = [UINib nibWithNibName:@"ServicesCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:collectionViewNib forCellWithReuseIdentifier:@"ServicesCollectionViewCell"];
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
 }
 
 #pragma mark Initial Setup method
@@ -435,6 +440,21 @@ typedef enum {
         tView.text = [singleTimeSlot valueForKey:@"time_slot"];
     }
     return tView;
+}
+
+#pragma mark - Collection View -
+
+#pragma mark Datasource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.services.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ServicesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ServicesCollectionViewCell" forIndexPath:indexPath];
+    cell.serviceDictionary = [self.services objectAtIndex:indexPath.row];
+    [cell setContent];
+    return cell;
 }
 
 @end
