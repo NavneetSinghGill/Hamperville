@@ -16,5 +16,6 @@ typedef void (^pickupInterfaceCompletionBlock)(BOOL success, id response);
 @property (nonatomic, strong) void (^block)(BOOL success, id response);
 
 - (void)getSchedulePickupWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block;
+- (void)getOrderHistoryWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block;
 
 @end

@@ -44,4 +44,8 @@
     
 }
 
+- (void)getOrderHistoryWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 @end

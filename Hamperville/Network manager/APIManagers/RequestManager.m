@@ -90,9 +90,24 @@
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
-        [[PickupInterface alloc] getSchedulePickupWithPickupRequest:[[PickupRequest alloc] initWithSchedulePickup] andCompletionBlock:^(BOOL success, id response) {
+        [[PickupInterface alloc] getSchedulePickupWithPickupRequest:
+         [[PickupRequest alloc] initWithSchedulePickup] andCompletionBlock:^(BOOL success, id response) {
             block(success, response);
         }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSDate *)timeStamp andOrderOffset:(NSInteger)previousOrderID withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[PickupInterface alloc] getOrderHistoryWithPickupRequest:
+         [[PickupRequest alloc] initWithOrderHistoryRecordLimit:limit
+                                                           time:timeStamp
+                                                 andOrderOffset:previousOrderID]
+                                               andCompletionBlock:^(BOOL success, id response) {
+                                                   block(success, response);
+                                               }];
     } else {
         block(NO, kNoNetworkAvailable);
     }

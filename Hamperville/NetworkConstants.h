@@ -18,4 +18,6 @@ extern NSString *apiPostUserUrl;
 extern NSString *apiForgotPassword;
 extern NSString *apiChangePassword;
 extern NSString *apiLogout;
+
 extern NSString *apiSchedulePickup;
+extern NSString *apiOrderHistory;

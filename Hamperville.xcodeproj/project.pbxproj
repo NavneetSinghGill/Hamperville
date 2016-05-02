@@ -21,6 +21,7 @@
 		3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37CB1CBE2B2300DE4E91 /* UserInterface.m */; };
 		3BCD37CF1CBE2B4000DE4E91 /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37CE1CBE2B4000DE4E91 /* UserRequest.m */; };
 		3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE21E751CBCD7C900F5EB80 /* LeftMenuViewController.m */; };
+		3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE3AD241CD25CF5007241DE /* OrderHistoryViewController.m */; };
 		3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE45CA01CBF727400C03369 /* ForgotPasswordViewController.m */; };
 		3BE603C91CB5188400E0F997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603C81CB5188400E0F997 /* main.m */; };
 		3BE603CC1CB5188400E0F997 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE603CB1CB5188400E0F997 /* AppDelegate.m */; };
@@ -42,6 +43,10 @@
 		3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */; };
 		3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */; };
 		3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */; };
+		3BEE16FF1CD7424400B5C9F7 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE16FE1CD7424400B5C9F7 /* Order.m */; };
+		3BEE17021CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */; };
+		3BEE17061CD75D9000B5C9F7 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */; };
+		3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */; };
 		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
 		3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824A1CB650E900E1CB3E /* SignupInterface.m */; };
 		3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824D1CB68C9500E1CB3E /* Request.m */; };
@@ -97,6 +102,8 @@
 		3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HampervillePrefixHeader.pch; sourceTree = "<group>"; };
 		3BE21E741CBCD7C900F5EB80 /* LeftMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
 		3BE21E751CBCD7C900F5EB80 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		3BE3AD231CD25CF5007241DE /* OrderHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryViewController.h; sourceTree = "<group>"; };
+		3BE3AD241CD25CF5007241DE /* OrderHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryViewController.m; sourceTree = "<group>"; };
 		3BE45C9F1CBF727400C03369 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		3BE45CA01CBF727400C03369 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		3BE603C41CB5188400E0F997 /* Hamperville.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hamperville.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +142,13 @@
 		3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupRequest.m; sourceTree = "<group>"; };
 		3BEB70CB1CC4C2F1008BEEC7 /* PickupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupInterface.h; sourceTree = "<group>"; };
 		3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupInterface.m; sourceTree = "<group>"; };
+		3BEE16FD1CD7424400B5C9F7 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		3BEE16FE1CD7424400B5C9F7 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		3BEE17001CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryDetailsViewController.h; sourceTree = "<group>"; };
+		3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryDetailsViewController.m; sourceTree = "<group>"; };
+		3BEE17031CD75D9000B5C9F7 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
+		3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
+		3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
 		3BF182461CB64D2E00E1CB3E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		3BF182471CB64D2E00E1CB3E /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		3BF182491CB650E900E1CB3E /* SignupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupInterface.h; sourceTree = "<group>"; };
@@ -190,6 +204,9 @@
 				3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */,
 				3B4BB6CE1CBD2C00005BC322 /* LeftMenuTableViewCell.h */,
 				3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */,
+				3BEE17031CD75D9000B5C9F7 /* OrderTableViewCell.h */,
+				3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */,
+				3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -214,6 +231,8 @@
 			children = (
 				3BCD37C21CBE270400DE4E91 /* User.h */,
 				3BCD37C31CBE270400DE4E91 /* User.m */,
+				3BEE16FD1CD7424400B5C9F7 /* Order.h */,
+				3BEE16FE1CD7424400B5C9F7 /* Order.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +258,10 @@
 				3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */,
 				3BFB9C981CC0B85900B0996A /* ChangePasswordViewController.h */,
 				3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */,
+				3BE3AD231CD25CF5007241DE /* OrderHistoryViewController.h */,
+				3BE3AD241CD25CF5007241DE /* OrderHistoryViewController.m */,
+				3BEE17001CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.h */,
+				3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */,
 			);
 			path = LeftMenuAndChildScreens;
 			sourceTree = "<group>";
@@ -562,6 +585,7 @@
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
 				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
+				3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */,
 				3BE603D71CB5188400E0F997 /* Image.xcassets in Resources */,
 				3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */,
 				3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */,
@@ -650,12 +674,15 @@
 				3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */,
 				3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */,
 				3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */,
+				3BEE16FF1CD7424400B5C9F7 /* Order.m in Sources */,
 				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
+				3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
 				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,
 				3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */,
 				3BF182551CB69CEA00E1CB3E /* RealHampervilleAPI.m in Sources */,
+				3BEE17061CD75D9000B5C9F7 /* OrderTableViewCell.m in Sources */,
 				3BE603CC1CB5188400E0F997 /* AppDelegate.m in Sources */,
 				3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */,
 				3BE603C91CB5188400E0F997 /* main.m in Sources */,
@@ -670,6 +697,7 @@
 				3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */,
 				3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */,
 				3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */,
+				3BEE17021CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m in Sources */,
 				3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */,
 				3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */,
 			);

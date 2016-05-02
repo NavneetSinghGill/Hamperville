@@ -11,6 +11,7 @@
 #import <SWRevealViewController.h>
 #import "PersonalDetailsViewController.h"
 #import "SchedulePickupViewController.h"
+#import "OrderHistoryViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -25,6 +26,7 @@
 
 @property(strong, nonatomic) PersonalDetailsViewController *personalDetailsViewController;
 @property(strong, nonatomic) SchedulePickupViewController *schedulePickupViewController;
+@property(strong, nonatomic) OrderHistoryViewController *orderHistoryViewController;
 
 @end
 
@@ -79,6 +81,7 @@
             [self openSchedulePickupScreen];
             break;
         case 2:
+            [self openOrderHistoryScreen];
             break;
         case 3:
             break;
@@ -149,6 +152,17 @@
         }
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.schedulePickupViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openOrderHistoryScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.orderHistoryViewController) {
+            self.orderHistoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryViewController"];
+        }
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.orderHistoryViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }

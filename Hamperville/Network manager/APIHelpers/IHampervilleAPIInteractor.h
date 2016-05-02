@@ -26,5 +26,6 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 
 #pragma mark - Pickup
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)getOrderHistoryWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
 @end
