@@ -17,12 +17,17 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 #pragma mark - Login
 - (void)loginWithRequest:(Request *)signupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
-#pragma mark - User
+#pragma mark - User -
 - (void)postUserDetailsWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)getUserWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postForgotPassWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)putChangePassWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)logoutUserWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
+#pragma mark Preferences
+
+- (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)postPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
 #pragma mark - Pickup
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

@@ -12,6 +12,8 @@
 		3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */; };
 		3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */; };
 		3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */; };
+		3B69E43F1CD9DB0F00F36F43 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */; };
+		3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B69E4421CD9F9BE00F36F43 /* PickupAndDeliverViewController.m */; };
 		3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */; };
 		3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB51CBBC87900D7B208 /* HomePageViewController.m */; };
 		3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */; };
@@ -86,6 +88,10 @@
 		3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
 		3B4BB6CE1CBD2C00005BC322 /* LeftMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTableViewCell.h; sourceTree = "<group>"; };
 		3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTableViewCell.m; sourceTree = "<group>"; };
+		3B69E43D1CD9DB0F00F36F43 /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
+		3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
+		3B69E4411CD9F9BE00F36F43 /* PickupAndDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupAndDeliverViewController.h; sourceTree = "<group>"; };
+		3B69E4421CD9F9BE00F36F43 /* PickupAndDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupAndDeliverViewController.m; sourceTree = "<group>"; };
 		3B6D8DB21CBBC87900D7B208 /* HomePageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageContentViewController.h; sourceTree = "<group>"; };
 		3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageContentViewController.m; sourceTree = "<group>"; };
 		3B6D8DB41CBBC87900D7B208 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
@@ -219,6 +225,15 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		3B69E4401CD9ED2400F36F43 /* Prefs */ = {
+			isa = PBXGroup;
+			children = (
+				3B69E4411CD9F9BE00F36F43 /* PickupAndDeliverViewController.h */,
+				3B69E4421CD9F9BE00F36F43 /* PickupAndDeliverViewController.m */,
+			);
+			name = Prefs;
+			sourceTree = "<group>";
+		};
 		3B6D8DB11CBBC87900D7B208 /* HomePageAndLogin */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +285,9 @@
 				3BE3AD241CD25CF5007241DE /* OrderHistoryViewController.m */,
 				3BEE17001CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.h */,
 				3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */,
+				3B69E43D1CD9DB0F00F36F43 /* PreferencesViewController.h */,
+				3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */,
+				3B69E4401CD9ED2400F36F43 /* Prefs */,
 			);
 			path = LeftMenuAndChildScreens;
 			sourceTree = "<group>";
@@ -303,7 +321,7 @@
 				3BE603CB1CB5188400E0F997 /* AppDelegate.m */,
 				3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */,
 				3BE961401CBBC3B8005D0BCA /* CustomFont */,
-				3BF182411CB64D1400E1CB3E /* Network manager */,
+				3BF182411CB64D1400E1CB3E /* NetworkManager */,
 				3BF182401CB64D0800E1CB3E /* Controllers */,
 				3BE603FD1CB5202900E0F997 /* Constants */,
 				3B4BB6C71CBD2961005BC322 /* TableViewCells */,
@@ -402,7 +420,7 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		3BF182411CB64D1400E1CB3E /* Network manager */ = {
+		3BF182411CB64D1400E1CB3E /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
 				3BF182421CB64D1400E1CB3E /* APIHelpers */,
@@ -410,6 +428,7 @@
 				3BF182441CB64D1400E1CB3E /* Requests */,
 				3BF182451CB64D1400E1CB3E /* Services */,
 			);
+			name = NetworkManager;
 			path = "Network manager";
 			sourceTree = "<group>";
 		};
@@ -688,6 +707,7 @@
 				3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
+				3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */,
 				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,
 				3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */,
 				3BF182551CB69CEA00E1CB3E /* RealHampervilleAPI.m in Sources */,
@@ -696,6 +716,7 @@
 				3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */,
 				3BE603C91CB5188400E0F997 /* main.m in Sources */,
 				3BCD37CF1CBE2B4000DE4E91 /* UserRequest.m in Sources */,
+				3B69E43F1CD9DB0F00F36F43 /* PreferencesViewController.m in Sources */,
 				3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */,
 				3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */,
 				3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */,

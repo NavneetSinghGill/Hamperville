@@ -32,7 +32,7 @@
     }
 }
 
-#pragma mark - User
+#pragma mark - User -
 
 - (void)postUser:(User *)user shouldUpdate:(BOOL)shouldUpdate withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
@@ -81,6 +81,30 @@
         [[UserInterface alloc]logoutUserWithUserRequest:[[UserRequest alloc] initWithUserToLogout:user] andCompletionBlock:^(BOOL success, id response) {
             block(success, response);
         }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+#pragma mark Preferences
+
+- (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block{
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getPickupAndDeliverPreferencesWithUserRequest:[[UserRequest alloc] initWithGetPickAndDeliverWithUser:user]
+                                                          andCompletionBlock:^(BOOL success, id response) {
+                                                              block(success, response);
+                                                          }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postPickupAndDeliverWithUser:(User *)user andMethod:(NSString *)method withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postPickupAndDeliverPreferencesWithUserRequest:[[UserRequest alloc] initWithPostPickAndDeliverWithUser:user andMethod:method]
+                                                          andCompletionBlock:^(BOOL success, id response) {
+                                                              block(success, response);
+                                                          }];
     } else {
         block(NO, kNoNetworkAvailable);
     }

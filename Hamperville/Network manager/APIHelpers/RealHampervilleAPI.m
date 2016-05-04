@@ -27,7 +27,7 @@
                 }];
 }
 
-#pragma mark - User
+#pragma mark - User -
 
 - (void)postUserDetailsWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
     [self interactAPIWithPostObject:userRequest
@@ -62,6 +62,22 @@
                   withCompletionBlock:^(BOOL success, id response) {
                       block(success, response);
                   }];
+}
+
+#pragma mark Preferences
+
+- (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:userRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
+- (void)postPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
 }
 
 #pragma mark - Pickup

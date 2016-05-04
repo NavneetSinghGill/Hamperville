@@ -85,6 +85,24 @@
     return self;
 }
 
+- (id)initWithGetPickAndDeliverWithUser:(User *)user {
+    self = [super init];
+    if (self) {
+        self.urlPath = [NSString stringWithFormat:@"%@%@/pickup_and_delivery",apiGetPickupAndDeliverPref, user.userID];
+    }
+    return self;
+}
+
+- (id)initWithPostPickAndDeliverWithUser:(User *)user andMethod:(NSString *)method {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:method forKey:@"pickup_deliver_method"];
+        self.urlPath = [NSString stringWithFormat:@"%@%@/pickup_and_delivery",apiPostPickupAndDeliverPref, user.userID];
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

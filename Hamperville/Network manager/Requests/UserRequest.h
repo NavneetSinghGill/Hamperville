@@ -19,6 +19,9 @@
 - (id)initWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass;
 - (id)initWithUserToLogout:(User *)user;
 
+- (id)initWithGetPickAndDeliverWithUser:(User *)user;
+- (id)initWithPostPickAndDeliverWithUser:(User *)user andMethod:(NSString *)method;
+
 - (NSDictionary *)getParams;
 
 @end

@@ -12,6 +12,7 @@
 #import "PersonalDetailsViewController.h"
 #import "SchedulePickupViewController.h"
 #import "OrderHistoryViewController.h"
+#import "PreferencesViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -27,6 +28,7 @@
 @property(strong, nonatomic) PersonalDetailsViewController *personalDetailsViewController;
 @property(strong, nonatomic) SchedulePickupViewController *schedulePickupViewController;
 @property(strong, nonatomic) OrderHistoryViewController *orderHistoryViewController;
+@property(strong, nonatomic) PreferencesViewController *preferencesViewController;
 
 @end
 
@@ -81,9 +83,10 @@
             [self openSchedulePickupScreen];
             break;
         case 2:
-//            [self openOrderHistoryScreen];
+            [self openOrderHistoryScreen];
             break;
         case 3:
+            [self openPreferenceScreen];
             break;
         case 4:
             break;
@@ -163,6 +166,17 @@
         }
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.orderHistoryViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openPreferenceScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.preferencesViewController) {
+            self.preferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PreferencesViewController"];
+        }
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.preferencesViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }
