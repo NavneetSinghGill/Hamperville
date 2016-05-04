@@ -81,7 +81,7 @@
             [self openSchedulePickupScreen];
             break;
         case 2:
-            [self openOrderHistoryScreen];
+//            [self openOrderHistoryScreen];
             break;
         case 3:
             break;

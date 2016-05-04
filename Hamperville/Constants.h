@@ -28,6 +28,9 @@ extern NSString *kNetworkAvailablability;
 extern NSString *kLeftMenuTableViewCellNibName;
 extern NSString *kLeftMenuTableViewCellIdentifier;
 
+extern NSString *kCouponTableViewCellNibName;
+extern NSString *kCouponTableViewCellIdentifier;
+
 #pragma mark - Segue Identifiers
 
 extern NSString *kToSWController;

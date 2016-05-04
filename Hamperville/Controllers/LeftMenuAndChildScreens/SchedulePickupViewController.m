@@ -20,13 +20,14 @@
 #import "SchedulePickupViewController.h"
 #import "RequestManager.h"
 #import "ServicesCollectionViewCell.h"
+#import "CouponTableViewCell.h"
 
 typedef enum {
     Pickup = 0,
     DropOff
 }Task;
 
-@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
 
 @property(weak, nonatomic) IBOutlet UIButton *pickupLeftArrowButton;
 @property(weak, nonatomic) IBOutlet UIButton *pickupRightArrowButton;
@@ -48,8 +49,8 @@ typedef enum {
 
 @property(weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property(weak, nonatomic) IBOutlet UIView *couponView;
-@property(weak, nonatomic) IBOutlet UITextField *couponTextField;
+@property(weak, nonatomic) IBOutlet UITableView *couponTableView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *couponTableViewHeight;
 
 @property(weak, nonatomic) IBOutlet UIButton *requestPickupButton;
 
@@ -115,6 +116,8 @@ typedef enum {
             self.dropOffDayCount = 1;
             self.difference = 1;
             [self setupEntriesForDayCount:self.pickupDayCount];
+        } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
+            [self showToastWithText:@"No Network" on:Top];
         }
     }];
 }
@@ -122,10 +125,6 @@ typedef enum {
 - (void)initialSetup {
     [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
     self.requestPickupButton.layer.cornerRadius = 4;
-    
-    self.couponView.layer.cornerRadius = 4;
-    self.couponView.layer.borderWidth = 1;
-    self.couponView.layer.borderColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0].CGColor;
     
     self.pickupPickerView.delegate = self;
     self.pickupPickerView.dataSource = self;
@@ -140,6 +139,14 @@ typedef enum {
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+}
+
+- (void)registerNib {
+    UINib *nib = [UINib nibWithNibName:kCouponTableViewCellNibName bundle:nil];
+    [self.couponTableView registerNib:nib forCellReuseIdentifier:kCouponTableViewCellIdentifier];
+    
+    self.couponTableView.delegate = self;
+    self.couponTableView.dataSource = self;
 }
 
 #pragma mark Initial Setup method
@@ -476,5 +483,26 @@ typedef enum {
     self.difference = cell.difference;
     [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:1];
 }
+
+#pragma mark - Table View -
+
+//#pragma mark Datasource
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    CouponTableViewCell *couponTableViewCell = [tableView dequeueReusableCellWithIdentifier:kCouponTableViewCellIdentifier];
+//    
+//    
+//    return couponTableViewCell;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    
+//}
+//
+//#pragma mark Delegate
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 40;
+//}
 
 @end

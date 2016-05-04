@@ -47,6 +47,8 @@
 		3BEE17021CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */; };
 		3BEE17061CD75D9000B5C9F7 /* OrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */; };
 		3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */; };
+		3BEE17111CD79B1B00B5C9F7 /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */; };
+		3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */; };
 		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
 		3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824A1CB650E900E1CB3E /* SignupInterface.m */; };
 		3BF1824E1CB68C9500E1CB3E /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824D1CB68C9500E1CB3E /* Request.m */; };
@@ -149,6 +151,9 @@
 		3BEE17031CD75D9000B5C9F7 /* OrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewCell.h; sourceTree = "<group>"; };
 		3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewCell.m; sourceTree = "<group>"; };
 		3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		3BEE170E1CD79B1B00B5C9F7 /* CouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
+		3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
+		3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
 		3BF182461CB64D2E00E1CB3E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
 		3BF182471CB64D2E00E1CB3E /* RequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestManager.m; sourceTree = "<group>"; };
 		3BF182491CB650E900E1CB3E /* SignupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupInterface.h; sourceTree = "<group>"; };
@@ -207,6 +212,9 @@
 				3BEE17031CD75D9000B5C9F7 /* OrderTableViewCell.h */,
 				3BEE17041CD75D9000B5C9F7 /* OrderTableViewCell.m */,
 				3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */,
+				3BEE170E1CD79B1B00B5C9F7 /* CouponTableViewCell.h */,
+				3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */,
+				3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -583,6 +591,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
+				3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
 				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
 				3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */,
@@ -692,6 +701,7 @@
 				3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */,
 				3BE961381CBB7F5B005D0BCA /* NSDictionary+hasValueForKey.m in Sources */,
 				3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */,
+				3BEE17111CD79B1B00B5C9F7 /* CouponTableViewCell.m in Sources */,
 				3BE961331CBB7CCA005D0BCA /* NetworkConstants.m in Sources */,
 				3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */,
 				3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */,
@@ -794,7 +804,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4a0949bd-2e5a-4687-a338-621ab84beb15";
+				PROVISIONING_PROFILE = "12d535e3-953c-48a2-b872-43e58284825a";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -832,7 +842,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "4a0949bd-2e5a-4687-a338-621ab84beb15";
+				PROVISIONING_PROFILE = "12d535e3-953c-48a2-b872-43e58284825a";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -882,7 +892,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Systango.Mobile.Hamperville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4a0949bd-2e5a-4687-a338-621ab84beb15";
+				PROVISIONING_PROFILE = "12d535e3-953c-48a2-b872-43e58284825a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -931,7 +941,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Systango.Mobile.Hamperville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4a0949bd-2e5a-4687-a338-621ab84beb15";
+				PROVISIONING_PROFILE = "12d535e3-953c-48a2-b872-43e58284825a";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

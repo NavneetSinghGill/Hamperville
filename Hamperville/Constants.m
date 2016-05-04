@@ -21,6 +21,9 @@ NSString *kNetworkAvailablability = @"NetworkAvailablability";
 NSString *kLeftMenuTableViewCellNibName = @"LeftMenuTableViewCell";
 NSString *kLeftMenuTableViewCellIdentifier = @"LeftMenuTableViewCellIdentifier";
 
+NSString *kCouponTableViewCellNibName = @"CouponTableViewCell";
+NSString *kCouponTableViewCellIdentifier = @"CouponTableViewCell";
+
 #pragma mark - Segue Identifiers
 
 NSString *kToSWController = @"toSWController";
