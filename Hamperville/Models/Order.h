@@ -17,7 +17,7 @@
 @property(strong, nonatomic) NSString *orderStatus;
 @property(strong, nonatomic) NSString *pickupDate;
 @property(strong, nonatomic) NSString *pickupTimeSlot;
-@property(strong, nonatomic) NSArray *serviceDetail;
+@property(strong, nonatomic) NSMutableArray *serviceDetail;
 
 + (Order *)getOrderFromDictionary:(NSDictionary *)dict;
 

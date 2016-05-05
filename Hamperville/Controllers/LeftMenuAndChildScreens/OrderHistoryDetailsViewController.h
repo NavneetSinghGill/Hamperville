@@ -7,7 +7,10 @@
 //
 
 #import "HampervilleViewController.h"
+#import "Order.h"
 
 @interface OrderHistoryDetailsViewController : HampervilleViewController
+
+@property(strong, nonatomic) Order *order;
 
 @end

@@ -85,6 +85,11 @@
 #pragma mark - View Properties
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self closeLeftMenuIfOpen];
+    [self.view endEditing:YES];
+}
+
+- (void)closeLeftMenuIfOpen {
     FrontViewPosition frontViewPosition = self.revealViewController.frontViewPosition;
     if (frontViewPosition == FrontViewPositionLeft) {
         // Left menu is closed
@@ -92,7 +97,6 @@
         // Left menu is open
         [self.revealViewController performSelector:@selector(revealToggle:) withObject:nil];
     }
-    [self.view endEditing:YES];
 }
 
 - (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition {

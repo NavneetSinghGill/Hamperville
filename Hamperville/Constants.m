@@ -24,6 +24,8 @@ NSString *kLeftMenuTableViewCellIdentifier = @"LeftMenuTableViewCellIdentifier";
 NSString *kCouponTableViewCellNibName = @"CouponTableViewCell";
 NSString *kCouponTableViewCellIdentifier = @"CouponTableViewCell";
 
+NSString *TVCOrderTableViewCellNibAndIdentifier = @"OrderTableViewCell";
+
 #pragma mark - Segue Identifiers
 
 NSString *kToSWController = @"toSWController";

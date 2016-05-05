@@ -9,6 +9,7 @@
 #import "OrderHistoryViewController.h"
 #import "RequestManager.h"
 #import "Order.h"
+#import "OrderHistoryDetailsViewController.h"
 
 NSInteger kTableViewCellLabelTag = 10;
 
@@ -27,6 +28,11 @@ NSInteger kTableViewCellLabelTag = 10;
     
     self.orders = nil;
     [self initialSetup];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.activityIndicator startAnimating];
     [[RequestManager alloc] getOrderHistoryWithLimit:5 time:[NSDate date] andOrderOffset:-1 withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
@@ -60,6 +66,7 @@ NSInteger kTableViewCellLabelTag = 10;
     
     Order *order = [self.orders objectAtIndex:indexPath.row];
     ((UILabel *)[cell viewWithTag:kTableViewCellLabelTag]).text = [NSString stringWithFormat:@"Order: %@",order.orderID];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -71,7 +78,13 @@ NSInteger kTableViewCellLabelTag = 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    OrderHistoryDetailsViewController *orderHistoryDetailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryDetailsViewController"];
+    orderHistoryDetailsViewController.order = [self.orders objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:orderHistoryDetailsViewController animated:YES];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self closeLeftMenuIfOpen];
 }
 
 @end

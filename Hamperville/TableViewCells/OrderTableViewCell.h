@@ -10,4 +10,8 @@
 
 @interface OrderTableViewCell : UITableViewCell
 
+@property(weak, nonatomic) IBOutlet UILabel *orderHeadingLabel;
+@property(weak, nonatomic) IBOutlet UILabel *orderInfoLabel;
+@property(weak, nonatomic) IBOutlet UIView *bottomLineView;
+
 @end

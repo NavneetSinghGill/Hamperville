@@ -33,7 +33,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Hz-kP-7fm">
                                 <rect key="frame" x="30" y="0.0" width="30" height="54"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RGu-D2-R1o">
@@ -64,7 +64,12 @@
                     <constraint firstItem="CXB-9g-uJS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oms-R4-9AC"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="517.5" y="452"/>
+            <connections>
+                <outlet property="bottomLineView" destination="6D2-cb-qtP" id="poA-3w-0BV"/>
+                <outlet property="orderHeadingLabel" destination="0Hz-kP-7fm" id="yYo-eq-09G"/>
+                <outlet property="orderInfoLabel" destination="RGu-D2-R1o" id="PzF-P4-xyU"/>
+            </connections>
+            <point key="canvasLocation" x="517.5" y="451.5"/>
         </tableViewCell>
     </objects>
 </document>

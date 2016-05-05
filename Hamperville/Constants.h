@@ -31,6 +31,8 @@ extern NSString *kLeftMenuTableViewCellIdentifier;
 extern NSString *kCouponTableViewCellNibName;
 extern NSString *kCouponTableViewCellIdentifier;
 
+extern NSString *TVCOrderTableViewCellNibAndIdentifier;
+
 #pragma mark - Segue Identifiers
 
 extern NSString *kToSWController;
