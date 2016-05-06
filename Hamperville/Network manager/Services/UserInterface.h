@@ -31,4 +31,8 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)postPickupAndDeliverPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)getNotificationPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
+- (void)postNotificationPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 @end

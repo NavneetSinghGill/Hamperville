@@ -12,6 +12,10 @@
 		3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */; };
 		3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */; };
 		3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */; };
+		3B4C6B5B1CDBCC88003B22B0 /* NotificationPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B5A1CDBCC88003B22B0 /* NotificationPreferencesViewController.m */; };
+		3B4C6B5E1CDBED86003B22B0 /* PermanentPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */; };
+		3B4C6B651CDBEE0B003B22B0 /* DropdownTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */; };
+		3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */; };
 		3B69E43F1CD9DB0F00F36F43 /* PreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */; };
 		3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B69E4421CD9F9BE00F36F43 /* PickupAndDeliverViewController.m */; };
 		3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB31CBBC87900D7B208 /* HomePageContentViewController.m */; };
@@ -88,6 +92,13 @@
 		3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
 		3B4BB6CE1CBD2C00005BC322 /* LeftMenuTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuTableViewCell.h; sourceTree = "<group>"; };
 		3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuTableViewCell.m; sourceTree = "<group>"; };
+		3B4C6B591CDBCC88003B22B0 /* NotificationPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationPreferencesViewController.h; sourceTree = "<group>"; };
+		3B4C6B5A1CDBCC88003B22B0 /* NotificationPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationPreferencesViewController.m; sourceTree = "<group>"; };
+		3B4C6B5C1CDBED86003B22B0 /* PermanentPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermanentPreferencesViewController.h; sourceTree = "<group>"; };
+		3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermanentPreferencesViewController.m; sourceTree = "<group>"; };
+		3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownTableViewCell.h; sourceTree = "<group>"; };
+		3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownTableViewCell.m; sourceTree = "<group>"; };
+		3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
 		3B69E43D1CD9DB0F00F36F43 /* PreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesViewController.h; sourceTree = "<group>"; };
 		3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesViewController.m; sourceTree = "<group>"; };
 		3B69E4411CD9F9BE00F36F43 /* PickupAndDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupAndDeliverViewController.h; sourceTree = "<group>"; };
@@ -221,6 +232,9 @@
 				3BEE170E1CD79B1B00B5C9F7 /* CouponTableViewCell.h */,
 				3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */,
 				3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */,
+				3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */,
+				3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */,
+				3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -230,6 +244,10 @@
 			children = (
 				3B69E4411CD9F9BE00F36F43 /* PickupAndDeliverViewController.h */,
 				3B69E4421CD9F9BE00F36F43 /* PickupAndDeliverViewController.m */,
+				3B4C6B5C1CDBED86003B22B0 /* PermanentPreferencesViewController.h */,
+				3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */,
+				3B4C6B591CDBCC88003B22B0 /* NotificationPreferencesViewController.h */,
+				3B4C6B5A1CDBCC88003B22B0 /* NotificationPreferencesViewController.m */,
 			);
 			name = Prefs;
 			sourceTree = "<group>";
@@ -611,6 +629,7 @@
 			files = (
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
 				3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */,
+				3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
 				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
 				3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */,
@@ -699,8 +718,10 @@
 				3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */,
 				3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */,
 				3BE7B9931CB7CFB200564F49 /* HampervilleViewController.m in Sources */,
+				3B4C6B651CDBEE0B003B22B0 /* DropdownTableViewCell.m in Sources */,
 				3BE21E761CBCD7C900F5EB80 /* LeftMenuViewController.m in Sources */,
 				3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */,
+				3B4C6B5E1CDBED86003B22B0 /* PermanentPreferencesViewController.m in Sources */,
 				3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */,
 				3BEE16FF1CD7424400B5C9F7 /* Order.m in Sources */,
 				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
@@ -716,6 +737,7 @@
 				3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */,
 				3BE603C91CB5188400E0F997 /* main.m in Sources */,
 				3BCD37CF1CBE2B4000DE4E91 /* UserRequest.m in Sources */,
+				3B4C6B5B1CDBCC88003B22B0 /* NotificationPreferencesViewController.m in Sources */,
 				3B69E43F1CD9DB0F00F36F43 /* PreferencesViewController.m in Sources */,
 				3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */,
 				3B6D8DB81CBBC87900D7B208 /* HomePageContentViewController.m in Sources */,

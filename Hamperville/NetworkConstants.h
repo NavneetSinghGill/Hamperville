@@ -21,6 +21,7 @@ extern NSString *apiLogout;
 
 extern NSString *apiGetPickupAndDeliverPref;
 extern NSString *apiPostPickupAndDeliverPref;
+extern NSString *apiNotificationPref;
 
 extern NSString *apiSchedulePickup;
 extern NSString *apiOrderHistory;

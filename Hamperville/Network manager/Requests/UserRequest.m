@@ -103,6 +103,28 @@
     return self;
 }
 
+- (id)initWithGetNotificationPrefOfUser:(User *)user {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:user.userID forKey:@"user_id"];
+        self.urlPath = apiNotificationPref;
+    }
+    return self;
+}
+
+- (id)initWithPostNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:[NSNumber numberWithBool:app] forKey:@"app_notifications"];
+        [_parameters setValue:[NSNumber numberWithBool:text] forKey:@"text_notifications"];
+        [_parameters setValue:[NSNumber numberWithBool:email] forKey:@"emails"];
+        self.urlPath = apiNotificationPref;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

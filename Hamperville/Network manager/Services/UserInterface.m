@@ -77,6 +77,24 @@
                                                    }];
 }
 
+- (void)getNotificationPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getNotificationPreferencesWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  //Parse
+                                              }];
+}
+
+- (void)postNotificationPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postNotificationPreferencesWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  //Parse
+                                              }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralMessageResponse:(id)response

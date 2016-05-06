@@ -8,6 +8,7 @@
 
 #import "PreferencesViewController.h"
 #import "PickupAndDeliverViewController.h"
+#import "NotificationPreferencesViewController.h"
 
 @interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -51,6 +52,11 @@
     [self.navigationController pushViewController:pickupAndDeliverViewController animated:YES];
 }
 
+- (void)openNotificationScreen {
+    NotificationPreferencesViewController *notificationPreferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NotificationPreferencesViewController"];
+    [self.navigationController pushViewController:notificationPreferencesViewController animated:YES];
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasource
@@ -82,6 +88,9 @@
     switch (indexPath.row) {
         case 0:
             [self openPickupAndDeliverScreen];
+            break;
+        case 3:
+            [self openNotificationScreen];
             break;
             
         default:

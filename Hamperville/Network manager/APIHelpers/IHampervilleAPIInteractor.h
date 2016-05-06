@@ -28,6 +28,8 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 
 - (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)getNotificationPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)postNotificationPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
 #pragma mark - Pickup
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

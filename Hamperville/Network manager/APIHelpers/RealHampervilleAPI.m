@@ -80,6 +80,20 @@
                 }];
 }
 
+- (void)getNotificationPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:userRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
+- (void)postNotificationPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
@@ -207,7 +221,12 @@
         NSLog(@"%@",error);
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         
-        NSMutableDictionary *serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        NSMutableDictionary *serializedData = nil;
+        if (errorData != nil) {
+            serializedData = [NSJSONSerialization JSONObjectWithData: errorData options:kNilOptions error:nil];
+        } else {
+            serializedData = [NSMutableDictionary dictionaryWithObject:error.localizedDescription forKey:@"message"];
+        }
         serializedData = [serializedData mutableCopy];
         [serializedData setValue:kFailure forKey:kSuccessStatus];
         NSLog(@"Failure error serialised - %@",serializedData);

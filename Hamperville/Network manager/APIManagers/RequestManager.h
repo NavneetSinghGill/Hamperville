@@ -28,6 +28,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
 - (void)postPickupAndDeliverWithUser:(User *)user andMethod:(NSString *)method withCompletionBlock:(requestCompletionBlock)block;
+- (void)getNotificationPrefOfUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
+- (void)postNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email withCompletionBlock:(requestCompletionBlock)block;
 
 #pragma mark - Pickup
 

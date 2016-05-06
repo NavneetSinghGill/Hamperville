@@ -118,6 +118,8 @@ typedef enum {
             [self setupEntriesForDayCount:self.pickupDayCount];
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
             [self showToastWithText:@"No Network" on:Top];
+        } else {
+            [self showToastWithText:response on:Top];
         }
     }];
 }

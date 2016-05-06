@@ -22,6 +22,9 @@
 - (id)initWithGetPickAndDeliverWithUser:(User *)user;
 - (id)initWithPostPickAndDeliverWithUser:(User *)user andMethod:(NSString *)method;
 
+- (id)initWithGetNotificationPrefOfUser:(User *)user;
+- (id)initWithPostNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email;
+
 - (NSDictionary *)getParams;
 
 @end

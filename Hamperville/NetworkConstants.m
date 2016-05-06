@@ -26,6 +26,7 @@ NSString *apiLogout = @"/api/v1/logout/";
 
 NSString *apiGetPickupAndDeliverPref = @"/api/v1/customer_preferences/";
 NSString *apiPostPickupAndDeliverPref = @"/api/v1/customer_preferences/";
+NSString *apiNotificationPref = @"/api/v1/customer_preferences/notification";
 
 NSString *apiSchedulePickup = @"/api/v1/schedule/";
 NSString *apiOrderHistory = @"/api/v1/orders/history";

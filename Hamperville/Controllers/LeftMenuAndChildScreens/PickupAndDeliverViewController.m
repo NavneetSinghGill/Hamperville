@@ -43,7 +43,7 @@
 #pragma mark - Private methods
 
 - (void)initialSetup {
-    [self setNavigationBarButtonTitle:@"Preferences" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+    [self setNavigationBarButtonTitle:@"Pickup and Deliver" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self setLeftMenuButtons:[NSArray arrayWithObject:self.backButton]];
     
     self.tableView.dataSource = self;

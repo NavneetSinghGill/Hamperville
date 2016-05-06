@@ -110,6 +110,28 @@
     }
 }
 
+- (void)getNotificationPrefOfUser:(User *)user withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getNotificationPreferencesWithUserRequest:[[UserRequest alloc]initWithGetNotificationPrefOfUser:user]
+                                                      andCompletionBlock:^(BOOL success, id response) {
+                                                          block(success, response);
+                                                      }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postNotificationPreferencesWithUserRequest:[[UserRequest alloc]initWithPostNotificationPrefWithAppNotification:app textNotifications:text andEmail:email]
+                                                       andCompletionBlock:^(BOOL success, id response) {
+                                                           block(success, response);
+                                                       }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {
