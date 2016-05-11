@@ -29,6 +29,8 @@ typedef enum {
 
 @interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
 
+@property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property(weak, nonatomic) IBOutlet UIButton *pickupLeftArrowButton;
 @property(weak, nonatomic) IBOutlet UIButton *pickupRightArrowButton;
 @property(weak, nonatomic) IBOutlet UIButton *pickupUpArrowButton;
@@ -54,8 +56,6 @@ typedef enum {
 
 @property(weak, nonatomic) IBOutlet UIButton *requestPickupButton;
 
-
-
 @property(strong, nonatomic) NSMutableDictionary *pickupDaysWithSlots;
 @property(strong, nonatomic) NSMutableArray *pickupDays;
 @property(assign, nonatomic) NSInteger pickupDayCount;
@@ -77,6 +77,8 @@ typedef enum {
 @property(assign, nonatomic) NSTimeInterval weekInSeconds;
 @property(assign, nonatomic) NSTimeInterval dayInSeconds;
 
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation SchedulePickupViewController
@@ -86,18 +88,25 @@ typedef enum {
     
     [self setNavigationBarButtonTitle:@"Request Pickup" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self initialSetup];
-    [self schedulePickupAPIcall];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.scrollView.hidden == NO) {
+        [self schedulePickupAPIcall];
+    }
 }
 
 #pragma mark - PRIVATE METHODS -
 
 - (void)schedulePickupAPIcall {
+    self.scrollView.hidden = YES;
+    [self.activityIndicator startAnimating];
     [[RequestManager alloc] getSchedulePickup:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
         if (success) {
+            self.scrollView.hidden = NO;
             self.dropOffDaysWithSlots = [response valueForKey:@"drop_off_slots"];
             self.dropOffDays = [[self.dropOffDaysWithSlots allKeys] mutableCopy];
             
@@ -267,7 +276,7 @@ typedef enum {
     
     //Just to set the array's first element to todays day
     for (;;) {
-        if (![normalDays[0] isEqualToString:todaysDay]) {
+        if (![normalDays[0] isEqualToString:[todaysDay lowercaseString]]) {
             NSString *object = normalDays[0];
             [normalDays removeObject:normalDays[0]];
             [normalDays addObject:object];
@@ -279,7 +288,7 @@ typedef enum {
     NSInteger dayCountToAdd = 0;
     //Now calculate day count
     for (;;) {
-        if (![normalDays[0] isEqualToString:taskDay]) {
+        if (![normalDays[0] isEqualToString:[taskDay lowercaseString]]) {
             NSString *object = normalDays[0];
             [normalDays removeObject:normalDays[0]];
             [normalDays addObject:object];

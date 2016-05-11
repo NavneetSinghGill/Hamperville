@@ -88,7 +88,7 @@
 - (id)initWithGetPickAndDeliverWithUser:(User *)user {
     self = [super init];
     if (self) {
-        self.urlPath = [NSString stringWithFormat:@"%@%@/pickup_and_delivery",apiGetPickupAndDeliverPref, user.userID];
+        self.urlPath = [NSString stringWithFormat:@"%@/pickup_and_delivery",apiGetPickupAndDeliverPref];
     }
     return self;
 }
@@ -98,7 +98,7 @@
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
         [_parameters setValue:method forKey:@"pickup_deliver_method"];
-        self.urlPath = [NSString stringWithFormat:@"%@%@/pickup_and_delivery",apiPostPickupAndDeliverPref, user.userID];
+        self.urlPath = [NSString stringWithFormat:@"%@/pickup_and_delivery",apiPostPickupAndDeliverPref];
     }
     return self;
 }
@@ -119,8 +119,28 @@
         _parameters = [NSMutableDictionary dictionary];
         [_parameters setValue:[NSNumber numberWithBool:app] forKey:@"app_notifications"];
         [_parameters setValue:[NSNumber numberWithBool:text] forKey:@"text_notifications"];
-        [_parameters setValue:[NSNumber numberWithBool:email] forKey:@"emails"];
+        [_parameters setValue:[NSNumber numberWithBool:email] forKey:@"emails_notifications"];
         self.urlPath = apiNotificationPref;
+    }
+    return self;
+}
+
+- (id)initWithPermanentPreferences {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiPermanentPref;
+    }
+    return self;
+}
+
+- (id)initWithPostPermanentPreferencesWithDetergentID:(NSString *)detergentID softnerID:(NSString *)softnerID drySheetID:(NSString *)drySheetID {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        [_parameters setValue:[NSNumber numberWithBool:detergentID] forKey:@"detergent_id"];
+        [_parameters setValue:[NSNumber numberWithBool:softnerID] forKey:@"softener_id"];
+        [_parameters setValue:[NSNumber numberWithBool:drySheetID] forKey:@"dry_sheet_id"];
+        self.urlPath = apiPermanentPref;
     }
     return self;
 }

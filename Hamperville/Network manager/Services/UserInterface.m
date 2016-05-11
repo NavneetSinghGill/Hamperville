@@ -82,7 +82,7 @@
     id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
     [apiInteractorProvider getNotificationPreferencesWithRequest:userRequest
                                               andCompletionBlock:^(BOOL success, id response) {
-                                                  //Parse
+                                                  [self parseGeneralDataResponse:response];
                                               }];
 }
 
@@ -93,6 +93,24 @@
                                               andCompletionBlock:^(BOOL success, id response) {
                                                   //Parse
                                               }];
+}
+
+- (void)getPermanentPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getPermanentPreferencesWithRequest:userRequest
+                                           andCompletionBlock:^(BOOL success, id response) {
+                                               [self parseGeneralDataResponse:response];
+                                           }];
+}
+
+- (void)postPermanentPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postPermanentPreferencesWithRequest:userRequest
+                                           andCompletionBlock:^(BOOL success, id response) {
+                                               [self parseGeneralDataResponse:response];
+                                           }];
 }
 
 #pragma mark - Parsing methods

@@ -30,6 +30,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)postPickupAndDeliverWithUser:(User *)user andMethod:(NSString *)method withCompletionBlock:(requestCompletionBlock)block;
 - (void)getNotificationPrefOfUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
 - (void)postNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email withCompletionBlock:(requestCompletionBlock)block;
+- (void)getPermanentPreferences:(requestCompletionBlock)block;
+- (void)postPermanentPreferencesWithDetergentID:(NSString *)detergentID softnerID:(NSString *)softnerID drySheetID:(NSString *)drySheetID withCompletionBlock:(requestCompletionBlock)block;
 
 #pragma mark - Pickup
 

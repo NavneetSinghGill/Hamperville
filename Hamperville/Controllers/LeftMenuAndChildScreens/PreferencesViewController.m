@@ -9,6 +9,7 @@
 #import "PreferencesViewController.h"
 #import "PickupAndDeliverViewController.h"
 #import "NotificationPreferencesViewController.h"
+#import "PermanentPreferencesViewController.h"
 
 @interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -57,6 +58,11 @@
     [self.navigationController pushViewController:notificationPreferencesViewController animated:YES];
 }
 
+- (void)openPermanentPrefScreen {
+    PermanentPreferencesViewController *permanentPreferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PermanentPreferencesViewController"];
+    [self.navigationController pushViewController:permanentPreferencesViewController animated:YES];
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasource
@@ -88,6 +94,9 @@
     switch (indexPath.row) {
         case 0:
             [self openPickupAndDeliverScreen];
+            break;
+        case 1:
+            [self openPermanentPrefScreen];
             break;
         case 3:
             [self openNotificationScreen];

@@ -21,7 +21,7 @@
 }
 
 - (IBAction)emptyButtonTapped:(id)sender {
-    [self.dropDownDelegate dropDownTapped];
+    [self.dropDownDelegate dropDownTapped:_index];
 }
 
 @end

@@ -17,6 +17,7 @@
 @interface DropdownTableViewCell : UITableViewCell
 
 @property(assign, nonatomic) NSInteger index;
+@property(weak, nonatomic) IBOutlet UILabel *name;
 @property(strong, nonatomic) id<DropDownDelegate> dropDownDelegate;
 
 @end

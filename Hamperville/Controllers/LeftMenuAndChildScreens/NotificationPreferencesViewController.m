@@ -20,6 +20,10 @@
 @property(assign, nonatomic) NSInteger kOptionLabelTag;
 @property(assign, nonatomic) NSInteger kOptionIconButtonTag;
 
+@property(assign, nonatomic) BOOL isAppNotificationOn;
+@property(assign, nonatomic) BOOL isEmailNotificationOn;
+@property(assign, nonatomic) BOOL isTextNotificationOn;
+
 @end
 
 @implementation NotificationPreferencesViewController
@@ -33,7 +37,19 @@
     [[RequestManager alloc]getNotificationPrefOfUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
-            
+            if ([response hasValueForKey:@"notification_preference"]) {
+                NSDictionary *notificationPref = [response valueForKey:@"notification_preference"];
+                if ([notificationPref hasValueForKey:@"app_notifications"]) {
+                    self.isAppNotificationOn = [[notificationPref valueForKey:@"app_notifications"] boolValue];
+                }
+                if ([notificationPref hasValueForKey:@"emails_notifications"]) {
+                    self.isEmailNotificationOn = [[notificationPref valueForKey:@"emails_notifications"] boolValue];
+                }
+                if ([notificationPref hasValueForKey:@"text_notifications"]) {
+                    self.isTextNotificationOn = [[notificationPref valueForKey:@"text_notifications"] boolValue];
+                }
+                [self.tableView reloadData];
+            }
         } else {
             [self showToastWithText:response on:Top];
         }
@@ -51,7 +67,7 @@
     
     self.selectedIndex = 0;
     
-    self.options = [NSMutableArray arrayWithObjects:@"a",@"b",@"c", nil];
+    self.options = [NSMutableArray arrayWithObjects:@"App Notifications",@"Text Messages",@"Emails", nil];
     //TAGS
     _kOptionIconButtonTag = 5;
     _kOptionLabelTag = 10;
@@ -78,11 +94,15 @@
     optionLabel.text = [self.options objectAtIndex:indexPath.row];
     
     UIButton *tickButton = (UIButton *)[cell.contentView viewWithTag:_kOptionIconButtonTag];
-    if (self.selectedIndex == indexPath.row) {
-        tickButton.selected = YES;
-    } else {
-        tickButton.selected = NO;
+
+    if (indexPath.row == 0) {
+        tickButton.selected = _isAppNotificationOn;
+    } else if (indexPath.row == 1) {
+        tickButton.selected = _isTextNotificationOn;
+    } else if (indexPath.row == 2) {
+        tickButton.selected = _isEmailNotificationOn;
     }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -95,10 +115,33 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger storePreviousSelection = self.selectedIndex;
-    self.selectedIndex = indexPath.row;
+    if (indexPath.row == 0) {
+        _isAppNotificationOn = !_isAppNotificationOn;
+    } else if (indexPath.row == 1) {
+        _isTextNotificationOn = !_isTextNotificationOn;
+    } else if (indexPath.row == 2) {
+        _isEmailNotificationOn = !_isEmailNotificationOn;
+    }
     [self.tableView reloadData];
     
+    [[RequestManager alloc]postNotificationPrefWithAppNotification:_isAppNotificationOn textNotifications:_isTextNotificationOn andEmail:_isEmailNotificationOn
+                                               withCompletionBlock:^(BOOL success, id response) {
+                                                   if (success) {
+                                                       
+                                                   } else {
+                                                       [self showToastWithText:response on:Top];
+                                                       if (indexPath.row == 0) {
+                                                           _isAppNotificationOn = !_isAppNotificationOn;
+                                                       } else if (indexPath.row == 1) {
+                                                           _isTextNotificationOn = !_isTextNotificationOn;
+                                                       } else if (indexPath.row == 2) {
+                                                           _isEmailNotificationOn = !_isEmailNotificationOn;
+                                                       }
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                           [self.tableView reloadData];
+                                                       });
+                                                   }
+                                               }];
 }
 
 @end

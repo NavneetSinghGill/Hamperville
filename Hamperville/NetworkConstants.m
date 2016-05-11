@@ -9,7 +9,7 @@
 #import "NetworkConstants.h"
 
 //NSString *baseUrl = @"http://staging.hamperville.com";
-NSString *baseUrl = @"http://192.168.1.28:3001";
+NSString *baseUrl = @"http://192.168.1.172:3001";
 
 NSString *kSuccessStatus = @"Success";
 NSString *kSuccess = @"Yes";
@@ -27,6 +27,7 @@ NSString *apiLogout = @"/api/v1/logout/";
 NSString *apiGetPickupAndDeliverPref = @"/api/v1/customer_preferences/";
 NSString *apiPostPickupAndDeliverPref = @"/api/v1/customer_preferences/";
 NSString *apiNotificationPref = @"/api/v1/customer_preferences/notification";
+NSString *apiPermanentPref = @"/api/v1/customer_preferences/permanent";
 
 NSString *apiSchedulePickup = @"/api/v1/schedule/";
 NSString *apiOrderHistory = @"/api/v1/orders/history";

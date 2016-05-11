@@ -25,6 +25,9 @@
 - (id)initWithGetNotificationPrefOfUser:(User *)user;
 - (id)initWithPostNotificationPrefWithAppNotification:(BOOL)app textNotifications:(BOOL)text andEmail:(BOOL)email;
 
+- (id)initWithPermanentPreferences;
+- (id)initWithPostPermanentPreferencesWithDetergentID:(NSString *)detergentID softnerID:(NSString *)softnerID drySheetID:(NSString *)drySheetID;
+
 - (NSDictionary *)getParams;
 
 @end
