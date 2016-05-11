@@ -117,9 +117,9 @@
     self = [super init];
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
-        [_parameters setValue:[NSNumber numberWithBool:app] forKey:@"app_notifications"];
-        [_parameters setValue:[NSNumber numberWithBool:text] forKey:@"text_notifications"];
-        [_parameters setValue:[NSNumber numberWithBool:email] forKey:@"emails_notifications"];
+        [_parameters setValue:(app == YES)?@"true":@"false" forKey:@"app_notifications"];
+        [_parameters setValue:(text == YES)?@"true":@"false" forKey:@"text_notifications"];
+        [_parameters setValue:(email == YES)?@"true":@"false" forKey:@"emails_notifications"];
         self.urlPath = apiNotificationPref;
     }
     return self;
