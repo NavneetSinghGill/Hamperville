@@ -330,10 +330,10 @@ typedef enum {
 - (void)setTaskTimeSlotsForDay:(NSString *)day withTask:(Task)task {
     if (task == Pickup) {
         self.pickupSlots = [self.pickupDaysWithSlots objectForKey:day];
-        [self.pickupPickerView reloadAllComponents];
+//        [self.pickupPickerView reloadAllComponents];
     } else {
         self.dropOffSlots = [self.dropOffDaysWithSlots objectForKey:day];
-        [self.dropOffPickerView reloadAllComponents];
+//        [self.dropOffPickerView reloadAllbComponents];
     }
 }
 

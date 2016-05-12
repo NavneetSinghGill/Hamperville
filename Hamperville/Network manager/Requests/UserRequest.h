@@ -28,6 +28,9 @@
 - (id)initWithPermanentPreferences;
 - (id)initWithPostPermanentPreferencesWithDetergentID:(NSString *)detergentID softnerID:(NSString *)softnerID drySheetID:(NSString *)drySheetID;
 
+- (id)initWithGetWashAndFoldPreferences;
+- (id)initWithPostWashAndFoldPreferencesWithDataDictionary:(NSDictionary *)dataDictionary;
+
 - (NSDictionary *)getParams;
 
 @end

@@ -113,6 +113,24 @@
                                            }];
 }
 
+- (void)getWashAndFoldPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getWashAndFoldPreferencesWithRequest:userRequest
+                                            andCompletionBlock:^(BOOL success, id response) {
+                                                [self parseGeneralDataResponse:response];
+                                            }];
+}
+
+- (void)postWashAndFoldPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postWashAndFoldPreferencesWithRequest:userRequest
+                                             andCompletionBlock:^(BOOL success, id response) {
+                                                 [self parseGeneralDataResponse:response];
+                                             }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralMessageResponse:(id)response

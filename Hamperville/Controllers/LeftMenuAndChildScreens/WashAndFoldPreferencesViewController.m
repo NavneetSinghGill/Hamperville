@@ -1,21 +1,28 @@
 //
-//  PermanentPreferencesViewController.m
+//  WashAndFoldPreferencesViewController.m
 //  Hamperville
 //
-//  Created by stplmacmini11 on 06/05/16.
+//  Created by stplmacmini11 on 11/05/16.
 //  Copyright © 2016 Systango. All rights reserved.
 //
 
-#import "PermanentPreferencesViewController.h"
+#import "WashAndFoldPreferencesViewController.h"
 #import "DropdownTableViewCell.h"
 #import "RequestManager.h"
 
-@interface PermanentPreferencesViewController () <DropDownDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface WashAndFoldPreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate> {
+    NSInteger tableViewDefaultTopContraintValue;
+}
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property(weak, nonatomic) IBOutlet UITextView *specialNoteTextView;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(weak, nonatomic) IBOutlet UILabel *specialNotelabel;
+@property(weak, nonatomic) IBOutlet UIView *specialTextViewBackgroundBoarderView;
 @property(strong, nonatomic) UIButton *saveButton;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 
 @property(strong, nonatomic) NSMutableArray *allEntries;
 @property(strong, nonatomic) NSMutableArray *allOptions;
@@ -25,19 +32,19 @@
 
 @end
 
-@implementation PermanentPreferencesViewController
+@implementation WashAndFoldPreferencesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+   
     [self initialSetup];
-    [self getPermanentPref];
+    [self getWashAndFoldPrefs];
 }
 
 #pragma mark - Private methods
 
 - (void)initialSetup {
-    [self setNavigationBarButtonTitle:@"Permanent Preferences" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+    [self setNavigationBarButtonTitle:@"Wash and Fold" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self setLeftMenuButtons:[NSArray arrayWithObject:self.backButton]];
     
     self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 50, 34)];
@@ -54,17 +61,34 @@
     self.pickerView.dataSource = self;
     self.pickerView.delegate = self;
     
+    self.specialNoteTextView.delegate = self;
+    self.specialNoteTextView.layer.cornerRadius = 5;
+    tableViewDefaultTopContraintValue = self.tableViewTopConstraint.constant;
+    
+    self.pickerView.hidden = YES;
+    self.specialNotelabel.hidden = YES;
+    self.specialNoteTextView.hidden = YES;
+    self.specialTextViewBackgroundBoarderView.hidden = YES;
+    
     UINib *nib = [UINib nibWithNibName:@"DropdownTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DropdownTableViewCell"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)getPermanentPref {
-    [[RequestManager alloc]getPermanentPreferences:^(BOOL success, id response) {
+- (void)getWashAndFoldPrefs {
+    [[RequestManager alloc] getWashAndFoldPreferences:^(BOOL success, id response) {
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
         
         if (success) {
+            self.pickerView.hidden = NO;
+            self.specialNotelabel.hidden = NO;
+            self.specialNoteTextView.hidden = NO;
+            self.specialTextViewBackgroundBoarderView.hidden = NO;
+            
             [self parseGetResponse:response];
         } else {
             [self showToastWithText:response on:Top];
@@ -73,8 +97,11 @@
 }
 
 - (void)parseGetResponse:(id)response {
-    if ([response hasValueForKey:@"permanent_preferences"]) {
-        self.allEntries = [response valueForKey:@"permanent_preferences"];
+    if ([response hasValueForKey:@"special_note"]) {
+        self.specialNoteTextView.text = [response valueForKey:@"special_note"];
+    }
+    if ([response hasValueForKey:@"wash_dry_and_fold_preferences"]) {
+        self.allEntries = [response valueForKey:@"wash_dry_and_fold_preferences"];
         
         for (NSDictionary *dict in self.allEntries) {
             [self.allOptions addObject:[self createMutableOption:[dict valueForKey:@"options"]]];
@@ -122,6 +149,27 @@
     [self.pickerView selectRow:count inComponent:0 animated:NO];
 }
 
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardBounds;
+    
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    CGFloat difference = ( self.view.frame.size.height - keyboardBounds.size.height) - (self.specialNoteTextView.frame.size.height + self.specialNoteTextView.frame.origin.y) ;
+    
+    if (difference < 0) {
+        self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue + difference;
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
@@ -130,8 +178,12 @@
 
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
+        NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"washer_temperature_dark_id", self.selectedOptionsIDs[1], @"washer_temperature_light_id", self.selectedOptionsIDs[2], @"washer_temperature_white_id", self.selectedOptionsIDs[3], @"dryer_temperature_id", nil];
+        if (self.specialNoteTextView.text.length > 0){
+            dataDict[@"special_instruction_wdf"] = self.specialNoteTextView.text;
+        }
         [self.activityIndicator startAnimating];
-        [[RequestManager alloc]postPermanentPreferencesWithDetergentID:self.selectedOptionsIDs[0] softnerID:self.selectedOptionsIDs[1] drySheetID:self.selectedOptionsIDs[2] withCompletionBlock:^(BOOL success, id response) {
+        [[RequestManager alloc] postWashAndFoldPreferencesWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
@@ -140,12 +192,6 @@
             }
         }];
     }
-}
-
-#pragma mark - Delegate methods
-
-- (void)dropDownTapped:(NSInteger)index {
-    
 }
 
 #pragma mark - TableView methods -
@@ -159,7 +205,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
-    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return dropdownTableViewCell;
 }
 
@@ -191,7 +237,7 @@
         tView = [[UILabel alloc] init];
         // Setup label properties - frame, font, colors etc
         [tView setTextColor:[UIColor colorWithRed:34/255.0 green:34/255.0 blue:34/255.0 alpha:1.0]];
-        [tView setFont:[UIFont fontWithName:@"roboto-regular" size:15.0]];
+        [tView setFont:[UIFont fontWithName:@"roboto-regular" size:13.0]];
         tView.textAlignment = NSTextAlignmentCenter;
     }
     // Fill the label text here
@@ -212,6 +258,33 @@
     NSDictionary *selectedProduct = option[row];
     [selectedProduct setValue:[NSNumber numberWithBool:YES] forKey:@"is_selected"];
     ((NSMutableArray *)self.allOptions[self.selectedOptionIndex])[row] = selectedProduct;
+    
+    [self.view endEditing:YES];
+}
+
+#pragma mark - TextView delegate methods -
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"Write your text here"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor]; //optional
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"Write your text here";
+        textView.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [textView resignFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    self.saveButton.selected = YES;
+    return YES;
 }
 
 @end

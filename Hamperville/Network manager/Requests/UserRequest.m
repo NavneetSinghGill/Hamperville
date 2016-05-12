@@ -145,6 +145,44 @@
     return self;
 }
 
+- (id)initWithGetWashAndFoldPreferences {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiWashAndFoldPref;
+    }
+    return self;
+}
+
+- (id)initWithPostWashAndFoldPreferencesWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"washer_temperature_dark_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"washer_temperature_dark_id"] forKey:@"washer_temperature_dark_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"washer_temperature_light_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"washer_temperature_light_id"] forKey:@"washer_temperature_light_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"washer_temperature_white_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"washer_temperature_white_id"] forKey:@"washer_temperature_white_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"dryer_temperature_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"dryer_temperature_id"] forKey:@"dryer_temperature_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"bleach_for_white_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"bleach_for_white_id"] forKey:@"bleach_for_white_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"button_down_shirt_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"button_down_shirt_id"] forKey:@"button_down_shirt_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"special_instruction_wdf"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"special_instruction_wdf"] forKey:@"special_instruction_wdf"];
+        }
+        self.urlPath = apiWashAndFoldPref;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

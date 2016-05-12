@@ -157,6 +157,28 @@
     }
 }
 
+- (void)getWashAndFoldPreferences:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getWashAndFoldPreferencesWithUserRequest:[[UserRequest alloc] initWithGetWashAndFoldPreferences]
+                                                     andCompletionBlock:^(BOOL success, id response) {
+                                                         block(success, response);
+                                                     }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postWashAndFoldPreferencesWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postWashAndFoldPreferencesWithUserRequest:[[UserRequest alloc] initWithPostWashAndFoldPreferencesWithDataDictionary:dataDictionary]
+                                                     andCompletionBlock:^(BOOL success, id response) {
+                                                         block(success, response);
+                                                     }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {

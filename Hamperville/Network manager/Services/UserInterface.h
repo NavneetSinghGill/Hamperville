@@ -39,4 +39,8 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)postPermanentPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)getWashAndFoldPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
+- (void)postWashAndFoldPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 @end

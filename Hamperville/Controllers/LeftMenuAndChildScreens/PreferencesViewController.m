@@ -10,6 +10,7 @@
 #import "PickupAndDeliverViewController.h"
 #import "NotificationPreferencesViewController.h"
 #import "PermanentPreferencesViewController.h"
+#import "WashAndFoldPreferencesViewController.h"
 
 @interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -63,6 +64,11 @@
     [self.navigationController pushViewController:permanentPreferencesViewController animated:YES];
 }
 
+- (void)openWashAndFoldPrefScreen {
+    WashAndFoldPreferencesViewController *washAndFoldPreferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WashAndFoldPreferencesViewController"];
+    [self.navigationController pushViewController:washAndFoldPreferencesViewController animated:YES];
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasource
@@ -97,6 +103,9 @@
             break;
         case 1:
             [self openPermanentPrefScreen];
+            break;
+        case 2:
+            [self openWashAndFoldPrefScreen];
             break;
         case 3:
             [self openNotificationScreen];
