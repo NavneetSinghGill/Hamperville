@@ -137,9 +137,9 @@
     self = [super init];
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
-        [_parameters setValue:[NSNumber numberWithBool:detergentID] forKey:@"detergent_id"];
-        [_parameters setValue:[NSNumber numberWithBool:softnerID] forKey:@"softener_id"];
-        [_parameters setValue:[NSNumber numberWithBool:drySheetID] forKey:@"dry_sheet_id"];
+        [_parameters setValue:detergentID forKey:@"detergent_id"];
+        [_parameters setValue:softnerID forKey:@"softener_id"];
+        [_parameters setValue:drySheetID forKey:@"dry_sheet_id"];
         self.urlPath = apiPermanentPref;
     }
     return self;
@@ -179,6 +179,38 @@
             [_parameters setValue:[dataDictionary valueForKey:@"special_instruction_wdf"] forKey:@"special_instruction_wdf"];
         }
         self.urlPath = apiWashAndFoldPref;
+    }
+    return self;
+}
+
+- (id)initWithGetSpecialCarePreferences {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiSpecialCarePref;
+    }
+    return self;
+}
+
+- (id)initWithPostSpecialCarePreferencesWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"damage_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"damage_id"] forKey:@"damage_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"shirt_pressing_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"shirt_pressing_id"] forKey:@"shirt_pressing_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"pant_crease_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"pant_crease_id"] forKey:@"pant_crease_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"starch_id"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"starch_id"] forKey:@"starch_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"special_instruction_care"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"special_instruction_care"] forKey:@"special_instruction_care"];
+        }
+        self.urlPath = apiSpecialCarePref;
     }
     return self;
 }

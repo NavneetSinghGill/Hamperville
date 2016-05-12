@@ -122,6 +122,20 @@
                 }];
 }
 
+- (void)getSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:userRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
+- (void)postSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

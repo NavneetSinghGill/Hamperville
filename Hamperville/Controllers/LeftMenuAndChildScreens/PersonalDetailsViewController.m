@@ -315,8 +315,12 @@
     CGFloat difference = ( self.view.frame.size.height - keyboardBounds.size.height) - (textField.frame.size.height + textField.frame.origin.y) ;
     
     if (difference < 0) {
-        self.yourInfoTopConstraint.constant = self.kYourInfoTopConstraintDefault - difference;
+        //Note: difference is negative so it's added
+        self.yourInfoTopConstraint.constant = self.kYourInfoTopConstraintDefault + difference - (self.kYourInfoTopConstraintDefault - self.yourInfoTopConstraint.constant);
     }
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notificaiton {
@@ -324,6 +328,9 @@
     
     [[notificaiton.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
     self.yourInfoTopConstraint.constant = self.kYourInfoTopConstraintDefault;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end

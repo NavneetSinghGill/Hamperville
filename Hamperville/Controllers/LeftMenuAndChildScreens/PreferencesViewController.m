@@ -11,6 +11,7 @@
 #import "NotificationPreferencesViewController.h"
 #import "PermanentPreferencesViewController.h"
 #import "WashAndFoldPreferencesViewController.h"
+#import "SpecialCarePreferencesViewController.h"
 
 @interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -69,6 +70,11 @@
     [self.navigationController pushViewController:washAndFoldPreferencesViewController animated:YES];
 }
 
+- (void)openSpecialCarePrefScreen {
+    SpecialCarePreferencesViewController *specialCarePreferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpecialCarePreferencesViewController"];
+    [self.navigationController pushViewController:specialCarePreferencesViewController animated:YES];
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasource
@@ -109,6 +115,9 @@
             break;
         case 3:
             [self openNotificationScreen];
+            break;
+        case 4:
+            [self openSpecialCarePrefScreen];
             break;
             
         default:

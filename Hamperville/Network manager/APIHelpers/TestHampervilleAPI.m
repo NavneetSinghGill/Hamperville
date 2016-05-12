@@ -72,6 +72,14 @@
     
 }
 
+- (void)getSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)postSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

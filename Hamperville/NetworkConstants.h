@@ -24,6 +24,7 @@ extern NSString *apiPostPickupAndDeliverPref;
 extern NSString *apiNotificationPref;
 extern NSString *apiPermanentPref;
 extern NSString *apiWashAndFoldPref;
+extern NSString *apiSpecialCarePref;
 
 extern NSString *apiSchedulePickup;
 extern NSString *apiOrderHistory;

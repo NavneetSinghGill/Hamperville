@@ -31,6 +31,9 @@
 - (id)initWithGetWashAndFoldPreferences;
 - (id)initWithPostWashAndFoldPreferencesWithDataDictionary:(NSDictionary *)dataDictionary;
 
+- (id)initWithGetSpecialCarePreferences;
+- (id)initWithPostSpecialCarePreferencesWithDataDictionary:(NSDictionary *)dataDictionary;
+
 - (NSDictionary *)getParams;
 
 @end

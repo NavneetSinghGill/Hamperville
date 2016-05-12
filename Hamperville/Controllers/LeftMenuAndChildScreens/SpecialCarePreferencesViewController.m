@@ -1,16 +1,16 @@
 //
-//  WashAndFoldPreferencesViewController.m
+//  SpecialCarePreferencesViewController.m
 //  Hamperville
 //
-//  Created by stplmacmini11 on 11/05/16.
+//  Created by stplmacmini11 on 12/05/16.
 //  Copyright © 2016 Systango. All rights reserved.
 //
 
-#import "WashAndFoldPreferencesViewController.h"
-#import "DropdownTableViewCell.h"
+#import "SpecialCarePreferencesViewController.h"
 #import "RequestManager.h"
+#import "DropdownTableViewCell.h"
 
-@interface WashAndFoldPreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate> {
+@interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
 }
 
@@ -33,11 +33,11 @@
 
 @end
 
-@implementation WashAndFoldPreferencesViewController
+@implementation SpecialCarePreferencesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     [self initialSetup];
     [self getWashAndFoldPrefs];
 }
@@ -45,7 +45,7 @@
 #pragma mark - Private methods
 
 - (void)initialSetup {
-    [self setNavigationBarButtonTitle:@"Wash and Fold" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+    [self setNavigationBarButtonTitle:@"Special Care Preference" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self setLeftMenuButtons:[NSArray arrayWithObject:self.backButton]];
     
     self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 50, 34)];
@@ -70,7 +70,7 @@
     self.specialNotelabel.hidden = YES;
     self.specialNoteTextView.hidden = YES;
     self.specialTextViewBackgroundBoarderView.hidden = YES;
-    
+//    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
@@ -84,7 +84,7 @@
 }
 
 - (void)getWashAndFoldPrefs {
-    [[RequestManager alloc] getWashAndFoldPreferences:^(BOOL success, id response) {
+    [[RequestManager alloc] getSpecialCarePreferences:^(BOOL success, id response) {
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
@@ -106,8 +106,8 @@
     if ([response hasValueForKey:@"special_note"]) {
         self.specialNoteTextView.text = [response valueForKey:@"special_note"];
     }
-    if ([response hasValueForKey:@"wash_dry_and_fold_preferences"]) {
-        self.allEntries = [response valueForKey:@"wash_dry_and_fold_preferences"];
+    if ([response hasValueForKey:@"special_care_preferences"]) {
+        self.allEntries = [response valueForKey:@"special_care_preferences"];
         
         for (NSDictionary *dict in self.allEntries) {
             [self.allOptions addObject:[self createMutableOption:[dict valueForKey:@"options"]]];
@@ -158,7 +158,14 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
-    
+//    CGFloat difference = ( self.view.frame.size.height - keyboardBounds.size.height) - (self.specialNoteTextView.frame.size.height + self.specialNoteTextView.frame.origin.y) ;
+//    
+//    if (difference < 0) {
+//        self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue + difference;
+//        [UIView animateWithDuration:0.5f animations:^{
+//            [self.view layoutIfNeeded];
+//        }];
+//    }
     self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
     CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
     [self.scrollView setContentOffset:bottomOffset animated:YES];
@@ -196,12 +203,12 @@
 
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
-        NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"washer_temperature_dark_id", self.selectedOptionsIDs[1], @"washer_temperature_light_id", self.selectedOptionsIDs[2], @"washer_temperature_white_id", self.selectedOptionsIDs[3], @"dryer_temperature_id", nil];
+        NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"damage_id", self.selectedOptionsIDs[1], @"shirt_pressing_id", self.selectedOptionsIDs[2], @"pant_crease_id", self.selectedOptionsIDs[3], @"starch_id", nil];
         if (self.specialNoteTextView.text.length > 0){
-            dataDict[@"special_instruction_wdf"] = self.specialNoteTextView.text;
+            dataDict[@"special_instruction_care"] = self.specialNoteTextView.text;
         }
         [self.activityIndicator startAnimating];
-        [[RequestManager alloc] postWashAndFoldPreferencesWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
+        [[RequestManager alloc] postSpecialCarePreferencesWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
@@ -223,7 +230,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
-//    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    //    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return dropdownTableViewCell;
 }
 

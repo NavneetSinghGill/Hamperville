@@ -131,6 +131,24 @@
                                              }];
 }
 
+- (void)getSpecialCarePreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getSpecialCarePreferencesWithRequest:userRequest
+                                             andCompletionBlock:^(BOOL success, id response) {
+                                                 [self parseGeneralDataResponse:response];
+                                             }];
+}
+
+- (void)postSpecialCarePreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postSpecialCarePreferencesWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  [self parseGeneralDataResponse:response];
+                                              }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralMessageResponse:(id)response
