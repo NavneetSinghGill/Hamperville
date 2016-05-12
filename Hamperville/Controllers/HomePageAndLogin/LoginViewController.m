@@ -10,7 +10,9 @@
 #import "RequestManager.h"
 #import "ForgotPasswordViewController.h"
 
-@interface LoginViewController() <UITextFieldDelegate>
+@interface LoginViewController() <UITextFieldDelegate> {
+    NSInteger kLogoTopConstraintDefaultValue;
+}
 
 @property(weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property(weak, nonatomic) IBOutlet UIView *userNameView;
@@ -19,6 +21,9 @@
 
 @property(weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property(weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopConstraint;
+
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -109,6 +114,48 @@
     [self.passwordView.layer setBorderColor:[UIColor colorWithRed:134/255.0f green:134/255.0f blue:134/255.0f alpha:1.0].CGColor];
     
     self.loginButton.layer.cornerRadius = 3;
+    
+    kLogoTopConstraintDefaultValue = self.logoTopConstraint.constant;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark Notification Methods
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardBounds;
+    UITextField *textField = nil;
+    UIView *viewOfTextField = nil;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    
+    if ([self.userNameTextField isFirstResponder]) {
+        textField = self.userNameTextField;
+        viewOfTextField = self.userNameView;
+    } else if ([self.passwordTextField isFirstResponder]) {
+        textField = self.passwordTextField;
+        viewOfTextField = self.passwordView;
+    }
+    
+    CGFloat difference = ( self.view.frame.size.height - keyboardBounds.size.height) - (textField.frame.size.height + viewOfTextField.frame.origin.y) ;
+    
+    if (difference < 0) {
+        //Note: difference is negative so it's added
+        self.logoTopConstraint.constant = kLogoTopConstraintDefaultValue + difference - (kLogoTopConstraintDefaultValue - self.logoTopConstraint.constant);
+    }
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    
+    self.logoTopConstraint.constant = kLogoTopConstraintDefaultValue;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - TextField Delegate methods

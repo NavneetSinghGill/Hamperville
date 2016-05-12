@@ -1090,6 +1090,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="GqY-Rg-7E0" id="z9J-jn-v8v"/>
                         <outlet property="loginButton" destination="pR8-VM-QJg" id="c8z-J2-Got"/>
+                        <outlet property="logoTopConstraint" destination="IqD-7V-ajI" id="daT-9D-Dd7"/>
                         <outlet property="passwordTextField" destination="oGl-Li-kBo" id="1Ce-Go-mM8"/>
                         <outlet property="passwordView" destination="o8y-WQ-8k8" id="U0t-o9-X9X"/>
                         <outlet property="titleLabel" destination="j3z-VH-twt" id="g4h-O3-utD"/>
