@@ -145,6 +145,13 @@
                }];
 }
 
+- (void)postRequestPickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:pickupRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
 - (void)getOrderHistoryWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
     [self interactAPIWithGetObject:pickupRequest
                withCompletionBlock:^(BOOL success, id response) {

@@ -12,6 +12,7 @@
 
 @property(weak, nonatomic) IBOutlet UIButton *serviceImageButton;
 @property(weak, nonatomic) IBOutlet UILabel *serviceNamelabel;
+@property(weak, nonatomic) IBOutlet UIView *serviceImageBackgroundBorderView;
 
 @property(strong, nonatomic) NSMutableDictionary *serviceDictionary;
 
@@ -22,5 +23,7 @@
 @property(strong, nonatomic) NSMutableArray *coupons;
 
 - (void)setContent;
+
+- (void)setSelectionState:(BOOL)isSelected;
 
 @end

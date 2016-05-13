@@ -52,7 +52,7 @@
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 34, 34)];
     leftButton.layer.cornerRadius = leftButton.frame.size.width / 2;
     leftButton.layer.masksToBounds = YES;
-    [leftButton setImage:[UIImage imageNamed:@"arrow_left"] forState:UIControlStateNormal];
+    [leftButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     return leftBarButton;

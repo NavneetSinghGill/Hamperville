@@ -56,6 +56,7 @@
 		3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */; };
 		3BEE17111CD79B1B00B5C9F7 /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */; };
 		3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */; };
+		3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF12CCE1CE5EA93002747F7 /* UIView+HVView.m */; };
 		3BF174A91CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF174A81CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m */; };
 		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
 		3BF1824B1CB650E900E1CB3E /* SignupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1824A1CB650E900E1CB3E /* SignupInterface.m */; };
@@ -175,6 +176,8 @@
 		3BEE170E1CD79B1B00B5C9F7 /* CouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
 		3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
 		3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
+		3BF12CCD1CE5EA93002747F7 /* UIView+HVView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HVView.h"; sourceTree = "<group>"; };
+		3BF12CCE1CE5EA93002747F7 /* UIView+HVView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HVView.m"; sourceTree = "<group>"; };
 		3BF174A71CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashAndFoldPreferencesViewController.h; sourceTree = "<group>"; };
 		3BF174A81CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashAndFoldPreferencesViewController.m; sourceTree = "<group>"; };
 		3BF182461CB64D2E00E1CB3E /* RequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestManager.h; sourceTree = "<group>"; };
@@ -348,6 +351,7 @@
 				3BE603CA1CB5188400E0F997 /* AppDelegate.h */,
 				3BE603CB1CB5188400E0F997 /* AppDelegate.m */,
 				3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */,
+				3BF12CCC1CE5EA84002747F7 /* Helpers */,
 				3BE961401CBBC3B8005D0BCA /* CustomFont */,
 				3BF182411CB64D1400E1CB3E /* NetworkManager */,
 				3BF182401CB64D0800E1CB3E /* Controllers */,
@@ -431,6 +435,15 @@
 				3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */,
 			);
 			path = CustomFont;
+			sourceTree = "<group>";
+		};
+		3BF12CCC1CE5EA84002747F7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3BF12CCD1CE5EA93002747F7 /* UIView+HVView.h */,
+				3BF12CCE1CE5EA93002747F7 /* UIView+HVView.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		3BF182401CB64D0800E1CB3E /* Controllers */ = {
@@ -721,6 +734,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BCD37C41CBE270400DE4E91 /* User.m in Sources */,
+				3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */,
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
 				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
 				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,

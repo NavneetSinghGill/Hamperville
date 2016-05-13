@@ -11,6 +11,8 @@
 @interface PickupRequest : Request
 
 - (id)initWithSchedulePickup;
+- (id)initWithRequestPickup:(NSDictionary *)dataDictionary;
+
 - (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSDate *)timeStamp andOrderOffset:(NSInteger)previousOrderID;
 
 @end

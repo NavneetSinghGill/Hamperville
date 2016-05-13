@@ -27,7 +27,9 @@ typedef enum {
     DropOff
 }Task;
 
-@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
+@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, CouponTableViewCellDelegate> {
+    NSInteger kCouponTableViewDefaultHeight;
+}
 
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -79,6 +81,10 @@ typedef enum {
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property(strong, nonatomic) NSMutableArray *selectedServiceIDs;
+@property(strong, nonatomic) NSMutableArray *appliedCouponsIDAndName;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightContraint;
+
 @end
 
 @implementation SchedulePickupViewController
@@ -117,6 +123,7 @@ typedef enum {
             self.universalCoupons = [response valueForKey:@"universal_coupons"];
             
             [self.collectionView reloadData];
+            [self.couponTableView reloadData];
             
             // Setup for first pickup date
             self.pickupLeftArrowButton.hidden = YES;
@@ -142,6 +149,14 @@ typedef enum {
     self.dropOffPickerView.delegate = self;
     self.dropOffPickerView.dataSource = self;
     
+    self.selectedServiceIDs = [NSMutableArray array];
+    self.appliedCouponsIDAndName = [NSMutableArray array];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [self.scrollView addGestureRecognizer:tapGesture];
+    
     self.weekInSeconds = (double)(60*60*24*7);
     self.dayInSeconds = (double)(60*60*24);
     
@@ -150,14 +165,21 @@ typedef enum {
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-}
-
-- (void)registerNib {
-    UINib *nib = [UINib nibWithNibName:kCouponTableViewCellNibName bundle:nil];
-    [self.couponTableView registerNib:nib forCellReuseIdentifier:kCouponTableViewCellIdentifier];
+    
+    UINib *couponTableViewNib = [UINib nibWithNibName:kCouponTableViewCellNibName bundle:nil];
+    [self.couponTableView registerNib:couponTableViewNib forCellReuseIdentifier:kCouponTableViewCellIdentifier];
     
     self.couponTableView.delegate = self;
     self.couponTableView.dataSource = self;
+    self.appliedCouponsIDAndName = [NSMutableArray array];
+    kCouponTableViewDefaultHeight = self.couponTableView.frame.size.height;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
 }
 
 #pragma mark Initial Setup method
@@ -330,11 +352,32 @@ typedef enum {
 - (void)setTaskTimeSlotsForDay:(NSString *)day withTask:(Task)task {
     if (task == Pickup) {
         self.pickupSlots = [self.pickupDaysWithSlots objectForKey:day];
-//        [self.pickupPickerView reloadAllComponents];
+        [self.pickupPickerView reloadAllComponents];
     } else {
         self.dropOffSlots = [self.dropOffDaysWithSlots objectForKey:day];
-//        [self.dropOffPickerView reloadAllbComponents];
+        [self.dropOffPickerView reloadAllComponents];
     }
+}
+
+#pragma mark Notification methods
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    
+    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
+    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+    [self.scrollView setContentOffset:bottomOffset animated:YES];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
+    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+    [self.scrollView setContentOffset:bottomOffset animated:YES];
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - IBAction methods -
@@ -425,7 +468,41 @@ typedef enum {
 }
 
 - (IBAction)requestPickupButtonTapped:(id)sender {
+    NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
     
+    NSString *commaSeparatedServiceIDs = kEmptyString;
+    NSInteger count = 0;
+    for (count = 0; count < self.selectedServiceIDs.count; count++) {
+        if (count == 0) {
+            commaSeparatedServiceIDs = self.selectedServiceIDs[0];
+            continue;
+        }
+        commaSeparatedServiceIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedServiceIDs,self.selectedServiceIDs[count]];
+    }
+    
+    [dataDictionary setValue:commaSeparatedServiceIDs forKey:@"service_selected"];
+    
+    NSInteger selectedIndex = [self.pickupPickerView selectedRowInComponent:0];
+    NSDictionary *selectedPickupTimeDictionary = [self.pickupSlots objectAtIndex:selectedIndex];
+    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"pick_up_time"];
+    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"pick_up_time_slot_id"];
+    
+    selectedIndex = [self.dropOffPickerView selectedRowInComponent:0];
+    selectedPickupTimeDictionary = [self.dropOffSlots objectAtIndex:selectedIndex];
+    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"drop_off_time"];
+    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"drop_off_time_slot_id"];
+    
+    
+    
+    [dataDictionary setValue:self.appliedCouponsIDAndName forKey:@"coupon_code"];
+    
+    [[RequestManager alloc] postRequestPickupWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
+        if (success) {
+            
+        } else {
+            [self showToastWithText:response on:Top];
+        }
+    }];
 }
 
 #pragma mark - PickerView Delegate and Datasource methods -
@@ -492,28 +569,72 @@ typedef enum {
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ServicesCollectionViewCell *cell = (ServicesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     self.difference = cell.difference;
+    [cell setSelectionState:!cell.serviceImageButton.selected];
+    if (cell.serviceImageButton.selected == YES) {
+        [self.selectedServiceIDs addObject:cell.serviceID];
+    } else {
+        NSString *serviceToDelete = nil;
+        for (NSString *serviceID in self.selectedServiceIDs) {
+            if ([serviceID isEqualToString:cell.serviceID]) {
+                serviceToDelete = serviceID;
+                break;
+            }
+        }
+        [self.selectedServiceIDs removeObject:serviceToDelete];
+    }
     [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:1];
 }
 
 #pragma mark - Table View -
 
-//#pragma mark Datasource
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    CouponTableViewCell *couponTableViewCell = [tableView dequeueReusableCellWithIdentifier:kCouponTableViewCellIdentifier];
-//    
-//    
-//    return couponTableViewCell;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    
-//}
-//
-//#pragma mark Delegate
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 40;
-//}
+#pragma mark Datasource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CouponTableViewCell *couponTableViewCell = [tableView dequeueReusableCellWithIdentifier:kCouponTableViewCellIdentifier];
+    couponTableViewCell.couponTableViewCellDelegate = self;
+    couponTableViewCell.index = indexPath.row;
+    
+    if (indexPath.row < self.appliedCouponsIDAndName.count) {
+        couponTableViewCell.textField.text = self.appliedCouponsIDAndName[indexPath.row];//[self.appliedCouponsIDAndName[indexPath.row] valueForKey:@"name"];
+        couponTableViewCell.verifyButton.selected = YES;
+    } else {
+        couponTableViewCell.textField.text = kEmptyString;
+        couponTableViewCell.verifyButton.selected = NO;
+    }
+    
+    return couponTableViewCell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.appliedCouponsIDAndName.count + 1;
+}
+
+#pragma mark Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return kCouponTableViewDefaultHeight;
+}
+
+#pragma mark - Custom delegate methods -
+
+- (void)verifyTapped:(CouponTableViewCell *)couponCell {
+    if (couponCell.verifyButton.selected == NO) {
+        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+        [self.couponTableView reloadData];
+        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + 1);
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    } else {
+        [self.appliedCouponsIDAndName removeObjectAtIndex:couponCell.index];
+        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + 1);
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+            [self.couponTableView reloadData];
+        }];
+    }
+}
 
 @end

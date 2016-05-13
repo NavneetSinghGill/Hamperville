@@ -33,27 +33,8 @@
 
     [self initialSetup];
     
-    [self.activityIndicator startAnimating];
-    [[RequestManager alloc]getNotificationPrefOfUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
-        [self.activityIndicator stopAnimating];
-        if (success) {
-            if ([response hasValueForKey:@"notification_preference"]) {
-                NSDictionary *notificationPref = [response valueForKey:@"notification_preference"];
-                if ([notificationPref hasValueForKey:@"app_notifications"]) {
-                    self.isAppNotificationOn = [[notificationPref valueForKey:@"app_notifications"] boolValue];
-                }
-                if ([notificationPref hasValueForKey:@"emails_notifications"]) {
-                    self.isEmailNotificationOn = [[notificationPref valueForKey:@"emails_notifications"] boolValue];
-                }
-                if ([notificationPref hasValueForKey:@"text_notifications"]) {
-                    self.isTextNotificationOn = [[notificationPref valueForKey:@"text_notifications"] boolValue];
-                }
-                [self.tableView reloadData];
-            }
-        } else {
-            [self showToastWithText:response on:Top];
-        }
-    }];
+    self.tableView.hidden = YES;
+    [self getNotificationPrefs];
 }
 
 #pragma mark - Private methods
@@ -71,6 +52,31 @@
     //TAGS
     _kOptionIconButtonTag = 5;
     _kOptionLabelTag = 10;
+}
+
+- (void)getNotificationPrefs {
+    [self.activityIndicator startAnimating];
+    [[RequestManager alloc]getNotificationPrefOfUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
+        if (success) {
+            self.tableView.hidden = NO;
+            if ([response hasValueForKey:@"notification_preference"]) {
+                NSDictionary *notificationPref = [response valueForKey:@"notification_preference"];
+                if ([notificationPref hasValueForKey:@"app_notifications"]) {
+                    self.isAppNotificationOn = [[notificationPref valueForKey:@"app_notifications"] boolValue];
+                }
+                if ([notificationPref hasValueForKey:@"emails_notifications"]) {
+                    self.isEmailNotificationOn = [[notificationPref valueForKey:@"emails_notifications"] boolValue];
+                }
+                if ([notificationPref hasValueForKey:@"text_notifications"]) {
+                    self.isTextNotificationOn = [[notificationPref valueForKey:@"text_notifications"] boolValue];
+                }
+                [self.tableView reloadData];
+            }
+        } else {
+            [self showToastWithText:response on:Top];
+        }
+    }];
 }
 
 #pragma mark - Overridden methods

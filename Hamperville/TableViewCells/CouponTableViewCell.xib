@@ -5,6 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
+        </mutableArray>
         <mutableArray key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
         </mutableArray>
@@ -31,19 +34,44 @@
                                 <state key="normal" image="coupon"/>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter coupon code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Jo-MK-CIX" userLabel="Coupon Text Field">
-                                <rect key="frame" x="41" y="0.0" width="279" height="39"/>
+                                <rect key="frame" x="41" y="0.0" width="227" height="39"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfV-Nh-zqe">
+                                <rect key="frame" x="270" y="5" width="45" height="29"/>
+                                <color key="backgroundColor" red="0.17254901959999999" green="0.62352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="0cL-F4-SCe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                <state key="normal" title="Verify">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="verifyButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4VP-vO-66s"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="1Jo-MK-CIX" secondAttribute="trailing" id="NiR-XB-DPV"/>
+                            <constraint firstItem="RfV-Nh-zqe" firstAttribute="leading" secondItem="1Jo-MK-CIX" secondAttribute="trailing" constant="2" id="2YE-zj-5Hr"/>
+                            <constraint firstAttribute="trailing" secondItem="RfV-Nh-zqe" secondAttribute="trailing" constant="5" id="Loh-NA-vh0"/>
+                            <constraint firstAttribute="bottom" secondItem="RfV-Nh-zqe" secondAttribute="bottom" constant="5" id="P6X-vI-xmu"/>
                             <constraint firstItem="1Jo-MK-CIX" firstAttribute="top" secondItem="jP6-ub-Hg0" secondAttribute="top" id="Rxq-q9-F5S"/>
                             <constraint firstAttribute="bottom" secondItem="1Jo-MK-CIX" secondAttribute="bottom" id="W8c-JS-avJ"/>
                             <constraint firstItem="ned-vU-ozj" firstAttribute="leading" secondItem="jP6-ub-Hg0" secondAttribute="leading" constant="10" id="XOt-y7-jpH"/>
                             <constraint firstItem="ned-vU-ozj" firstAttribute="centerY" secondItem="jP6-ub-Hg0" secondAttribute="centerY" id="dMq-vH-MT8"/>
                             <constraint firstItem="1Jo-MK-CIX" firstAttribute="leading" secondItem="ned-vU-ozj" secondAttribute="trailing" constant="10" id="eIh-A4-vme"/>
+                            <constraint firstItem="RfV-Nh-zqe" firstAttribute="top" secondItem="jP6-ub-Hg0" secondAttribute="top" constant="5" id="hxG-K9-BO3"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -54,6 +82,10 @@
                     <constraint firstAttribute="bottom" secondItem="jP6-ub-Hg0" secondAttribute="bottom" id="Naj-xK-Mgo"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="textField" destination="1Jo-MK-CIX" id="qr6-AK-11a"/>
+                <outlet property="verifyButton" destination="RfV-Nh-zqe" id="gOE-oH-kLF"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

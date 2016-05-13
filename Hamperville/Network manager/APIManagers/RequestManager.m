@@ -214,6 +214,17 @@
     }
 }
 
+- (void)postRequestPickupWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[PickupInterface alloc] postRequestPickupWithPickupRequest:
+         [[PickupRequest alloc] initWithRequestPickup:dataDictionary] andCompletionBlock:^(BOOL success, id response) {
+             block(success, response);
+         }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 - (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSDate *)timeStamp andOrderOffset:(NSInteger)previousOrderID withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
         [[PickupInterface alloc] getOrderHistoryWithPickupRequest:

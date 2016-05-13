@@ -20,4 +20,8 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)verifyButtonTapped:(id)sender {
+    [self.couponTableViewCellDelegate verifyTapped:self];
+}
+
 @end

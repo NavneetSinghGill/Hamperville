@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CouponTableViewCell;
+
+@protocol CouponTableViewCellDelegate <NSObject>
+
+- (void)verifyTapped:(CouponTableViewCell *)couponCell;
+
+@end
 
 @interface CouponTableViewCell : UITableViewCell
+
+@property(weak, nonatomic) IBOutlet UITextField *textField;
+@property(weak, nonatomic) IBOutlet UIButton *verifyButton;
+@property(assign, nonatomic) NSInteger index;
+
+@property(assign, nonatomic) id<CouponTableViewCellDelegate> couponTableViewCellDelegate;
 
 @end

@@ -22,6 +22,15 @@
                                      }];
 }
 
+- (void)postRequestPickupWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postRequestPickupWithRequest:pickupRequest
+                                     andCompletionBlock:^(BOOL success, id response) {
+                                         [self parseGetSchedulePickup:response];
+                                     }];
+}
+
 - (void)getOrderHistoryWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block {
     _block = block;
     id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];

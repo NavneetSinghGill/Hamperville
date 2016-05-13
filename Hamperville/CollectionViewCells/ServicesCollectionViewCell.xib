@@ -21,12 +21,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvi-ZO-M4Y">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwc-wI-6n1" userLabel="Service Image Button">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNk-EY-mZV" userLabel="Border View">
+                                <rect key="frame" x="23" y="14" width="54" height="54"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwc-wI-6n1" userLabel="Service Image Button">
                                 <rect key="frame" x="24" y="15" width="52" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="52" id="KFK-D3-e33"/>
                                     <constraint firstAttribute="height" constant="52" id="p7e-m2-WMk"/>
                                 </constraints>
+                                <state key="normal" image="Hamperville_Logo"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVx-RL-z7V" userLabel="Service Name Label">
                                 <rect key="frame" x="0.0" y="72" width="100" height="18"/>
@@ -42,9 +47,13 @@
                         <constraints>
                             <constraint firstItem="aVx-RL-z7V" firstAttribute="leading" secondItem="mvi-ZO-M4Y" secondAttribute="leading" id="5s7-U6-0px"/>
                             <constraint firstAttribute="trailing" secondItem="aVx-RL-z7V" secondAttribute="trailing" id="7ro-Lu-Rdp"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="bottom" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="1" id="9mV-Yz-Upo"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="top" secondItem="mvi-ZO-M4Y" secondAttribute="top" constant="15" id="Bhf-lL-IiP"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="leading" secondItem="kwc-wI-6n1" secondAttribute="leading" constant="-1" id="IR2-Kd-58s"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="top" constant="-1" id="LU0-gL-d6i"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="centerX" secondItem="mvi-ZO-M4Y" secondAttribute="centerX" id="Siv-rZ-rmH"/>
                             <constraint firstItem="aVx-RL-z7V" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="5" id="ZDT-Ix-V3O"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="trailing" secondItem="kwc-wI-6n1" secondAttribute="trailing" constant="1" id="eA3-iC-HGK"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -57,9 +66,13 @@
                 <constraint firstAttribute="trailing" secondItem="mvi-ZO-M4Y" secondAttribute="trailing" id="NZ1-Fv-vzH"/>
             </constraints>
             <connections>
+                <outlet property="serviceImageBackgroundBorderView" destination="gNk-EY-mZV" id="8d2-Np-sln"/>
                 <outlet property="serviceImageButton" destination="kwc-wI-6n1" id="rwr-pc-Wi2"/>
                 <outlet property="serviceNamelabel" destination="aVx-RL-z7V" id="wCO-uQ-PUB"/>
             </connections>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Hamperville_Logo" width="102" height="102"/>
+    </resources>
 </document>

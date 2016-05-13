@@ -24,17 +24,26 @@
 #pragma mark - Private methods
 
 - (void)setServiceWithServiceDict:(NSMutableDictionary *)serviceDict {
-    self.difference = [[serviceDict valueForKey:@"number_of_days_to_complete_order"] integerValue];
-    self.serviceID = [serviceDict valueForKey:@"service_id"];
-    self.serviceImageUrl = [serviceDict valueForKey:@"service_image_url"];
-    self.serviceName = [serviceDict valueForKey:@"service_name"];
+    self.difference = [[serviceDict valueForKey:@"day_difference"] integerValue];
+    self.serviceID = [serviceDict valueForKey:@"id"];
+    self.serviceImageUrl = [serviceDict valueForKey:@"image_url"];
+    self.serviceName = [serviceDict valueForKey:@"name"];
     
     self.coupons = [serviceDict valueForKey:@"coupons"];
 }
 
 - (void)updateUI {
     self.serviceNamelabel.text = self.serviceName;
+    self.serviceImageButton.layer.cornerRadius = self.serviceImageButton.frame.size.width / 2;
+    self.serviceImageButton.layer.masksToBounds = YES;
+    self.serviceImageBackgroundBorderView.layer.cornerRadius = self.serviceImageBackgroundBorderView.frame.size.width / 2;
+    self.serviceImageBackgroundBorderView.layer.masksToBounds = YES;
     //ImageUrl set
+}
+
+- (void)setSelectionState:(BOOL)isSelected {
+    self.serviceImageBackgroundBorderView.hidden = !isSelected;
+    self.serviceImageButton.selected = isSelected;
 }
 
 @end

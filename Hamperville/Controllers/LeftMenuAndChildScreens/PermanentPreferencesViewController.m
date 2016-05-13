@@ -31,6 +31,9 @@
     [super viewDidLoad];
 
     [self initialSetup];
+    
+    self.pickerView.hidden = YES;
+    self.tableView.hidden = YES;
     [self getPermanentPref];
 }
 
@@ -63,9 +66,11 @@
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
-        
+
         if (success) {
             [self parseGetResponse:response];
+            self.pickerView.hidden = NO;
+            self.tableView.hidden = NO;
         } else {
             [self showToastWithText:response on:Top];
         }
