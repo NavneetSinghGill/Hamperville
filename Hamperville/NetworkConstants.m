@@ -8,8 +8,9 @@
 
 #import "NetworkConstants.h"
 
-NSString *baseUrl = @"http://staging.hamperville.com";
+//NSString *baseUrl = @"http://staging.hamperville.com";
 //NSString *baseUrl = @"http://192.168.1.172:3001";
+NSString *baseUrl = @"http://192.168.1.28:3001";
 
 NSString *kSuccessStatus = @"Success";
 NSString *kSuccess = @"Yes";
@@ -34,5 +35,5 @@ NSString *apiWashAndFoldPref = @"/api/v1/customer_preferences/wash_dry_and_fold"
 NSString *apiSpecialCarePref = @"/api/v1/customer_preferences/special_care";
 
 NSString *apiSchedulePickup = @"/api/v1/schedule/";
-NSString *apiOrderHistory = @"/api/v1/orders/history";
+NSString *apiOrderHistory = @"/api/v1/orders/";
 

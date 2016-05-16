@@ -19,17 +19,17 @@
     if ([dict hasValueForKey:@"delivery_time_slot"]) {
         order.deliveryTimeSlot = [dict valueForKey:@"delivery_time_slot"];
     }
-    if ([dict hasValueForKey:@"order_amount"]) {
-        order.orderAmount = [[dict valueForKey:@"order_amount"] integerValue];
+    if ([dict hasValueForKey:@"total_amount"]) {
+        order.orderAmount = [[dict valueForKey:@"total_amount"] integerValue];
     }
-    if ([dict hasValueForKey:@"order_id"]) {
-        order.orderID = [dict valueForKey:@"order_id"];
+    if ([dict hasValueForKey:@"id"]) {
+        order.orderID = [NSString stringWithFormat:@"%ld",[[dict valueForKey:@"id"] integerValue]];
     }
-    if ([dict hasValueForKey:@"order_status"]) {
-        order.orderStatus = [dict valueForKey:@"order_status"];
+    if ([dict hasValueForKey:@"state"]) {
+        order.orderStatus = [dict valueForKey:@"state"];
     }
-    if ([dict hasValueForKey:@"pick_up_date"]) {
-        order.pickupDate = [dict valueForKey:@"pick_up_date"];
+    if ([dict hasValueForKey:@"pickup_date"]) {
+        order.pickupDate = [dict valueForKey:@"pickup_date"];
     }
     if ([dict hasValueForKey:@"pick_up_time_slot"]) {
         order.pickupTimeSlot = [dict valueForKey:@"pick_up_time_slot"];

@@ -62,7 +62,9 @@
 }
 
 - (void)getPermanentPref {
+    [self.activityIndicator startAnimating];
     [[RequestManager alloc]getPermanentPreferences:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
@@ -164,13 +166,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
-    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return dropdownTableViewCell;
 }
 
 #pragma mark Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self refreshPickerViewForCellIndex:indexPath.row];
 }
 

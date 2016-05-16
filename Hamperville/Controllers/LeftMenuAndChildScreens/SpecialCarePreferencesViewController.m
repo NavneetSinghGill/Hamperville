@@ -70,7 +70,7 @@
     self.specialNotelabel.hidden = YES;
     self.specialNoteTextView.hidden = YES;
     self.specialTextViewBackgroundBoarderView.hidden = YES;
-//    
+
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
@@ -230,13 +230,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
-    //    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return dropdownTableViewCell;
 }
 
 #pragma mark Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self refreshPickerViewForCellIndex:indexPath.row];
 }
 

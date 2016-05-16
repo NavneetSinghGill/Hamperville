@@ -34,13 +34,15 @@ NSInteger kTableViewCellLabelTag = 10;
     [super viewWillAppear:animated];
     
     [self.activityIndicator startAnimating];
-    [[RequestManager alloc] getOrderHistoryWithLimit:5 time:[NSDate date] andOrderOffset:-1 withCompletionBlock:^(BOOL success, id response) {
+    [[RequestManager alloc] getOrderHistoryWithLimit:5 time:[[NSDate date]timeIntervalSince1970] andOrderOffset:-1 withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
             self.orders = response;
             [self.tableView reloadData];
         } else {
-            [self showToastWithText:response on:Top];
+            if ([response isKindOfClass:[NSString class]]) {
+                [self showToastWithText:response on:Top];
+            }
         }
     }];
 }

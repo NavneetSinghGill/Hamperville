@@ -13,6 +13,6 @@
 - (id)initWithSchedulePickup;
 - (id)initWithRequestPickup:(NSDictionary *)dataDictionary;
 
-- (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSDate *)timeStamp andOrderOffset:(NSInteger)previousOrderID;
+- (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSInteger)timeStamp andOrderOffset:(NSInteger)previousOrderID;
 
 @end

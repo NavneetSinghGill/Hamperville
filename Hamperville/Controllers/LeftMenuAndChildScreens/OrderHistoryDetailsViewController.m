@@ -61,7 +61,7 @@
     
     self.numberOfBagsOptions = [NSMutableArray array];
     for (NSDictionary *dict in self.order.serviceDetail) {
-        [self.numberOfBagsOptions addObject:[dict valueForKey:@"service_name"]];
+        [self.numberOfBagsOptions addObject:[dict valueForKey:@"name"]];
     }
     
     self.numberOfBagsEntries = [NSMutableArray array];

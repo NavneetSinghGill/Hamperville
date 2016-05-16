@@ -13,7 +13,7 @@
 #import "WashAndFoldPreferencesViewController.h"
 #import "SpecialCarePreferencesViewController.h"
 
-@interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(strong, nonatomic) NSArray *options;
@@ -48,6 +48,11 @@
     //TAGS
     _kOptionIconButtonTag = 5;
     _kOptionLabelTag = 10;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeLeftMenuIfOpen)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [self.view addGestureRecognizer:tapGesture];
 }
 
 - (void)openPickupAndDeliverScreen {
@@ -75,6 +80,21 @@
     [self.navigationController pushViewController:specialCarePreferencesViewController animated:YES];
 }
 
+#pragma mark - Gesture delegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:self.tableView]) {
+        FrontViewPosition frontViewPosition = [self.revealViewController frontViewPosition];
+        if (frontViewPosition != FrontViewPositionLeft) {
+            return YES;
+        }
+        [super closeLeftMenuIfOpen];
+        return NO;
+    }
+    return NO;
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasource
@@ -92,7 +112,6 @@
     UIButton *optionIconButton = (UIButton *)[cell.contentView viewWithTag:_kOptionIconButtonTag];
     [optionIconButton setImage:[UIImage imageNamed:[self.optionImages objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -103,6 +122,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
             [self openPickupAndDeliverScreen];

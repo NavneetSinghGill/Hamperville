@@ -1535,7 +1535,7 @@
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nP5-1l-JwR" userLabel="OptionName Label">
                                                             <rect key="frame" x="50" y="0.0" width="222" height="54"/>
-                                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="12"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1623,6 +1623,7 @@
                         <constraints>
                             <constraint firstItem="FlC-6K-vO4" firstAttribute="leading" secondItem="44m-69-pcD" secondAttribute="leading" id="GNk-hH-Duj"/>
                             <constraint firstItem="vDZ-VT-D7h" firstAttribute="centerX" secondItem="44m-69-pcD" secondAttribute="centerX" id="Pen-4I-IPK"/>
+                            <constraint firstAttribute="trailing" secondItem="FlC-6K-vO4" secondAttribute="trailing" id="RfT-mV-Sw8"/>
                             <constraint firstItem="vDZ-VT-D7h" firstAttribute="centerY" secondItem="44m-69-pcD" secondAttribute="centerY" id="g77-Ee-rgb"/>
                             <constraint firstAttribute="trailing" secondItem="fxg-ew-WAr" secondAttribute="trailing" id="iQ9-13-LPG"/>
                             <constraint firstItem="FlC-6K-vO4" firstAttribute="top" secondItem="fxg-ew-WAr" secondAttribute="bottom" constant="20" id="sh8-bU-c75"/>
