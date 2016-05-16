@@ -215,6 +215,14 @@ typedef enum {
     return nil;
 }
 
+- (void)resizeTableViewWithAnimation {
+    self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark Initial Setup method
 
 - (void)setupEntriesForDayCount:(NSInteger)dayCount {
@@ -401,6 +409,9 @@ typedef enum {
     self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
     CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
     [self.scrollView setContentOffset:bottomOffset animated:YES];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
@@ -548,11 +559,8 @@ typedef enum {
                 reloadCollectionViewToDefault = YES;
                 [self.collectionView reloadData];
                 [self.couponTableView reloadData];
-                self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
                 
-                [UIView animateWithDuration:0.5 animations:^{
-                    [self.view layoutIfNeeded];
-                }];
+                [self resizeTableViewWithAnimation];
                 reloadCollectionViewToDefault = NO;
             });
         } else {
@@ -662,6 +670,7 @@ typedef enum {
     self.dropOffLeftArrowButton.hidden = YES;
     self.dropOffDayCount = 1;
     [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:1];
+    [self resizeTableViewWithAnimation];
 }
 
 #pragma mark - Table View -
@@ -674,11 +683,15 @@ typedef enum {
     couponTableViewCell.index = indexPath.row;
     
     if (indexPath.row < self.appliedCouponsIDAndName.count) {
-        couponTableViewCell.textField.text = self.appliedCouponsIDAndName[indexPath.row];//[self.appliedCouponsIDAndName[indexPath.row] valueForKey:@"name"];
+        couponTableViewCell.textField.text = self.appliedCouponsIDAndName[indexPath.row];
         couponTableViewCell.verifyButton.selected = YES;
+        couponTableViewCell.verifyButton.alpha = 0.5;
+        couponTableViewCell.textField.userInteractionEnabled = NO;
     } else {
         couponTableViewCell.textField.text = kEmptyString;
         couponTableViewCell.verifyButton.selected = NO;
+        couponTableViewCell.verifyButton.alpha = 1;
+        couponTableViewCell.textField.userInteractionEnabled = YES;
     }
     
     return couponTableViewCell;
@@ -777,22 +790,13 @@ typedef enum {
             }
         }
         
-        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            [self.view layoutIfNeeded];
-        }];
+        [self resizeTableViewWithAnimation];
     } else {
         [self.appliedCouponsIDAndName removeObjectAtIndex:couponCell.index];
         if (self.appliedCouponsIDAndName.count == 0 && _isUniversalCouponApplied) {
             _isUniversalCouponApplied = NO;
         }
-        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            [self.view layoutIfNeeded];
-            [self.couponTableView reloadData];
-        }];
+        [self resizeTableViewWithAnimation];
     }
 }
 
