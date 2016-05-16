@@ -33,12 +33,9 @@
                                 </constraints>
                                 <state key="normal" image="Hamperville_Logo"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVx-RL-z7V" userLabel="Service Name Label">
-                                <rect key="frame" x="0.0" y="72" width="100" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="hJg-nV-R7l"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVx-RL-z7V" userLabel="Service Name Label">
+                                <rect key="frame" x="0.0" y="67" width="100" height="33"/>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -49,10 +46,11 @@
                             <constraint firstAttribute="trailing" secondItem="aVx-RL-z7V" secondAttribute="trailing" id="7ro-Lu-Rdp"/>
                             <constraint firstItem="gNk-EY-mZV" firstAttribute="bottom" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="1" id="9mV-Yz-Upo"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="top" secondItem="mvi-ZO-M4Y" secondAttribute="top" constant="15" id="Bhf-lL-IiP"/>
+                            <constraint firstAttribute="bottom" secondItem="aVx-RL-z7V" secondAttribute="bottom" id="EAF-uK-yQb"/>
                             <constraint firstItem="gNk-EY-mZV" firstAttribute="leading" secondItem="kwc-wI-6n1" secondAttribute="leading" constant="-1" id="IR2-Kd-58s"/>
                             <constraint firstItem="gNk-EY-mZV" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="top" constant="-1" id="LU0-gL-d6i"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="centerX" secondItem="mvi-ZO-M4Y" secondAttribute="centerX" id="Siv-rZ-rmH"/>
-                            <constraint firstItem="aVx-RL-z7V" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="5" id="ZDT-Ix-V3O"/>
+                            <constraint firstItem="aVx-RL-z7V" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="bottom" id="ZDT-Ix-V3O"/>
                             <constraint firstItem="gNk-EY-mZV" firstAttribute="trailing" secondItem="kwc-wI-6n1" secondAttribute="trailing" constant="1" id="eA3-iC-HGK"/>
                         </constraints>
                     </view>

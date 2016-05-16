@@ -66,6 +66,7 @@
 		3BF182581CB69CFC00E1CB3E /* TestHampervilleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182571CB69CFC00E1CB3E /* TestHampervilleAPI.m */; };
 		3BF1825B1CB69D1100E1CB3E /* APIInteractorProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */; };
 		3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */; };
+		3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFAB85C1CE9AACF002864EC /* ServiceInfo.m */; };
 		3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +198,8 @@
 		3BF1825A1CB69D1100E1CB3E /* APIInteractorProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIInteractorProvider.m; sourceTree = "<group>"; };
 		3BF2BED71CBE0CBA00DF6297 /* PersonalDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDetailsViewController.h; sourceTree = "<group>"; };
 		3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDetailsViewController.m; sourceTree = "<group>"; };
+		3BFAB85B1CE9AACF002864EC /* ServiceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceInfo.h; sourceTree = "<group>"; };
+		3BFAB85C1CE9AACF002864EC /* ServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfo.m; sourceTree = "<group>"; };
 		3BFB9C981CC0B85900B0996A /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
 		6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.release.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +290,8 @@
 				3BCD37C31CBE270400DE4E91 /* User.m */,
 				3BEE16FD1CD7424400B5C9F7 /* Order.h */,
 				3BEE16FE1CD7424400B5C9F7 /* Order.m */,
+				3BFAB85B1CE9AACF002864EC /* ServiceInfo.h */,
+				3BFAB85C1CE9AACF002864EC /* ServiceInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -751,6 +756,7 @@
 				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
 				3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
+				3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
 				3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */,
 				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,

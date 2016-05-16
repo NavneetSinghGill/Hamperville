@@ -21,6 +21,7 @@
 #import "RequestManager.h"
 #import "ServicesCollectionViewCell.h"
 #import "CouponTableViewCell.h"
+#import "ServiceInfo.h"
 
 typedef enum {
     Pickup = 0,
@@ -29,6 +30,7 @@ typedef enum {
 
 @interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, CouponTableViewCellDelegate> {
     NSInteger kCouponTableViewDefaultHeight;
+    BOOL reloadCollectionViewToDefault;
 }
 
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -81,9 +83,12 @@ typedef enum {
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property(strong, nonatomic) NSMutableArray *selectedServiceIDs;
+@property(strong, nonatomic) NSMutableArray<ServiceInfo *> *selectedServiceIDs;
+@property(strong, nonatomic) NSMutableArray *appliedCouponsServiceIDs;
 @property(strong, nonatomic) NSMutableArray *appliedCouponsIDAndName;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightContraint;
+
+@property(assign, nonatomic) BOOL isUniversalCouponApplied;
 
 @end
 
@@ -148,9 +153,10 @@ typedef enum {
     self.pickupPickerView.dataSource = self;
     self.dropOffPickerView.delegate = self;
     self.dropOffPickerView.dataSource = self;
-    
+
     self.selectedServiceIDs = [NSMutableArray array];
     self.appliedCouponsIDAndName = [NSMutableArray array];
+    self.appliedCouponsServiceIDs = [NSMutableArray array];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     tapGesture.numberOfTapsRequired = 1;
@@ -172,6 +178,7 @@ typedef enum {
     self.couponTableView.delegate = self;
     self.couponTableView.dataSource = self;
     self.appliedCouponsIDAndName = [NSMutableArray array];
+    self.appliedCouponsServiceIDs = [NSMutableArray array];
     kCouponTableViewDefaultHeight = self.couponTableView.frame.size.height;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -180,6 +187,32 @@ typedef enum {
 
 - (void)dismissKeyboard {
     [self.view endEditing:YES];
+}
+
+- (BOOL)isCouponPresentInUniversalCouponsOfName:(NSString *)couponName {
+    for (NSDictionary *coupon in self.universalCoupons) {
+        if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (NSDictionary *)isCouponPresentInOtherCouponsOfName:(NSString *)couponName {
+    //returns serviceID and couponID in dictionary
+    NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
+    NSArray *coupons = nil;
+    for (NSDictionary *service in self.services) {
+        coupons = [service valueForKey:@"coupons"];
+        for (NSDictionary *coupon in coupons) {
+            if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
+                [dataDict setValue:[NSString stringWithFormat:@"%d",[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
+                [dataDict setValue:[NSString stringWithFormat:@"%d",[[service valueForKey:@"id"] integerValue]] forKey:@"serviceID"];
+                return dataDict;
+            }
+        }
+    }
+    return nil;
 }
 
 #pragma mark Initial Setup method
@@ -474,12 +507,15 @@ typedef enum {
     NSInteger count = 0;
     for (count = 0; count < self.selectedServiceIDs.count; count++) {
         if (count == 0) {
-            commaSeparatedServiceIDs = self.selectedServiceIDs[0];
+            commaSeparatedServiceIDs = self.selectedServiceIDs[0].serviceID;
             continue;
         }
-        commaSeparatedServiceIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedServiceIDs,self.selectedServiceIDs[count]];
+        commaSeparatedServiceIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedServiceIDs,self.selectedServiceIDs[count].serviceID];
     }
-    
+    if ([commaSeparatedServiceIDs length] == 0) {
+        [self showToastWithText:@"Select a service" on:Top];
+        return;
+    }
     [dataDictionary setValue:commaSeparatedServiceIDs forKey:@"service_selected"];
     
     NSInteger selectedIndex = [self.pickupPickerView selectedRowInComponent:0];
@@ -492,13 +528,33 @@ typedef enum {
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"drop_off_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"drop_off_time_slot_id"];
     
-    
-    
     [dataDictionary setValue:self.appliedCouponsIDAndName forKey:@"coupon_code"];
     
+    [self.activityIndicator startAnimating];
     [[RequestManager alloc] postRequestPickupWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
+        [[self activityIndicator]stopAnimating];
         if (success) {
+            self.pickupLeftArrowButton.hidden = YES;
+            self.dropOffLeftArrowButton.hidden = YES;
+            self.pickupDayCount = 1;
+            self.dropOffDayCount = 1;
+            self.difference = 1;
+            [self setupEntriesForDayCount:self.pickupDayCount];
             
+            self.isUniversalCouponApplied = NO;
+            self.selectedServiceIDs = [NSMutableArray array];
+            self.appliedCouponsIDAndName = [NSMutableArray array];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                reloadCollectionViewToDefault = YES;
+                [self.collectionView reloadData];
+                [self.couponTableView reloadData];
+                self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
+                
+                [UIView animateWithDuration:0.5 animations:^{
+                    [self.view layoutIfNeeded];
+                }];
+                reloadCollectionViewToDefault = NO;
+            });
         } else {
             [self showToastWithText:response on:Top];
         }
@@ -560,6 +616,9 @@ typedef enum {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ServicesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ServicesCollectionViewCell" forIndexPath:indexPath];
     cell.serviceDictionary = [self.services objectAtIndex:indexPath.row];
+    if (reloadCollectionViewToDefault == YES) {
+        [cell setSelectionState:NO];
+    }
     [cell setContent];
     return cell;
 }
@@ -571,17 +630,37 @@ typedef enum {
     self.difference = cell.difference;
     [cell setSelectionState:!cell.serviceImageButton.selected];
     if (cell.serviceImageButton.selected == YES) {
-        [self.selectedServiceIDs addObject:cell.serviceID];
+        [self.selectedServiceIDs addObject:[ServiceInfo getServiceInfoWithServiceID:cell.serviceID isAppliedStatus:NO andDifferenceOfDays:cell.difference]];
     } else {
-        NSString *serviceToDelete = nil;
-        for (NSString *serviceID in self.selectedServiceIDs) {
-            if ([serviceID isEqualToString:cell.serviceID]) {
-                serviceToDelete = serviceID;
+        ServiceInfo *serviceInfoToDelete = nil;
+        for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
+            if ([serviceInfo.serviceID isEqualToString:cell.serviceID]) {
+                serviceInfoToDelete = serviceInfo;
                 break;
             }
         }
-        [self.selectedServiceIDs removeObject:serviceToDelete];
+        [self.selectedServiceIDs removeObject:serviceInfoToDelete];
+        NSString *couponName = nil;
+        for (NSDictionary *coupon in cell.coupons) {
+            for (NSString *appliedCouponName in self.appliedCouponsIDAndName) {
+                if ([[coupon valueForKey:@"name"] isEqualToString:appliedCouponName]) {
+                    couponName = appliedCouponName;
+                    break;
+                }
+            }
+        }
+        [self.appliedCouponsIDAndName removeObject:couponName];
+        [self.couponTableView reloadData];
     }
+    NSInteger maxDifference = 1;
+    for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
+        if (maxDifference <= serviceInfo.difference) {
+            maxDifference = serviceInfo.difference;
+        }
+    }
+    self.difference = maxDifference;
+    self.dropOffLeftArrowButton.hidden = YES;
+    self.dropOffDayCount = 1;
     [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:1];
 }
 
@@ -606,7 +685,7 @@ typedef enum {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.appliedCouponsIDAndName.count + 1;
+    return self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied;
 }
 
 #pragma mark Delegate
@@ -615,20 +694,100 @@ typedef enum {
     return kCouponTableViewDefaultHeight;
 }
 
+#pragma mark - Gesture delegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:self.collectionView]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - Custom delegate methods -
 
 - (void)verifyTapped:(CouponTableViewCell *)couponCell {
+    [self.view endEditing:YES];
     if (couponCell.verifyButton.selected == NO) {
-        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
-        [self.couponTableView reloadData];
-        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + 1);
+        
+        if (self.appliedCouponsIDAndName.count == 0) {
+            if ([self isCouponPresentInUniversalCouponsOfName:couponCell.textField.text]) {
+                //Coupon is universal coupon
+                _isUniversalCouponApplied = YES;
+                [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                [self.couponTableView reloadData];
+            }
+            else {
+                NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
+                NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
+                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+                
+                if (serviceAndCouponIDs != nil) {
+                    //Coupon is a valid coupon
+                    BOOL isServiceSelected = NO;
+                    ServiceInfo *serviceInfoToChangeStatusOf = nil;
+                    for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
+                        if ([serviceInfo.serviceID isEqualToString:fetchedServiceID]) {
+                            isServiceSelected = YES;
+                            serviceInfoToChangeStatusOf = serviceInfo;
+                        }
+                    }
+                    if (isServiceSelected) {
+                        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                        serviceInfoToChangeStatusOf.isApplied = YES;
+                        [self.couponTableView reloadData];
+                    } else {
+                        [self showToastWithText:@"Invalid coupon" on:Top];
+                    }
+                } else {
+                    [self showToastWithText:@"Invalid coupon" on:Top];
+                }
+            }
+        } else {
+            if ([self isCouponPresentInUniversalCouponsOfName:couponCell.textField.text]) {
+                //Coupon is universal coupon
+                _isUniversalCouponApplied = YES;
+                [self showToastWithText:@"Can't apply Universal coupon" on:Top];
+            } else {
+                NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
+                NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
+                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+                
+                if (serviceAndCouponIDs != nil) {
+                    //Coupon is a valid coupon
+                    BOOL isServiceSelected = NO;
+                    ServiceInfo *serviceInfoToChangeStatusOf = nil;
+                    for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
+                        if ([serviceInfo.serviceID isEqualToString:fetchedServiceID] && serviceInfo.isApplied == NO) {
+                            isServiceSelected = YES;
+                            serviceInfoToChangeStatusOf = serviceInfo;
+                        }
+                    }
+                    if (isServiceSelected) {
+                        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                        serviceInfoToChangeStatusOf.isApplied = YES;
+                        [self.couponTableView reloadData];
+                    } else {
+                        [self showToastWithText:@"Invalid coupon" on:Top];
+                    }
+                } else {
+                    
+                }
+            }
+        }
+        
+        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
         
         [UIView animateWithDuration:0.5 animations:^{
             [self.view layoutIfNeeded];
         }];
     } else {
         [self.appliedCouponsIDAndName removeObjectAtIndex:couponCell.index];
-        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + 1);
+        if (self.appliedCouponsIDAndName.count == 0 && _isUniversalCouponApplied) {
+            _isUniversalCouponApplied = NO;
+        }
+        self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
         
         [UIView animateWithDuration:0.5 animations:^{
             [self.view layoutIfNeeded];

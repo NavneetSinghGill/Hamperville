@@ -25,7 +25,7 @@
 
 - (void)setServiceWithServiceDict:(NSMutableDictionary *)serviceDict {
     self.difference = [[serviceDict valueForKey:@"day_difference"] integerValue];
-    self.serviceID = [serviceDict valueForKey:@"id"];
+    self.serviceID = [NSString stringWithFormat:@"%@",[serviceDict valueForKey:@"id"]];
     self.serviceImageUrl = [serviceDict valueForKey:@"image_url"];
     self.serviceName = [serviceDict valueForKey:@"name"];
     
