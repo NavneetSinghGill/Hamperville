@@ -13,7 +13,7 @@
 
 NSInteger kTableViewCellLabelTag = 10;
 
-@interface OrderHistoryViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface OrderHistoryViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -55,6 +55,26 @@ NSInteger kTableViewCellLabelTag = 10;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeLeftMenuIfOpen)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+#pragma mark - Gesture delegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if ([touch.view isDescendantOfView:self.tableView]) {
+        FrontViewPosition frontViewPosition = [self.revealViewController frontViewPosition];
+        if (frontViewPosition != FrontViewPositionLeft) {
+            return YES;
+        }
+        [super closeLeftMenuIfOpen];
+        return NO;
+    }
+    return NO;
 }
 
 #pragma mark - TableView methods -

@@ -13,6 +13,7 @@
 #import "SchedulePickupViewController.h"
 #import "OrderHistoryViewController.h"
 #import "PreferencesViewController.h"
+#import "SettingsViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -29,6 +30,7 @@
 @property(strong, nonatomic) SchedulePickupViewController *schedulePickupViewController;
 @property(strong, nonatomic) OrderHistoryViewController *orderHistoryViewController;
 @property(strong, nonatomic) PreferencesViewController *preferencesViewController;
+@property(strong, nonatomic) SettingsViewController *settingsViewController;
 
 @end
 
@@ -91,6 +93,7 @@
         case 4:
             break;
         case 5:
+            [self openSettingScreen];
             break;
         case 6:
             break;
@@ -177,6 +180,17 @@
         }
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.preferencesViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openSettingScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.settingsViewController) {
+            self.settingsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+        }
+        
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.settingsViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }

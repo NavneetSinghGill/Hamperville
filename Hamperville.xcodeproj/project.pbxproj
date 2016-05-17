@@ -48,6 +48,7 @@
 		3BE9613F1CBBC38F005D0BCA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */; };
 		3BE961431CBBC401005D0BCA /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */; };
 		3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */; };
+		3BEB5E401CEAEB86000573E7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB5E3F1CEAEB86000573E7 /* SettingsViewController.m */; };
 		3BEB70CA1CC4C2A6008BEEC7 /* PickupRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */; };
 		3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEB70CC1CC4C2F1008BEEC7 /* PickupInterface.m */; };
 		3BEE16FF1CD7424400B5C9F7 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE16FE1CD7424400B5C9F7 /* Order.m */; };
@@ -163,6 +164,8 @@
 		3BE9613E1CBBC38F005D0BCA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		3BE961411CBBC401005D0BCA /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		3BEB5E3E1CEAEB86000573E7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		3BEB5E3F1CEAEB86000573E7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		3BEB70C81CC4C2A6008BEEC7 /* PickupRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupRequest.h; sourceTree = "<group>"; };
 		3BEB70C91CC4C2A6008BEEC7 /* PickupRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickupRequest.m; sourceTree = "<group>"; };
 		3BEB70CB1CC4C2F1008BEEC7 /* PickupInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickupInterface.h; sourceTree = "<group>"; };
@@ -323,6 +326,8 @@
 				3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */,
 				3B69E43D1CD9DB0F00F36F43 /* PreferencesViewController.h */,
 				3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */,
+				3BEB5E3E1CEAEB86000573E7 /* SettingsViewController.h */,
+				3BEB5E3F1CEAEB86000573E7 /* SettingsViewController.m */,
 				3B69E4401CD9ED2400F36F43 /* Prefs */,
 			);
 			path = LeftMenuAndChildScreens;
@@ -741,6 +746,7 @@
 				3BCD37C41CBE270400DE4E91 /* User.m in Sources */,
 				3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */,
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
+				3BEB5E401CEAEB86000573E7 /* SettingsViewController.m in Sources */,
 				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
 				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,
 				3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */,
