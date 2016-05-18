@@ -52,14 +52,16 @@
     return self;
 }
 
-- (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSInteger)timeStamp andOrderOffset:(NSInteger)previousOrderID {
+- (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSString *)timeStamp andOrderOffset:(NSString *)previousOrderID {
     self = [super init];
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
         _parameters[@"limit"] = [NSNumber numberWithInteger:limit];
-        _parameters[@"timestamp"] = [NSNumber numberWithInteger:timeStamp];
-        if (previousOrderID != -1) {
-            _parameters[@"orderOffset"] = [NSNumber numberWithInteger:previousOrderID];
+        if (![timeStamp isEqualToString:kEmptyString]) {
+            _parameters[@"timestamp"] = timeStamp;
+        }
+        if (![previousOrderID isEqualToString:kEmptyString]) {
+            _parameters[@"orderOffset"] = previousOrderID;
         }
         self.urlPath = apiOrderHistory;
     }

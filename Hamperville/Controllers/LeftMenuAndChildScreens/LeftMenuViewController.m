@@ -167,7 +167,7 @@
         if (!self.orderHistoryViewController) {
             self.orderHistoryViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryViewController"];
         }
-        
+        self.orderHistoryViewController.shouldRefresh = YES;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.orderHistoryViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });

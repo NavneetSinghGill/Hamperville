@@ -20,16 +20,22 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CCBottomRefreshControl (0.5.1):
+    - Masonry (~> 0.6.2)
+  - Masonry (0.6.4)
   - SWRevealViewController (2.3.0)
   - Toast (3.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
+  - CCBottomRefreshControl
   - SWRevealViewController (~> 2.3)
   - Toast (~> 3.0)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
   Toast: 32c59229abfcf41850162b83bb9259dc84372473
 

@@ -46,6 +46,6 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)getSchedulePickup:(requestCompletionBlock)block;
 - (void)postRequestPickupWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
 
-- (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSInteger)timeStamp andOrderOffset:(NSInteger)previousOrderID withCompletionBlock:(requestCompletionBlock)block;
+- (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSString *)timeStamp andOrderOffset:(NSString *)previousOrderID withCompletionBlock:(requestCompletionBlock)block;
 
 @end

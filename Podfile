@@ -8,5 +8,6 @@ target 'Hamperville' do
 pod 'AFNetworking', '~> 2.5'
 pod 'SWRevealViewController', '~> 2.3'
 pod 'Toast', '~> 3.0'
+pod 'CCBottomRefreshControl'
 
 end

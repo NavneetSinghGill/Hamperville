@@ -10,6 +10,7 @@
 #import "RequestManager.h"
 #import "Order.h"
 #import "OrderHistoryDetailsViewController.h"
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
 
 NSInteger kTableViewCellLabelTag = 10;
 
@@ -18,6 +19,11 @@ NSInteger kTableViewCellLabelTag = 10;
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(strong, nonatomic) NSMutableArray *orders;
+@property(assign, nonatomic) BOOL hasMore;
+@property(assign, nonatomic) NSInteger timeStamp;
+@property(assign, nonatomic) NSInteger orderOffset;
+
+@property(retain, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -33,18 +39,26 @@ NSInteger kTableViewCellLabelTag = 10;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.activityIndicator startAnimating];
-    [[RequestManager alloc] getOrderHistoryWithLimit:5 time:[[NSDate date]timeIntervalSince1970] andOrderOffset:-1 withCompletionBlock:^(BOOL success, id response) {
-        [self.activityIndicator stopAnimating];
-        if (success) {
-            self.orders = response;
-            [self.tableView reloadData];
-        } else {
-            if ([response isKindOfClass:[NSString class]]) {
-                [self showToastWithText:response on:Top];
+    if (self.shouldRefresh == YES) {
+        [self.activityIndicator startAnimating];
+        [[RequestManager alloc] getOrderHistoryWithLimit:10 time:kEmptyString andOrderOffset:kEmptyString withCompletionBlock:^(BOOL success, id response) {
+            [self.activityIndicator stopAnimating];
+            if (success) {
+                self.orders = [response valueForKey:@"order_history"];
+                self.hasMore = [[response valueForKey:@"hasMore"] boolValue];
+                if (self.hasMore) {
+                    self.timeStamp = [[response valueForKey:@"timestamp"] integerValue];
+                    self.orderOffset = [[response valueForKey:@"orderOffset"] integerValue];
+                }
+                [self.tableView reloadData];
+            } else {
+                if ([response isKindOfClass:[NSString class]]) {
+                    [self showToastWithText:response on:Top];
+                }
             }
-        }
-    }];
+        }];
+        self.shouldRefresh = NO;
+    }
 }
 
 #pragma mark - Private methods -
@@ -60,6 +74,35 @@ NSInteger kTableViewCellLabelTag = 10;
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
+    
+    self.refreshControl = [UIRefreshControl new];
+    self.refreshControl.triggerVerticalOffset = 50;
+    [self.refreshControl addTarget:self action:@selector(loadMore) forControlEvents:UIControlEventValueChanged];
+    self.tableView.bottomRefreshControl = self.refreshControl;
+}
+
+- (void)loadMore {
+    if (self.orders.count == 0 || self.hasMore == NO) {
+        [self.refreshControl endRefreshing];
+        return;
+    }
+    [[RequestManager alloc] getOrderHistoryWithLimit:10 time:[NSString stringWithFormat:@"%ld",(long)self.timeStamp] andOrderOffset:[NSString stringWithFormat:@"%ld",(long)self.orderOffset] withCompletionBlock:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
+        if (success) {
+            [self.orders addObjectsFromArray:[response valueForKey:@"order_history"]];
+            self.hasMore = [[response valueForKey:@"hasMore"] boolValue];
+            if (self.hasMore) {
+                self.timeStamp = [[response valueForKey:@"timestamp"] integerValue];
+                self.orderOffset = [[response valueForKey:@"orderOffset"] integerValue];
+            }
+            [self.tableView reloadData];
+        } else {
+            if ([response isKindOfClass:[NSString class]]) {
+                [self showToastWithText:response on:Top];
+            }
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Gesture delegate methods
@@ -90,7 +133,6 @@ NSInteger kTableViewCellLabelTag = 10;
     
     Order *order = [self.orders objectAtIndex:indexPath.row];
     ((UILabel *)[cell viewWithTag:kTableViewCellLabelTag]).text = [NSString stringWithFormat:@"Order: %@",order.orderID];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -102,6 +144,7 @@ NSInteger kTableViewCellLabelTag = 10;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     OrderHistoryDetailsViewController *orderHistoryDetailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryDetailsViewController"];
     orderHistoryDetailsViewController.order = [self.orders objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:orderHistoryDetailsViewController animated:YES];

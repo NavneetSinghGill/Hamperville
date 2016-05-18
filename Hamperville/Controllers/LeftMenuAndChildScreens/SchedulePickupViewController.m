@@ -531,12 +531,14 @@ typedef enum {
     
     NSInteger selectedIndex = [self.pickupPickerView selectedRowInComponent:0];
     NSDictionary *selectedPickupTimeDictionary = [self.pickupSlots objectAtIndex:selectedIndex];
-    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"pick_up_time"];
+    //    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"pick_up_time"];
+    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentPickupDate timeIntervalSince1970]] forKey:@"pick_up_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"pick_up_time_slot_id"];
     
     selectedIndex = [self.dropOffPickerView selectedRowInComponent:0];
     selectedPickupTimeDictionary = [self.dropOffSlots objectAtIndex:selectedIndex];
-    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"drop_off_time"];
+//    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"drop_off_time"];
+    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentDropOffDate timeIntervalSince1970]] forKey:@"drop_off_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"drop_off_time_slot_id"];
     
     [dataDictionary setValue:self.appliedCouponsIDAndName forKey:@"coupon_code"];

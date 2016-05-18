@@ -87,7 +87,15 @@
                 for (NSDictionary *dict in ordersDictionaries) {
                     [orders addObject:[Order getOrderFromDictionary:dict]];
                 }
-                self.block(YES, orders);
+                NSMutableDictionary *modifiedDictionary = [NSMutableDictionary dictionary];
+                for (NSString *key in [[response valueForKey:@"data"] allKeys]) {
+                    if ([key isEqualToString:@"order_history"]) {
+                        [modifiedDictionary setObject:orders forKey:@"order_history"];
+                    } else {
+                        [modifiedDictionary setObject:[[response valueForKey:@"data"] valueForKey:key] forKey:key];
+                    }
+                }
+                self.block(YES, modifiedDictionary);
             }
             else
             {

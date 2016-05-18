@@ -225,7 +225,7 @@
     }
 }
 
-- (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSInteger)timeStamp andOrderOffset:(NSInteger)previousOrderID withCompletionBlock:(requestCompletionBlock)block {
+- (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSString *)timeStamp andOrderOffset:(NSString *)previousOrderID withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
         [[PickupInterface alloc] getOrderHistoryWithPickupRequest:
          [[PickupRequest alloc] initWithOrderHistoryRecordLimit:limit
