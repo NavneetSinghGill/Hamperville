@@ -12,6 +12,7 @@
 
 @interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
+    NSString *specialNotePlaceHolder;
 }
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -75,6 +76,8 @@
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
     [self.scrollView addGestureRecognizer:tapGesture];
+    
+    specialNotePlaceHolder = @"Write your text here";
     
     UINib *nib = [UINib nibWithNibName:@"DropdownTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DropdownTableViewCell"];
@@ -204,7 +207,7 @@
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
         NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"damage_id", self.selectedOptionsIDs[1], @"shirt_pressing_id", self.selectedOptionsIDs[2], @"pant_crease_id", self.selectedOptionsIDs[3], @"starch_id", nil];
-        if (self.specialNoteTextView.text.length > 0){
+        if (self.specialNoteTextView.text.length > 0 || ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
             dataDict[@"special_instruction_care"] = self.specialNoteTextView.text;
         }
         [self.activityIndicator startAnimating];
@@ -292,7 +295,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"Write your text here"]) {
+    if ([textView.text isEqualToString:specialNotePlaceHolder]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; //optional
     }
@@ -302,7 +305,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"Write your text here";
+        textView.text = specialNotePlaceHolder;
         textView.textColor = [UIColor lightGrayColor]; //optional
     }
     [textView resignFirstResponder];

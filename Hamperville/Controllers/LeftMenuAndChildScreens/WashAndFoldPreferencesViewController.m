@@ -12,6 +12,7 @@
 
 @interface WashAndFoldPreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
+    NSString *specialNotePlaceHolder;
 }
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -75,6 +76,8 @@
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
     [self.scrollView addGestureRecognizer:tapGesture];
+    
+    specialNotePlaceHolder = @"Write your text here";
     
     UINib *nib = [UINib nibWithNibName:@"DropdownTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DropdownTableViewCell"];
@@ -197,8 +200,10 @@
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
         NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"washer_temperature_dark_id", self.selectedOptionsIDs[1], @"washer_temperature_light_id", self.selectedOptionsIDs[2], @"washer_temperature_white_id", self.selectedOptionsIDs[3], @"dryer_temperature_id", nil];
-        if (self.specialNoteTextView.text.length > 0){
+        if (self.specialNoteTextView.text.length > 0 || ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
             dataDict[@"special_instruction_wdf"] = self.specialNoteTextView.text;
+        } else {
+            dataDict[@"special_instruction_wdf"] = kEmptyString;
         }
         [self.activityIndicator startAnimating];
         [[RequestManager alloc] postWashAndFoldPreferencesWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
@@ -285,7 +290,7 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"Write your text here"]) {
+    if ([textView.text isEqualToString:specialNotePlaceHolder]) {
         textView.text = @"";
         textView.textColor = [UIColor blackColor]; //optional
     }
@@ -295,7 +300,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"Write your text here";
+        textView.text = specialNotePlaceHolder;
         textView.textColor = [UIColor lightGrayColor]; //optional
     }
     [textView resignFirstResponder];

@@ -206,8 +206,8 @@ typedef enum {
         coupons = [service valueForKey:@"coupons"];
         for (NSDictionary *coupon in coupons) {
             if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
-                [dataDict setValue:[NSString stringWithFormat:@"%d",[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
-                [dataDict setValue:[NSString stringWithFormat:@"%d",[[service valueForKey:@"id"] integerValue]] forKey:@"serviceID"];
+                [dataDict setValue:[NSString stringWithFormat:@"%ld",[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
+                [dataDict setValue:[NSString stringWithFormat:@"%ld",[[service valueForKey:@"id"] integerValue]] forKey:@"serviceID"];
                 return dataDict;
             }
         }
@@ -217,7 +217,7 @@ typedef enum {
 
 - (void)resizeTableViewWithAnimation {
     self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
-    
+    [self.couponTableView reloadData];
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }];
@@ -687,12 +687,12 @@ typedef enum {
     if (indexPath.row < self.appliedCouponsIDAndName.count) {
         couponTableViewCell.textField.text = self.appliedCouponsIDAndName[indexPath.row];
         couponTableViewCell.verifyButton.selected = YES;
-        couponTableViewCell.verifyButton.alpha = 0.5;
+//        couponTableViewCell.verifyButton.alpha = 0.5;
         couponTableViewCell.textField.userInteractionEnabled = NO;
     } else {
         couponTableViewCell.textField.text = kEmptyString;
         couponTableViewCell.verifyButton.selected = NO;
-        couponTableViewCell.verifyButton.alpha = 1;
+//        couponTableViewCell.verifyButton.alpha = 1;
         couponTableViewCell.textField.userInteractionEnabled = YES;
     }
     
@@ -714,6 +714,15 @@ typedef enum {
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     if ([touch.view isDescendantOfView:self.collectionView]) {
+        [super closeLeftMenuIfOpen];
+        return NO;
+    } else if ([touch.view isDescendantOfView:self.scrollView]) {
+        FrontViewPosition frontViewPosition = [self.revealViewController frontViewPosition];
+        if (frontViewPosition != FrontViewPositionLeft) {
+            [super closeLeftMenuIfOpen];
+            return YES;
+        }
+        [self.view endEditing:YES];
         return NO;
     }
     

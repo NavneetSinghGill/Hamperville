@@ -25,6 +25,26 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jP6-ub-Hg0" userLabel="Coupon View">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a72-fM-hdG" userLabel="BackgroundViewBorder">
+                                <rect key="frame" x="5" y="1" width="261" height="37"/>
+                                <color key="backgroundColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Sk-mE-zCb" userLabel="BackgroundView">
+                                <rect key="frame" x="6" y="2" width="259" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circularView" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ned-vU-ozj" userLabel="Cuopon Button">
                                 <rect key="frame" x="10" y="9" width="21" height="22"/>
                                 <constraints>
@@ -34,9 +54,9 @@
                                 <state key="normal" image="coupon"/>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter coupon code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Jo-MK-CIX" userLabel="Coupon Text Field">
-                                <rect key="frame" x="41" y="0.0" width="227" height="39"/>
+                                <rect key="frame" x="41" y="2" width="224" height="35"/>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RfV-Nh-zqe">
                                 <rect key="frame" x="270" y="5" width="45" height="29"/>
@@ -63,13 +83,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RfV-Nh-zqe" firstAttribute="leading" secondItem="1Jo-MK-CIX" secondAttribute="trailing" constant="2" id="2YE-zj-5Hr"/>
+                            <constraint firstItem="RfV-Nh-zqe" firstAttribute="leading" secondItem="1Jo-MK-CIX" secondAttribute="trailing" constant="5" id="2YE-zj-5Hr"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="top" secondItem="1Jo-MK-CIX" secondAttribute="top" id="429-9g-2wn"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="trailing" secondItem="1Jo-MK-CIX" secondAttribute="trailing" id="9TQ-MY-T0s"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="bottom" secondItem="a72-fM-hdG" secondAttribute="bottom" constant="-1" id="9cu-Gw-Vs8"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="leading" secondItem="ned-vU-ozj" secondAttribute="leading" constant="-4" id="AXO-b6-A44"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="leading" secondItem="a72-fM-hdG" secondAttribute="leading" constant="1" id="Gev-DY-ZmK"/>
                             <constraint firstAttribute="trailing" secondItem="RfV-Nh-zqe" secondAttribute="trailing" constant="5" id="Loh-NA-vh0"/>
                             <constraint firstAttribute="bottom" secondItem="RfV-Nh-zqe" secondAttribute="bottom" constant="5" id="P6X-vI-xmu"/>
-                            <constraint firstItem="1Jo-MK-CIX" firstAttribute="top" secondItem="jP6-ub-Hg0" secondAttribute="top" id="Rxq-q9-F5S"/>
-                            <constraint firstAttribute="bottom" secondItem="1Jo-MK-CIX" secondAttribute="bottom" id="W8c-JS-avJ"/>
+                            <constraint firstItem="1Jo-MK-CIX" firstAttribute="top" secondItem="jP6-ub-Hg0" secondAttribute="top" constant="2" id="Rxq-q9-F5S"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="trailing" secondItem="a72-fM-hdG" secondAttribute="trailing" constant="-1" id="VfU-Ur-vq4"/>
+                            <constraint firstAttribute="bottom" secondItem="1Jo-MK-CIX" secondAttribute="bottom" constant="2" id="W8c-JS-avJ"/>
                             <constraint firstItem="ned-vU-ozj" firstAttribute="leading" secondItem="jP6-ub-Hg0" secondAttribute="leading" constant="10" id="XOt-y7-jpH"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="bottom" secondItem="1Jo-MK-CIX" secondAttribute="bottom" id="XrC-yl-zXm"/>
                             <constraint firstItem="ned-vU-ozj" firstAttribute="centerY" secondItem="jP6-ub-Hg0" secondAttribute="centerY" id="dMq-vH-MT8"/>
+                            <constraint firstItem="9Sk-mE-zCb" firstAttribute="top" secondItem="a72-fM-hdG" secondAttribute="top" constant="1" id="dpm-Sc-bXA"/>
                             <constraint firstItem="1Jo-MK-CIX" firstAttribute="leading" secondItem="ned-vU-ozj" secondAttribute="trailing" constant="10" id="eIh-A4-vme"/>
                             <constraint firstItem="RfV-Nh-zqe" firstAttribute="top" secondItem="jP6-ub-Hg0" secondAttribute="top" constant="5" id="hxG-K9-BO3"/>
                         </constraints>
