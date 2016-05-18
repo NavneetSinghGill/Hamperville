@@ -24,6 +24,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property(weak, nonatomic) IBOutlet UIButton *editButton;
 
+@property(strong, nonatomic) UIButton *saveButton;
+
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *yourInfoTopConstraint;
 
 @property(assign, nonatomic) NSInteger kYourInfoTopConstraintDefault;
@@ -43,6 +45,7 @@
     
     [self setUserinteractionForTextFields];
     [self initTextFieldsWithUserInfo];
+    self.saveButton.hidden = YES;
 }
 
 #pragma mark - IBAction methods
@@ -84,12 +87,14 @@
     }
     if (!invalidEntries) {
         self.editButton.selected = !self.editButton.selected;
+        self.saveButton.hidden = !self.editButton.selected;
         [self setUserinteractionForTextFields];
     }
 }
 
 - (void)showOrHideLeftMenu {
     [self dismissKeyboardIfOpen];
+    self.saveButton.hidden = YES;
     if (self.editButton.isSelected) {
         UIAlertController *alertController = [[UIAlertController alloc]init];
         alertController.title = @"Do you want to save your data?";
@@ -217,6 +222,17 @@
     [self setNavigationBarButtonTitle:@"Personal Details" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
     
+    self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 44, 34)];
+    self.saveButton.layer.cornerRadius = self.saveButton.frame.size.width / 2;
+    self.saveButton.layer.masksToBounds = YES;
+    [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [self.saveButton.titleLabel setFont:[UIFont fontWithName:@"roboto-regular" size:14.0f]];
+    [self.saveButton setTitleColor:[UIColor colorWithRed:51/255.0f green:171/255.0f blue:73/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [self.saveButton addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *saveBarButton = [[UIBarButtonItem alloc] initWithCustomView:self.saveButton];
+    
+    [self setRightMenuButtons:[NSArray arrayWithObject:saveBarButton]];
+    
     self.changePasswordButton.layer.cornerRadius = 4;
     self.changePasswordButton.layer.borderWidth = 1;
     self.changePasswordButton.layer.borderColor = [UIColor colorWithRed:44/255.0f green:159/255.0f blue:57/255.0f alpha:1.0].CGColor;
@@ -293,6 +309,11 @@
                          }
                      }
                  }];
+}
+
+- (void)saveButtonTapped:(UIButton *)button {
+    [self editButtonTapped:self.editButton];
+    self.saveButton.hidden = YES;
 }
 
 #pragma mark - Notification methods

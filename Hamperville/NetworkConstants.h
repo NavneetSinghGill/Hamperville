@@ -13,6 +13,8 @@ extern NSString *kSuccessStatus;
 extern NSString *kSuccess;
 extern NSString *kFailure;
 
+extern NSString *kNoNetworkNotification;
+
 extern NSString *kLoginUrl;
 extern NSString *apiPostUserUrl;
 extern NSString *apiForgotPassword;

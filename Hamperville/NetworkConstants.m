@@ -15,6 +15,7 @@ NSString *baseUrl = @"http://192.168.1.28:3001";
 NSString *kSuccessStatus = @"Success";
 NSString *kSuccess = @"Yes";
 NSString *kFailure = @"No";
+NSString *kNoNetworkNotification = @"NoNetworkNotification";
 
 #pragma mark - API urls
 

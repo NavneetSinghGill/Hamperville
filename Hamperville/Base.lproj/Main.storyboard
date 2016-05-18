@@ -13,6 +13,7 @@
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
+            <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
@@ -258,17 +259,17 @@
                                         <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWi-2L-N0E">
-                                        <rect key="frame" x="211" y="3" width="90" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWi-2L-N0E">
+                                        <rect key="frame" x="270" y="3" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="4vd-c1-oQJ"/>
-                                            <constraint firstAttribute="width" constant="90" id="NDX-cD-lTj"/>
+                                            <constraint firstAttribute="width" constant="30" id="bf1-p9-nUf"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
-                                        <state key="normal" title="Edit mode: OFF">
+                                        <state key="normal" image="ProfileEdit">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" title="Edit mode: ON">
+                                        <state key="selected" image="ProfileEdit">
                                             <color key="titleColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -278,7 +279,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.94509803921568625" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="JWi-2L-N0E" secondAttribute="trailing" constant="19" id="4Xc-Mv-ocy"/>
+                                    <constraint firstAttribute="trailing" secondItem="JWi-2L-N0E" secondAttribute="trailing" constant="20" id="4Xc-Mv-ocy"/>
                                     <constraint firstItem="4TL-vB-Edj" firstAttribute="centerY" secondItem="lzu-Y7-xbT" secondAttribute="centerY" id="MOU-0x-CZl"/>
                                     <constraint firstAttribute="height" constant="36" id="f3o-Co-WNb"/>
                                     <constraint firstItem="4TL-vB-Edj" firstAttribute="leading" secondItem="lzu-Y7-xbT" secondAttribute="leading" constant="29" id="wst-03-3vh"/>
@@ -980,7 +981,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UsernameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xa5-FJ-HfZ">
                                         <rect key="frame" x="14" y="13" width="14" height="15"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-a6-c7M">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kmt-a6-c7M">
                                         <rect key="frame" x="38" y="0.0" width="222" height="40"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next"/>
@@ -1034,7 +1035,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pR8-VM-QJg" userLabel="Login">
-                                <rect key="frame" x="30" y="359" width="260" height="40"/>
+                                <rect key="frame" x="30" y="379" width="260" height="40"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ON1-Gw-bT1"/>
@@ -1063,6 +1064,20 @@
                                     <color key="titleColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWV-Qr-dYO" userLabel="ForgotPassButton">
+                                <rect key="frame" x="18" y="343" width="104" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="bRZ-yR-aqM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                <state key="normal" title="Remember me" image="Pref_uncheck">
+                                    <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="Pref_checkmark"/>
+                                <connections>
+                                    <action selector="forgotPasswordButtonTapped:" destination="DVJ-Ad-iLM" eventType="touchUpInside" id="oCs-Ly-DYd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1081,8 +1096,11 @@
                             <constraint firstItem="pR8-VM-QJg" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="30" id="XUo-GD-fdT"/>
                             <constraint firstItem="j3z-VH-twt" firstAttribute="centerX" secondItem="ab5-bL-ziB" secondAttribute="centerX" id="YeF-5R-pNn"/>
                             <constraint firstAttribute="trailing" secondItem="pR8-VM-QJg" secondAttribute="trailing" constant="30" id="dmF-fz-UtW"/>
-                            <constraint firstItem="pR8-VM-QJg" firstAttribute="top" secondItem="mzU-e1-B4z" secondAttribute="bottom" constant="21" id="giT-6L-a0f"/>
+                            <constraint firstItem="rWV-Qr-dYO" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="18" id="f0H-cy-EZ7"/>
+                            <constraint firstItem="pR8-VM-QJg" firstAttribute="top" secondItem="rWV-Qr-dYO" secondAttribute="bottom" constant="15" id="hBn-KG-FYG"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rWV-Qr-dYO" secondAttribute="trailing" constant="10" id="p1C-AG-au3"/>
                             <constraint firstItem="axm-z5-IUb" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="30" id="sY5-OP-6sZ"/>
+                            <constraint firstItem="rWV-Qr-dYO" firstAttribute="top" secondItem="mzU-e1-B4z" secondAttribute="bottom" constant="5" id="tkS-Mo-Pkc"/>
                             <constraint firstItem="o8y-WQ-8k8" firstAttribute="top" secondItem="axm-z5-IUb" secondAttribute="bottom" constant="15" id="vKn-Rh-KeB"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mzU-e1-B4z" secondAttribute="trailing" constant="10" id="vkZ-ki-e8Q"/>
                             <constraint firstAttribute="trailing" secondItem="o8y-WQ-8k8" secondAttribute="trailing" constant="30" id="wWE-ux-rWY"/>
@@ -2198,10 +2216,11 @@
         <image name="LogoAndTitle" width="208" height="35"/>
         <image name="PasswordLock" width="14" height="15"/>
         <image name="Pref_arrow" width="8" height="11"/>
-        <image name="Pref_checkmark" width="18" height="18"/>
-        <image name="Pref_notification" width="27" height="24"/>
-        <image name="Pref_tick" width="16" height="13"/>
-        <image name="Pref_uncheck" width="18" height="18"/>
+        <image name="Pref_checkmark" width="25" height="25"/>
+        <image name="Pref_notification" width="34" height="29"/>
+        <image name="Pref_tick" width="21" height="16"/>
+        <image name="Pref_uncheck" width="25" height="25"/>
+        <image name="ProfileEdit" width="20" height="20"/>
         <image name="UsernameIcon" width="14" height="15"/>
         <image name="arrow_down" width="13" height="9"/>
         <image name="arrow_left" width="9" height="13"/>

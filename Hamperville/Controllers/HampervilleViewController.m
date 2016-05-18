@@ -22,9 +22,14 @@
 
 - (void)networkAvailability {
     if ([ApplicationDelegate hasNetworkAvailable]) {
-//        [self showToastWithText:@"Network online" on:Top];
+        
     } else {
-//        [self showToastWithText:@"Network offline" on:Top];
+        if (self.isViewLoaded && self.view.window) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Network available" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertActionDismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil ];
+            [alertController addAction:alertActionDismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
 }
 
@@ -62,6 +67,10 @@
 
 - (void)setLeftMenuButtons:(NSArray *)barButtons {
     self.navigationItem.leftBarButtonItems = barButtons;
+}
+
+- (void)setRightMenuButtons:(NSArray *)barButtons {
+    self.navigationItem.rightBarButtonItems = barButtons;
 }
 
 - (void)setNavigationBarButtonTitle:(NSString *)title andColor:(UIColor *)color
@@ -119,7 +128,11 @@
         }
     }
     
-    [self.view makeToast:message duration:1 position:value style:style];
+    if ([message isEqualToString:kNoNetworkAvailable]) {
+        [self networkAvailability];
+    } else {
+        [self.view makeToast:message duration:1 position:value style:style];
+    }
 }
 
 @end

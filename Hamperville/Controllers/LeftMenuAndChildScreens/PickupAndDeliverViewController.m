@@ -28,16 +28,11 @@
     [super viewDidLoad];
     
     [self initialSetup];
-    [self.activityIndicator startAnimating];
-    [[RequestManager alloc]getPickupAndDeliverWithUser:[[Util sharedInstance] getUser]
-                                   withCompletionBlock:^(BOOL success, id response) {
-                                       [self.activityIndicator stopAnimating];
-                                       if (success) {
-                                           [self readResponse:response];
-                                       } else {
-                                           [self showToastWithText:response on:Top];
-                                       }
-                                   }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self getPickupAndDeliverPrefs];
 }
 
 #pragma mark - Private methods
@@ -54,6 +49,19 @@
     //TAGS
     _kOptionIconButtonTag = 5;
     _kOptionLabelTag = 10;
+}
+
+- (void)getPickupAndDeliverPrefs {
+    [self.activityIndicator startAnimating];
+    [[RequestManager alloc]getPickupAndDeliverWithUser:[[Util sharedInstance] getUser]
+                                   withCompletionBlock:^(BOOL success, id response) {
+                                       [self.activityIndicator stopAnimating];
+                                       if (success) {
+                                           [self readResponse:response];
+                                       } else {
+                                           [self showToastWithText:response on:Top];
+                                       }
+                                   }];
 }
 
 - (void)readResponse:(id)response {

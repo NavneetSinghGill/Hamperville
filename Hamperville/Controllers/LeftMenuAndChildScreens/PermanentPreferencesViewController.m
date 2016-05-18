@@ -34,6 +34,10 @@
     
     self.pickerView.hidden = YES;
     self.tableView.hidden = YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self getPermanentPref];
 }
 

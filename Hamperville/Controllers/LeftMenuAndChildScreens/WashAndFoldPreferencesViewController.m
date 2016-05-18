@@ -40,6 +40,10 @@
     [super viewDidLoad];
    
     [self initialSetup];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self getWashAndFoldPrefs];
 }
 

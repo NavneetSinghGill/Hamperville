@@ -40,6 +40,10 @@
     [super viewDidLoad];
     
     [self initialSetup];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self getWashAndFoldPrefs];
 }
 
@@ -161,14 +165,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification {
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
-//    CGFloat difference = ( self.view.frame.size.height - keyboardBounds.size.height) - (self.specialNoteTextView.frame.size.height + self.specialNoteTextView.frame.origin.y) ;
-//    
-//    if (difference < 0) {
-//        self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue + difference;
-//        [UIView animateWithDuration:0.5f animations:^{
-//            [self.view layoutIfNeeded];
-//        }];
-//    }
+    
     self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
     CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
     [self.scrollView setContentOffset:bottomOffset animated:YES];

@@ -104,7 +104,14 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.scrollView.hidden == NO) {
+    if (self.scrollView.hidden == NO || [ApplicationDelegate hasNetworkAvailable] == YES) {
+        [self schedulePickupAPIcall];
+    }
+}
+
+- (void)networkAvailability {
+    [super networkAvailability];
+    if ([ApplicationDelegate hasNetworkAvailable]) {
         [self schedulePickupAPIcall];
     }
 }
@@ -138,7 +145,7 @@ typedef enum {
             self.difference = 1;
             [self setupEntriesForDayCount:self.pickupDayCount];
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
-            [self showToastWithText:@"No Network" on:Top];
+            [self showToastWithText:response on:Top];
         } else {
             [self showToastWithText:response on:Top];
         }

@@ -24,6 +24,7 @@ typedef enum {
 - (UIBarButtonItem *)backButton;
 
 - (void)setLeftMenuButtons:(NSArray *)barButtons;
+- (void)setRightMenuButtons:(NSArray *)barButtons;
 - (void)setNavigationBarButtonTitle:(NSString *)title andColor:(UIColor *)color;
 
 - (void)centerTitleButtonTapped;

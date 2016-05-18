@@ -65,7 +65,7 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkAvailablability object:nil];
 //                [[ALAlertBannerManager sharedManager] hideAllAlertBanners];
                 
-//                [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:kAvailableNetwork];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:nil];
                 
                 // Save response in MobiLogger
 //                [[SMobiLogger sharedInterface] error:@"Network Available." withDescription:nil];
@@ -81,7 +81,7 @@
                 
                 NSLog(@"offline");
 //                self.isBannerVisible = NO;
-//                [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:kNoNetwork];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:nil];
                 break;
         }
     }];

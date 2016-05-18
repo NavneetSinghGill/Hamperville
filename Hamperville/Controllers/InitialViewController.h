@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HampervilleViewController.h"
 
-@interface InitialViewController : HampervilleViewController
+@interface InitialViewController : UIViewController
 
 @end
