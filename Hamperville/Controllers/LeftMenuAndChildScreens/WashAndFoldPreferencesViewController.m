@@ -35,6 +35,8 @@
 @property(strong, nonatomic) NSMutableArray *selectedOptionsIDs;
 @property(assign, nonatomic) NSInteger selectedOptionIndex;
 
+@property(strong, nonatomic) NSMutableArray *entries;
+
 @end
 
 @implementation WashAndFoldPreferencesViewController
@@ -75,6 +77,8 @@
     tableViewDefaultTopContraintValue = self.tableViewTopConstraint.constant;
     pickerSuperViewDefaultBottomContraintValue = -self.pickerSuperView.frame.size.height;
     
+    self.entries = [NSMutableArray arrayWithObjects:@"Washer Temperature(Dark)", @"Washer Temperature(Light)", @"Washer Temperature(Whites)", @"Dryer Temperature", nil];
+    
     self.pickerView.hidden = YES;
     self.specialNotelabel.hidden = YES;
     self.specialNoteTextView.hidden = YES;
@@ -107,10 +111,14 @@
             self.specialNotelabel.hidden = NO;
             self.specialNoteTextView.hidden = NO;
             self.specialTextViewBackgroundBoarderView.hidden = NO;
+            self.saveButton.hidden = NO;
             
             [self parseGetResponse:response];
         } else {
             [self showToastWithText:response on:Top];
+            self.pickerView.hidden = YES;
+            self.tableView.hidden = NO;
+            self.saveButton.hidden = YES;
         }
     }];
 }
@@ -118,6 +126,10 @@
 - (void)parseGetResponse:(id)response {
     if ([response hasValueForKey:@"special_note"]) {
         self.specialNoteTextView.text = [response valueForKey:@"special_note"];
+        if (((NSString *)[response valueForKey:@"special_note"]).length == 0) {
+            self.specialNoteTextView.text = specialNotePlaceHolder;
+            self.specialNoteTextView.textColor = [UIColor lightGrayColor];
+        }
     }
     if ([response hasValueForKey:@"wash_dry_and_fold_preferences"]) {
         self.allEntries = [response valueForKey:@"wash_dry_and_fold_preferences"];
@@ -172,20 +184,24 @@
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
     
-    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
-    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
+    if (self.specialNoteTextView.frame.origin.y + self.specialNoteTextView.frame.size.height > self.view.frame.size.height - keyboardBounds.size.height) {
+        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue;
-    
-    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
-    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    if (self.tableViewTopConstraint.constant < tableViewDefaultTopContraintValue) {
+        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:YES];
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
 - (void)dismissKeyboard {
@@ -239,6 +255,10 @@
 #pragma mark - Delegate methods
 
 - (void)dropDownTapped:(NSInteger)index {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self networkAvailability];
+        return;
+    }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self refreshPickerViewForCellIndex:indexPath.row];
@@ -254,12 +274,13 @@
 #pragma mark Datasourse
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.allEntries.count;
+    return self.entries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
-    dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    //    dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    dropdownTableViewCell.name.text = [self.entries objectAtIndex:indexPath.row];
     dropdownTableViewCell.dropDownDelegate = self;
     dropdownTableViewCell.index = indexPath.row;
     dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;

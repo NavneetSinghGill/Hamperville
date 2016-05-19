@@ -115,11 +115,24 @@ typedef enum {
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self networkAvailability];
+}
+
 - (void)networkAvailability {
     [super networkAvailability];
     if ([ApplicationDelegate hasNetworkAvailable]) {
         [self schedulePickupAPIcall];
     }
+}
+
+#pragma mark - Over ridden methods
+
+- (void)showOrHideLeftMenu {
+    [super showOrHideLeftMenu];
+    [self.view endEditing:YES];
 }
 
 #pragma mark - PRIVATE METHODS -
@@ -155,7 +168,7 @@ typedef enum {
 //                self.difference = self.orderToModify.d
             }
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
-            [self showToastWithText:response on:Top];
+            [self networkAvailability];
         } else {
             [self showToastWithText:response on:Top];
         }

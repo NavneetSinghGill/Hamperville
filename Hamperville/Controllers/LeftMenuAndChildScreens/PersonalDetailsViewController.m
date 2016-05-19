@@ -30,6 +30,8 @@
 
 @property(assign, nonatomic) NSInteger kYourInfoTopConstraintDefault;
 
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation PersonalDetailsViewController
@@ -56,12 +58,24 @@
 }
 
 - (IBAction)logoutButtonTapped:(id)sender {
-    [[RequestManager alloc]logoutUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
-        
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Do you want to logout?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *yesAlertAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.activityIndicator startAnimating];
+        [[RequestManager alloc]logoutUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
+            [self.activityIndicator stopAnimating];
+            if (success) {
+                [[SignupInterface alloc] clearSavedSessionCookies];
+                [[Util sharedInstance]saveUser:[User new]];
+                [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
+            } else {
+                [self showToastWithText:response on:Top];
+            }
+        }];
     }];
-    [[SignupInterface alloc] clearSavedSessionCookies];
-    [[Util sharedInstance]saveUser:[User new]];
-    [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
+    UIAlertAction *noAlertAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:yesAlertAction];
+    [alertController addAction:noAlertAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)editButtonTapped:(id)sender {
@@ -76,7 +90,23 @@
             [self setUserinteractionForTextFields];
         }];
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self postUserAPI];
+            if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length == 10 &&
+                ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 0 ||
+                 [[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10) &&
+                self.firstNameTextField.text.length != 0 && self.lastNameTextField.text.length != 0) {
+                if ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10 &&
+                    [self.alternativePhoneTextField.text isEqualToString:self.primaryPhoneTextField.text]) {
+                    [self showToastWithText:@"Primary and alternate phone numbers can't be same" on:Top withDuration:3.0];
+                    self.saveButton.hidden = NO;
+                } else {
+                    [self postUserAPI];
+                }
+            } else {
+                [self showToastWithText:@"Please re-check your entries" on:Top];
+                self.saveButton.hidden = NO;
+                self.editButton.selected = YES;
+                [self setUserinteractionForTextFields];
+            }
         }];
         [alertController addAction:alertActionNo];
         [alertController addAction:alertActionYes];
@@ -107,13 +137,21 @@
         UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length == 10 &&
                 ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 0 ||
-                 [[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10)) {
+                 [[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10) &&
+                self.firstNameTextField.text.length != 0 && self.lastNameTextField.text.length != 0) {
+                if ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length == 10 &&
+                    [self.alternativePhoneTextField.text isEqualToString:self.primaryPhoneTextField.text]) {
+                    [self showToastWithText:@"Primary and alternate phone numbers can't be same" on:Top withDuration:3.0];
+                    self.saveButton.hidden = NO;
+                } else {
                     [super showOrHideLeftMenu];
                     [self.editButton setSelected:NO];
                     [self postUserAPI];
                     [self setUserinteractionForTextFields];
+                }
             } else {
                 [self showToastWithText:@"Please re-check your entries" on:Top];
+                self.saveButton.hidden = NO;
             }
         }];
         [alertController addAction:alertActionNo];

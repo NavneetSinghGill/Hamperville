@@ -18,12 +18,12 @@
 @property(weak, nonatomic) IBOutlet UIView *userNameView;
 @property(weak, nonatomic) IBOutlet UIView *passwordView;
 @property(weak, nonatomic) IBOutlet UIButton *loginButton;
+@property(weak, nonatomic) IBOutlet UIButton *rememberMeButton;
 
 @property(weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property(weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopConstraint;
-
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -39,10 +39,20 @@
     [self initialSetup];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if ([[NSUserDefaults standardUserDefaults]boolForKey:kRememberMe]) {
+        self.userNameTextField.text = [[NSUserDefaults standardUserDefaults]valueForKey:kUserEmail];
+        self.passwordTextField.text = [[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword];
+        self.rememberMeButton.selected = YES;
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [self.userNameTextField becomeFirstResponder];
+    if (![[NSUserDefaults standardUserDefaults]boolForKey:kRememberMe]) {
+        [self.userNameTextField becomeFirstResponder];
+    }
 }
 
 
@@ -50,13 +60,17 @@
 
 - (IBAction)loginButtonTapped:(id)sender {
     if (self.userNameTextField.text.length < 1) {
-        [self showToastWithText:@"Enter username" on:Bottom];
+        [self showToastWithText:@"Enter username" on:Top];
     } else if (self.passwordTextField.text.length < 1) {
-        [self showToastWithText:@"Enter password" on:Bottom];
+        [self showToastWithText:@"Enter password" on:Top];
     } else {
         [self.activityIndicator startAnimating];
         [[RequestManager alloc] loginWithUserEmail:self.userNameTextField.text andPassword:self.passwordTextField.text withCompletionBlock:^(BOOL success, id response) {
             if (success){
+                [[NSUserDefaults standardUserDefaults]setBool:self.rememberMeButton.selected forKey:kRememberMe];
+                [[NSUserDefaults standardUserDefaults]setValue:self.userNameTextField.text forKey:kUserEmail];
+                [[NSUserDefaults standardUserDefaults]setValue:self.passwordTextField.text forKey:kUserPassword];
+                
                 NSString *userId = (NSString *)response;
                 
                 NSLog(@"UserId: %@", userId);
@@ -73,6 +87,10 @@
 - (IBAction)forgotPasswordButtonTapped:(id)sender {
     ForgotPasswordViewController *forgotPasswordViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ForgotPasswordViewController"];
     [self.navigationController pushViewController:forgotPasswordViewController animated:YES];
+}
+
+- (IBAction)rememberMeButtonTapped:(id)sender {
+    self.rememberMeButton.selected = !self.rememberMeButton.selected;
 }
 
 #pragma mark - Private methods
@@ -171,6 +189,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *modifiedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    textField.text = modifiedString;
+    return NO;
 }
 
 @end

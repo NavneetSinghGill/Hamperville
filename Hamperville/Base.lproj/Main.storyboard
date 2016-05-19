@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Light.ttf">
@@ -350,10 +351,15 @@
                                     <action selector="logoutButtonTapped:" destination="aBO-iU-t3S" eventType="touchUpInside" id="Sqn-5B-UFx"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="lA8-Ob-TD1">
+                                <rect key="frame" x="142" y="265" width="37" height="37"/>
+                                <color key="color" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FA5-h0-dAC" firstAttribute="top" secondItem="hRn-lz-ifY" secondAttribute="bottom" constant="35" id="2FO-HO-khz"/>
+                            <constraint firstItem="lA8-Ob-TD1" firstAttribute="centerY" secondItem="fhx-qQ-pgU" secondAttribute="centerY" id="7WJ-Xq-WUq"/>
                             <constraint firstAttribute="trailing" secondItem="3RB-L7-ixi" secondAttribute="trailing" constant="29" id="8al-Ct-jJz"/>
                             <constraint firstItem="Wg8-pR-4TW" firstAttribute="top" secondItem="FA5-h0-dAC" secondAttribute="bottom" constant="14" id="AU6-b4-VeX"/>
                             <constraint firstAttribute="trailing" secondItem="FA5-h0-dAC" secondAttribute="trailing" constant="29" id="FSV-g4-e64"/>
@@ -368,6 +374,7 @@
                             <constraint firstItem="hRn-lz-ifY" firstAttribute="leading" secondItem="fhx-qQ-pgU" secondAttribute="leading" constant="29" id="aaW-Qk-QgZ"/>
                             <constraint firstItem="lzu-Y7-xbT" firstAttribute="top" secondItem="RgO-gS-yaj" secondAttribute="bottom" constant="22" id="c0n-fH-PEx"/>
                             <constraint firstItem="3RB-L7-ixi" firstAttribute="top" secondItem="I4B-1Y-8vf" secondAttribute="bottom" constant="20" id="d6r-81-Zah"/>
+                            <constraint firstItem="lA8-Ob-TD1" firstAttribute="centerX" secondItem="fhx-qQ-pgU" secondAttribute="centerX" id="fHo-Kz-y2H"/>
                             <constraint firstItem="FA5-h0-dAC" firstAttribute="leading" secondItem="fhx-qQ-pgU" secondAttribute="leading" constant="29" id="fcE-Fd-cGs"/>
                             <constraint firstAttribute="trailing" secondItem="hRn-lz-ifY" secondAttribute="trailing" constant="29" id="odG-Fx-MTa"/>
                             <constraint firstItem="I4B-1Y-8vf" firstAttribute="top" secondItem="lzu-Y7-xbT" secondAttribute="bottom" constant="18" id="tHT-To-1zl"/>
@@ -378,6 +385,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="eIx-Xz-SiD"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="lA8-Ob-TD1" id="LmN-aI-fUA"/>
                         <outlet property="alternativePhoneTextField" destination="hRn-lz-ifY" id="weK-BY-ms2"/>
                         <outlet property="changePasswordButton" destination="FA5-h0-dAC" id="O9V-3X-8op"/>
                         <outlet property="editButton" destination="JWi-2L-N0E" id="8V4-cf-e7R"/>
@@ -444,11 +452,17 @@
                                 <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9xG-8j-voH">
+                                <rect key="frame" x="142" y="124" width="37" height="37"/>
+                                <color key="color" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tO6-sS-LLv" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="0yF-xd-z9b"/>
                             <constraint firstAttribute="trailing" secondItem="OWD-AP-H37" secondAttribute="trailing" constant="30" id="8t7-Oj-es8"/>
+                            <constraint firstItem="9xG-8j-voH" firstAttribute="centerY" secondItem="bJx-eU-eQY" secondAttribute="centerY" multiplier="0.5" id="Mew-v3-RCT"/>
+                            <constraint firstItem="9xG-8j-voH" firstAttribute="centerX" secondItem="bJx-eU-eQY" secondAttribute="centerX" id="PWL-cc-F7O"/>
                             <constraint firstItem="N6P-gx-XAl" firstAttribute="top" secondItem="bfc-32-Zg8" secondAttribute="bottom" constant="30" id="Yvo-o3-RcU"/>
                             <constraint firstItem="bfc-32-Zg8" firstAttribute="top" secondItem="OWD-AP-H37" secondAttribute="bottom" constant="15" id="bS0-xG-oFB"/>
                             <constraint firstItem="OWD-AP-H37" firstAttribute="leading" secondItem="bJx-eU-eQY" secondAttribute="leading" constant="30" id="dTr-wf-jax"/>
@@ -463,6 +477,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="oRg-FJ-OrM"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9xG-8j-voH" id="jR2-b4-Ej8"/>
                         <outlet property="currentPassTextField" destination="tO6-sS-LLv" id="YVW-yN-7GI"/>
                         <outlet property="nwPassTextField" destination="OWD-AP-H37" id="7Qe-sT-5zr"/>
                         <outlet property="reEnterNwPassTextField" destination="bfc-32-Zg8" id="uBb-S2-nvW"/>
@@ -1026,7 +1041,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mzU-e1-B4z" userLabel="ForgotPassButton">
-                                <rect key="frame" x="44" y="317" width="99" height="21"/>
+                                <rect key="frame" x="44" y="317" width="126" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Kif-C8-aOC"/>
                                 </constraints>
@@ -1068,18 +1083,19 @@
                                     <color key="titleColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWV-Qr-dYO" userLabel="ForgotPassButton">
-                                <rect key="frame" x="18" y="343" width="104" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWV-Qr-dYO" userLabel="Remember me button">
+                                <rect key="frame" x="13" y="343" width="157" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bRZ-yR-aqM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
+                                <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Remember me" image="Pref_uncheck">
                                     <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <state key="selected" image="Pref_checkmark"/>
                                 <connections>
-                                    <action selector="forgotPasswordButtonTapped:" destination="DVJ-Ad-iLM" eventType="touchUpInside" id="oCs-Ly-DYd"/>
+                                    <action selector="rememberMeButtonTapped:" destination="DVJ-Ad-iLM" eventType="touchUpInside" id="Be5-cz-zG7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1100,13 +1116,13 @@
                             <constraint firstItem="pR8-VM-QJg" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="30" id="XUo-GD-fdT"/>
                             <constraint firstItem="j3z-VH-twt" firstAttribute="centerX" secondItem="ab5-bL-ziB" secondAttribute="centerX" id="YeF-5R-pNn"/>
                             <constraint firstAttribute="trailing" secondItem="pR8-VM-QJg" secondAttribute="trailing" constant="30" id="dmF-fz-UtW"/>
-                            <constraint firstItem="rWV-Qr-dYO" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="18" id="f0H-cy-EZ7"/>
+                            <constraint firstItem="rWV-Qr-dYO" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="13" id="f0H-cy-EZ7"/>
                             <constraint firstItem="pR8-VM-QJg" firstAttribute="top" secondItem="rWV-Qr-dYO" secondAttribute="bottom" constant="15" id="hBn-KG-FYG"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rWV-Qr-dYO" secondAttribute="trailing" constant="10" id="p1C-AG-au3"/>
+                            <constraint firstAttribute="trailing" secondItem="rWV-Qr-dYO" secondAttribute="trailing" constant="150" id="p1C-AG-au3"/>
                             <constraint firstItem="axm-z5-IUb" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="30" id="sY5-OP-6sZ"/>
                             <constraint firstItem="rWV-Qr-dYO" firstAttribute="top" secondItem="mzU-e1-B4z" secondAttribute="bottom" constant="5" id="tkS-Mo-Pkc"/>
                             <constraint firstItem="o8y-WQ-8k8" firstAttribute="top" secondItem="axm-z5-IUb" secondAttribute="bottom" constant="15" id="vKn-Rh-KeB"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mzU-e1-B4z" secondAttribute="trailing" constant="10" id="vkZ-ki-e8Q"/>
+                            <constraint firstAttribute="trailing" secondItem="mzU-e1-B4z" secondAttribute="trailing" constant="150" id="vkZ-ki-e8Q"/>
                             <constraint firstAttribute="trailing" secondItem="o8y-WQ-8k8" secondAttribute="trailing" constant="30" id="wWE-ux-rWY"/>
                             <constraint firstItem="o8y-WQ-8k8" firstAttribute="leading" secondItem="ab5-bL-ziB" secondAttribute="leading" constant="30" id="yBt-4n-0XT"/>
                             <constraint firstAttribute="trailing" secondItem="j3z-VH-twt" secondAttribute="trailing" constant="10" id="zlb-6l-IJV"/>
@@ -1118,6 +1134,7 @@
                         <outlet property="logoTopConstraint" destination="IqD-7V-ajI" id="daT-9D-Dd7"/>
                         <outlet property="passwordTextField" destination="oGl-Li-kBo" id="1Ce-Go-mM8"/>
                         <outlet property="passwordView" destination="o8y-WQ-8k8" id="U0t-o9-X9X"/>
+                        <outlet property="rememberMeButton" destination="rWV-Qr-dYO" id="lFE-u6-RCw"/>
                         <outlet property="titleLabel" destination="j3z-VH-twt" id="g4h-O3-utD"/>
                         <outlet property="userNameTextField" destination="kmt-a6-c7M" id="saw-4C-kXe"/>
                         <outlet property="userNameView" destination="axm-z5-IUb" id="1kc-Sx-qij"/>

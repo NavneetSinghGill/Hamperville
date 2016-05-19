@@ -35,6 +35,8 @@
 @property(strong, nonatomic) NSMutableArray *selectedOptionsIDs;
 @property(assign, nonatomic) NSInteger selectedOptionIndex;
 
+@property(strong, nonatomic) NSMutableArray *entries;
+
 @end
 
 @implementation SpecialCarePreferencesViewController
@@ -64,6 +66,10 @@
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.saveButton];
     self.navigationItem.rightBarButtonItem = saveButtonItem;
     
+    self.entries = [NSMutableArray arrayWithObjects:@"Damage Found", @"Shirt Pressing", @"Pant Crease", @"Starch", nil];
+    
+    specialNotePlaceHolder = @"Write your text here";
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -72,6 +78,7 @@
     
     self.specialNoteTextView.delegate = self;
     self.specialNoteTextView.layer.cornerRadius = 5;
+    self.specialNoteTextView.text = specialNotePlaceHolder;
     tableViewDefaultTopContraintValue = self.tableViewTopConstraint.constant;
     pickerSuperViewDefaultBottomContraintValue = -self.pickerSuperView.frame.size.height;
     
@@ -85,7 +92,6 @@
     tapGesture.delegate = self;
     [self.scrollView addGestureRecognizer:tapGesture];
     
-    specialNotePlaceHolder = @"Write your text here";
     
     UINib *nib = [UINib nibWithNibName:@"DropdownTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DropdownTableViewCell"];
@@ -107,10 +113,14 @@
             self.specialNotelabel.hidden = NO;
             self.specialNoteTextView.hidden = NO;
             self.specialTextViewBackgroundBoarderView.hidden = NO;
+            self.saveButton.hidden = NO;
             
             [self parseGetResponse:response];
         } else {
             [self showToastWithText:response on:Top];
+            self.pickerView.hidden = YES;
+            self.tableView.hidden = NO;
+            self.saveButton.hidden = YES;
         }
     }];
 }
@@ -118,6 +128,10 @@
 - (void)parseGetResponse:(id)response {
     if ([response hasValueForKey:@"special_note"]) {
         self.specialNoteTextView.text = [response valueForKey:@"special_note"];
+        if (((NSString *)[response valueForKey:@"special_note"]).length == 0) {
+            self.specialNoteTextView.text = specialNotePlaceHolder;
+            self.specialNoteTextView.textColor = [UIColor lightGrayColor];
+        }
     }
     if ([response hasValueForKey:@"special_care_preferences"]) {
         self.allEntries = [response valueForKey:@"special_care_preferences"];
@@ -172,20 +186,24 @@
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
     
-    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
-    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
+    if (self.specialNoteTextView.frame.origin.y + self.specialNoteTextView.frame.size.height > self.view.frame.size.height - keyboardBounds.size.height) {
+        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height - keyboardBounds.size.height);
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:YES];
+    }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    self.tableViewTopConstraint.constant = tableViewDefaultTopContraintValue;
-    
-    self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
-    CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-    [self.scrollView setContentOffset:bottomOffset animated:YES];
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.view layoutIfNeeded];
-    }];
+    CGRect keyboardBounds;
+    [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
+    if (self.tableViewTopConstraint.constant < tableViewDefaultTopContraintValue) {
+        self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
+        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+        [self.scrollView setContentOffset:bottomOffset animated:YES];
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
 - (void)dismissKeyboard {
@@ -252,12 +270,13 @@
 #pragma mark Datasourse
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.allEntries.count;
+    return self.entries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
-    dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    //    dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    dropdownTableViewCell.name.text = [self.entries objectAtIndex:indexPath.row];
     dropdownTableViewCell.dropDownDelegate = self;
     dropdownTableViewCell.index = indexPath.row;
     dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;

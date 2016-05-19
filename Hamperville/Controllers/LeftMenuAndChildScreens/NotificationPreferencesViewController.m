@@ -62,8 +62,8 @@
     [self.activityIndicator startAnimating];
     [[RequestManager alloc]getNotificationPrefOfUser:[[Util sharedInstance]getUser] withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
+        self.tableView.hidden = NO;
         if (success) {
-            self.tableView.hidden = NO;
             if ([response hasValueForKey:@"notification_preference"]) {
                 NSDictionary *notificationPref = [response valueForKey:@"notification_preference"];
                 if ([notificationPref hasValueForKey:@"app_notifications"]) {
@@ -79,6 +79,7 @@
             }
         } else {
             [self showToastWithText:response on:Top];
+            [self.tableView reloadData];
         }
     }];
 }

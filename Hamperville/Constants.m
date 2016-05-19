@@ -16,6 +16,10 @@ NSString *kSessionCookies = @"SessionCookies";
 
 NSString *kNetworkAvailablability = @"NetworkAvailablability";
 
+NSString *kRememberMe = @"RememberMe";
+NSString *kUserEmail = @"UserEmail";
+NSString *kUserPassword = @"Password";
+
 #pragma mark - TableViewCell constants
 
 NSString *kLeftMenuTableViewCellNibName = @"LeftMenuTableViewCell";
@@ -35,4 +39,6 @@ NSString *kToSWController = @"toSWController";
 NSString *kNoNetworkAvailable = @"No Network available";
 
 #pragma mark - Local notifications
+
+
 

@@ -36,28 +36,19 @@ NSInteger kTableViewCellLabelTag = 10;
     [self initialSetup];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     if (self.shouldRefresh == YES) {
-        [self.activityIndicator startAnimating];
-        [[RequestManager alloc] getOrderHistoryWithLimit:10 time:kEmptyString andOrderOffset:kEmptyString withCompletionBlock:^(BOOL success, id response) {
-            [self.activityIndicator stopAnimating];
-            if (success) {
-                self.orders = [response valueForKey:@"order_history"];
-                self.hasMore = [[response valueForKey:@"hasMore"] boolValue];
-                if (self.hasMore) {
-                    self.timeStamp = [[response valueForKey:@"timestamp"] integerValue];
-                    self.orderOffset = [[response valueForKey:@"orderOffset"] integerValue];
-                }
-                [self.tableView reloadData];
-            } else {
-                if ([response isKindOfClass:[NSString class]]) {
-                    [self showToastWithText:response on:Top];
-                }
-            }
-        }];
+        [self getStartingOrders];
         self.shouldRefresh = NO;
+    }
+}
+
+- (void)networkAvailability {
+    [super networkAvailability];
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [self getStartingOrders];
     }
 }
 
@@ -79,6 +70,26 @@ NSInteger kTableViewCellLabelTag = 10;
     self.refreshControl.triggerVerticalOffset = 50;
     [self.refreshControl addTarget:self action:@selector(loadMore) forControlEvents:UIControlEventValueChanged];
     self.tableView.bottomRefreshControl = self.refreshControl;
+}
+
+- (void)getStartingOrders {
+    [self.activityIndicator startAnimating];
+    [[RequestManager alloc] getOrderHistoryWithLimit:10 time:kEmptyString andOrderOffset:kEmptyString withCompletionBlock:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
+        if (success) {
+            self.orders = [response valueForKey:@"order_history"];
+            self.hasMore = [[response valueForKey:@"hasMore"] boolValue];
+            if (self.hasMore) {
+                self.timeStamp = [[response valueForKey:@"timestamp"] integerValue];
+                self.orderOffset = [[response valueForKey:@"orderOffset"] integerValue];
+            }
+            [self.tableView reloadData];
+        } else {
+            if ([response isKindOfClass:[NSString class]]) {
+                [self showToastWithText:response on:Top];
+            }
+        }
+    }];
 }
 
 - (void)loadMore {

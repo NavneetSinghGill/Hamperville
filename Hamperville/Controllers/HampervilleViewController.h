@@ -31,6 +31,7 @@ typedef enum {
 - (void)backButtonTapped;
 
 - (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition;
+- (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition withDuration:(NSTimeInterval)duration;
 - (void)closeLeftMenuIfOpen;
 
 @end

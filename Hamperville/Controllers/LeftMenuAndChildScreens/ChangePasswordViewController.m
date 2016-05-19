@@ -17,6 +17,8 @@
 
 @property(weak, nonatomic) IBOutlet UIButton *savePassword;
 
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation ChangePasswordViewController
@@ -50,17 +52,29 @@
 
 - (IBAction)savePasswordButtonTapped:(id)sender {
     if ([self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text] && self.nwPassTextField.text.length >= 8 && self.currentPassTextField.text.length >= 8 && self.reEnterNwPassTextField.text.length >= 8) {
+        
+        [self.activityIndicator startAnimating];
         [[RequestManager alloc] putChangePasswordWithOldPassword:self.currentPassTextField.text andNwPassword:self.nwPassTextField.text withCompletionBlock:^(BOOL success, id response) {
+            [self.activityIndicator stopAnimating];
             if (success) {
-                
+                double delayInSeconds = 1.2;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [[NSUserDefaults standardUserDefaults]setValue:self.nwPassTextField.text forKey:kUserPassword];
+                    [[NSUserDefaults standardUserDefaults]setValue:nil forKey:kUserID];
+                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                });
             } else {
                 
             }
+            [self showToastWithText:response on:Top];
         }];
     } else if (self.nwPassTextField.text.length < 8 || self.reEnterNwPassTextField.text.length < 8){
         [self showToastWithText:@"Minimum 8 characters required." on:Top];
     }   else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
         [self showToastWithText:@"Passwords doesn't match" on:Top];
+    } else if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
+        [self showToastWithText:@"Incorrect password" on:Top];
     }
 }
 

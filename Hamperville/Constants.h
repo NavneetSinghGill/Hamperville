@@ -23,6 +23,10 @@ extern NSString *kSessionCookies;
 
 extern NSString *kNetworkAvailablability;
 
+extern NSString *kRememberMe;
+extern NSString *kUserEmail;
+extern NSString *kUserPassword;
+
 #pragma mark - TableViewCell constants
 
 extern NSString *kLeftMenuTableViewCellNibName;
