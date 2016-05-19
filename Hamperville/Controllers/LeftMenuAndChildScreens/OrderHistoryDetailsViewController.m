@@ -8,6 +8,7 @@
 
 #import "OrderHistoryDetailsViewController.h"
 #import "OrderTableViewCell.h"
+#import "SchedulePickupViewController.h"
 
 @interface OrderHistoryDetailsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -85,6 +86,13 @@
 
 - (void)backButtonTapped {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)modifyOrder:(id)sender {
+    SchedulePickupViewController *schedulePickupViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SchedulePickupViewController"];
+    schedulePickupViewController.isModifyModeOn = YES;
+    schedulePickupViewController.orderToModify = self.order;
+    [self.navigationController pushViewController:schedulePickupViewController animated:YES];
 }
 
 #pragma mark - TableView methods -

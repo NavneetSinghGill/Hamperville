@@ -22,6 +22,7 @@
 #import "ServicesCollectionViewCell.h"
 #import "CouponTableViewCell.h"
 #import "ServiceInfo.h"
+#import "Order.h"
 
 typedef enum {
     Pickup = 0,
@@ -97,7 +98,12 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarButtonTitle:@"Request Pickup" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+    if (!self.isModifyModeOn) {
+        [self setNavigationBarButtonTitle:@"Request Pickup" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+    } else {
+        [self setNavigationBarButtonTitle:@"Modify order" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+        [self.requestPickupButton setTitle:@"Modify order" forState:UIControlStateNormal];
+    }
     [self initialSetup];
 }
 
@@ -143,7 +149,11 @@ typedef enum {
             self.pickupDayCount = 1;
             self.dropOffDayCount = 1;
             self.difference = 1;
-            [self setupEntriesForDayCount:self.pickupDayCount];
+            [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
+            
+            if (self.isModifyModeOn) {
+//                self.difference = self.orderToModify.d
+            }
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
             [self showToastWithText:response on:Top];
         } else {
@@ -153,7 +163,11 @@ typedef enum {
 }
 
 - (void)initialSetup {
-    [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
+    if (!self.isModifyModeOn) {
+        [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
+    } else {
+        [self setLeftMenuButtons:[NSArray arrayWithObjects:self.backButton, nil]];
+    }
     self.requestPickupButton.layer.cornerRadius = 4;
     
     self.pickupPickerView.delegate = self;
@@ -196,6 +210,10 @@ typedef enum {
     [self.view endEditing:YES];
 }
 
+- (void)backButtonTapped {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (BOOL)isCouponPresentInUniversalCouponsOfName:(NSString *)couponName {
     for (NSDictionary *coupon in self.universalCoupons) {
         if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
@@ -232,12 +250,11 @@ typedef enum {
 
 #pragma mark Initial Setup method
 
-- (void)setupEntriesForDayCount:(NSInteger)dayCount {
-    NSDate *currentDate = [NSDate date];
-    
+- (void)setupEntriesForDayCount:(NSInteger)dayCount andStartDate:(NSDate *)startDate {
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"EEEE";
-    NSString *dayName = [[dateFormatter stringFromDate:currentDate] lowercaseString];
+    NSString *dayName = [[dateFormatter stringFromDate:startDate] lowercaseString];
     
     //Calculation for Pickup-----------------------------
     NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
@@ -436,7 +453,7 @@ typedef enum {
 - (IBAction)pickUpLeftArrowButtonTapped:(id)sender {
     NSInteger count = self.pickupDayCount - 1;
     if (count >= 1) {
-        [self setupEntriesForDayCount:count];
+        [self setupEntriesForDayCount:count andStartDate:[NSDate date]];
         if (count == 1) {
             self.pickupLeftArrowButton.hidden = YES;
         }
@@ -452,7 +469,7 @@ typedef enum {
 - (IBAction)pickUpRightArrowButtonTapped:(id)sender {
     NSInteger count = self.pickupDayCount + 1;
     if (count <= 10) {
-        [self setupEntriesForDayCount:count];
+        [self setupEntriesForDayCount:count andStartDate:[NSDate date]];
         if (count == 10) {
             self.pickupRightArrowButton.hidden = YES;
         }
@@ -559,7 +576,7 @@ typedef enum {
             self.pickupDayCount = 1;
             self.dropOffDayCount = 1;
             self.difference = 1;
-            [self setupEntriesForDayCount:self.pickupDayCount];
+            [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
             
             self.isUniversalCouponApplied = NO;
             self.selectedServiceIDs = [NSMutableArray array];

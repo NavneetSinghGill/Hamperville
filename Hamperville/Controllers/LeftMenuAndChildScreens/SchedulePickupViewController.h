@@ -8,6 +8,11 @@
 
 #import "HampervilleViewController.h"
 
+@class Order;
+
 @interface SchedulePickupViewController : HampervilleViewController
+
+@property(assign, nonatomic) BOOL isModifyModeOn;
+@property(strong, nonatomic) Order *orderToModify;
 
 @end

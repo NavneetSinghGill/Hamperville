@@ -8,9 +8,9 @@
 
 #import "NetworkConstants.h"
 
-//NSString *baseUrl = @"http://staging.hamperville.com";
+NSString *baseUrl = @"http://staging.hamperville.com";
 //NSString *baseUrl = @"http://192.168.1.172:3001";
-NSString *baseUrl = @"http://192.168.1.28:3001";
+//NSString *baseUrl = @"http://192.168.1.28:3001";
 
 NSString *kSuccessStatus = @"Success";
 NSString *kSuccess = @"Yes";

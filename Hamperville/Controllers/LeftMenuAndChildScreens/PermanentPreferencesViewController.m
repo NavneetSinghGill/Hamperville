@@ -10,12 +10,16 @@
 #import "DropdownTableViewCell.h"
 #import "RequestManager.h"
 
-@interface PermanentPreferencesViewController () <DropDownDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface PermanentPreferencesViewController () <DropDownDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate> {
+    NSInteger pickerSuperViewDefaultBottomContraintValue;
+}
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
 @property(weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(strong, nonatomic) UIButton *saveButton;
+@property(weak, nonatomic) IBOutlet UIView *pickerSuperView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *pickerSuperViewBottomConstraint;
 
 @property(strong, nonatomic) NSMutableArray *allEntries;
 @property(strong, nonatomic) NSMutableArray *allOptions;
@@ -54,6 +58,8 @@
     [self.saveButton  addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *saveButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.saveButton];
     self.navigationItem.rightBarButtonItem = saveButtonItem;
+    
+    pickerSuperViewDefaultBottomContraintValue = -self.pickerSuperView.frame.size.height;
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -133,6 +139,16 @@
     [self.pickerView selectRow:count inComponent:0 animated:NO];
 }
 
+#pragma mark - IBaction methods -
+
+- (IBAction)doneButtonTapped:(id)sender {
+    self.pickerSuperViewBottomConstraint.constant = pickerSuperViewDefaultBottomContraintValue;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
@@ -156,7 +172,14 @@
 #pragma mark - Delegate methods
 
 - (void)dropDownTapped:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self refreshPickerViewForCellIndex:indexPath.row];
     
+    self.pickerSuperViewBottomConstraint.constant = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - TableView methods -
@@ -170,16 +193,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    dropdownTableViewCell.dropDownDelegate = self;
+    dropdownTableViewCell.index = indexPath.row;
+    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return dropdownTableViewCell;
 }
 
 #pragma mark Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self refreshPickerViewForCellIndex:indexPath.row];
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45;

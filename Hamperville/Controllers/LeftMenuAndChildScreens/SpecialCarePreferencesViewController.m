@@ -10,9 +10,10 @@
 #import "RequestManager.h"
 #import "DropdownTableViewCell.h"
 
-@interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate> {
+@interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, DropDownDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
     NSString *specialNotePlaceHolder;
+    NSInteger pickerSuperViewDefaultBottomContraintValue;
 }
 
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,10 +22,12 @@
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(weak, nonatomic) IBOutlet UILabel *specialNotelabel;
 @property(weak, nonatomic) IBOutlet UIView *specialTextViewBackgroundBoarderView;
+@property(weak, nonatomic) IBOutlet UIView *pickerSuperView;
 @property(strong, nonatomic) UIButton *saveButton;
 
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *pickerSuperViewBottomConstraint;
 
 @property(strong, nonatomic) NSMutableArray *allEntries;
 @property(strong, nonatomic) NSMutableArray *allOptions;
@@ -70,6 +73,7 @@
     self.specialNoteTextView.delegate = self;
     self.specialNoteTextView.layer.cornerRadius = 5;
     tableViewDefaultTopContraintValue = self.tableViewTopConstraint.constant;
+    pickerSuperViewDefaultBottomContraintValue = -self.pickerSuperView.frame.size.height;
     
     self.pickerView.hidden = YES;
     self.specialNotelabel.hidden = YES;
@@ -91,7 +95,9 @@
 }
 
 - (void)getWashAndFoldPrefs {
+    [self.activityIndicator startAnimating];
     [[RequestManager alloc] getSpecialCarePreferences:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
@@ -219,6 +225,28 @@
     }
 }
 
+#pragma mark - IBaction methods
+
+- (IBAction)doneButtonTapped:(id)sender {
+    self.pickerSuperViewBottomConstraint.constant = pickerSuperViewDefaultBottomContraintValue;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+#pragma mark - Delegate methods
+
+- (void)dropDownTapped:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self refreshPickerViewForCellIndex:indexPath.row];
+    
+    self.pickerSuperViewBottomConstraint.constant = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - TableView methods -
 
 #pragma mark Datasourse
@@ -230,16 +258,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DropdownTableViewCell *dropdownTableViewCell = [tableView dequeueReusableCellWithIdentifier:@"DropdownTableViewCell"];
     dropdownTableViewCell.name.text = [self.allEntries[indexPath.row] valueForKey:@"name"];
+    dropdownTableViewCell.dropDownDelegate = self;
+    dropdownTableViewCell.index = indexPath.row;
+    dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return dropdownTableViewCell;
 }
 
 #pragma mark Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self refreshPickerViewForCellIndex:indexPath.row];
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45;
