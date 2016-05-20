@@ -14,6 +14,7 @@
 #import "OrderHistoryViewController.h"
 #import "PreferencesViewController.h"
 #import "SettingsViewController.h"
+#import "SubscriptionViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -31,6 +32,7 @@
 @property(strong, nonatomic) OrderHistoryViewController *orderHistoryViewController;
 @property(strong, nonatomic) PreferencesViewController *preferencesViewController;
 @property(strong, nonatomic) SettingsViewController *settingsViewController;
+@property(strong, nonatomic) SubscriptionViewController *subscriptionViewController;
 
 @end
 
@@ -91,6 +93,7 @@
             [self openPreferenceScreen];
             break;
         case 4:
+            [self openSubscriptionScreen];
             break;
         case 5:
             [self openSettingScreen];
@@ -191,6 +194,16 @@
         }
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.settingsViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openSubscriptionScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.subscriptionViewController) {
+            self.subscriptionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SubscriptionViewController"];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.subscriptionViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }

@@ -25,6 +25,12 @@
 
 @property(assign, nonatomic) NSInteger cellHeight;
 
+@property(weak, nonatomic) IBOutlet UIView *pendingOrderView;
+@property(weak, nonatomic) IBOutlet UIView *acceptedOrderView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *pendingOrderViewHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *acceptedOrderViewHeight;
+@property(weak, nonatomic) IBOutlet UILabel *orderAmountLabel;
+
 @end
 
 @implementation OrderHistoryDetailsViewController
@@ -55,6 +61,15 @@
     
     [self.orderDetailsTableView reloadData];
     [self.numberOfBagsTableView reloadData];
+    
+    if ([[self.order.orderStatus lowercaseString] isEqualToString:@"pending"]) {
+        self.acceptedOrderViewHeight.constant = 0;
+        self.acceptedOrderView.clipsToBounds = YES;
+    } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
+        self.pendingOrderViewHeight.constant = 0;
+        self.pendingOrderView.clipsToBounds = YES;
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.order.orderAmount];
+    }
 }
 
 - (void)setupArrays {
@@ -88,11 +103,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)modifyOrder:(id)sender {
+#pragma mark - IBAction methods
+
+- (IBAction)modifyOrderButtonTapped:(id)sender {
     SchedulePickupViewController *schedulePickupViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SchedulePickupViewController"];
     schedulePickupViewController.isModifyModeOn = YES;
     schedulePickupViewController.orderToModify = self.order;
     [self.navigationController pushViewController:schedulePickupViewController animated:YES];
+}
+
+- (IBAction)cancelOrderButtonTapped:(id)sender {
+    
 }
 
 #pragma mark - TableView methods -

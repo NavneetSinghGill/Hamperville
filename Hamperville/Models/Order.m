@@ -40,4 +40,8 @@
     return order;
 }
 
++ (void)printOrder:(Order *)order {
+    NSLog(@"\n\nOrder ID\t\t: %@ \nPickup date\t\t: %@ \nPickup timeslot\t: %@ \nDelivery date\t\t: %@ \nDelivery timeslot\t: %@ \nOrder amount\t\t: %ld \nOrder status\t\t: %@ \nOrder service detail: %@",order.orderID,order.pickupDate,order.pickupTimeSlot,order.deliveryDate,order.deliveryTimeSlot,(long)order.orderAmount,order.orderStatus,order.serviceDetail);
+}
+
 @end

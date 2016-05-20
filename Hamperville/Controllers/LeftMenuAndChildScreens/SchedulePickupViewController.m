@@ -118,7 +118,7 @@ typedef enum {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self networkAvailability];
+    [super networkAvailability];
 }
 
 - (void)networkAvailability {
@@ -165,7 +165,7 @@ typedef enum {
             [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
             
             if (self.isModifyModeOn) {
-//                self.difference = self.orderToModify.d
+                [self setupScreenForOrder:self.orderToModify];
             }
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
             [self networkAvailability];
@@ -259,6 +259,109 @@ typedef enum {
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }];
+}
+
+- (void)setupScreenForOrder:(Order *)order {//Delay is solving an issue of unselected first cell when screen opens
+    double delayInSeconds = 0.0005;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [Order printOrder:order];
+        //For pickup----
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *pickupDate = [dateFormatter dateFromString:order.pickupDate];
+        NSLog(@"%@",pickupDate);
+        
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"EEEE";
+        NSString *dayName = [[dateFormatter stringFromDate:[NSDate date]] lowercaseString];
+        
+        //Calculation for Pickup-----------------------------
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSInteger dayCount = 1;
+        NSDate *resultantDate;
+        for (;;) {
+            NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
+            nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
+            if (nextDate < pickupDate) {
+                dayCount++;
+                continue;
+            } else if (nextDate == pickupDate) {
+                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
+                for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
+                    [self pickUpRightArrowButtonTapped:self.pickupLeftArrowButton];
+                    resultantDate = self.currentPickupDate;
+                }
+                if (resultantDate == nil) {
+                    resultantDate = [NSDate date];
+                }
+                break;
+            } else {
+                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
+                break;
+            }
+        }
+        
+        //Select services-----
+        
+        NSInteger serviceCount = 0;
+        for (NSDictionary *service in self.services) {
+            for (NSDictionary *orderService in order.serviceDetail) {
+                if ([service valueForKey:@"id"] == [orderService valueForKey:@"id"]) {
+                    [self selectCellAtIndexPath:[NSIndexPath indexPathForItem:serviceCount inSection:0]];
+                }
+            }
+            serviceCount++;
+        }
+        
+        //For dropoff----
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *dropOffDate = [dateFormatter dateFromString:order.deliveryDate];
+        NSLog(@"%@",dropOffDate);
+        
+        dayCount = 1;
+        for (;;) {
+            //        NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
+            NSDate *nextDate = [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:dayCount];
+            nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
+            dropOffDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:dropOffDate]];
+            if (nextDate < dropOffDate) {
+                dayCount++;
+                continue;
+            } else if (nextDate == dropOffDate) {
+                [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:1];
+                for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
+                    [self dropOffRightArrowButtonTapped:self.dropOffRightArrowButton];
+                }
+                break;
+            } else {
+                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
+                break;
+            }
+        }
+        
+        //For pickup timeslot
+        for (NSInteger index = 0; index < self.pickupSlots.count; index++) {
+            if ([[self.pickupSlots[index] valueForKey:@"time_slot"] isEqualToString:order.pickupTimeSlot]) {
+                [self.pickupPickerView selectRow:index inComponent:0 animated:NO];
+                break;
+            }
+        }
+        
+        //For dropoff timeslot
+        for (NSInteger index = 0; index < self.dropOffSlots.count; index++) {
+            if ([[self.dropOffSlots[index] valueForKey:@"time_slot"] isEqualToString:order.deliveryTimeSlot]) {
+                [self.dropOffPickerView selectRow:index inComponent:0 animated:NO];
+                break;
+            }
+        }
+    });
+}
+
+- (NSInteger)getDayCountForDate:(NSDate *)orderDate {
+    
+    return 1;
 }
 
 #pragma mark Initial Setup method
@@ -673,7 +776,11 @@ typedef enum {
 #pragma mark Delegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    ServicesCollectionViewCell *cell = (ServicesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self selectCellAtIndexPath:indexPath];
+}
+
+- (void)selectCellAtIndexPath:(NSIndexPath *)indexPath {
+    ServicesCollectionViewCell *cell = (ServicesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     self.difference = cell.difference;
     [cell setSelectionState:!cell.serviceImageButton.selected];
     if (cell.serviceImageButton.selected == YES) {

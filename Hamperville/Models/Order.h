@@ -20,5 +20,6 @@
 @property(strong, nonatomic) NSMutableArray *serviceDetail;
 
 + (Order *)getOrderFromDictionary:(NSDictionary *)dict;
++ (void)printOrder:(Order *)order;
 
 @end
