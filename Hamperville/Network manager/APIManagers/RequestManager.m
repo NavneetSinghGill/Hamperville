@@ -201,6 +201,28 @@
     }
 }
 
+#pragma mark Subscription
+
+- (void)getSubscription:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc]getSubscriptionWithUserRequest:[[UserRequest alloc]initWithGetSubscription] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postSubscriptionWithStatus:(BOOL)status andSubscriptionID:(NSString *)subscriptionID withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postSubscriptionWithUserRequest:[[UserRequest alloc] initWithPostSubscriptionWithStatus:status andSubscriptionID:subscriptionID] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {

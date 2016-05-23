@@ -215,6 +215,26 @@
     return self;
 }
 
+- (id)initWithGetSubscription {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiGetSubscription;
+    }
+    return self;
+}
+
+- (id)initWithPostSubscriptionWithStatus:(BOOL)status andSubscriptionID:(NSString *)subscriptionID {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        _parameters[@"status"] = [NSNumber numberWithBool:status];
+        _parameters[@"subscription_id"] = subscriptionID;
+        User *user = [[Util sharedInstance]getUser];
+        self.urlPath = [NSString stringWithFormat:@"%@%@/modify_subscription",apiPostSubscription,user.userID];
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

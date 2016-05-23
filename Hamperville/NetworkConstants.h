@@ -32,3 +32,9 @@ extern NSString *apiSpecialCarePref;
 
 extern NSString *apiSchedulePickup;
 extern NSString *apiOrderHistory;
+
+extern NSString *apiGetSubscription;
+extern NSString *apiPostSubscription;
+
+
+

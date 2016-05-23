@@ -10,4 +10,6 @@
 
 @interface SubscriptionViewController : HampervilleViewController
 
+@property(assign, nonatomic) BOOL shouldRefresh;
+
 @end

@@ -203,6 +203,7 @@
         if (!self.subscriptionViewController) {
             self.subscriptionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SubscriptionViewController"];
         }
+        self.subscriptionViewController.shouldRefresh = YES;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.subscriptionViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
