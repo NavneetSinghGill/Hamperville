@@ -36,5 +36,7 @@ extern NSString *apiOrderHistory;
 extern NSString *apiGetSubscription;
 extern NSString *apiPostSubscription;
 
+extern NSString *apiAddress;
+
 
 

@@ -41,3 +41,7 @@ NSString *apiOrderHistory = @"/api/v1/orders/";
 NSString *apiGetSubscription = @"/api/v1/subscriptions";
 NSString *apiPostSubscription = @"/api/v1/users/";
 
+NSString *apiAddress = @"/api/v1/users/address/";
+
+
+

@@ -37,6 +37,9 @@
 - (id)initWithGetSubscription;
 - (id)initWithPostSubscriptionWithStatus:(BOOL)status andSubscriptionID:(NSString *)subscriptionID;
 
+- (id)initWithGetAddressPreferences;
+- (id)initWithPostAddressWithDataDictionary:(NSDictionary *)dataDictionary;
+
 - (NSDictionary *)getParams;
 
 @end

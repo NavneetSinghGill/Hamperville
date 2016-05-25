@@ -46,6 +46,11 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)getSubscription:(requestCompletionBlock)block;
 - (void)postSubscriptionWithStatus:(BOOL)status andSubscriptionID:(NSString *)subscriptionID withCompletionBlock:(requestCompletionBlock)block;
 
+#pragma mark Address
+
+- (void)getAddress:(requestCompletionBlock)block;
+- (void)postAddressWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block;

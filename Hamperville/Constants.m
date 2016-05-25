@@ -29,6 +29,7 @@ NSString *kCouponTableViewCellNibName = @"CouponTableViewCell";
 NSString *kCouponTableViewCellIdentifier = @"CouponTableViewCell";
 
 NSString *TVCOrderTableViewCellNibAndIdentifier = @"OrderTableViewCell";
+NSString *TVCLocationTableViewCellNibAndIdentifier = @"LocationTableViewCell";
 
 #pragma mark - Segue Identifiers
 

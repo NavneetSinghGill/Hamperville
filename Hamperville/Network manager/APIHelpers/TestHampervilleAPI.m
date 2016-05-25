@@ -80,6 +80,16 @@
     
 }
 
+#pragma mark Address
+
+- (void)getAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)postAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 #pragma mark Subscription
 
 - (void)getSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

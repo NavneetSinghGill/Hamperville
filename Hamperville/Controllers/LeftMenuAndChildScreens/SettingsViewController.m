@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "LocationViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
@@ -48,6 +49,11 @@
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
+}
+
+- (void)openWashAndFoldPrefScreen {
+    LocationViewController *locationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationViewController"];
+    [self.navigationController pushViewController:locationViewController animated:YES];
 }
 
 #pragma mark - Gesture delegate methods
@@ -95,6 +101,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
+            [self openWashAndFoldPrefScreen];
             break;
             
         default:

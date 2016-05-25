@@ -37,6 +37,8 @@ extern NSString *kCouponTableViewCellIdentifier;
 
 extern NSString *TVCOrderTableViewCellNibAndIdentifier;
 
+extern NSString *TVCLocationTableViewCellNibAndIdentifier;
+
 #pragma mark - Segue Identifiers
 
 extern NSString *kToSWController;

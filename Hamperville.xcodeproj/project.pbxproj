@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		04EA82A275AB45466DB9B180 /* libPods-Hamperville.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA7285666675FF78131008 /* libPods-Hamperville.a */; };
 		3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */; };
+		3B3D630F1CF59C1600BA8F0D /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */; };
+		3B3D63101CF59C1600BA8F0D /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B3D630E1CF59C1600BA8F0D /* LocationTableViewCell.xib */; };
 		3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */; };
 		3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */; };
 		3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */; };
@@ -59,6 +61,7 @@
 		3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17051CD75D9000B5C9F7 /* OrderTableViewCell.xib */; };
 		3BEE17111CD79B1B00B5C9F7 /* CouponTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */; };
 		3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */; };
+		3BEEDFCC1CF34C5C0071214C /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BEEDFCB1CF34C5C0071214C /* LocationViewController.m */; };
 		3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF12CCE1CE5EA93002747F7 /* UIView+HVView.m */; };
 		3BF174A91CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF174A81CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m */; };
 		3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF182471CB64D2E00E1CB3E /* RequestManager.m */; };
@@ -94,6 +97,9 @@
 		29CA7285666675FF78131008 /* libPods-Hamperville.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hamperville.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B08B7DC1CBCEF69001862FF /* SchedulePickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchedulePickupViewController.h; sourceTree = "<group>"; };
 		3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchedulePickupViewController.m; sourceTree = "<group>"; };
+		3B3D630C1CF59C1600BA8F0D /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
+		3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
+		3B3D630E1CF59C1600BA8F0D /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
 		3B4BB6C31CBD0E04005BC322 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -186,6 +192,8 @@
 		3BEE170E1CD79B1B00B5C9F7 /* CouponTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponTableViewCell.h; sourceTree = "<group>"; };
 		3BEE170F1CD79B1B00B5C9F7 /* CouponTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponTableViewCell.m; sourceTree = "<group>"; };
 		3BEE17101CD79B1B00B5C9F7 /* CouponTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponTableViewCell.xib; sourceTree = "<group>"; };
+		3BEEDFCA1CF34C5C0071214C /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationViewController.h; sourceTree = "<group>"; };
+		3BEEDFCB1CF34C5C0071214C /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationViewController.m; sourceTree = "<group>"; };
 		3BF12CCD1CE5EA93002747F7 /* UIView+HVView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HVView.h"; sourceTree = "<group>"; };
 		3BF12CCE1CE5EA93002747F7 /* UIView+HVView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HVView.m"; sourceTree = "<group>"; };
 		3BF174A71CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashAndFoldPreferencesViewController.h; sourceTree = "<group>"; };
@@ -256,6 +264,9 @@
 				3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */,
 				3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */,
 				3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */,
+				3B3D630C1CF59C1600BA8F0D /* LocationTableViewCell.h */,
+				3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */,
+				3B3D630E1CF59C1600BA8F0D /* LocationTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -332,13 +343,14 @@
 				3BEE17011CD75B0700B5C9F7 /* OrderHistoryDetailsViewController.m */,
 				3B69E43D1CD9DB0F00F36F43 /* PreferencesViewController.h */,
 				3B69E43E1CD9DB0F00F36F43 /* PreferencesViewController.m */,
+				3B69E4401CD9ED2400F36F43 /* Prefs */,
 				3BEB5E3E1CEAEB86000573E7 /* SettingsViewController.h */,
 				3BEB5E3F1CEAEB86000573E7 /* SettingsViewController.m */,
+				3BEEDFC91CF34C400071214C /* Settings child screens */,
 				3BE9E36D1CEDDFCB0088F010 /* SubscriptionViewController.h */,
 				3BE9E36E1CEDDFCB0088F010 /* SubscriptionViewController.m */,
 				3BDA168C1CEF5ECA007BD51A /* ChangeSubscriptionViewController.h */,
 				3BDA168D1CEF5ECA007BD51A /* ChangeSubscriptionViewController.m */,
-				3B69E4401CD9ED2400F36F43 /* Prefs */,
 			);
 			path = LeftMenuAndChildScreens;
 			sourceTree = "<group>";
@@ -455,6 +467,15 @@
 				3BE961421CBBC401005D0BCA /* Roboto-Regular.ttf */,
 			);
 			path = CustomFont;
+			sourceTree = "<group>";
+		};
+		3BEEDFC91CF34C400071214C /* Settings child screens */ = {
+			isa = PBXGroup;
+			children = (
+				3BEEDFCA1CF34C5C0071214C /* LocationViewController.h */,
+				3BEEDFCB1CF34C5C0071214C /* LocationViewController.m */,
+			);
+			name = "Settings child screens";
 			sourceTree = "<group>";
 		};
 		3BF12CCC1CE5EA84002747F7 /* Helpers */ = {
@@ -672,6 +693,7 @@
 			files = (
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
 				3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */,
+				3B3D63101CF59C1600BA8F0D /* LocationTableViewCell.xib in Resources */,
 				3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
 				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
@@ -757,7 +779,9 @@
 				3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */,
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
 				3BEB5E401CEAEB86000573E7 /* SettingsViewController.m in Sources */,
+				3BEEDFCC1CF34C5C0071214C /* LocationViewController.m in Sources */,
 				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
+				3B3D630F1CF59C1600BA8F0D /* LocationTableViewCell.m in Sources */,
 				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,
 				3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */,
 				3BE9E36F1CEDDFCB0088F010 /* SubscriptionViewController.m in Sources */,

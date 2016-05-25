@@ -47,4 +47,9 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 - (void)getSubscriptionWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 - (void)postSubscriptionWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+#pragma mark Address
+
+- (void)getAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+- (void)postAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 @end

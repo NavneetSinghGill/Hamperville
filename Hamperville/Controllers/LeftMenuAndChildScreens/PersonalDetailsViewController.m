@@ -72,7 +72,7 @@
             }
         }];
     }];
-    UIAlertAction *noAlertAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *noAlertAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
     [alertController addAction:yesAlertAction];
     [alertController addAction:noAlertAction];
     [self presentViewController:alertController animated:YES completion:nil];

@@ -46,6 +46,11 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 - (void)getSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+#pragma mark Address
+
+- (void)getAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)postAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 #pragma mark - Pickup
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postRequestPickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

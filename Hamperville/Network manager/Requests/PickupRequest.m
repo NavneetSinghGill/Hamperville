@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
-        self.urlPath = [NSString stringWithFormat:@"%@/pickup",apiSchedulePickup];
+        self.urlPath = [NSString stringWithFormat:@"%@pickup",apiSchedulePickup];
     }
     return self;
 }

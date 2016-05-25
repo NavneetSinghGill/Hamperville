@@ -169,6 +169,26 @@
                                               }];
 }
 
+#pragma mark Address
+
+- (void)getAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getAddressWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  [self parseGeneralDataResponse:response];
+                                              }];
+}
+
+- (void)postAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postAddressWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  [self parseGeneralDataResponse:response];
+                                              }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralMessageResponse:(id)response

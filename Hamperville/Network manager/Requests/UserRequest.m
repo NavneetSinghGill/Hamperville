@@ -235,6 +235,38 @@
     return self;
 }
 
+- (id)initWithGetAddressPreferences {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiAddress;
+    }
+    return self;
+}
+
+- (id)initWithPostAddressWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"street"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"street"] forKey:@"street"];
+        }
+        if ([dataDictionary hasValueForKey:@"apartment_number"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"apartment_number"] forKey:@"apartment_number"];
+        }
+        if ([dataDictionary hasValueForKey:@"city"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"city"] forKey:@"city"];
+        }
+        if ([dataDictionary hasValueForKey:@"state"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"state"] forKey:@"state"];
+        }
+        if ([dataDictionary hasValueForKey:@"is_doorman_building"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"is_doorman_building"] forKey:@"is_doorman_building"];
+        }
+        self.urlPath = apiAddress;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

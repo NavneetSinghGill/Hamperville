@@ -223,6 +223,28 @@
     }
 }
 
+#pragma mark Address
+
+- (void)getAddress:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getAddressWithUserRequest:[[UserRequest alloc]initWithGetAddressPreferences] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postAddressWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postAddressWithUserRequest:[[UserRequest alloc] initWithPostAddressWithDataDictionary:dataDictionary] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {
