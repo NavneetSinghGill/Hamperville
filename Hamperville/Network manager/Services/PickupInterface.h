@@ -20,4 +20,8 @@ typedef void (^pickupInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)getOrderHistoryWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block;
 
+- (void)postModifyOrderWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block;
+
+- (void)postCancelOrderWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block;
+
 @end

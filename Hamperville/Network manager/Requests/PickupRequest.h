@@ -15,4 +15,7 @@
 
 - (id)initWithOrderHistoryRecordLimit:(NSInteger)limit time:(NSString *)timeStamp andOrderOffset:(NSString *)previousOrderID;
 
+- (id)initWithModifyOrderWithDataDictionary:(NSDictionary *)dataDictionary;
+- (id)initWithCancelOrderWithOrderID:(NSString *)orderID;
+
 @end

@@ -70,6 +70,8 @@ NSInteger kTableViewCellLabelTag = 10;
     self.refreshControl.triggerVerticalOffset = 50;
     [self.refreshControl addTarget:self action:@selector(loadMore) forControlEvents:UIControlEventValueChanged];
     self.tableView.bottomRefreshControl = self.refreshControl;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setShouldRefreshValue:) name:LNChangeShouldRefresh object:nil];
 }
 
 - (void)getStartingOrders {
@@ -114,6 +116,12 @@ NSInteger kTableViewCellLabelTag = 10;
         }
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (void)setShouldRefreshValue:(NSNotification *)notification {
+    if (notification != nil && notification.userInfo != nil) {
+        self.shouldRefresh = [[notification.userInfo valueForKey:@"shouldRefresh"] boolValue];
+    }
 }
 
 #pragma mark - Gesture delegate methods

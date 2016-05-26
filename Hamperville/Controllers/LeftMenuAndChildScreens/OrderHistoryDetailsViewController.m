@@ -9,11 +9,13 @@
 #import "OrderHistoryDetailsViewController.h"
 #import "OrderTableViewCell.h"
 #import "SchedulePickupViewController.h"
+#import "RequestManager.h"
 
 @interface OrderHistoryDetailsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(weak, nonatomic) IBOutlet UITableView *orderDetailsTableView;
 @property(weak, nonatomic) IBOutlet UITableView *numberOfBagsTableView;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property(strong, nonatomic) NSMutableArray *orderDetailOptions;
 @property(strong, nonatomic) NSMutableArray *numberOfBagsOptions;
@@ -30,6 +32,8 @@
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *pendingOrderViewHeight;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *acceptedOrderViewHeight;
 @property(weak, nonatomic) IBOutlet UILabel *orderAmountLabel;
+@property(weak, nonatomic) IBOutlet UIView *numberOfBagsHeaderSuperView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *numberOfBagsHeaderSuperViewTopConstraint;
 
 @end
 
@@ -37,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initialSetup];
 }
 
@@ -65,7 +69,15 @@
     if ([[self.order.orderStatus lowercaseString] isEqualToString:@"pending"]) {
         self.acceptedOrderViewHeight.constant = 0;
         self.acceptedOrderView.clipsToBounds = YES;
+        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
+        self.numberOfBagsTableViewHeightConstraint.constant = 0;
     } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
+        self.pendingOrderViewHeight.constant = 0;
+        self.pendingOrderView.clipsToBounds = YES;
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.order.orderAmount];
+        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
+        self.numberOfBagsTableViewHeightConstraint.constant = 0;
+    } else {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
         self.orderAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.order.orderAmount];
@@ -113,7 +125,21 @@
 }
 
 - (IBAction)cancelOrderButtonTapped:(id)sender {
-    
+    [self.activityIndicator startAnimating];
+    [[RequestManager alloc] postCancelOrderWithOrderID:self.order.orderID withCompletionBlock:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
+        if (success) {
+            double delayInSeconds = 2.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+            [self showToastWithText:@"Order cancelled successfully." on:Top withDuration:1.8];
+        } else {
+            [self showToastWithText:response on:Top withDuration:1.8];
+        }
+    }];
 }
 
 #pragma mark - TableView methods -

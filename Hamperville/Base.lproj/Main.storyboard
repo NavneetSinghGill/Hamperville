@@ -1840,13 +1840,6 @@
                                                     <constraint firstItem="swm-6e-hr9" firstAttribute="leading" secondItem="dOs-Ek-8U9" secondAttribute="leading" constant="29" id="ZBM-2V-gQi"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-5M-zL6">
-                                                <rect key="frame" x="0.0" y="69" width="320" height="330"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="330" id="qGA-cf-rff"/>
-                                                </constraints>
-                                            </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B32-Jc-JvO" userLabel="SuperHeaderView">
                                                 <rect key="frame" x="1" y="395" width="318" height="48"/>
                                                 <subviews>
@@ -1876,13 +1869,6 @@
                                                     <constraint firstAttribute="bottom" secondItem="JNK-Wd-dfz" secondAttribute="bottom" id="reV-9m-4Wf"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T0R-xt-0nD">
-                                                <rect key="frame" x="0.0" y="451" width="320" height="174"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="174" id="8MW-Uy-MgE"/>
-                                                </constraints>
-                                            </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ix5-Sa-d9c" userLabel="Pending order view">
                                                 <rect key="frame" x="0.0" y="635" width="320" height="90"/>
                                                 <subviews>
@@ -1934,6 +1920,20 @@
                                                     <constraint firstAttribute="height" constant="90" id="uLd-5R-qs6"/>
                                                 </constraints>
                                             </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QXp-5M-zL6">
+                                                <rect key="frame" x="0.0" y="69" width="320" height="330"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="330" id="qGA-cf-rff"/>
+                                                </constraints>
+                                            </tableView>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T0R-xt-0nD">
+                                                <rect key="frame" x="0.0" y="451" width="320" height="174"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="174" id="8MW-Uy-MgE"/>
+                                                </constraints>
+                                            </tableView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ZE-dG-4SG" userLabel="Accepted order view">
                                                 <rect key="frame" x="0.0" y="725" width="320" height="40"/>
                                                 <subviews>
@@ -2037,6 +2037,8 @@
                     <connections>
                         <outlet property="acceptedOrderView" destination="7ZE-dG-4SG" id="ejh-69-SOQ"/>
                         <outlet property="acceptedOrderViewHeight" destination="1Nv-Gb-cHH" id="JAq-Hy-YF2"/>
+                        <outlet property="numberOfBagsHeaderSuperView" destination="B32-Jc-JvO" id="JQq-84-PpA"/>
+                        <outlet property="numberOfBagsHeaderSuperViewTopConstraint" destination="xfV-Ly-mo6" id="L7f-fk-xLQ"/>
                         <outlet property="numberOfBagsTableView" destination="T0R-xt-0nD" id="iEe-N4-BMC"/>
                         <outlet property="numberOfBagsTableViewHeightConstraint" destination="8MW-Uy-MgE" id="PUp-zK-J0t"/>
                         <outlet property="orderAmountLabel" destination="HYU-3V-unk" id="ZSY-DM-iNy"/>

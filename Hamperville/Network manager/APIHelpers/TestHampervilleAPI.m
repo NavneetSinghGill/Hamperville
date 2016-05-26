@@ -114,4 +114,12 @@
     
 }
 
+- (void)postModifyOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)postCancelOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 @end

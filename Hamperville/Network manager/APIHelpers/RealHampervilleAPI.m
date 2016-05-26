@@ -191,6 +191,20 @@
                }];
 }
 
+- (void)postModifyOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:pickupRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
+- (void)postCancelOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:pickupRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
 #pragma mark - API interactor methods
 
 - (void)interactAPIWithPostObject:(Request *)postObject withCompletionBlock:(apiInteractorCompletionBlock)block {

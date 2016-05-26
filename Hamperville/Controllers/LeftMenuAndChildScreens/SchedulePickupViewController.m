@@ -255,113 +255,127 @@ typedef enum {
 
 - (void)resizeTableViewWithAnimation {
     self.tableViewHeightContraint.constant = kCouponTableViewDefaultHeight * (self.appliedCouponsIDAndName.count + !_isUniversalCouponApplied);
+    if (self.isModifyModeOn) {
+        self.tableViewHeightContraint.constant = 0;
+    }
     [self.couponTableView reloadData];
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }];
 }
 
-- (void)setupScreenForOrder:(Order *)order {//Delay is solving an issue of unselected first cell when screen opens
-    double delayInSeconds = 0.0005;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [Order printOrder:order];
-        //For pickup----
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *pickupDate = [dateFormatter dateFromString:order.pickupDate];
-        NSLog(@"%@",pickupDate);
-        
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.dateFormat = @"EEEE";
-        NSString *dayName = [[dateFormatter stringFromDate:[NSDate date]] lowercaseString];
-        
-        //Calculation for Pickup-----------------------------
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSInteger dayCount = 1;
-        NSDate *resultantDate;
-        for (;;) {
-            NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
-            nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
-            if (nextDate < pickupDate) {
-                dayCount++;
-                continue;
-            } else if (nextDate == pickupDate) {
-                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
-                for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
-                    [self pickUpRightArrowButtonTapped:self.pickupLeftArrowButton];
-                    resultantDate = self.currentPickupDate;
-                }
-                if (resultantDate == nil) {
-                    resultantDate = [NSDate date];
-                }
-                break;
-            } else {
-                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
-                break;
-            }
-        }
-        
-        //Select services-----
-        
-        NSInteger serviceCount = 0;
-        for (NSDictionary *service in self.services) {
-            for (NSDictionary *orderService in order.serviceDetail) {
-                if ([service valueForKey:@"id"] == [orderService valueForKey:@"id"]) {
-                    [self selectCellAtIndexPath:[NSIndexPath indexPathForItem:serviceCount inSection:0]];
-                }
-            }
-            serviceCount++;
-        }
-        
-        //For dropoff----
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *dropOffDate = [dateFormatter dateFromString:order.deliveryDate];
-        NSLog(@"%@",dropOffDate);
-        
-        dayCount = 1;
-        for (;;) {
-            //        NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
-            NSDate *nextDate = [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:dayCount];
-            nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
-            dropOffDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:dropOffDate]];
-            if (nextDate < dropOffDate) {
-                dayCount++;
-                continue;
-            } else if (nextDate == dropOffDate) {
-                [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:1];
-                for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
-                    [self dropOffRightArrowButtonTapped:self.dropOffRightArrowButton];
-                }
-                break;
-            } else {
-                [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
-                break;
-            }
-        }
-        
-        //For pickup timeslot
-        for (NSInteger index = 0; index < self.pickupSlots.count; index++) {
-            if ([[self.pickupSlots[index] valueForKey:@"time_slot"] isEqualToString:order.pickupTimeSlot]) {
-                [self.pickupPickerView selectRow:index inComponent:0 animated:NO];
-                break;
-            }
-        }
-        
-        //For dropoff timeslot
-        for (NSInteger index = 0; index < self.dropOffSlots.count; index++) {
-            if ([[self.dropOffSlots[index] valueForKey:@"time_slot"] isEqualToString:order.deliveryTimeSlot]) {
-                [self.dropOffPickerView selectRow:index inComponent:0 animated:NO];
-                break;
-            }
-        }
-    });
-}
+#pragma mark For Modify Order
 
-- (NSInteger)getDayCountForDate:(NSDate *)orderDate {
-    
-    return 1;
+- (void)setupScreenForOrder:(Order *)order {//Delay is solving an issue of unselected first cell when screen opens
+//    double delayInSeconds = 0.005;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [Order printOrder:order];
+            //For pickup----
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *pickupDate = [dateFormatter dateFromString:order.pickupDate];
+            NSLog(@"PickupDate %@",pickupDate);
+            
+            dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"EEEE";
+            NSString *dayName = [[dateFormatter stringFromDate:[NSDate date]] lowercaseString];
+            
+            //Calculation for Pickup-----------------------------
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSInteger dayCount = 1;
+            NSDate *resultantDate;
+            for (;;) {
+                NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
+                nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
+                NSLog(@"\nNextDate: %@\nPickupDate: %@\nEquals: %hhd\n",nextDate, pickupDate, [nextDate isEqualToDate:pickupDate]);
+                if (nextDate < pickupDate) {
+                    NSLog(@"UP");
+                    dayCount++;
+                    continue;
+                } else if ([nextDate isEqualToDate:pickupDate]) {
+                    NSLog(@"MIDDLE");
+                    [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
+                    for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
+                        [self pickUpRightArrowButtonTapped:self.pickupLeftArrowButton];
+                        resultantDate = self.currentPickupDate;
+                    }
+                    if (resultantDate == nil) {
+                        resultantDate = [NSDate date];
+                    }
+                    break;
+                } else {
+                    NSLog(@"BOTTOM");
+                    //This will arise when pickup date is smaller than first calculated date which should be impossible
+                    resultantDate = self.currentPickupDate;
+                    [self setupEntriesForDayCount:1 andStartDate:resultantDate];
+                    break;
+                }
+            }
+            
+            //Select services-----
+            
+            self.selectedServiceIDs = [NSMutableArray array];
+            for (NSInteger serviceCount = 0;serviceCount < self.services.count; serviceCount++) {
+                for (NSInteger serviceDetailCount = 0;serviceDetailCount < order.serviceDetail.count; serviceDetailCount++) {
+                    //                NSLog(@"Service ID: %@",[self.services[serviceCount] valueForKey:@"id"]);
+                    if ([[self.services[serviceCount] valueForKey:@"id"] integerValue] == [[order.serviceDetail[serviceDetailCount] valueForKey:@"id"] integerValue]) {
+                        ServiceInfo *serviceInfo = [ServiceInfo new];
+                        serviceInfo.serviceID = [self.services[serviceCount] valueForKey:@"id"];
+                        serviceInfo.difference = [[self.services[serviceCount] valueForKey:@"day_difference"] integerValue];
+                        [self.selectedServiceIDs addObject:serviceInfo];
+                    }
+                }
+            }
+            [self.collectionView reloadData];
+            
+            //For dropoff----
+            dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate *dropOffDate = [dateFormatter dateFromString:order.deliveryDate];
+            NSLog(@"%@",dropOffDate);
+            
+            dayCount = 1;
+            for (;;) {
+                //        NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
+                NSDate *nextDate = [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:dayCount];
+                nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
+                dropOffDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:dropOffDate]];
+                if (nextDate < dropOffDate) {
+                    dayCount++;
+                    continue;
+                } else if (nextDate == dropOffDate) {
+                    [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:1];
+                    for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
+                        [self dropOffRightArrowButtonTapped:self.dropOffRightArrowButton];
+                    }
+                    break;
+                } else {
+                    resultantDate = self.currentPickupDate;
+                    [self setupEntriesForDayCount:1 andStartDate:resultantDate];
+                    break;
+                }
+            }
+            
+            //For pickup timeslot
+            for (NSInteger index = 0; index < self.pickupSlots.count; index++) {
+                if ([[self.pickupSlots[index] valueForKey:@"time_slot"] isEqualToString:order.pickupTimeSlot]) {
+                    [self.pickupPickerView selectRow:index inComponent:0 animated:NO];
+                    break;
+                }
+            }
+            
+            //For dropoff timeslot
+            for (NSInteger index = 0; index < self.dropOffSlots.count; index++) {
+                if ([[self.dropOffSlots[index] valueForKey:@"time_slot"] isEqualToString:order.deliveryTimeSlot]) {
+                    [self.dropOffPickerView selectRow:index inComponent:0 animated:NO];
+                    break;
+                }
+            }
+            [self resizeTableViewWithAnimation];
+        });
+//    });
 }
 
 #pragma mark Initial Setup method
@@ -684,31 +698,39 @@ typedef enum {
     [dataDictionary setValue:self.appliedCouponsIDAndName forKey:@"coupon_code"];
     
     [self.activityIndicator startAnimating];
-    [[RequestManager alloc] postRequestPickupWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
-        [[self activityIndicator]stopAnimating];
-        if (success) {
-            self.pickupLeftArrowButton.hidden = YES;
-            self.dropOffLeftArrowButton.hidden = YES;
-            self.pickupDayCount = 1;
-            self.dropOffDayCount = 1;
-            self.difference = 1;
-            [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
-            
-            self.isUniversalCouponApplied = NO;
-            self.selectedServiceIDs = [NSMutableArray array];
-            self.appliedCouponsIDAndName = [NSMutableArray array];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                reloadCollectionViewToDefault = YES;
-                [self.collectionView reloadData];
-                [self.couponTableView reloadData];
+    if (!self.isModifyModeOn) {
+        [[RequestManager alloc] postRequestPickupWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
+            [[self activityIndicator]stopAnimating];
+            if (success) {
+                self.pickupLeftArrowButton.hidden = YES;
+                self.dropOffLeftArrowButton.hidden = YES;
+                self.pickupDayCount = 1;
+                self.dropOffDayCount = 1;
+                self.difference = 1;
+                [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
                 
-                [self resizeTableViewWithAnimation];
-                reloadCollectionViewToDefault = NO;
-            });
-        } else {
+                self.isUniversalCouponApplied = NO;
+                self.selectedServiceIDs = [NSMutableArray array];
+                self.appliedCouponsIDAndName = [NSMutableArray array];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    reloadCollectionViewToDefault = YES;
+                    [self.collectionView reloadData];
+                    [self.couponTableView reloadData];
+                    
+                    [self resizeTableViewWithAnimation];
+                    reloadCollectionViewToDefault = NO;
+                });
+            } else {
+                [self showToastWithText:response on:Top];
+            }
+        }];
+    } else {
+        dataDictionary[@"order_id"] = self.orderToModify.orderID;
+        [[RequestManager alloc] postModifyOrderWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
+            [self.activityIndicator stopAnimating];
             [self showToastWithText:response on:Top];
-        }
-    }];
+        }];
+    }
 }
 
 #pragma mark - PickerView Delegate and Datasource methods -
@@ -770,6 +792,13 @@ typedef enum {
         [cell setSelectionState:NO];
     }
     [cell setContent];
+    for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
+        if ([cell.serviceID integerValue] == [serviceInfo.serviceID integerValue]) {
+            [cell setSelectionState:YES];
+            return cell;
+        }
+    }
+    [cell setSelectionState:NO];
     return cell;
 }
 

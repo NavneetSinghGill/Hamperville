@@ -57,4 +57,8 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 
 - (void)getOrderHistoryWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+- (void)postModifyOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
+- (void)postCancelOrderWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 @end

@@ -58,4 +58,7 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 
 - (void)getOrderHistoryWithLimit:(NSInteger)limit time:(NSString *)timeStamp andOrderOffset:(NSString *)previousOrderID withCompletionBlock:(requestCompletionBlock)block;
 
+- (void)postModifyOrderWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+- (void)postCancelOrderWithOrderID:(NSString *)orderID withCompletionBlock:(requestCompletionBlock)block;
+
 @end

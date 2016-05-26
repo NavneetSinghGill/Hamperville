@@ -41,5 +41,5 @@ NSString *kNoNetworkAvailable = @"No Network available";
 
 #pragma mark - Local notifications
 
-
+NSString *LNChangeShouldRefresh = @"ChangeShouldRefresh";
 

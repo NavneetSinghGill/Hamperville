@@ -40,6 +40,24 @@
                                    }];
 }
 
+- (void)postModifyOrderWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postModifyOrderWithRequest:pickupRequest
+                                   andCompletionBlock:^(BOOL success, id response) {
+                                       [self parseGeneralDataResponse:response];
+                                   }];
+}
+
+- (void)postCancelOrderWithPickupRequest:(PickupRequest *)pickupRequest andCompletionBlock:(pickupInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postCancelOrderWithRequest:pickupRequest
+                                   andCompletionBlock:^(BOOL success, id response) {
+                                       [self parseGeneralDataResponse:response];
+                                   }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGetSchedulePickup:(id)response {
@@ -96,6 +114,39 @@
                     }
                 }
                 self.block(YES, modifiedDictionary);
+            }
+            else
+            {
+                NSString *errorMessage = nil;
+                if([response hasValueForKey:@"message"])
+                {
+                    errorMessage = [response valueForKey:@"message"];
+                }
+                _block(NO, errorMessage);
+            }
+        }
+    }
+    else if([response isKindOfClass:[NSError class]])
+    {
+        NSString *errorMessage = ((NSError *)response).localizedDescription;
+        _block(NO, errorMessage);
+    }
+    else
+    {
+        _block(NO, nil);
+    }
+}
+
+- (void)parseGeneralDataResponse:(id)response
+{
+    if ([response isKindOfClass:[NSDictionary class]])
+    {
+        NSString *success = nil;
+        if ([response hasValueForKey:kSuccessStatus]) {
+            success = [response valueForKey:kSuccessStatus];
+            if (success == kSuccess)
+            {
+                self.block(YES, [response valueForKey:@"data"]);
             }
             else
             {

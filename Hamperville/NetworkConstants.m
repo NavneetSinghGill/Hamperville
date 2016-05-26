@@ -43,5 +43,8 @@ NSString *apiPostSubscription = @"/api/v1/users/";
 
 NSString *apiAddress = @"/api/v1/users/address/";
 
+NSString *apiModifyOrder = @"/api/v1/orders/update";
+NSString *apiCancelOrder = @"/api/v1/orders/cancel";
+
 
 

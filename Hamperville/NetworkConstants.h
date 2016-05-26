@@ -38,5 +38,8 @@ extern NSString *apiPostSubscription;
 
 extern NSString *apiAddress;
 
+extern NSString *apiModifyOrder;
+extern NSString *apiCancelOrder;
+
 
 
