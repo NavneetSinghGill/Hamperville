@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "LocationViewController.h"
+#import "CardViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
@@ -51,9 +52,14 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)openWashAndFoldPrefScreen {
+- (void)openLocationScreen {
     LocationViewController *locationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationViewController"];
     [self.navigationController pushViewController:locationViewController animated:YES];
+}
+
+- (void)openCardScreen {
+    CardViewController *cardViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CardViewController"];
+    [self.navigationController pushViewController:cardViewController animated:YES];
 }
 
 #pragma mark - Gesture delegate methods
@@ -101,9 +107,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
         case 0:
-            [self openWashAndFoldPrefScreen];
+            [self openLocationScreen];
             break;
-            
+        case 1:
+            [self openCardScreen];
+            break;
         default:
             break;
     }

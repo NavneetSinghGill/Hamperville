@@ -183,7 +183,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSDictionary *optionsSelectedProduct = self.allSubscriptions[row];
+//    NSDictionary *optionsSelectedProduct = self.allSubscriptions[row];
 //    self.selectedOptionsIDs[self.selectedOptionIndex] = [optionsSelectedProduct valueForKey:@"id"];
 //    
 //    NSMutableArray *option = self.allOptions[self.selectedOptionIndex];

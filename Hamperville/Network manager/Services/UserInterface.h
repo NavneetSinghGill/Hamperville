@@ -52,4 +52,11 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 - (void)getAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 - (void)postAddressWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+#pragma mark Credit Card
+
+- (void)postAddCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+- (void)deleteCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+- (void)postSetPrimaryCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+- (void)getAlreadyAddedCreditCardsWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 @end

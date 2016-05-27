@@ -24,6 +24,7 @@
 		3B6D8DB91CBBC87900D7B208 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB51CBBC87900D7B208 /* HomePageViewController.m */; };
 		3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */; };
 		3B7197941CE4805000B102CD /* SpecialCarePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7197931CE4805000B102CD /* SpecialCarePreferencesViewController.m */; };
+		3B868AF21CF8513A001E7012 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B868AF11CF8513A001E7012 /* CardViewController.m */; };
 		3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */; };
 		3BCD37C41CBE270400DE4E91 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C31CBE270400DE4E91 /* User.m */; };
 		3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C81CBE27ED00DE4E91 /* Util.m */; };
@@ -124,6 +125,8 @@
 		3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3B7197921CE4805000B102CD /* SpecialCarePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialCarePreferencesViewController.h; sourceTree = "<group>"; };
 		3B7197931CE4805000B102CD /* SpecialCarePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialCarePreferencesViewController.m; sourceTree = "<group>"; };
+		3B868AF01CF8513A001E7012 /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
+		3B868AF11CF8513A001E7012 /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
 		3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		3BCD37C21CBE270400DE4E91 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		3BCD37C31CBE270400DE4E91 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -474,6 +477,8 @@
 			children = (
 				3BEEDFCA1CF34C5C0071214C /* LocationViewController.h */,
 				3BEEDFCB1CF34C5C0071214C /* LocationViewController.m */,
+				3B868AF01CF8513A001E7012 /* CardViewController.h */,
+				3B868AF11CF8513A001E7012 /* CardViewController.m */,
 			);
 			name = "Settings child screens";
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B868AF21CF8513A001E7012 /* CardViewController.m in Sources */,
 				3BCD37C41CBE270400DE4E91 /* User.m in Sources */,
 				3BF12CCF1CE5EA93002747F7 /* UIView+HVView.m in Sources */,
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,

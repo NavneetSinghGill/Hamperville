@@ -267,6 +267,57 @@
     return self;
 }
 
+- (id)initWithPostAddCreditWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"credit_card_type"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"credit_card_type"] forKey:@"credit_card_type"];
+        }
+        if ([dataDictionary hasValueForKey:@"number"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"number"] forKey:@"number"];
+        }
+        if ([dataDictionary hasValueForKey:@"expiry_year"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"expiry_year"] forKey:@"expiry_year"];
+        }
+        if ([dataDictionary hasValueForKey:@"expiry_month"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"expiry_month"] forKey:@"expiry_month"];
+        }
+        if ([dataDictionary hasValueForKey:@"card_holder_name"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"card_holder_name"] forKey:@"card_holder_name"];
+        }
+        if ([dataDictionary hasValueForKey:@"authorize_token"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"authorize_token"] forKey:@"authorize_token"];
+        }
+        self.urlPath = apiAddCreditCard;
+    }
+    return self;
+}
+
+- (id)initWithDeleteCreditCard {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiDeleteCrediCard;
+    }
+    return self;
+}
+
+- (id)initWithPostSetPrimaryCreditCard:(NSString *)creditCardID {
+    self = [super init];
+    if (self) {
+        self.urlPath = [NSString stringWithFormat:@"%@%@%@",apiSetPrimaryCard ,creditCardID ,apiSetPrimaryCardExtendedString];
+    }
+    return self;
+}
+
+- (id)initWithGetAlreadyAddedCreditCards {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiGetAlreadyAddedCreditCards;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

@@ -138,7 +138,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSDictionary *selectedSubscription = self.allSubscriptions[row];
+//    NSDictionary *selectedSubscription = self.allSubscriptions[row];
     
 }
 

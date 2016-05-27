@@ -90,6 +90,24 @@
     
 }
 
+#pragma mark Credit Card
+
+- (void)postAddCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)deleteCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)postSetPrimaryCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)getAlreadyAddedCreditCardsWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 #pragma mark Subscription
 
 - (void)getSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

@@ -918,7 +918,7 @@ typedef enum {
             else {
                 NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
                 NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
-                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+//                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
                 
                 if (serviceAndCouponIDs != nil) {
                     //Coupon is a valid coupon
@@ -949,7 +949,7 @@ typedef enum {
             } else {
                 NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
                 NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
-                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+//                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
                 
                 if (serviceAndCouponIDs != nil) {
                     //Coupon is a valid coupon

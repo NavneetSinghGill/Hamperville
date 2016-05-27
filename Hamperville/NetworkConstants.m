@@ -46,5 +46,8 @@ NSString *apiAddress = @"/api/v1/users/address/";
 NSString *apiModifyOrder = @"/api/v1/orders/update";
 NSString *apiCancelOrder = @"/api/v1/orders/cancel";
 
-
+NSString *apiAddCreditCard = @"/api/v1/credit_card";
+NSString *apiDeleteCrediCard = @"/api/v1/credit_card/";
+NSString *apiSetPrimaryCard = @"/api/v1/credit_card/"; NSString *apiSetPrimaryCardExtendedString = @"/make_primary";
+NSString *apiGetAlreadyAddedCreditCards = @"/api/credit_card/";
 

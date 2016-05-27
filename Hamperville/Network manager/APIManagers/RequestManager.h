@@ -51,6 +51,13 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)getAddress:(requestCompletionBlock)block;
 - (void)postAddressWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
 
+#pragma mark Credit card
+
+- (void)postAddCreditWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+- (void)deleteCreditCard:(requestCompletionBlock)block;
+- (void)postSetPrimaryCreditCard:(NSString *)creditCardID withCompletionBlock:(requestCompletionBlock)block;
+- (void)getAlreadyAddedCreditCards:(requestCompletionBlock)block;
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block;

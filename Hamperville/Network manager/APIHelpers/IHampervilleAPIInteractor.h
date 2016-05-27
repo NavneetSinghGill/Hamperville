@@ -51,6 +51,13 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 - (void)getAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+#pragma mark Credit Card
+
+- (void)postAddCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)deleteCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)postSetPrimaryCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)getAlreadyAddedCreditCardsWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 #pragma mark - Pickup
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postRequestPickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

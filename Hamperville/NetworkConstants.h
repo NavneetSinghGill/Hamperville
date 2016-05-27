@@ -41,5 +41,8 @@ extern NSString *apiAddress;
 extern NSString *apiModifyOrder;
 extern NSString *apiCancelOrder;
 
-
+extern NSString *apiAddCreditCard;
+extern NSString *apiDeleteCrediCard;
+extern NSString *apiSetPrimaryCard; extern NSString *apiSetPrimaryCardExtendedString;
+extern NSString *apiGetAlreadyAddedCreditCards;
 

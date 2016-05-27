@@ -191,6 +191,44 @@
                                               }];
 }
 
+#pragma mark Credit Card
+
+- (void)postAddCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postAddCreditCardWithRequest:userRequest
+                               andCompletionBlock:^(BOOL success, id response) {
+                                   [self parseGeneralDataResponse:response];
+                               }];
+}
+
+- (void)deleteCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider deleteCreditCardWithRequest:userRequest
+                               andCompletionBlock:^(BOOL success, id response) {
+                                   [self parseGeneralDataResponse:response];
+                               }];
+}
+
+- (void)postSetPrimaryCreditCardWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postSetPrimaryCreditCardWithRequest:userRequest
+                               andCompletionBlock:^(BOOL success, id response) {
+                                   [self parseGeneralDataResponse:response];
+                               }];
+}
+
+- (void)getAlreadyAddedCreditCardsWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getAlreadyAddedCreditCardsWithRequest:userRequest
+                               andCompletionBlock:^(BOOL success, id response) {
+                                   [self parseGeneralDataResponse:response];
+                               }];
+}
+
 #pragma mark - Parsing methods
 
 - (void)parseGeneralMessageResponse:(id)response

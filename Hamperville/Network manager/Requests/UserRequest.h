@@ -40,6 +40,11 @@
 - (id)initWithGetAddressPreferences;
 - (id)initWithPostAddressWithDataDictionary:(NSDictionary *)dataDictionary;
 
+- (id)initWithPostAddCreditWithDataDictionary:(NSDictionary *)dataDictionary;
+- (id)initWithDeleteCreditCard;
+- (id)initWithPostSetPrimaryCreditCard:(NSString *)creditCardID;
+- (id)initWithGetAlreadyAddedCreditCards;
+
 - (NSDictionary *)getParams;
 
 @end

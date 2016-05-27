@@ -178,7 +178,7 @@
                 [self.addressInfo addObject:[address valueForKey:@"apartment_number"]];
                 [self.addressInfo addObject:[address valueForKey:@"city"]];
                 [self.addressInfo addObject:[address valueForKey:@"state"]];
-                [self.addressInfo addObject:[NSString stringWithFormat:@"%d",[[address valueForKey:@"zipcode"] integerValue]]];
+                [self.addressInfo addObject:[NSString stringWithFormat:@"%ld",(long)[[address valueForKey:@"zipcode"] integerValue]]];
                 
                 self.isDoorMan = [[address valueForKey:@"is_doorman_building"] boolValue];
                 dispatch_async(dispatch_get_main_queue(), ^{

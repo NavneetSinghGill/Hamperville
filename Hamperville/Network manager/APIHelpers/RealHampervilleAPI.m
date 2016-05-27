@@ -168,6 +168,36 @@
                 }];
 }
 
+#pragma mark Credit Card
+
+- (void)postAddCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
+- (void)deleteCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithDeleteObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
+- (void)postSetPrimaryCreditCardWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
+- (void)getAlreadyAddedCreditCardsWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickupWithRequest:(Request *)pickupRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

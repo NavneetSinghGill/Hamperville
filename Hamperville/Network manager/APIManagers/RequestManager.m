@@ -245,6 +245,48 @@
     }
 }
 
+#pragma mark Credit card
+
+- (void)postAddCreditWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postAddCreditCardWithUserRequest:[[UserRequest alloc] initWithPostAddCreditWithDataDictionary:dataDictionary] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)deleteCreditCard:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] deleteCreditCardWithUserRequest:[[UserRequest alloc] initWithDeleteCreditCard] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postSetPrimaryCreditCard:(NSString *)creditCardID withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postSetPrimaryCreditCardWithUserRequest:[[UserRequest alloc] initWithPostSetPrimaryCreditCard:creditCardID] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)getAlreadyAddedCreditCards:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getAlreadyAddedCreditCardsWithUserRequest:[[UserRequest alloc] initWithGetAlreadyAddedCreditCards] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark - Pickup
 
 - (void)getSchedulePickup:(requestCompletionBlock)block {
