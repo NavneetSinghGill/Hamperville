@@ -129,6 +129,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Top];
+        return;
+    }
     if (indexPath.row == self.allCreditCards.count) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self openCardScreen];

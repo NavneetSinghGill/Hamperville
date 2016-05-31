@@ -728,6 +728,15 @@ typedef enum {
         dataDictionary[@"order_id"] = self.orderToModify.orderID;
         [[RequestManager alloc] postModifyOrderWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
+            if (success) {
+                double delayInSeconds = 2.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
+                [self showToastWithText:@"Order modified successfully." on:Top withDuration:1.8];
+            }
             [self showToastWithText:response on:Top];
         }];
     }
@@ -817,7 +826,7 @@ typedef enum {
     } else {
         ServiceInfo *serviceInfoToDelete = nil;
         for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
-            if ([serviceInfo.serviceID isEqualToString:cell.serviceID]) {
+            if (serviceInfo.serviceID == cell.serviceID) {
                 serviceInfoToDelete = serviceInfo;
                 break;
             }
