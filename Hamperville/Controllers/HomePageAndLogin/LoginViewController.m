@@ -77,7 +77,7 @@
                 
                 [self getUserCall:userId];
             } else {
-                [self showToastWithText:response on:Bottom];
+                [self showToastWithText:response on:Top];
                 [self.activityIndicator stopAnimating];
             }
         }];
@@ -104,7 +104,7 @@
                               [[Util sharedInstance] saveUser:user];
                               [self.navigationController dismissViewControllerAnimated:NO completion:nil];
                           } else {
-                              [self showToastWithText:response on:Bottom];
+                              [self showToastWithText:response on:Top];
                           }
                       }];
 }

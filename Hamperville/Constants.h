@@ -39,6 +39,8 @@ extern NSString *TVCOrderTableViewCellNibAndIdentifier;
 
 extern NSString *TVCLocationTableViewCellNibAndIdentifier;
 
+extern NSString *TVCCreditCardTableViewCellNibAndIdentifier;
+
 #pragma mark - Segue Identifiers
 
 extern NSString *kToSWController;

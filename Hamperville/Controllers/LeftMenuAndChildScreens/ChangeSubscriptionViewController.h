@@ -18,7 +18,7 @@
 @interface ChangeSubscriptionViewController : HampervilleViewController
 
 @property(strong, nonatomic) NSMutableArray *allSubscriptions;
-@property(assign, nonatomic) BOOL status;
+@property(assign, nonatomic) BOOL oldStatus;
 @property(assign, nonatomic) NSInteger currentSubscriptionPlanID;
 @property(strong, nonatomic) NSDate *nextRenewalDate;
 @property(strong, nonatomic) id<UpdateSubscriptionDelegate> updateDelegate;

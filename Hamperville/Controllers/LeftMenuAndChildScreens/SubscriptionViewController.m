@@ -49,6 +49,12 @@
     self.shouldRefresh = NO;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [super networkAvailability];
+}
+
 #pragma mark - Private methods
 
 - (void)initialSetup {
@@ -68,6 +74,9 @@
     [self.activityIndicator startAnimating];
     [[RequestManager alloc]getSubscription:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
+        self.subscriptionOnView.hidden = NO;
+        self.subscriptionOffView.hidden = YES;
+        self.subscriptionNextRenewalDateLabel.text = @"Next Renewal Date --";
         if (success) {
             if ([response hasValueForKey:@"subscription_status"]) {
                 BOOL status = [[response valueForKey:@"subscription_status"] boolValue];
@@ -103,7 +112,7 @@
     ChangeSubscriptionViewController *changeSubscriptionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChangeSubscriptionViewController"];
     changeSubscriptionViewController.updateDelegate = self;
     changeSubscriptionViewController.allSubscriptions = self.allSubscriptions;
-    changeSubscriptionViewController.status = self.status;
+    changeSubscriptionViewController.oldStatus = self.status;
     if (self.subscriptionOffView.hidden == YES) { // OR subscriberOnView.hidden == NO
         changeSubscriptionViewController.currentSubscriptionPlanID = self.currentSubscriptionPlanID;
     }
@@ -125,7 +134,10 @@
 #pragma mark - IBAction methods
 
 - (IBAction)changeSubscriptionButtonTapped:(id)sender {
-//    [self postSubscription];
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Top];
+        return;
+    }
     [self openChangeSubscriptionScreen];
 }
 

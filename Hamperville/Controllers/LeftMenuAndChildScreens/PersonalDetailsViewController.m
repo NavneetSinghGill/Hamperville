@@ -98,6 +98,7 @@
                     [self.alternativePhoneTextField.text isEqualToString:self.primaryPhoneTextField.text]) {
                     [self showToastWithText:@"Primary and alternate phone numbers can't be same" on:Top withDuration:3.0];
                     self.saveButton.hidden = NO;
+                    self.editButton.selected = YES;
                 } else {
                     [self postUserAPI];
                 }

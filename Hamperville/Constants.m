@@ -30,6 +30,7 @@ NSString *kCouponTableViewCellIdentifier = @"CouponTableViewCell";
 
 NSString *TVCOrderTableViewCellNibAndIdentifier = @"OrderTableViewCell";
 NSString *TVCLocationTableViewCellNibAndIdentifier = @"LocationTableViewCell";
+NSString *TVCCreditCardTableViewCellNibAndIdentifier = @"CreditCardTableViewCell";
 
 #pragma mark - Segue Identifiers
 

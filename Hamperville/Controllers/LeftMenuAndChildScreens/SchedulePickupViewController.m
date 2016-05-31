@@ -854,6 +854,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CouponTableViewCell *couponTableViewCell = [tableView dequeueReusableCellWithIdentifier:kCouponTableViewCellIdentifier];
+    couponTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     couponTableViewCell.couponTableViewCellDelegate = self;
     couponTableViewCell.index = indexPath.row;
     

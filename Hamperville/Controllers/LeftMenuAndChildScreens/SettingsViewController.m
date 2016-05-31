@@ -8,7 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "LocationViewController.h"
-#import "CardViewController.h"
+#import "ShowCreditCardsViewController.h"
 
 @interface SettingsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
@@ -58,8 +58,8 @@
 }
 
 - (void)openCardScreen {
-    CardViewController *cardViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CardViewController"];
-    [self.navigationController pushViewController:cardViewController animated:YES];
+    ShowCreditCardsViewController *showCreditCardsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ShowCreditCardsViewController"];
+    [self.navigationController pushViewController:showCreditCardsViewController animated:YES];
 }
 
 #pragma mark - Gesture delegate methods
