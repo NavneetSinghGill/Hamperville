@@ -13,5 +13,6 @@
 @property(strong, nonatomic) NSString *creditCardID;
 @property(strong, nonatomic) NSString *creditCardNumber;
 @property(assign, nonatomic) BOOL isPrimary;
+@property(strong, nonatomic) NSString *cardType;
 
 @end

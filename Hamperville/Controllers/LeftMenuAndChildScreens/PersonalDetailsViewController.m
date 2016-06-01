@@ -48,6 +48,7 @@
     [self setUserinteractionForTextFields];
     [self initTextFieldsWithUserInfo];
     self.saveButton.hidden = YES;
+    [self getUserCall:[[Util sharedInstance]getUser].userID];
 }
 
 #pragma mark - IBAction methods
@@ -353,6 +354,20 @@
 - (void)saveButtonTapped:(UIButton *)button {
     [self editButtonTapped:self.editButton];
     self.saveButton.hidden = YES;
+}
+
+- (void)getUserCall:(NSString *)userID {
+    [[RequestManager alloc] getUserWithID:userID
+                      withCompletionBlock:^(BOOL success, id response) {
+                          [self.activityIndicator stopAnimating];
+                          if (success) {
+                              User *user = (User *)response;
+                              [[Util sharedInstance] saveUser:user];
+                              [self initTextFieldsWithUserInfo];
+                          } else {
+                              
+                          }
+                      }];
 }
 
 #pragma mark - Notification methods

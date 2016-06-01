@@ -41,7 +41,7 @@
 - (id)initWithPostAddressWithDataDictionary:(NSDictionary *)dataDictionary;
 
 - (id)initWithPostAddCreditWithDataDictionary:(NSDictionary *)dataDictionary;
-- (id)initWithDeleteCreditCard;
+- (id)initWithDeleteCreditCard:(NSString *)creditCardID;
 - (id)initWithPostSetPrimaryCreditCard:(NSString *)creditCardID;
 - (id)initWithGetAlreadyAddedCreditCards;
 

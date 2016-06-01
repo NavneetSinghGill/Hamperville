@@ -100,11 +100,17 @@
     
     self.numberOfBagsTableViewHeightConstraint.constant = _cellHeight * _numberOfBagsEntries.count;
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
     self.orderDetailEntries = [NSMutableArray array];
     [self.orderDetailEntries addObject:self.order.orderID];
-    [self.orderDetailEntries addObject:self.order.pickupDate];
+//    dateFormatter.dateFormat = @"";
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self.order.pickupDate integerValue]]];
+    [self.orderDetailEntries addObject:dateString];
     [self.orderDetailEntries addObject:self.order.pickupTimeSlot];
-    [self.orderDetailEntries addObject:self.order.deliveryDate];
+    dateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self.order.deliveryDate integerValue]]];
+    [self.orderDetailEntries addObject:dateString];
     [self.orderDetailEntries addObject:self.order.deliveryTimeSlot];
     [self.orderDetailEntries addObject:self.order.orderStatus];
 }
@@ -118,6 +124,10 @@
 #pragma mark - IBAction methods
 
 - (IBAction)modifyOrderButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Top];
+        return;
+    }
     SchedulePickupViewController *schedulePickupViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SchedulePickupViewController"];
     schedulePickupViewController.isModifyModeOn = YES;
     schedulePickupViewController.orderToModify = self.order;
@@ -125,21 +135,28 @@
 }
 
 - (IBAction)cancelOrderButtonTapped:(id)sender {
-    [self.activityIndicator startAnimating];
-    [[RequestManager alloc] postCancelOrderWithOrderID:self.order.orderID withCompletionBlock:^(BOOL success, id response) {
-        [self.activityIndicator stopAnimating];
-        if (success) {
-            double delayInSeconds = 2.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
-                [self.navigationController popToRootViewControllerAnimated:YES];
-            });
-            [self showToastWithText:@"Order cancelled successfully." on:Top withDuration:1.8];
-        } else {
-            [self showToastWithText:response on:Top withDuration:1.8];
-        }
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Credit card is already set to primary." message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.activityIndicator startAnimating];
+        [[RequestManager alloc] postCancelOrderWithOrderID:self.order.orderID withCompletionBlock:^(BOOL success, id response) {
+            [self.activityIndicator stopAnimating];
+            if (success) {
+                double delayInSeconds = 2.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                });
+                [self showToastWithText:@"Order cancelled successfully." on:Top withDuration:1.8];
+            } else {
+                [self showToastWithText:response on:Top withDuration:1.8];
+            }
+        }];
     }];
+    [alertController addAction:alertActionYes];
+    [alertController addAction:alertActionNo];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - TableView methods -

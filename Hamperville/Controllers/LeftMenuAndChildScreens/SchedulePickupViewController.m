@@ -101,8 +101,8 @@ typedef enum {
     if (!self.isModifyModeOn) {
         [self setNavigationBarButtonTitle:@"Request Pickup" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     } else {
-        [self setNavigationBarButtonTitle:@"Modify order" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
-        [self.requestPickupButton setTitle:@"Modify order" forState:UIControlStateNormal];
+        [self setNavigationBarButtonTitle:@"Modify Order" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
+        [self.requestPickupButton setTitle:@"Modify Order" forState:UIControlStateNormal];
     }
     [self initialSetup];
 }
@@ -270,12 +270,14 @@ typedef enum {
 //    double delayInSeconds = 0.005;
 //    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
 //    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             [Order printOrder:order];
             //For pickup----
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            NSDate *pickupDate = [dateFormatter dateFromString:order.pickupDate];
+            NSDate *pickupDate = [NSDate dateWithTimeIntervalSince1970:[order.pickupDate integerValue]];//[dateFormatter dateFromString:order.pickupDate];
+            NSString *pickupDateString = [dateFormatter stringFromDate:pickupDate];
+            pickupDate = [dateFormatter dateFromString:pickupDateString];
             NSLog(@"PickupDate %@",pickupDate);
             
             dateFormatter = [[NSDateFormatter alloc] init];
@@ -290,11 +292,11 @@ typedef enum {
                 NSDate *nextDate = [self refreshPickupEntriesWithDayName:dayName andDayCount:dayCount];
                 nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
                 NSLog(@"\nNextDate: %@\nPickupDate: %@\nEquals: %hhd\n",nextDate, pickupDate, [nextDate isEqualToDate:pickupDate]);
-                if (nextDate < pickupDate) {
+                if ([nextDate compare:pickupDate] == NSOrderedAscending) {
                     NSLog(@"UP");
                     dayCount++;
                     continue;
-                } else if ([nextDate isEqualToDate:pickupDate]) {
+                } else if ([nextDate compare:pickupDate] == NSOrderedSame) {
                     NSLog(@"MIDDLE");
                     [self setupEntriesForDayCount:1 andStartDate:[NSDate date]];
                     for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
@@ -333,7 +335,12 @@ typedef enum {
             //For dropoff----
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            NSDate *dropOffDate = [dateFormatter dateFromString:order.deliveryDate];
+//            NSDate *dropOffDate = [dateFormatter dateFromString:order.deliveryDate];
+            
+            NSDate *dropOffDate = [NSDate dateWithTimeIntervalSince1970:[order.deliveryDate integerValue]];//[dateFormatter dateFromString:order.pickupDate];
+            NSString *dropOffString = [dateFormatter stringFromDate:dropOffDate];
+            dropOffDate = [dateFormatter dateFromString:dropOffString];
+            
             NSLog(@"%@",dropOffDate);
             
             dayCount = 1;
@@ -342,10 +349,10 @@ typedef enum {
                 NSDate *nextDate = [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:dayCount];
                 nextDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:nextDate]];
                 dropOffDate = [dateFormatter dateFromString:[dateFormatter stringFromDate:dropOffDate]];
-                if (nextDate < dropOffDate) {
+                if ([nextDate compare:dropOffDate] == NSOrderedAscending) {
                     dayCount++;
                     continue;
-                } else if (nextDate == dropOffDate) {
+                } else if ([nextDate compare:dropOffDate] == NSOrderedSame) {
                     [self refreshDropOffEntriesWithNextDate:resultantDate andDayCount:1];
                     for (NSInteger numberOfTap = 1; numberOfTap < dayCount; numberOfTap++) {
                         [self dropOffRightArrowButtonTapped:self.dropOffRightArrowButton];
@@ -374,7 +381,7 @@ typedef enum {
                 }
             }
             [self resizeTableViewWithAnimation];
-        });
+//        });  
 //    });
 }
 
@@ -677,9 +684,12 @@ typedef enum {
         }
         commaSeparatedServiceIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedServiceIDs,self.selectedServiceIDs[count].serviceID];
     }
-    if ([commaSeparatedServiceIDs length] == 0) {
+    if ([commaSeparatedServiceIDs isKindOfClass:[NSString class]] && [commaSeparatedServiceIDs length] == 0) {
         [self showToastWithText:@"Select a service" on:Top];
         return;
+    }
+    if ([commaSeparatedServiceIDs isKindOfClass:[NSNumber class]]) {
+        commaSeparatedServiceIDs = [NSString stringWithFormat:@"%ld",(long)[commaSeparatedServiceIDs integerValue]];
     }
     [dataDictionary setValue:commaSeparatedServiceIDs forKey:@"service_selected"];
     
@@ -720,6 +730,7 @@ typedef enum {
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
                 });
+                [self showToastWithText:@"Order successfully placed." on:Top withDuration:1.5];
             } else {
                 [self showToastWithText:response on:Top];
             }
@@ -826,7 +837,7 @@ typedef enum {
     } else {
         ServiceInfo *serviceInfoToDelete = nil;
         for (ServiceInfo *serviceInfo in self.selectedServiceIDs) {
-            if (serviceInfo.serviceID == cell.serviceID) {
+            if ([serviceInfo.serviceID integerValue] == [cell.serviceID integerValue]) {
                 serviceInfoToDelete = serviceInfo;
                 break;
             }

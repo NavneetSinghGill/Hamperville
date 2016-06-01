@@ -118,6 +118,15 @@
         } else {
             creditCardTableViewCell.primaryLabel.hidden = YES;
         }
+        
+        NSString *type = [self.allCreditCards[indexPath.row] valueForKey:@"cc_type"];
+        if ([type isEqualToString:@"Visa"]) {
+            [creditCardTableViewCell.imageButton setImage:[UIImage imageNamed:@"visa"] forState:UIControlStateNormal];
+        } else if ([type isEqualToString:@"American Express"]) {
+            [creditCardTableViewCell.imageButton setImage:[UIImage imageNamed:@"americanExpress"] forState:UIControlStateNormal];
+        } else if ([type isEqualToString:@"Master Card"]) {
+            [creditCardTableViewCell.imageButton setImage:[UIImage imageNamed:@"mastercard"] forState:UIControlStateNormal];
+        }
     }
     return creditCardTableViewCell;
 }
@@ -146,6 +155,7 @@
             NSString *creditCardNumber = [self.allCreditCards[indexPath.row] valueForKey:@"cc_last_4_digits"];
             editCardViewController.creditCardNumber = creditCardNumber;
             editCardViewController.isPrimary = [[self.allCreditCards[indexPath.row] valueForKey:@"is_primary"] boolValue];
+            editCardViewController.cardType = [self.allCreditCards[indexPath.row] valueForKey:@"cc_type"];
             
             [self.navigationController pushViewController:editCardViewController animated:YES];
         });

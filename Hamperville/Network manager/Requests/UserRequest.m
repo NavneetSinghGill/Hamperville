@@ -271,33 +271,27 @@
     self = [super init];
     if (self) {
         _parameters = [NSMutableDictionary dictionary];
-        if ([dataDictionary hasValueForKey:@"credit_card_type"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"credit_card_type"] forKey:@"credit_card_type"];
+        if ([dataDictionary hasValueForKey:@"cc_type"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"cc_type"] forKey:@"cc_type"];
         }
-        if ([dataDictionary hasValueForKey:@"number"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"number"] forKey:@"number"];
+        if ([dataDictionary hasValueForKey:@"cc_last_4_digits"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"cc_last_4_digits"] forKey:@"cc_last_4_digits"];
         }
-        if ([dataDictionary hasValueForKey:@"expiry_year"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"expiry_year"] forKey:@"expiry_year"];
+        if ([dataDictionary hasValueForKey:@"year"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"year"] forKey:@"year"];
         }
-        if ([dataDictionary hasValueForKey:@"expiry_month"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"expiry_month"] forKey:@"expiry_month"];
-        }
-        if ([dataDictionary hasValueForKey:@"card_holder_name"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"card_holder_name"] forKey:@"card_holder_name"];
-        }
-        if ([dataDictionary hasValueForKey:@"authorize_token"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"authorize_token"] forKey:@"authorize_token"];
+        if ([dataDictionary hasValueForKey:@"month"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"month"] forKey:@"month"];
         }
         self.urlPath = apiAddCreditCard;
     }
     return self;
 }
 
-- (id)initWithDeleteCreditCard {
+- (id)initWithDeleteCreditCard:(NSString *)creditCardID {
     self = [super init];
     if (self) {
-        self.urlPath = apiDeleteCrediCard;
+        self.urlPath = [NSString stringWithFormat:@"%@%@",apiDeleteCrediCard, creditCardID];
     }
     return self;
 }

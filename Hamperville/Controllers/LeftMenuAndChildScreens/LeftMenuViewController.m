@@ -48,6 +48,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.allHeadings = [NSMutableArray arrayWithObjects:@"User Name",@"Request Pickup",@"History",@"Preferences",@"Subscription",@"Settings",@"Price List",@"Coverage Area", @"Help", @"Write a Review", nil];
+    
+    User *user = [[Util sharedInstance]getUser];
+    NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
+    self.allHeadings[0] = userName;
+    
     [self.tableView reloadData];
 }
 

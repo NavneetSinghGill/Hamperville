@@ -257,9 +257,9 @@
     }
 }
 
-- (void)deleteCreditCard:(requestCompletionBlock)block {
+- (void)deleteCreditCard:(NSString *)creditCardID withCompletionBlock:(requestCompletionBlock)block {
     if ([ApplicationDelegate hasNetworkAvailable]) {
-        [[UserInterface alloc] deleteCreditCardWithUserRequest:[[UserRequest alloc] initWithDeleteCreditCard] andCompletionBlock:^(BOOL success, id response) {
+        [[UserInterface alloc] deleteCreditCardWithUserRequest:[[UserRequest alloc] initWithDeleteCreditCard:creditCardID] andCompletionBlock:^(BOOL success, id response) {
             block(success, response);
         }];
     } else {

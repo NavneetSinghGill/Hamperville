@@ -14,6 +14,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *cardNumberLabel;
 @property(weak, nonatomic) IBOutlet UIButton *primaryButton;
 @property(weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property(weak, nonatomic) IBOutlet UIButton *imageButton;
 
 @property(assign, nonatomic) BOOL wasUpdated;
 
@@ -42,6 +43,14 @@
         self.deleteButton.alpha = 0.5;
     }
     _wasUpdated = NO;
+    
+    if ([_cardType isEqualToString:@"Visa"]) {
+        [self.imageButton setImage:[UIImage imageNamed:@"visa"] forState:UIControlStateNormal];
+    } else if ([_cardType isEqualToString:@"American Express"]) {
+        [self.imageButton setImage:[UIImage imageNamed:@"americanExpress"] forState:UIControlStateNormal];
+    } else if ([_cardType isEqualToString:@"Master Card"]) {
+        [self.imageButton setImage:[UIImage imageNamed:@"mastercard"] forState:UIControlStateNormal];
+    }
 }
 
 - (void)backButtonTapped {
@@ -54,6 +63,23 @@
 
 - (void)setAsPrimaryApiCall {
     [[RequestManager alloc] postSetPrimaryCreditCard:self.creditCardID withCompletionBlock:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
+        if (success) {
+            _wasUpdated = YES;
+            [self showToastWithText:[response valueForKey:@"message"] on:Top withDuration:1.8];
+            double delayInSeconds = 2;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            });
+        } else {
+            [self showToastWithText:response on:Top];
+        }
+    }];
+}
+
+- (void)deleteApiCall {
+    [[RequestManager alloc] deleteCreditCard:self.creditCardID withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
             _wasUpdated = YES;
@@ -91,6 +117,8 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
+    [self.activityIndicator startAnimating];
+    [self deleteApiCall];
 }
 
 @end

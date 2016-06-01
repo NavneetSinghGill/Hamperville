@@ -188,6 +188,9 @@
                 });
             }
             self.isEditionAllowed = [[response valueForKey:@"is_editable"] boolValue];
+            if (self.isEditionAllowed) {
+                self.editButton.hidden = YES;
+            }
         } else {
             [self showToastWithText:response on:Top];
         }
@@ -222,11 +225,12 @@
         [self showToastWithText:@"Cant't edit in offline mode" on:Top];
         return;
     }
-    if (!self.isEditionAllowed) {
-        [self showToastWithText:@"Address is uneditable" on:Top];
+    if (self.isEditionAllowed) {
+        [self showToastWithText:@"Address can not be updated because doorman service is active" on:Top];
         return;
     }
     self.editButton.selected = !self.editButton.selected;
+    self.saveButton.hidden = NO;
     if (self.editButton.selected) {
         self.areFieldsEditable = self.doorManButton.userInteractionEnabled = self.editButton.selected;
         [self.tableView reloadData];

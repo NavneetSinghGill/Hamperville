@@ -13,6 +13,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *primaryLabel;
 @property(weak, nonatomic) IBOutlet UILabel *cardNumberLabel;
 @property(weak, nonatomic) IBOutlet UIButton *tickButton;
+@property(weak, nonatomic) IBOutlet UIButton *imageButton;
 
 @property(weak, nonatomic) IBOutlet UIView *addCardSuperView;
 @property(weak, nonatomic) IBOutlet UIView *addedCardSuperView;

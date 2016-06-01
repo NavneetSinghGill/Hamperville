@@ -54,7 +54,7 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 #pragma mark Credit card
 
 - (void)postAddCreditWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
-- (void)deleteCreditCard:(requestCompletionBlock)block;
+- (void)deleteCreditCard:(NSString *)creditCardID withCompletionBlock:(requestCompletionBlock)block;
 - (void)postSetPrimaryCreditCard:(NSString *)creditCardID withCompletionBlock:(requestCompletionBlock)block;
 - (void)getAlreadyAddedCreditCards:(requestCompletionBlock)block;
 
