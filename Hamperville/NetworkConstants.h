@@ -48,3 +48,5 @@ extern NSString *apiGetAlreadyAddedCreditCards;
 
 extern NSString *apiGetPriceList;
 
+extern NSString *apiHelp;
+

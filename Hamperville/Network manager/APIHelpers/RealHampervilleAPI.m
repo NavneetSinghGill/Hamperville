@@ -71,6 +71,13 @@
                }];
 }
 
+- (void)postHelpWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithMultipartFormRequestWithObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
@@ -309,6 +316,26 @@
                                                          operation:task
                                                          withBlock:block];
                                              }];
+}
+
+- (void)interactAPIWithMultipartFormRequestWithObject:(Request *)object withCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self initialSetupWithRequest:object requestType:RequestMutiPartPost];
+    
+    // Save request in MobiLogger
+//    [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: Performing API call with [URL:%@] [params: %@]", object.urlPath, params]];
+    
+    [[NetworkHttpClient sharedInstance] multipartApiCallWithUrl:object.urlPath parameters:object.getParams data:object.fileData name:object.dataFilename fileName:object.fileName mimeType:object.mimeType successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        // Save Success in Mobilogger
+//        [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: API call succesfull with [URL:%@] [params: %@]", object.urlPath, params]];
+        
+        [self handleSuccessResponse:task response:responseObject withBlock:block];
+    } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        // Save Failure in Mobilogger
+//        [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: API call Failed with [URL:%@] [params: %@] [Error:%@]", object.urlPath, params, error]];
+        [self handleError:error operation:task withBlock:block];
+    }];
 }
 
 #pragma mark - Private methods

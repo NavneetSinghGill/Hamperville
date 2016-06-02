@@ -53,3 +53,5 @@ NSString *apiGetAlreadyAddedCreditCards = @"/api/v1/credit_card";
 
 NSString *apiGetPriceList = @"api/v1/subscriptions/price_list";
 
+NSString *apiHelp = @"/api/v1/users/report_issue";
+

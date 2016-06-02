@@ -320,6 +320,37 @@
     return self;
 }
 
+- (id)initWithPostHelpWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"title"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"title"] forKey:@"title"];
+        }
+        if ([dataDictionary hasValueForKey:@"description"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"description"] forKey:@"description"];
+        }
+        if ([dataDictionary hasValueForKey:@"image"]) {
+            UIImage *image = [dataDictionary objectForKey:@"image"];
+            
+            if (image != nil) {
+                id logImageData = [UIImageJPEGRepresentation(image, 0.2) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                self.fileData = logImageData;
+                self.dataFilename = @"profile_picture";
+                self.fileName = @"image.jpg";
+                self.mimeType = @"image/jpeg";
+//                NSData *imageData = UIImagePNGRepresentation(image);
+                _parameters[@"image"] = self.fileData;
+            }
+        }
+        if ([dataDictionary hasValueForKey:@"logs"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"logs"] forKey:@"logs"];
+        }
+        self.urlPath = apiHelp;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

@@ -66,6 +66,15 @@
                               }];
 }
 
+- (void)postHelpWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postHelpWithRequest:userRequest
+                                andCompletionBlock:^(BOOL success, id response) {
+                                    [self parseGeneralDataResponse:response];
+                                }];
+}
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {

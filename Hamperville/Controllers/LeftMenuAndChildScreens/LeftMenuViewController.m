@@ -16,6 +16,7 @@
 #import "SettingsViewController.h"
 #import "SubscriptionViewController.h"
 #import "PriceListViewController.h"
+#import "HelpViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -35,6 +36,7 @@
 @property(strong, nonatomic) SettingsViewController *settingsViewController;
 @property(strong, nonatomic) SubscriptionViewController *subscriptionViewController;
 @property(strong, nonatomic) PriceListViewController *priceListViewController;
+@property(strong, nonatomic) HelpViewController *helpViewController;
 
 @end
 
@@ -112,6 +114,7 @@
         case 7:
             break;
         case 8:
+            [self openHelpScreen];
             break;
         case 9:
             break;
@@ -224,6 +227,16 @@
             self.priceListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PriceListViewController"];
         }
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.priceListViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openHelpScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.helpViewController) {
+            self.helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HelpViewController"];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.helpViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }

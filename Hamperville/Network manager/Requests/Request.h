@@ -21,6 +21,11 @@ typedef NS_ENUM(NSInteger, RequestType){
 @property (nonatomic, strong) NSString *urlPath;
 @property (nonatomic, assign) NSInteger requestType;
 
+@property (nonatomic, strong) NSData *fileData;
+@property (nonatomic, strong) NSString *dataFilename;
+@property (nonatomic, strong) NSString *fileName;
+@property (nonatomic, strong) NSString *mimeType;
+
 - (NSMutableDictionary *)getParams;
 
 @end

@@ -26,6 +26,8 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 
 - (void)getPriceListWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+- (void)postHelpWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

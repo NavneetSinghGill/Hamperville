@@ -26,6 +26,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 
 - (void)getPriceList:(requestCompletionBlock)block;
 
+- (void)postHelpWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;

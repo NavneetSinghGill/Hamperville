@@ -47,6 +47,8 @@
 
 - (id)initWithGetPriceList;
 
+- (id)initWithPostHelpWithDataDictionary:(NSDictionary *)dataDictionary;
+
 - (NSDictionary *)getParams;
 
 @end
