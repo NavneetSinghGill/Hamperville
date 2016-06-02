@@ -32,6 +32,11 @@ NSString *TVCOrderTableViewCellNibAndIdentifier = @"OrderTableViewCell";
 NSString *TVCLocationTableViewCellNibAndIdentifier = @"LocationTableViewCell";
 NSString *TVCCreditCardTableViewCellNibAndIdentifier = @"CreditCardTableViewCell";
 
+NSString *TVCPriceListSubscriptionHeaderIdentifier = @"SubscriptionHeader";
+NSString *TVCPriceListSubscriptionCellIdentifier = @"SubscriptionCell";
+NSString *TVCPriceListServiceHeaderIdentifier = @"ServiceHeader";
+NSString *TVCPriceListServiceCellIdentifier = @"ServiceCell";
+
 #pragma mark - Segue Identifiers
 
 NSString *kToSWController = @"toSWController";

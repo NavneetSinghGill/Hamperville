@@ -86,6 +86,16 @@
     }
 }
 
+- (void)getPriceList:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getPriceListWithUserRequest:[[UserRequest alloc]initWithGetPriceList] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block{

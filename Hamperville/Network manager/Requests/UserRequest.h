@@ -45,6 +45,8 @@
 - (id)initWithPostSetPrimaryCreditCard:(NSString *)creditCardID;
 - (id)initWithGetAlreadyAddedCreditCards;
 
+- (id)initWithGetPriceList;
+
 - (NSDictionary *)getParams;
 
 @end

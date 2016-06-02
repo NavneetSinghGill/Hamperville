@@ -46,3 +46,5 @@ extern NSString *apiDeleteCrediCard;
 extern NSString *apiSetPrimaryCard; extern NSString *apiSetPrimaryCardExtendedString;
 extern NSString *apiGetAlreadyAddedCreditCards;
 
+extern NSString *apiGetPriceList;
+

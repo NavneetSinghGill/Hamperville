@@ -57,6 +57,15 @@
                               }];
 }
 
+- (void)getPriceListWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getPriceListWithRequest:userRequest
+                              andCompletionBlock:^(BOOL success, id response) {
+                                  [self parseGeneralDataResponse:response];
+                              }];
+}
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {

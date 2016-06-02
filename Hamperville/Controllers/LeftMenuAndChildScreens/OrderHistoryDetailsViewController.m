@@ -135,7 +135,7 @@
 }
 
 - (IBAction)cancelOrderButtonTapped:(id)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Credit card is already set to primary." message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Are you sure you want to cancel this order?" message:nil preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
     UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.activityIndicator startAnimating];

@@ -32,6 +32,11 @@
     [super viewDidLoad];
  
     [self initialSetup];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.activityIndicator startAnimating];
     [self getAllCreditCards];
 }

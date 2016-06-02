@@ -70,7 +70,7 @@
             double delayInSeconds = 2;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
             [self showToastWithText:response on:Top];
@@ -87,7 +87,7 @@
             double delayInSeconds = 2;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
             [self showToastWithText:response on:Top];
@@ -117,8 +117,15 @@
         [self presentViewController:alertController animated:YES completion:nil];
         return;
     }
-    [self.activityIndicator startAnimating];
-    [self deleteApiCall];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Do you want to delete this card?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.activityIndicator startAnimating];
+        [self deleteApiCall];
+    } ];
+    UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil ];
+    [alertController addAction:alertActionYes];
+    [alertController addAction:alertActionNo];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

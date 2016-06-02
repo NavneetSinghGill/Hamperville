@@ -312,6 +312,14 @@
     return self;
 }
 
+- (id)initWithGetPriceList {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiGetPriceList;
+    }
+    return self;
+}
+
 - (NSDictionary *)getParams {
     if (_parameters != nil) {
         return _parameters;

@@ -11,6 +11,7 @@
 		3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */; };
 		3B3D630F1CF59C1600BA8F0D /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */; };
 		3B3D63101CF59C1600BA8F0D /* LocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B3D630E1CF59C1600BA8F0D /* LocationTableViewCell.xib */; };
+		3B412B7A1D001546003E42D9 /* PriceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B412B791D001546003E42D9 /* PriceListViewController.m */; };
 		3B4BB6C51CBD0E04005BC322 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */; };
 		3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */; };
 		3B4BB6D01CBD2C00005BC322 /* LeftMenuTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4BB6CF1CBD2C00005BC322 /* LeftMenuTableViewCell.m */; };
@@ -105,6 +106,8 @@
 		3B3D630C1CF59C1600BA8F0D /* LocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTableViewCell.h; sourceTree = "<group>"; };
 		3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTableViewCell.m; sourceTree = "<group>"; };
 		3B3D630E1CF59C1600BA8F0D /* LocationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationTableViewCell.xib; sourceTree = "<group>"; };
+		3B412B781D001546003E42D9 /* PriceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceListViewController.h; sourceTree = "<group>"; };
+		3B412B791D001546003E42D9 /* PriceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceListViewController.m; sourceTree = "<group>"; };
 		3B4BB6C31CBD0E04005BC322 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
 		3B4BB6C41CBD0E04005BC322 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		3B4BB6CC1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuTableViewCell.xib; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 				3BE9E36E1CEDDFCB0088F010 /* SubscriptionViewController.m */,
 				3BDA168C1CEF5ECA007BD51A /* ChangeSubscriptionViewController.h */,
 				3BDA168D1CEF5ECA007BD51A /* ChangeSubscriptionViewController.m */,
+				3B412B781D001546003E42D9 /* PriceListViewController.h */,
+				3B412B791D001546003E42D9 /* PriceListViewController.m */,
 			);
 			path = LeftMenuAndChildScreens;
 			sourceTree = "<group>";
@@ -806,6 +811,7 @@
 				3BEB5E401CEAEB86000573E7 /* SettingsViewController.m in Sources */,
 				3BEEDFCC1CF34C5C0071214C /* LocationViewController.m in Sources */,
 				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
+				3B412B7A1D001546003E42D9 /* PriceListViewController.m in Sources */,
 				3B3D630F1CF59C1600BA8F0D /* LocationTableViewCell.m in Sources */,
 				3BE604021CB520CC00E0F997 /* Constants.m in Sources */,
 				3BCD37CC1CBE2B2300DE4E91 /* UserInterface.m in Sources */,

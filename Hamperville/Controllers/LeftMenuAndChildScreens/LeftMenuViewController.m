@@ -15,6 +15,7 @@
 #import "PreferencesViewController.h"
 #import "SettingsViewController.h"
 #import "SubscriptionViewController.h"
+#import "PriceListViewController.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -33,6 +34,7 @@
 @property(strong, nonatomic) PreferencesViewController *preferencesViewController;
 @property(strong, nonatomic) SettingsViewController *settingsViewController;
 @property(strong, nonatomic) SubscriptionViewController *subscriptionViewController;
+@property(strong, nonatomic) PriceListViewController *priceListViewController;
 
 @end
 
@@ -105,6 +107,7 @@
             [self openSettingScreen];
             break;
         case 6:
+            [self openPriceListScreen];
             break;
         case 7:
             break;
@@ -211,6 +214,16 @@
         }
         self.subscriptionViewController.shouldRefresh = YES;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.subscriptionViewController];
+        [self.revealViewController pushFrontViewController:navigationController animated:YES];
+    });
+}
+
+- (void)openPriceListScreen {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (!self.priceListViewController) {
+            self.priceListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PriceListViewController"];
+        }
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.priceListViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
 }

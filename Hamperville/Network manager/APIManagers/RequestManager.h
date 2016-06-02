@@ -24,6 +24,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)putChangePasswordWithOldPassword:(NSString *)oldPass andNwPassword:(NSString *)nwPass withCompletionBlock:(requestCompletionBlock)block;
 - (void)logoutUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
 
+- (void)getPriceList:(requestCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;

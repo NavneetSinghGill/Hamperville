@@ -41,6 +41,11 @@ extern NSString *TVCLocationTableViewCellNibAndIdentifier;
 
 extern NSString *TVCCreditCardTableViewCellNibAndIdentifier;
 
+extern NSString *TVCPriceListSubscriptionHeaderIdentifier;
+extern NSString *TVCPriceListSubscriptionCellIdentifier;
+extern NSString *TVCPriceListServiceHeaderIdentifier;
+extern NSString *TVCPriceListServiceCellIdentifier;
+
 #pragma mark - Segue Identifiers
 
 extern NSString *kToSWController;

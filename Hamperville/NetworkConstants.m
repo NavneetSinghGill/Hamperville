@@ -51,3 +51,5 @@ NSString *apiDeleteCrediCard = @"/api/v1/credit_card/";
 NSString *apiSetPrimaryCard = @"/api/v1/credit_card/"; NSString *apiSetPrimaryCardExtendedString = @"/make_primary";
 NSString *apiGetAlreadyAddedCreditCards = @"/api/v1/credit_card";
 
+NSString *apiGetPriceList = @"api/v1/subscriptions/price_list";
+

@@ -25,6 +25,8 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)logoutUserWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)getPriceListWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
