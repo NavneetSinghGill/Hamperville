@@ -843,6 +843,7 @@
                     <navigationItem key="navigationItem" id="e8e-2Z-yuZ"/>
                     <connections>
                         <outlet property="activityIndicator" destination="ZgS-Ke-chr" id="o15-z5-zn1"/>
+                        <outlet property="attachLogsButton" destination="wOn-Z5-vU2" id="d7E-0i-l5M"/>
                         <outlet property="descriptionTextView" destination="usk-Te-GGh" id="E3v-dB-3rc"/>
                         <outlet property="titleLabelTopConstraint" destination="Nes-JN-icm" id="0hf-RB-sJv"/>
                         <outlet property="titleTextField" destination="4bm-i1-pDs" id="HHe-PU-4LI"/>

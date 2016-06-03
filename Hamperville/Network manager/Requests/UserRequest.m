@@ -334,17 +334,31 @@
             UIImage *image = [dataDictionary objectForKey:@"image"];
             
             if (image != nil) {
-                id logImageData = [UIImageJPEGRepresentation(image, 0.2) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                self.fileData = logImageData;
-                self.dataFilename = @"profile_picture";
-                self.fileName = @"image.jpg";
-                self.mimeType = @"image/jpeg";
-//                NSData *imageData = UIImagePNGRepresentation(image);
-                _parameters[@"image"] = self.fileData;
+                self.fileData = UIImagePNGRepresentation(image);//logImageData;
+                self.dataFilename = @"image";
+                self.fileName = @"image.png";
+                self.mimeType = @"image";
+                _parameters[@"image_"] = self.fileData;
+                
+//                imageDict[@"fileData"] = [UIImagePNGRepresentation(image) base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];//logImageData;
+//                [imageDict setObject:UIImagePNGRepresentation(image) forKey:@"fileData"];
+//                imageDict[@"dataFilename"] = @"ios_HampervilleIssueReportScreenshot";
+//                imageDict[@"fileName"] = @"image.png";
+//                imageDict[@"mimeType"] = @"image";
+//                _parameters[@"image"] = imageDict;
             }
         }
         if ([dataDictionary hasValueForKey:@"logs"]) {
-            [_parameters setValue:[dataDictionary valueForKey:@"logs"] forKey:@"logs"];
+            NSMutableDictionary *logDict = [NSMutableDictionary dictionary];
+            
+            SMobiLogger *mobiLogger = [[SMobiLogger alloc] init];
+            NSString *fetchLogString = [mobiLogger fetchLogs];
+            
+            logDict[@"fileData"] = [fetchLogString dataUsingEncoding:NSUTF8StringEncoding];
+            logDict[@"dataFilename"] = @"ios_HampervilleIssueReport.txt";
+            logDict[@"fileName"] = @"issue_report.txt";
+            logDict[@"mimeType"] = @"text/plain";
+            _parameters[@"logDict"] = logDict;
         }
         self.urlPath = apiHelp;
     }

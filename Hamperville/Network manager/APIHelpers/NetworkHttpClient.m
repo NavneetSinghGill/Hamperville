@@ -78,4 +78,49 @@
     }];
 }
 
+- (void)multipartApiCallForHelpWithUrl:(NSString *)url parameters:(NSDictionary *)parameters data:(NSData *)data name:(NSString *)dataFileName fileName:(NSString *)fileName mimeType:(NSString *)mimeType successBlock:(successBlock)success failureBlock:(failureBlock)failure {
+    
+    NSMutableDictionary *actualParams = [NSMutableDictionary dictionary];
+    actualParams[@"title"] = parameters[@"title"];
+    actualParams[@"description"] = parameters[@"description"];
+//    NSData *imageFileData;
+//    if ([parameters hasValueForKey:@"imageDict"]) {
+//        imageFileData = [parameters[@"imageDict"] objectForKey:@"fileData"];
+//        actualParams[@"image"] = imageFileData;
+//    }
+    if ([parameters objectForKey:@"image_"]) {
+//        [actualParams setObject:[parameters objectForKey:@"image_"] forKey:@"image"];
+    }
+    if ([parameters hasValueForKey:@"logDict"]) {
+        actualParams[@"logs"] = [parameters[@"logDict"] valueForKey:@"fileData"];
+    }
+    
+    [self POST:url parameters:actualParams
+    constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    
+        if ([parameters hasValueForKey:@"image_"]) {
+//            if ([parameters hasValueForKey:@"imageDict"]) {
+                //            NSDictionary *imageDict = [parameters valueForKey:@"imageDict"];
+                [formData appendPartWithFileData:data//imageFileData
+                                            name:dataFileName//imageDict[@"dataFilename"]
+                                        fileName:fileName//imageDict[@"fileName"]
+                                        mimeType:mimeType//imageDict[@"mimeType"]
+                 ];
+//            }
+        }
+        if ([parameters hasValueForKey:@"logDict"]) {
+            NSDictionary *logDict = [parameters valueForKey:@"logDict"];
+            [formData appendPartWithFileData:logDict[@"fileData"]
+                                        name:logDict[@"dataFilename"]
+                                    fileName:logDict[@"fileName"]
+                                    mimeType:logDict[@"mimeType"]];
+        }
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+        success(task, responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task, error);
+    }];
+}
+
 @end

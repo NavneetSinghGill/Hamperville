@@ -21,6 +21,7 @@
 #import <UIView+Toast.h>
 #import "NetworkConstants.h"
 #import "Util.h"
+#import "SMobiLogger.h"
 
 #endif 
 

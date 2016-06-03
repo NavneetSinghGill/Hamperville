@@ -17,6 +17,7 @@
 @property(weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property(weak, nonatomic) IBOutlet UITextField *titleTextField;
 
+@property(weak, nonatomic) IBOutlet UIButton *attachLogsButton;
 @property (strong, nonatomic) UIImage *attachedScreenShot;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTopConstraint;
@@ -95,7 +96,7 @@
 
 -(UIImage*)imageWithImage:(UIImage*)image;
 {
-    CGSize newSize = CGSizeMake(image.size.width/2, image.size.height/2);
+    CGSize newSize = CGSizeMake(5, 5);
     UIGraphicsBeginImageContext( newSize );
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -125,13 +126,26 @@
     
     dataDict[@"title"] = self.titleTextField.text;
     dataDict[@"description"] = self.descriptionTextView.text;
-    [dataDict setObject:self.attachedScreenShot forKey:@"image"];
+    if (self.attachedScreenShot) {
+        self.attachedScreenShot = [self imageWithImage:self.attachedScreenShot];
+        [dataDict setObject:self.attachedScreenShot forKey:@"image"];
+    }
+    if (areLogsAttached) {
+        [dataDict setObject:[NSNumber numberWithBool:YES] forKey:@"logs"];
+    }
     
     [self.activityIndicator startAnimating];
     [[RequestManager alloc] postHelpWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
+            [self showToastWithText:response on:Top];
             
+            self.attachedScreenShot = nil;
+            self.titleTextField.text = @"";
+            self.descriptionTextView.text = @"Write your text here";
+            self.descriptionTextView.textColor = [UIColor lightGrayColor];
+            self.attachLogsButton.selected = NO;
+            areLogsAttached = NO;
         } else {
             [self showToastWithText:response on:Top];
         }

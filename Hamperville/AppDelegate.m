@@ -68,7 +68,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNoNetworkNotification object:nil];
                 
                 // Save response in MobiLogger
-//                [[SMobiLogger sharedInterface] error:@"Network Available." withDescription:nil];
+                [[SMobiLogger sharedInterface] error:@"Network Available." withDescription:nil];
                 
                 break;
                 
@@ -77,7 +77,7 @@
                 self.isNetworkAvailable = NO;
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNetworkAvailablability object:nil];
                 // Save response in MobiLogger
-//                [[SMobiLogger sharedInterface] error:@"Network UnAvailable." withDescription:nil];
+                [[SMobiLogger sharedInterface] error:@"Network UnAvailable." withDescription:nil];
                 
                 NSLog(@"offline");
 //                self.isBannerVisible = NO;
