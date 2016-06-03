@@ -336,8 +336,8 @@
             if (image != nil) {
                 self.fileData = UIImagePNGRepresentation(image);//logImageData;
                 self.dataFilename = @"image";
-                self.fileName = @"image.png";
-                self.mimeType = @"image";
+                self.fileName = @"image.jpeg";
+                self.mimeType = @"image/jpg";
                 _parameters[@"image_"] = self.fileData;
                 
 //                imageDict[@"fileData"] = [UIImagePNGRepresentation(image) base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];//logImageData;

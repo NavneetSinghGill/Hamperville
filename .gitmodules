@@ -1,0 +1,3 @@
+[submodule "SMobiLogger"]
+	path = SMobiLogger
+	url = https://github.com/zsheikh-systango/SMobiLogger.git

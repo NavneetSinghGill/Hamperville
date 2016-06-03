@@ -20,6 +20,14 @@
 		3B4C6B5E1CDBED86003B22B0 /* PermanentPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */; };
 		3B4C6B651CDBEE0B003B22B0 /* DropdownTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */; };
 		3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */; };
+		3B52FB891D01B57900A587DD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB771D01B57800A587DD /* .gitignore */; };
+		3B52FB8A1D01B57900A587DD /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB781D01B57800A587DD /* LICENSE.txt */; };
+		3B52FB8B1D01B57900A587DD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3B52FB791D01B57800A587DD /* README.md */; };
+		3B52FB8C1D01B57900A587DD /* Lib.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB7D1D01B57800A587DD /* Lib.plist */; };
+		3B52FB8D1D01B57900A587DD /* SLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B52FB7F1D01B57800A587DD /* SLog.m */; };
+		3B52FB8E1D01B57900A587DD /* SMobiLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B52FB821D01B57800A587DD /* SMobiLogger.m */; };
+		3B52FB8F1D01B57900A587DD /* SMobiLogger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B52FB831D01B57800A587DD /* SMobiLogger.xcdatamodeld */; };
+		3B52FB901D01B57900A587DD /* SMobiLogger.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB851D01B57800A587DD /* SMobiLogger.podspec */; };
 		3B5591301CFD6DFE00480DD5 /* ShowCreditCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B55912F1CFD6DFE00480DD5 /* ShowCreditCardsViewController.m */; };
 		3B5591371CFD6FCE00480DD5 /* CreditCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5591351CFD6FCE00480DD5 /* CreditCardTableViewCell.m */; };
 		3B5591381CFD6FCE00480DD5 /* CreditCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B5591361CFD6FCE00480DD5 /* CreditCardTableViewCell.xib */; };
@@ -84,6 +92,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3B52FB921D01B57900A587DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3B52FB861D01B57800A587DD /* SMobiLogger.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 89B6FEDC1717F83900AAAEC2;
+			remoteInfo = SMobiLogger;
+		};
 		3BE603E11CB5188400E0F997 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3BE603BC1CB5188400E0F997 /* Project object */;
@@ -123,6 +138,19 @@
 		3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownTableViewCell.h; sourceTree = "<group>"; };
 		3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownTableViewCell.m; sourceTree = "<group>"; };
 		3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		3B52FB771D01B57800A587DD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3B52FB781D01B57800A587DD /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		3B52FB791D01B57800A587DD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3B52FB7B1D01B57800A587DD /* LoggerConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerConstants.h; sourceTree = "<group>"; };
+		3B52FB7D1D01B57800A587DD /* Lib.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Lib.plist; sourceTree = "<group>"; };
+		3B52FB7E1D01B57800A587DD /* SLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLog.h; sourceTree = "<group>"; };
+		3B52FB7F1D01B57800A587DD /* SLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLog.m; sourceTree = "<group>"; };
+		3B52FB801D01B57800A587DD /* SMobiLogger-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMobiLogger-Prefix.pch"; sourceTree = "<group>"; };
+		3B52FB811D01B57800A587DD /* SMobiLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMobiLogger.h; sourceTree = "<group>"; };
+		3B52FB821D01B57800A587DD /* SMobiLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMobiLogger.m; sourceTree = "<group>"; };
+		3B52FB841D01B57800A587DD /* SMobiLogger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SMobiLogger.xcdatamodel; sourceTree = "<group>"; };
+		3B52FB851D01B57800A587DD /* SMobiLogger.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SMobiLogger.podspec; sourceTree = "<group>"; };
+		3B52FB861D01B57800A587DD /* SMobiLogger.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SMobiLogger.xcodeproj; sourceTree = "<group>"; };
 		3B55912E1CFD6DFE00480DD5 /* ShowCreditCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCreditCardsViewController.h; sourceTree = "<group>"; };
 		3B55912F1CFD6DFE00480DD5 /* ShowCreditCardsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowCreditCardsViewController.m; sourceTree = "<group>"; };
 		3B5591341CFD6FCE00480DD5 /* CreditCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardTableViewCell.h; sourceTree = "<group>"; };
@@ -294,6 +322,50 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		3B52FB761D01B57800A587DD /* SMobiLogger */ = {
+			isa = PBXGroup;
+			children = (
+				3B52FB771D01B57800A587DD /* .gitignore */,
+				3B52FB781D01B57800A587DD /* LICENSE.txt */,
+				3B52FB791D01B57800A587DD /* README.md */,
+				3B52FB7A1D01B57800A587DD /* SMobiLogger */,
+				3B52FB851D01B57800A587DD /* SMobiLogger.podspec */,
+				3B52FB861D01B57800A587DD /* SMobiLogger.xcodeproj */,
+			);
+			path = SMobiLogger;
+			sourceTree = SOURCE_ROOT;
+		};
+		3B52FB7A1D01B57800A587DD /* SMobiLogger */ = {
+			isa = PBXGroup;
+			children = (
+				3B52FB7B1D01B57800A587DD /* LoggerConstants.h */,
+				3B52FB7C1D01B57800A587DD /* Resources */,
+				3B52FB7E1D01B57800A587DD /* SLog.h */,
+				3B52FB7F1D01B57800A587DD /* SLog.m */,
+				3B52FB801D01B57800A587DD /* SMobiLogger-Prefix.pch */,
+				3B52FB811D01B57800A587DD /* SMobiLogger.h */,
+				3B52FB821D01B57800A587DD /* SMobiLogger.m */,
+				3B52FB831D01B57800A587DD /* SMobiLogger.xcdatamodeld */,
+			);
+			path = SMobiLogger;
+			sourceTree = "<group>";
+		};
+		3B52FB7C1D01B57800A587DD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B52FB7D1D01B57800A587DD /* Lib.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3B52FB871D01B57800A587DD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B52FB931D01B57900A587DD /* libSMobiLogger.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3B69E4401CD9ED2400F36F43 /* Prefs */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +482,7 @@
 				3BE603CA1CB5188400E0F997 /* AppDelegate.h */,
 				3BE603CB1CB5188400E0F997 /* AppDelegate.m */,
 				3BE21E6E1CBCBE5900F5EB80 /* HampervillePrefixHeader.pch */,
+				3B52FB761D01B57800A587DD /* SMobiLogger */,
 				3BF12CCC1CE5EA84002747F7 /* Helpers */,
 				3BE961401CBBC3B8005D0BCA /* CustomFont */,
 				3BF182411CB64D1400E1CB3E /* NetworkManager */,
@@ -710,6 +783,12 @@
 			mainGroup = 3BE603BB1CB5188400E0F997;
 			productRefGroup = 3BE603C51CB5188400E0F997 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3B52FB871D01B57800A587DD /* Products */;
+					ProjectRef = 3B52FB861D01B57800A587DD /* SMobiLogger.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3BE603C31CB5188400E0F997 /* Hamperville */,
@@ -719,6 +798,16 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		3B52FB931D01B57900A587DD /* libSMobiLogger.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMobiLogger.a;
+			remoteRef = 3B52FB921D01B57900A587DD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		3BE603C21CB5188400E0F997 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -727,16 +816,20 @@
 				3BE603DA1CB5188400E0F997 /* LaunchScreen.storyboard in Resources */,
 				3BEE17121CD79B1B00B5C9F7 /* CouponTableViewCell.xib in Resources */,
 				3B3D63101CF59C1600BA8F0D /* LocationTableViewCell.xib in Resources */,
+				3B52FB8A1D01B57900A587DD /* LICENSE.txt in Resources */,
 				3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */,
 				3B4BB6CD1CBD2A3E005BC322 /* LeftMenuTableViewCell.xib in Resources */,
 				3BE6E2961CD0D7C800901B94 /* ServicesCollectionViewCell.xib in Resources */,
 				3BEE17071CD75D9000B5C9F7 /* OrderTableViewCell.xib in Resources */,
 				3B5591381CFD6FCE00480DD5 /* CreditCardTableViewCell.xib in Resources */,
+				3B52FB891D01B57900A587DD /* .gitignore in Resources */,
+				3B52FB8C1D01B57900A587DD /* Lib.plist in Resources */,
 				3BE603D71CB5188400E0F997 /* Image.xcassets in Resources */,
 				3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */,
 				3BE961441CBBC401005D0BCA /* Roboto-Regular.ttf in Resources */,
 				3BE961431CBBC401005D0BCA /* Roboto-Light.ttf in Resources */,
 				3BE603D21CB5188400E0F997 /* Main.storyboard in Resources */,
+				3B52FB901D01B57900A587DD /* SMobiLogger.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,6 +908,7 @@
 				3BF182511CB68CC900E1CB3E /* SignupRequest.m in Sources */,
 				3BEB5E401CEAEB86000573E7 /* SettingsViewController.m in Sources */,
 				3BEEDFCC1CF34C5C0071214C /* LocationViewController.m in Sources */,
+				3B52FB8F1D01B57900A587DD /* SMobiLogger.xcdatamodeld in Sources */,
 				3BE6E2951CD0D7C800901B94 /* ServicesCollectionViewCell.m in Sources */,
 				3B3022B01D00496E00C636FA /* HelpViewController.m in Sources */,
 				3B412B7A1D001546003E42D9 /* PriceListViewController.m in Sources */,
@@ -832,12 +926,15 @@
 				3B55913B1CFDC9CD00480DD5 /* EditCardViewController.m in Sources */,
 				3BEB70CD1CC4C2F1008BEEC7 /* PickupInterface.m in Sources */,
 				3B5591371CFD6FCE00480DD5 /* CreditCardTableViewCell.m in Sources */,
+				3B52FB8E1D01B57900A587DD /* SMobiLogger.m in Sources */,
 				3BEE16FF1CD7424400B5C9F7 /* Order.m in Sources */,
+				3B52FB8B1D01B57900A587DD /* README.md in Sources */,
 				3BE7B98F1CB7871B00564F49 /* NetworkHttpClient.m in Sources */,
 				3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
+				3B52FB8D1D01B57900A587DD /* SLog.m in Sources */,
 				3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */,
 				3BE603D51CB5188400E0F997 /* Hamperville.xcdatamodeld in Sources */,
 				3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */,
@@ -1193,6 +1290,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		3B52FB831D01B57800A587DD /* SMobiLogger.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3B52FB841D01B57800A587DD /* SMobiLogger.xcdatamodel */,
+			);
+			currentVersion = 3B52FB841D01B57800A587DD /* SMobiLogger.xcdatamodel */;
+			path = SMobiLogger.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		3BE603D31CB5188400E0F997 /* Hamperville.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

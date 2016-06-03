@@ -15,6 +15,8 @@
 
 @property(assign, nonatomic) BOOL isNetworkAvailable;
 
+void uncaughtExceptionHandler(NSException *exception);
+
 @end
 
 @implementation AppDelegate
@@ -26,7 +28,20 @@
     [[SignupInterface alloc] setSavedSessionCookies];
     
     [self setupNetworkMonitoring];
+    
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
     return YES;
+}
+
+void uncaughtExceptionHandler(NSException *exception)
+{
+    NSString *errorMessage = [NSString stringWithFormat:@"Error: Application Crashed while launching At: %s, \n Exception Description: %@. \n  \n", __FUNCTION__, [exception description]];
+    
+    // Save response in MobiLogger
+    [[SMobiLogger sharedInterface] error:@"Uncaught Exception." withDescription:errorMessage];
+    
+    NSLog(@"Uncaught Exception: %@", errorMessage);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -45,6 +60,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[SMobiLogger sharedInterface] startMobiLogger];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
