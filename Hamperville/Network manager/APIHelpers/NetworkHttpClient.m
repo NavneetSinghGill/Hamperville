@@ -89,10 +89,10 @@
 //        actualParams[@"image"] = imageFileData;
 //    }
     if ([parameters objectForKey:@"image_"]) {
-//        [actualParams setObject:[parameters objectForKey:@"image_"] forKey:@"image"];
+        [actualParams setObject:[parameters objectForKey:@"image_"] forKey:@"image"];
     }
     if ([parameters hasValueForKey:@"logDict"]) {
-        actualParams[@"logs"] = [parameters[@"logDict"] valueForKey:@"fileData"];
+        actualParams[@"file"] = [parameters[@"logDict"] valueForKey:@"fileData"];
     }
     
     [self POST:url parameters:actualParams

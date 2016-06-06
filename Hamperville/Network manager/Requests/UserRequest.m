@@ -369,7 +369,7 @@
             NSString *fetchLogString = [mobiLogger fetchLogs];
             
             logDict[@"fileData"] = [fetchLogString dataUsingEncoding:NSUTF8StringEncoding];
-            logDict[@"dataFilename"] = @"ios_HampervilleIssueReport.txt";
+            logDict[@"dataFilename"] = @"file";
             logDict[@"fileName"] = @"issue_report.txt";
             logDict[@"mimeType"] = @"text/plain";
             _parameters[@"logDict"] = logDict;

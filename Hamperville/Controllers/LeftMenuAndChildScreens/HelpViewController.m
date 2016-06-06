@@ -96,7 +96,11 @@
 
 -(UIImage*)imageWithImage:(UIImage*)image;
 {
-    CGSize newSize = CGSizeMake(5, 5);
+    CGSize newSize = image.size;
+//    if (image.size.width > 400) {
+//        float proportion = 400/image.size.width;
+//        newSize = CGSizeMake((image.size.width/proportion),(image.size.height/proportion));
+//    }
     UIGraphicsBeginImageContext( newSize );
     [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -138,6 +142,9 @@
     [[RequestManager alloc] postHelpWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
+            
+            [[SMobiLogger sharedInterface] startMobiLogger];
+            
             [self showToastWithText:response on:Top];
             
             self.attachedScreenShot = nil;
