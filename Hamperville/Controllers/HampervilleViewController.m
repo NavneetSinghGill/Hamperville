@@ -20,6 +20,20 @@
                                                object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPushNotificationMessage:) name:kAppReceivedPushNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+- (void)showPushNotificationMessage:(NSNotification *)notification {
+    if (self.isViewLoaded && self.view.window && notification.userInfo != nil) {
+        [self showToastWithText:[notification.userInfo valueForKey:kPushNotificationMessage] on:Top withDuration:2.0];
+    }
+}
+
 - (void)networkAvailability {
     if ([ApplicationDelegate hasNetworkAvailable]) {
         

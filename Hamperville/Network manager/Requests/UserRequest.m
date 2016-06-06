@@ -85,6 +85,20 @@
     return self;
 }
 
+- (id)initWithPostDeviceTokenWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        _parameters[@"cert_type"] = environmentType;
+        if ([[NSUserDefaults standardUserDefaults]valueForKey:keyDeviceToken]) {
+            _parameters[@"device_id"] = [[NSUserDefaults standardUserDefaults]valueForKey:keyDeviceToken];
+        }
+        _parameters[@"device_type"] = @"ios";
+        self.urlPath = apiDeviceToken;
+    }
+    return self;
+}
+
 - (id)initWithGetPickAndDeliverWithUser:(User *)user {
     self = [super init];
     if (self) {

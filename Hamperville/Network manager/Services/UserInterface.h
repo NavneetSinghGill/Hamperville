@@ -29,6 +29,8 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 
 - (void)postHelpWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)postDeviceDetailWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;

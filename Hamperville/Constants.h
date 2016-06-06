@@ -27,6 +27,11 @@ extern NSString *kRememberMe;
 extern NSString *kUserEmail;
 extern NSString *kUserPassword;
 
+extern NSString *keyDeviceToken;
+
+extern NSString *kAppReceivedPushNotification;
+extern NSString *kPushNotificationMessage;
+
 #pragma mark - TableViewCell constants
 
 extern NSString *kLeftMenuTableViewCellNibName;

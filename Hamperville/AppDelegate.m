@@ -21,19 +21,6 @@ void uncaughtExceptionHandler(NSException *exception);
 
 @implementation AppDelegate
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
-    [[SignupInterface alloc] setSavedSessionCookies];
-    
-    [self setupNetworkMonitoring];
-    
-    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    
-    return YES;
-}
-
 void uncaughtExceptionHandler(NSException *exception)
 {
     NSString *errorMessage = [NSString stringWithFormat:@"Error: Application Crashed while launching At: %s, \n Exception Description: %@. \n  \n", __FUNCTION__, [exception description]];
@@ -42,6 +29,26 @@ void uncaughtExceptionHandler(NSException *exception)
     [[SMobiLogger sharedInterface] error:@"Uncaught Exception." withDescription:errorMessage];
     
     NSLog(@"Uncaught Exception: %@", errorMessage);
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    
+    [[SignupInterface alloc] setSavedSessionCookies];
+    
+    [self setupNetworkMonitoring];
+    
+    //Register (APNS) Remote notification
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
+                                                                                             |UIUserNotificationTypeSound
+                                                                                             |UIUserNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
+    NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -67,6 +74,39 @@ void uncaughtExceptionHandler(NSException *exception)
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    if (notificationSettings.types != UIUserNotificationTypeNone) {
+        [application registerForRemoteNotifications];
+    }
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    NSString *deviceTokenString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:deviceTokenString forKey:keyDeviceToken];
+    [userDefaults synchronize];
+    
+    // Save response in MobiLogger
+    [[SMobiLogger sharedInterface] info:@"Application registered for receiveing remote notifications." withDescription:[NSString stringWithFormat:@"At: %s, \n [Param: [Device Id: %@]]. \n  \n", __FUNCTION__, deviceTokenString]];
+    
+    NSLog(@"Device token: %@", deviceToken);
+    
+    // Perform device id call
+//    [self registerDeviceTokenforApp];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    [[SMobiLogger sharedInterface] info:@"Application received remote notification." withDescription:[NSString stringWithFormat:@"At: %s, \n Error: %@\n", __FUNCTION__, error.localizedDescription]];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    if (userInfo != nil) {
+        [[SMobiLogger sharedInterface] info:@"Application received remote notification." withDescription:[NSString stringWithFormat:@"At: %s, \n Aps: %@\n", __FUNCTION__, [userInfo valueForKey:@"aps"]]];
+        [[NSNotificationCenter defaultCenter]postNotificationName:kAppReceivedPushNotification object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[[userInfo valueForKey:@"aps"] valueForKey:@"alert"],kPushNotificationMessage, nil]];
+    }
 }
 
 #pragma mark - AFNetworking methods

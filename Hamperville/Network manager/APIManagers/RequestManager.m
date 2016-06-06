@@ -106,6 +106,16 @@
     }
 }
 
+- (void)postDeviceDetailWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postDeviceDetailWithUserRequest:[[UserRequest alloc]initWithPostDeviceTokenWithDataDictionary:dataDictionary] andCompletionBlock:^(BOOL success, id response) {
+            block(success, response);
+        }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block{

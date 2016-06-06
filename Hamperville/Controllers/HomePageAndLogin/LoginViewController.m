@@ -76,6 +76,11 @@
                 NSLog(@"UserId: %@", userId);
                 
                 [self getUserCall:userId];
+                
+                NSMutableDictionary *deviceDetailDict = [NSMutableDictionary dictionary];
+                [[RequestManager alloc] postDeviceDetailWithDataDictionary:deviceDetailDict withCompletionBlock:^(BOOL success, id response) {
+                    
+                }];
             } else {
                 [self showToastWithText:response on:Top];
                 [self.activityIndicator stopAnimating];

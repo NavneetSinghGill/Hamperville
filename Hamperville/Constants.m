@@ -20,6 +20,11 @@ NSString *kRememberMe = @"RememberMe";
 NSString *kUserEmail = @"UserEmail";
 NSString *kUserPassword = @"Password";
 
+NSString *keyDeviceToken = @"";
+
+NSString *kAppReceivedPushNotification = @"AppReceivedPushNotification";
+NSString *kPushNotificationMessage = @"kPushNotificationMessage";
+
 #pragma mark - TableViewCell constants
 
 NSString *kLeftMenuTableViewCellNibName = @"LeftMenuTableViewCell";

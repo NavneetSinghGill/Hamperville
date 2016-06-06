@@ -28,6 +28,8 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 
 - (void)postHelpWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+- (void)postDeviceDetailWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

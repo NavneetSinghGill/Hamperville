@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *baseUrl;
+extern NSString *environmentType;
+
 extern NSString *kSuccessStatus;
 extern NSString *kSuccess;
 extern NSString *kFailure;
@@ -20,6 +22,8 @@ extern NSString *apiPostUserUrl;
 extern NSString *apiForgotPassword;
 extern NSString *apiChangePassword;
 extern NSString *apiLogout;
+
+extern NSString *apiDeviceToken;
 
 extern NSString *apiRequestPickup;
 

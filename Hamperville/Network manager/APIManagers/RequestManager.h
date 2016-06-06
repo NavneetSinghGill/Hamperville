@@ -28,6 +28,8 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 
 - (void)postHelpWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
 
+- (void)postDeviceDetailWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+
 #pragma mark Preferences
 
 - (void)getPickupAndDeliverWithUser:(User *)user withCompletionBlock:(requestCompletionBlock)block;
