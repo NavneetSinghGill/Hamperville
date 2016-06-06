@@ -12,6 +12,7 @@
 #import "PermanentPreferencesViewController.h"
 #import "WashAndFoldPreferencesViewController.h"
 #import "SpecialCarePreferencesViewController.h"
+#import "WashAndPressViewController.h"
 
 @interface PreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
@@ -42,8 +43,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.options = [NSArray arrayWithObjects:@"How do we pickup and deliver", @"Permanent", @"Wash & Fold", @"Notification", @"Special Care", nil];
-    self.optionImages = [NSArray arrayWithObjects:@"Pref_pickup", @"Pref_permanenent", @"Pref_wasandfold", @"Pref_notification", @"Pref_specialCare", nil];
+    self.options = [NSArray arrayWithObjects:@"How do we pickup and deliver", @"Permanent", @"Wash & Fold", @"Notification", @"Special Care", @"Wash and Press", nil];
+    self.optionImages = [NSArray arrayWithObjects:@"Pref_pickup", @"Pref_permanenent", @"Pref_wasandfold", @"Pref_notification", @"Pref_specialCare", @"washAndpress", nil];
     
     //TAGS
     _kOptionIconButtonTag = 5;
@@ -78,6 +79,11 @@
 - (void)openSpecialCarePrefScreen {
     SpecialCarePreferencesViewController *specialCarePreferencesViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpecialCarePreferencesViewController"];
     [self.navigationController pushViewController:specialCarePreferencesViewController animated:YES];
+}
+
+- (void)openWashAndPressPrefScreen {
+    WashAndPressViewController *washAndPressViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"WashAndPressViewController"];
+    [self.navigationController pushViewController:washAndPressViewController animated:YES];
 }
 
 #pragma mark - Gesture delegate methods
@@ -139,6 +145,8 @@
         case 4:
             [self openSpecialCarePrefScreen];
             break;
+        case 5:
+            [self openWashAndPressPrefScreen];
             
         default:
             break;

@@ -39,6 +39,7 @@ NSString *apiNotificationPref = @"/api/v1/customer_preferences/notification";
 NSString *apiPermanentPref = @"/api/v1/customer_preferences/permanent";
 NSString *apiWashAndFoldPref = @"/api/v1/customer_preferences/wash_dry_and_fold";
 NSString *apiSpecialCarePref = @"/api/v1/customer_preferences/special_care";
+NSString *apiWashAndPressPref = @"api/v1/customer_preferences/wash_and_press";
 
 NSString *apiSchedulePickup = @"/api/v1/schedule/";
 NSString *apiOrderHistory = @"/api/v1/orders/";

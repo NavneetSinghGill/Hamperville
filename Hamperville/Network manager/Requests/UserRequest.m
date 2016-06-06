@@ -229,6 +229,26 @@
     return self;
 }
 
+- (id)initWithGetWashAndPressPreferences {
+    self = [super init];
+    if (self) {
+        self.urlPath = apiWashAndPressPref;
+    }
+    return self;
+}
+
+- (id)initWithPostWashAndPressPreferencesWithDataDictionary:(NSDictionary *)dataDictionary {
+    self = [super init];
+    if (self) {
+        _parameters = [NSMutableDictionary dictionary];
+        if ([dataDictionary hasValueForKey:@"wash_and_press_method"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"wash_and_press_method"] forKey:@"wash_and_press_method"];
+        }
+        self.urlPath = apiWashAndPressPref;
+    }
+    return self;
+}
+
 - (id)initWithGetSubscription {
     self = [super init];
     if (self) {

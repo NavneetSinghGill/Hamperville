@@ -176,7 +176,23 @@
                                               }];
 }
 
+- (void)getWashAndPressPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider getWashAndPressPreferencesWithRequest:userRequest
+                                             andCompletionBlock:^(BOOL success, id response) {
+                                                 [self parseGeneralDataResponse:response];
+                                             }];
+}
 
+- (void)postWashAndPressPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block {
+    _block = block;
+    id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
+    [apiInteractorProvider postWashAndPressPreferencesWithRequest:userRequest
+                                              andCompletionBlock:^(BOOL success, id response) {
+                                                  [self parseGeneralDataResponse:response];
+                                              }];
+}
 
 #pragma mark Subscription
 

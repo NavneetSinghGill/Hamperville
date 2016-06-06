@@ -158,6 +158,20 @@
                 }];
 }
 
+- (void)getWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithGetObject:userRequest
+               withCompletionBlock:^(BOOL success, id response) {
+                   block(success, response);
+               }];
+}
+
+- (void)postWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    [self interactAPIWithPostObject:userRequest
+                withCompletionBlock:^(BOOL success, id response) {
+                    block(success, response);
+                }];
+}
+
 #pragma mark Subscription
 
 - (void)getSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

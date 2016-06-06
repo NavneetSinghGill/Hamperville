@@ -231,6 +231,28 @@
     }
 }
 
+- (void)getWashAndPressPreferences:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] getWashAndPressPreferencesWithUserRequest:[[UserRequest alloc] initWithGetWashAndPressPreferences]
+                                                     andCompletionBlock:^(BOOL success, id response) {
+                                                         block(success, response);
+                                                     }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
+- (void)postWashAndPressPreferencesWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block {
+    if ([ApplicationDelegate hasNetworkAvailable]) {
+        [[UserInterface alloc] postWashAndPressPreferencesWithUserRequest:[[UserRequest alloc] initWithPostWashAndPressPreferencesWithDataDictionary:dataDictionary]
+                                                      andCompletionBlock:^(BOOL success, id response) {
+                                                          block(success, response);
+                                                      }];
+    } else {
+        block(NO, kNoNetworkAvailable);
+    }
+}
+
 #pragma mark Subscription
 
 - (void)getSubscription:(requestCompletionBlock)block {

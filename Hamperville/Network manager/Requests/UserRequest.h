@@ -36,6 +36,9 @@
 - (id)initWithGetSpecialCarePreferences;
 - (id)initWithPostSpecialCarePreferencesWithDataDictionary:(NSDictionary *)dataDictionary;
 
+- (id)initWithGetWashAndPressPreferences;
+- (id)initWithPostWashAndPressPreferencesWithDataDictionary:(NSDictionary *)dataDictionary;
+
 - (id)initWithGetSubscription;
 - (id)initWithPostSubscriptionWithStatus:(BOOL)status andSubscriptionID:(NSString *)subscriptionID;
 

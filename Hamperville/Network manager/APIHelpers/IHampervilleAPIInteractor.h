@@ -47,6 +47,9 @@ typedef void (^apiInteractorCompletionBlock)(BOOL success, id response);
 - (void)getSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 - (void)postSpecialCarePreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
 
+- (void)getWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+- (void)postWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;
+
 #pragma mark Subscription
 
 - (void)getSubscriptionWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block;

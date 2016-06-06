@@ -111,6 +111,7 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2354,6 +2355,7 @@
                         <segue destination="wDG-tB-DqC" kind="push" id="Kv6-xe-djk"/>
                         <segue destination="oBx-sT-6lc" kind="push" id="X2g-5h-hOy"/>
                         <segue destination="CwF-qZ-7X0" kind="push" id="xMc-fD-G4g"/>
+                        <segue destination="pkq-ta-NWJ" kind="push" id="9Rx-mN-aDH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LDP-wp-B6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2449,7 +2451,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f9y-e9-qW3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189" y="2489"/>
+            <point key="canvasLocation" x="1885" y="2489"/>
         </scene>
         <!--Notification Preferences View Controller-->
         <scene sceneID="PPm-07-wxZ">
@@ -3085,7 +3087,83 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a8J-X1-KIL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2189" y="3620"/>
+            <point key="canvasLocation" x="1885" y="3620"/>
+        </scene>
+        <!--Wash And Press View Controller-->
+        <scene sceneID="7oe-Nd-Y3G">
+            <objects>
+                <viewController storyboardIdentifier="WashAndPressViewController" automaticallyAdjustsScrollViewInsets="NO" id="pkq-ta-NWJ" customClass="WashAndPressViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dqr-HS-e42"/>
+                        <viewControllerLayoutGuide type="bottom" id="SV6-dd-8te"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nfc-hZ-FOI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gwj-ce-v0N">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="40" id="HEH-Bm-oJc">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HEH-Bm-oJc" id="rLL-eD-3Kb">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFF-fc-XVZ" userLabel="Check Button">
+                                                    <rect key="frame" x="12" y="11" width="18" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="CFb-2z-vUA"/>
+                                                        <constraint firstAttribute="width" constant="18" id="foj-Ja-cTd"/>
+                                                    </constraints>
+                                                    <state key="normal" image="Pref_uncheck"/>
+                                                    <state key="selected" image="Pref_checkmark"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCd-gN-XrK">
+                                                    <rect key="frame" x="50" y="0.0" width="260" height="40"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bFF-fc-XVZ" firstAttribute="leading" secondItem="rLL-eD-3Kb" secondAttribute="leading" constant="12" id="BzR-kE-PqL"/>
+                                                <constraint firstItem="zCd-gN-XrK" firstAttribute="leading" secondItem="bFF-fc-XVZ" secondAttribute="trailing" constant="20" id="C6q-1S-z4n"/>
+                                                <constraint firstAttribute="bottom" secondItem="zCd-gN-XrK" secondAttribute="bottom" id="IYo-WQ-7kl"/>
+                                                <constraint firstAttribute="trailing" secondItem="zCd-gN-XrK" secondAttribute="trailing" constant="10" id="S1Q-7s-gMe"/>
+                                                <constraint firstItem="bFF-fc-XVZ" firstAttribute="centerY" secondItem="rLL-eD-3Kb" secondAttribute="centerY" id="Z23-kn-bKt"/>
+                                                <constraint firstItem="zCd-gN-XrK" firstAttribute="top" secondItem="rLL-eD-3Kb" secondAttribute="top" id="Z9h-ma-8yq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="5Ss-Vh-Bia">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <color key="color" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5Ss-Vh-Bia" firstAttribute="centerY" secondItem="nfc-hZ-FOI" secondAttribute="centerY" id="Dhc-2B-qYx"/>
+                            <constraint firstItem="Gwj-ce-v0N" firstAttribute="leading" secondItem="nfc-hZ-FOI" secondAttribute="leading" id="IDt-cq-mTh"/>
+                            <constraint firstItem="Gwj-ce-v0N" firstAttribute="top" secondItem="dqr-HS-e42" secondAttribute="bottom" id="V6L-hJ-z72"/>
+                            <constraint firstAttribute="trailing" secondItem="Gwj-ce-v0N" secondAttribute="trailing" id="fzA-FS-1kY"/>
+                            <constraint firstItem="SV6-dd-8te" firstAttribute="top" secondItem="Gwj-ce-v0N" secondAttribute="bottom" id="o3L-LV-ZP6"/>
+                            <constraint firstItem="5Ss-Vh-Bia" firstAttribute="centerX" secondItem="nfc-hZ-FOI" secondAttribute="centerX" id="xkl-Zi-Ap7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Dx7-wL-XSg"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="5Ss-Vh-Bia" id="kvT-hN-mFn"/>
+                        <outlet property="tableView" destination="Gwj-ce-v0N" id="ibF-zw-bbz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeH-KY-zrD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2345" y="3620"/>
         </scene>
         <!--Wash And Fold Preferences View Controller-->
         <scene sceneID="f4N-qb-rIi">
@@ -3243,7 +3321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSK-Vv-sd8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1809" y="3081"/>
+            <point key="canvasLocation" x="2345" y="2513"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="Ab0-4v-PaP">

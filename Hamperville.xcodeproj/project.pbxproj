@@ -20,6 +20,7 @@
 		3B4C6B5E1CDBED86003B22B0 /* PermanentPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */; };
 		3B4C6B651CDBEE0B003B22B0 /* DropdownTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */; };
 		3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */; };
+		3B4DE8101D05BBD500E6AD01 /* WashAndPressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4DE80F1D05BBD500E6AD01 /* WashAndPressViewController.m */; };
 		3B52FB891D01B57900A587DD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB771D01B57800A587DD /* .gitignore */; };
 		3B52FB8A1D01B57900A587DD /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB781D01B57800A587DD /* LICENSE.txt */; };
 		3B52FB8B1D01B57900A587DD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3B52FB791D01B57800A587DD /* README.md */; };
@@ -138,6 +139,8 @@
 		3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownTableViewCell.h; sourceTree = "<group>"; };
 		3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownTableViewCell.m; sourceTree = "<group>"; };
 		3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		3B4DE80E1D05BBD500E6AD01 /* WashAndPressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashAndPressViewController.h; sourceTree = "<group>"; };
+		3B4DE80F1D05BBD500E6AD01 /* WashAndPressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashAndPressViewController.m; sourceTree = "<group>"; };
 		3B52FB771D01B57800A587DD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3B52FB781D01B57800A587DD /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		3B52FB791D01B57800A587DD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -379,6 +382,8 @@
 				3BF174A81CE36CBF0055A9E5 /* WashAndFoldPreferencesViewController.m */,
 				3B7197921CE4805000B102CD /* SpecialCarePreferencesViewController.h */,
 				3B7197931CE4805000B102CD /* SpecialCarePreferencesViewController.m */,
+				3B4DE80E1D05BBD500E6AD01 /* WashAndPressViewController.h */,
+				3B4DE80F1D05BBD500E6AD01 /* WashAndPressViewController.m */,
 			);
 			name = Prefs;
 			sourceTree = "<group>";
@@ -938,6 +943,7 @@
 				3BE3AD251CD25CF5007241DE /* OrderHistoryViewController.m in Sources */,
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */,
+				3B4DE8101D05BBD500E6AD01 /* WashAndPressViewController.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
 				3B52FB8D1D01B57900A587DD /* SLog.m in Sources */,
 				3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */,

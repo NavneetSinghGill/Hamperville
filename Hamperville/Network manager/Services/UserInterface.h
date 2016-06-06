@@ -48,6 +48,9 @@ typedef void (^userInterfaceCompletionBlock)(BOOL success, id response);
 - (void)getSpecialCarePreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 - (void)postSpecialCarePreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
 
+- (void)getWashAndPressPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+- (void)postWashAndPressPreferencesWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;
+
 #pragma mark Subscription
 
 - (void)getSubscriptionWithUserRequest:(UserRequest *)userRequest andCompletionBlock:(userInterfaceCompletionBlock)block;

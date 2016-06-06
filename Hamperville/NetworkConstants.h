@@ -33,6 +33,7 @@ extern NSString *apiNotificationPref;
 extern NSString *apiPermanentPref;
 extern NSString *apiWashAndFoldPref;
 extern NSString *apiSpecialCarePref;
+extern NSString *apiWashAndPressPref;
 
 extern NSString *apiSchedulePickup;
 extern NSString *apiOrderHistory;

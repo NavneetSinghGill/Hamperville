@@ -92,6 +92,14 @@
     
 }
 
+- (void)getWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
+- (void)postWashAndPressPreferencesWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {
+    
+}
+
 #pragma mark Address
 
 - (void)getAddressWithRequest:(Request *)userRequest andCompletionBlock:(apiInteractorCompletionBlock)block {

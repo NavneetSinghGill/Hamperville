@@ -47,6 +47,9 @@ typedef void (^requestCompletionBlock)(BOOL success,id response);
 - (void)getSpecialCarePreferences:(requestCompletionBlock)block;
 - (void)postSpecialCarePreferencesWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
 
+- (void)getWashAndPressPreferences:(requestCompletionBlock)block;
+- (void)postWashAndPressPreferencesWithDataDictionary:(NSDictionary *)dataDictionary withCompletionBlock:(requestCompletionBlock)block;
+
 #pragma mark Subscription
 
 - (void)getSubscription:(requestCompletionBlock)block;
