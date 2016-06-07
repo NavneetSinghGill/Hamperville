@@ -47,11 +47,11 @@
 }
 
 - (void)backButtonTapped {
-    if (!_wasAdded) {
+//    if (!_wasAdded) {
         [self.navigationController popViewControllerAnimated:YES];
-    } else {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+//    } else {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    }
 }
 
 - (void)setCardImageForText:(NSString *)text {
@@ -77,6 +77,10 @@
         [self showToastWithText:@"Enter cards of type \'Visa\', \'American Express\' or \'MasterCard\'" on:Top withDuration:1.5];
         return;
     }
+    if (self.monthTextField.text.length == 0 || self.yearTextField.text.length == 0 || self.cvvTextField.text.length == 0) {
+        [self showToastWithText:@"Enter details" on:Top withDuration:1.5];
+        return;
+    }
     NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
     dataDict[@"cc_type"] = self.cardType;
     dataDict[@"cc_last_4_digits"] = self.cardNumberTextField.text;
@@ -87,11 +91,13 @@
     [[RequestManager alloc] postAddCreditWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
+            [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:kChangeRefreshStatusShowCardScreen];
+            
             [self showToastWithText:@"Credit card added successfully." on:Top withDuration:1.5];
             double delayInSeconds = 1.8;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             });
             _wasAdded = YES;
         } else {

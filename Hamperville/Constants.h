@@ -63,3 +63,7 @@ extern NSString *kNoNetworkAvailable;
 
 extern NSString *LNChangeShouldRefresh;
 
+#pragma mark - UserDefault keys
+
+extern NSString *kChangeRefreshStatusShowCardScreen;
+

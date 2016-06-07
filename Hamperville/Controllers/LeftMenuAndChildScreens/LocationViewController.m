@@ -269,6 +269,12 @@
     }
     locationTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    if (indexPath.row == self.headings.count - 1) {
+        [locationTableViewCell.textField setTextColor:[UIColor lightGrayColor]];
+    } else {
+        [locationTableViewCell.textField setTextColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]];
+    }
+    
     return locationTableViewCell;
 }
 

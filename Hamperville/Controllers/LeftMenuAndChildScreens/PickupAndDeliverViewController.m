@@ -124,7 +124,7 @@
                                                andMethod:method
                                      withCompletionBlock:^(BOOL success, id response) {
                                          if (success) {
-//                                             [self readResponse:response];
+                                            [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Top withDuration:1.5];
                                          } else {
                                              [self showToastWithText:response on:Top];
                                              self.selectedIndex = storePreviousSelection;

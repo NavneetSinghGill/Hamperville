@@ -54,3 +54,7 @@ NSString *kNoNetworkAvailable = @"No Network available";
 
 NSString *LNChangeShouldRefresh = @"ChangeShouldRefresh";
 
+#pragma mark - UserDefault keys
+
+NSString *kChangeRefreshStatusShowCardScreen = @"changeRefreshStatusShowCardScreen";
+

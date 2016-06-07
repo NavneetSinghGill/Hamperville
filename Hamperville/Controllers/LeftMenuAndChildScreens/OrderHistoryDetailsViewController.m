@@ -135,17 +135,19 @@
 }
 
 - (IBAction)cancelOrderButtonTapped:(id)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Are you sure you want to cancel this order?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Are you sure you want to cancel this order?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *alertActionNo = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:nil];
     UIAlertAction *alertActionYes = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.activityIndicator startAnimating];
         [[RequestManager alloc] postCancelOrderWithOrderID:self.order.orderID withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
             if (success) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
+                [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:LNChangeShouldRefresh];
+                [[NSUserDefaults standardUserDefaults]synchronize];
                 double delayInSeconds = 2.0;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
                 [self showToastWithText:@"Order cancelled successfully." on:Top withDuration:1.8];

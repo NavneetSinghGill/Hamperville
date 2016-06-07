@@ -118,7 +118,7 @@
     dict[@"wash_and_press_method"] = self.options[self.selectedIndex];
     [[RequestManager alloc] postWashAndPressPreferencesWithDataDictionary:dict withCompletionBlock:^(BOOL success, id response) {
         if (success) {
-            [self showToastWithText:@"Preference updated." on:Top withDuration:1.5];
+            [self showToastWithText:@"Wash and Press preference updated successfully." on:Top withDuration:1.5];
         } else {
             [self showToastWithText:response on:Top];
         }

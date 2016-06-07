@@ -39,6 +39,11 @@ NSInteger kTableViewCellLabelTag = 10;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:LNChangeShouldRefresh] != nil) {
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:LNChangeShouldRefresh];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+        self.shouldRefresh = YES;
+    }
     if (self.shouldRefresh == YES) {
         [self getStartingOrders];
         self.shouldRefresh = NO;

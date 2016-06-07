@@ -39,8 +39,8 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.options = [NSArray arrayWithObjects:@"Location", @"Payment", @"Notification", nil];
-    self.optionImages = [NSArray arrayWithObjects:@"Location", @"Payment", @"Pref_notification", nil];
+    self.options = [NSArray arrayWithObjects:@"Location", @"Payment", nil];//, @"Notification", nil];
+    self.optionImages = [NSArray arrayWithObjects:@"Location", @"Payment", nil];//, @"Pref_notification", nil];
     
     //TAGS
     _kOptionIconButtonTag = 5;

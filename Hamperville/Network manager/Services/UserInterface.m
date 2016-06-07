@@ -320,12 +320,21 @@
             }
             else
             {
-                NSString *errorMessage = nil;
-                if([response hasValueForKey:@"message"])
-                {
-                    errorMessage = [response valueForKey:@"message"];
+                if ([response hasValueForKey:@"data"]) {
+                    NSString *errorMessage = nil;
+                    if([[response valueForKey:@"data"] hasValueForKey:@"message"])
+                    {
+                        errorMessage = [[response valueForKey:@"data"] valueForKey:@"message"];
+                    }
+                    _block(NO, errorMessage);
+                } else {
+                    NSString *errorMessage = nil;
+                    if([response hasValueForKey:@"message"])
+                    {
+                        errorMessage = [response valueForKey:@"message"];
+                    }
+                    _block(NO, errorMessage);
                 }
-                _block(NO, errorMessage);
             }
         }
     }

@@ -236,6 +236,7 @@
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
+                [self showToastWithText:@"Special care preference updated successfully." on:Top withDuration:1.5];
             } else {
                 [self showToastWithText:response on:Top];
             }

@@ -32,6 +32,7 @@ typedef enum {
 @interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, CouponTableViewCellDelegate> {
     NSInteger kCouponTableViewDefaultHeight;
     BOOL reloadCollectionViewToDefault;
+    BOOL wasModifiedAtLeastOnce;
 }
 
 @property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -224,7 +225,11 @@ typedef enum {
 }
 
 - (void)backButtonTapped {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (!wasModifiedAtLeastOnce) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (BOOL)isCouponPresentInUniversalCouponsOfName:(NSString *)couponName {
@@ -740,10 +745,13 @@ typedef enum {
         [[RequestManager alloc] postModifyOrderWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
             if (success) {
+                [[NSUserDefaults standardUserDefaults] setValue:@"1" forKey:LNChangeShouldRefresh];
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                wasModifiedAtLeastOnce = YES;
+                
                 double delayInSeconds = 2.0;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [[NSNotificationCenter defaultCenter] postNotificationName:LNChangeShouldRefresh object:nil userInfo:[NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"shouldRefresh", nil]];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
                 [self showToastWithText:@"Order modified successfully." on:Top withDuration:1.8];

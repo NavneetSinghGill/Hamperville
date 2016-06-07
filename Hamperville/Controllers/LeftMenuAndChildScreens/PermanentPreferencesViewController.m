@@ -169,6 +169,7 @@
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
+                [self showToastWithText:@"Permanent preference updated successfully." on:Top withDuration:1.5];
             } else {
                 [self showToastWithText:response on:Top];
             }

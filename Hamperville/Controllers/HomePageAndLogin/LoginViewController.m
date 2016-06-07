@@ -188,6 +188,7 @@
         [self.passwordTextField becomeFirstResponder];
     } else {
         [textField resignFirstResponder];
+        [self loginButtonTapped:self.loginButton];
     }
     return YES;
 }

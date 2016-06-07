@@ -137,7 +137,7 @@
     [[RequestManager alloc]postNotificationPrefWithAppNotification:_isAppNotificationOn textNotifications:_isTextNotificationOn andEmail:_isEmailNotificationOn
                                                withCompletionBlock:^(BOOL success, id response) {
                                                    if (success) {
-                                                       
+                                                       [self showToastWithText:@"Notification preference updated successfully." on:Top withDuration:1.5];
                                                    } else {
                                                        [self showToastWithText:response on:Top];
                                                        if (indexPath.row == 0) {

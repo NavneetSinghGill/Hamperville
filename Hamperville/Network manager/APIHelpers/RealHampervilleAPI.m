@@ -305,17 +305,19 @@
 - (void)interactAPIWithGetObject:(Request *)getObject withCompletionBlock:(apiInteractorCompletionBlock)block {
     [self initialSetupWithRequest:getObject requestType:RequestGET];
     
-    NSString *params = [NSString stringWithFormat:@"Info: Performing API call with [URL:%@] [params: %@]", [getObject urlPath], [getObject getParams]];
-    NSLog(params);
-    // Save request in MobiLogger
-    [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:params];
+    NSString *info = [NSString stringWithFormat:@"%s", __FUNCTION__];
+    NSString *desc = [NSString stringWithFormat:@"Info: Performing API call with [URL:%@] [params: %@]", getObject.urlPath, [getObject getParams]];
+    NSLog(info);NSLog(desc);
+    [[SMobiLogger sharedInterface] info:info withDescription:desc];
     
     [[NetworkHttpClient sharedInstance] getAPIcallWithUrl:getObject.urlPath
                                                    params:[getObject getParams]
                                          withSuccessBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                              
                                              // Save Success in Mobilogger
-                                             [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: API call succesfull with [URL:%@] [params: %@]", getObject.urlPath, [getObject getParams]]];
+                                             NSString *infoS = [NSString stringWithFormat:@"%s", __FUNCTION__];
+                                             NSString *descS = [NSString stringWithFormat:@"Info: API call succesfull with [URL:%@] [params: %@]", getObject.urlPath, [getObject getParams]];
+                                             [[SMobiLogger sharedInterface] info:infoS withDescription:descS];
                                              
                                              [self handleSuccessResponse:task
                                                                 response:responseObject
@@ -394,26 +396,26 @@
     [self initialSetupWithRequest:object requestType:RequestMutiPartPost];
     
     // Save request in MobiLogger
-    [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: Performing API call with [URL:%@] [params: %@]", object.urlPath, [object getParams]]];
+    NSString *info = [NSString stringWithFormat:@"%s", __FUNCTION__];
+    NSString *desc = [NSString stringWithFormat:@"Info: Performing API call with [URL:%@] [params: %@]", object.urlPath, [object getParams]];
+    [[SMobiLogger sharedInterface] info:info withDescription:desc];
     
     [[NetworkHttpClient sharedInstance] multipartApiCallForHelpWithUrl:object.urlPath parameters:object.getParams data:object.fileData name:object.dataFilename fileName:object.fileName mimeType:object.mimeType successBlock:^(NSURLSessionDataTask *task, id responseObject) {
         
         // Save Success in Mobilogger
-        [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: API call succesfull with [URL:%@] [params: %@]", object.urlPath, [object getParams]]];
+        NSString *infoS = [NSString stringWithFormat:@"%s", __FUNCTION__];
+        NSString *descS = [NSString stringWithFormat:@"Info: API call succesfull with [URL:%@] [params: %@]", object.urlPath, [object getParams]];
+        [[SMobiLogger sharedInterface] info:infoS withDescription:descS];
         
         [self handleSuccessResponse:task response:responseObject withBlock:block];
     } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
         
         // Save Failure in Mobilogger
-        [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: API call Failed with [URL:%@] [params: %@] [Error:%@]", object.urlPath, [object getParams], error]];
+        NSString *infoF = [NSString stringWithFormat:@"%s", __FUNCTION__];
+        NSString *descF = [NSString stringWithFormat:@"Info: API call Failed with [URL:%@] [params: %@] [Error:%@]", object.urlPath, [object getParams], error];
+        [[SMobiLogger sharedInterface] info:infoF withDescription:descF];
         [self handleError:error operation:task withBlock:block];
     }];
-    
-//    [[NetworkHttpClient sharedInstance] multipartApiCallWithUrl:object.urlPath parameters:object.getParams successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-//        [self handleSuccessResponse:task response:responseObject withBlock:block];
-//    } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
-//        [self handleError:error operation:task withBlock:block];
-//    }];
 }
 
 #pragma mark - Private methods

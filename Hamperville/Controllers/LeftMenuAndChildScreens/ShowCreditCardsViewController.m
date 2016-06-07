@@ -24,6 +24,8 @@
 
 @property(strong, nonatomic) NSMutableArray *allCreditCards;
 
+@property(assign, nonatomic) BOOL shouldRefresh;
+
 @end
 
 @implementation ShowCreditCardsViewController
@@ -37,8 +39,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.activityIndicator startAnimating];
-    [self getAllCreditCards];
+    if ([[NSUserDefaults standardUserDefaults]valueForKey:kChangeRefreshStatusShowCardScreen]) {
+        _shouldRefresh = YES;
+        [[NSUserDefaults standardUserDefaults]setValue:nil forKey:kChangeRefreshStatusShowCardScreen];
+    }
+    if (_shouldRefresh) {
+        [self.activityIndicator startAnimating];
+        [self getAllCreditCards];
+        _shouldRefresh = NO;
+    }
 }
 
 #pragma mark - Private methods
@@ -48,6 +57,7 @@
     [self setLeftMenuButtons:[NSArray arrayWithObjects:self.backButton, nil]];
     
     tableViewCellHeight = 55;
+    _shouldRefresh = YES;
     
     [self registerNib];
 }

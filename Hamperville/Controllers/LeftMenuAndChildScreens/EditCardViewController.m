@@ -54,17 +54,19 @@
 }
 
 - (void)backButtonTapped {
-    if (_wasUpdated) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    } else {
+//    if (_wasUpdated) {
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//    } else {
         [self.navigationController popViewControllerAnimated:YES];
-    }
+//    }
 }
 
 - (void)setAsPrimaryApiCall {
     [[RequestManager alloc] postSetPrimaryCreditCard:self.creditCardID withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
+            [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:kChangeRefreshStatusShowCardScreen];
+            
             _wasUpdated = YES;
             [self showToastWithText:[response valueForKey:@"message"] on:Top withDuration:1.8];
             double delayInSeconds = 2;
@@ -82,6 +84,7 @@
     [[RequestManager alloc] deleteCreditCard:self.creditCardID withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"changeRefreshStatusShowCardScreen" object:nil];
             _wasUpdated = YES;
             [self showToastWithText:[response valueForKey:@"message"] on:Top withDuration:1.8];
             double delayInSeconds = 2;

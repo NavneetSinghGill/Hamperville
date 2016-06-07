@@ -29,6 +29,8 @@
 @property(strong, nonatomic) NSMutableArray *services;
 @property(strong, nonatomic) NSMutableArray *showableServices;
 
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation PriceListViewController
@@ -41,7 +43,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-        
+    
+    [self.activityIndicator startAnimating];
     [self getPriceList];
 }
 
@@ -72,6 +75,7 @@
 
 - (void)getPriceList {
     [[RequestManager alloc] getPriceList:^(BOOL success, id response) {
+        [self.activityIndicator stopAnimating];
         if (success) {
             if ([response hasValueForKey:@"subscriptions"]) {
                 self.subscriptions = [response valueForKey:@"subscriptions"];
