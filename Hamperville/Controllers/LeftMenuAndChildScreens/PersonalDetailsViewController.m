@@ -339,6 +339,7 @@
                              LeftMenuViewController *leftMenuViewController = (LeftMenuViewController *)self.revealViewController.rearViewController;
                              [leftMenuViewController refreshUser];
                          }
+                         [self showToastWithText:response on:Top withDuration:1.5];
                      } else {
                          [self initTextFieldsWithUserInfo];
                          if ([response isKindOfClass:[NSArray class]]) {

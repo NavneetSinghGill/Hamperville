@@ -316,7 +316,13 @@
             success = [response valueForKey:kSuccessStatus];
             if (success == kSuccess)
             {
-                self.block(YES, [response valueForKey:@"data"]);
+                if ([response hasValueForKey:@"data"]) {
+                    self.block(YES, [response valueForKey:@"data"]);
+                } else if([response hasValueForKey:@"message"]){
+                    self.block(YES, [response valueForKey:@"message"]);
+                } else {
+                    self.block(YES, @"Success");
+                }
             }
             else
             {

@@ -256,6 +256,10 @@
 #pragma mark - Delegate methods
 
 - (void)dropDownTapped:(NSInteger)index {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Top];
+        return;
+    }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self refreshPickerViewForCellIndex:indexPath.row];

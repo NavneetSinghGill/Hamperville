@@ -70,7 +70,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LeftMenuTableViewCell *leftMenuTableViewCell = [tableView dequeueReusableCellWithIdentifier:kLeftMenuTableViewCellIdentifier];
     [leftMenuTableViewCell.headingButton setTitle:self.allHeadings[indexPath.row] forState:UIControlStateNormal];
-    [leftMenuTableViewCell.headingButton setImage:[UIImage imageNamed:self.allImageName[indexPath.row]] forState:UIControlStateNormal];
+    [leftMenuTableViewCell.imageButton setImage:[UIImage imageNamed:self.allImageName[indexPath.row]] forState:UIControlStateNormal];
     
     if (indexPath.row == self.selectedRowIndex){
         [leftMenuTableViewCell setSelection:YES];

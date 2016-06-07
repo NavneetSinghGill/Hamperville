@@ -11,6 +11,7 @@
 @interface LeftMenuTableViewCell : UITableViewCell
 
 @property(weak, nonatomic) IBOutlet UIButton *headingButton;
+@property(weak, nonatomic) IBOutlet UIButton *imageButton;
 @property(assign, nonatomic) BOOL isSelected;
 
 - (void)setSelection:(BOOL)isSelected;

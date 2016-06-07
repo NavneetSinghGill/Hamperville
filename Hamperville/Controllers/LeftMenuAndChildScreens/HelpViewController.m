@@ -153,6 +153,7 @@
             self.descriptionTextView.textColor = [UIColor lightGrayColor];
             self.attachLogsButton.selected = NO;
             areLogsAttached = NO;
+            [self.view endEditing:YES];
         } else {
             [self showToastWithText:response on:Top];
         }

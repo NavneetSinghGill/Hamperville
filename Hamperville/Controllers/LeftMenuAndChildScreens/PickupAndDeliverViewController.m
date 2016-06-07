@@ -44,11 +44,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.selectedIndex = 0;
+    self.selectedIndex = -1;
+    self.options = [NSMutableArray arrayWithObjects:@"With the doorman", @"By apartment door", @"Buzz my apartment", @"Call the phone I provide", nil];
     
     //TAGS
     _kOptionIconButtonTag = 5;
     _kOptionLabelTag = 10;
+    
+    [self.tableView reloadData];
 }
 
 - (void)getPickupAndDeliverPrefs {
@@ -66,9 +69,9 @@
 
 - (void)readResponse:(id)response {
     NSArray *responseArray = (NSArray *)[response valueForKey:@"pickup_deliver_preferences"];
-    self.options = [NSMutableArray array];
+//    self.options = [NSMutableArray array];
     for (NSInteger count = 0; count < responseArray.count; count++) {
-        [self.options addObject:[responseArray[count] valueForKey:@"name"]];
+//        [self.options addObject:[responseArray[count] valueForKey:@"name"]];
         if ([[responseArray[count] valueForKey:@"is_selected"] boolValue] == YES) {
             self.selectedIndex = count;
         }
@@ -114,6 +117,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Top];
+        return;
+    }
     NSInteger storePreviousSelection = self.selectedIndex;
     self.selectedIndex = indexPath.row;
     [self.tableView reloadData];
