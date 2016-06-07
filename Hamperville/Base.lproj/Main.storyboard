@@ -517,35 +517,56 @@
                                     <action selector="statusSwitchTapped:" destination="wtC-lh-wLO" eventType="touchUpInside" id="u7h-ub-AKh"/>
                                 </connections>
                             </switch>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znj-l2-nWY" userLabel="Dropdown Button">
-                                <rect key="frame" x="215" y="141" width="75" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXn-ud-erj" userLabel="Subs Plan SuperView">
+                                <rect key="frame" x="0.0" y="141" width="320" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znj-l2-nWY" userLabel="Dropdown Button">
+                                        <rect key="frame" x="215" y="0.0" width="75" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="QdV-Xt-Gjm"/>
+                                            <constraint firstAttribute="width" constant="75" id="tJR-5O-mQk"/>
+                                        </constraints>
+                                        <state key="normal" image="Pref_dropDown"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Subscription Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-Vt-HmS">
+                                        <rect key="frame" x="30" y="5" width="139" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="azJ-3S-FUS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
+                                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0u-3Y-Q9S" userLabel="Select label">
+                                        <rect key="frame" x="225" y="0.0" width="35" height="30"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adC-6f-pjx" userLabel="Empty Button">
+                                        <rect key="frame" x="215" y="0.0" width="75" height="30"/>
+                                        <connections>
+                                            <action selector="dropDownButtonTapped:" destination="wtC-lh-wLO" eventType="touchUpInside" id="SIY-OW-L77"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QdV-Xt-Gjm"/>
-                                    <constraint firstAttribute="width" constant="75" id="tJR-5O-mQk"/>
+                                    <constraint firstItem="i7p-Vt-HmS" firstAttribute="leading" secondItem="SXn-ud-erj" secondAttribute="leading" constant="30" id="2RW-Tb-C5o"/>
+                                    <constraint firstAttribute="height" constant="30" id="4KD-1H-WVJ"/>
+                                    <constraint firstItem="i7p-Vt-HmS" firstAttribute="centerY" secondItem="SXn-ud-erj" secondAttribute="centerY" id="8FC-q1-ASY"/>
+                                    <constraint firstItem="e0u-3Y-Q9S" firstAttribute="trailing" secondItem="znj-l2-nWY" secondAttribute="trailing" constant="-30" id="GDy-Xf-uh4"/>
+                                    <constraint firstItem="e0u-3Y-Q9S" firstAttribute="bottom" secondItem="znj-l2-nWY" secondAttribute="bottom" id="GzO-fp-Nn2"/>
+                                    <constraint firstItem="e0u-3Y-Q9S" firstAttribute="leading" secondItem="znj-l2-nWY" secondAttribute="leading" constant="10" id="JwX-lB-403"/>
+                                    <constraint firstAttribute="trailing" secondItem="znj-l2-nWY" secondAttribute="trailing" constant="30" id="LTV-Jt-wQy"/>
+                                    <constraint firstItem="znj-l2-nWY" firstAttribute="bottom" secondItem="adC-6f-pjx" secondAttribute="bottom" id="Pm8-1v-uuZ"/>
+                                    <constraint firstItem="znj-l2-nWY" firstAttribute="trailing" secondItem="adC-6f-pjx" secondAttribute="trailing" id="W1W-Do-tCC"/>
+                                    <constraint firstItem="znj-l2-nWY" firstAttribute="centerY" secondItem="SXn-ud-erj" secondAttribute="centerY" id="X18-Xi-cEN"/>
+                                    <constraint firstItem="e0u-3Y-Q9S" firstAttribute="top" secondItem="znj-l2-nWY" secondAttribute="top" id="XVL-Jd-Zc6"/>
+                                    <constraint firstItem="znj-l2-nWY" firstAttribute="top" secondItem="adC-6f-pjx" secondAttribute="top" id="YEL-kR-kQq"/>
+                                    <constraint firstItem="znj-l2-nWY" firstAttribute="leading" secondItem="adC-6f-pjx" secondAttribute="leading" id="nkk-MY-2S1"/>
                                 </constraints>
-                                <state key="normal" image="Pref_dropDown"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e0u-3Y-Q9S" userLabel="Select label">
-                                <rect key="frame" x="225" y="141" width="35" height="30"/>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adC-6f-pjx" userLabel="Empty Button">
-                                <rect key="frame" x="215" y="141" width="75" height="30"/>
-                                <connections>
-                                    <action selector="dropDownButtonTapped:" destination="wtC-lh-wLO" eventType="touchUpInside" id="SIY-OW-L77"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Subscription Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-Vt-HmS">
-                                <rect key="frame" x="30" y="145" width="139" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="azJ-3S-FUS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
-                                <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31d-NF-H3I" userLabel="Modify Order">
                                 <rect key="frame" x="30" y="196" width="260" height="40"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.62352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -614,30 +635,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i7p-Vt-HmS" firstAttribute="top" secondItem="C0H-D6-Vlh" secondAttribute="bottom" constant="30" id="1cN-Kv-JVO"/>
+                            <constraint firstItem="SXn-ud-erj" firstAttribute="leading" secondItem="Tr1-XT-acj" secondAttribute="leading" id="0UK-Xa-ese"/>
                             <constraint firstItem="C0H-D6-Vlh" firstAttribute="top" secondItem="lj0-Rm-C1Y" secondAttribute="bottom" constant="30" id="3CU-Xa-WhV"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="trailing" secondItem="e0u-3Y-Q9S" secondAttribute="trailing" constant="30" id="7JA-MZ-mnd"/>
+                            <constraint firstItem="31d-NF-H3I" firstAttribute="top" secondItem="SXn-ud-erj" secondAttribute="bottom" constant="25" id="59M-HG-Wp0"/>
                             <constraint firstItem="C0H-D6-Vlh" firstAttribute="leading" secondItem="Tr1-XT-acj" secondAttribute="leading" constant="30" id="BCv-9G-o3E"/>
                             <constraint firstAttribute="trailing" secondItem="31d-NF-H3I" secondAttribute="trailing" constant="30" id="CoA-2d-ZrE"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="leading" secondItem="e0u-3Y-Q9S" secondAttribute="leading" constant="-10" id="JPB-xa-J5t"/>
                             <constraint firstItem="Yhd-c1-X2b" firstAttribute="top" secondItem="gVd-7a-a5R" secondAttribute="bottom" constant="-180" id="Moc-G8-hVJ"/>
-                            <constraint firstAttribute="trailing" secondItem="znj-l2-nWY" secondAttribute="trailing" constant="30" id="NC2-mC-cM3"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="bottom" secondItem="e0u-3Y-Q9S" secondAttribute="bottom" id="R4J-3M-XYa"/>
+                            <constraint firstItem="SXn-ud-erj" firstAttribute="top" secondItem="C0H-D6-Vlh" secondAttribute="bottom" constant="26" id="R4Z-CO-6Sg"/>
                             <constraint firstAttribute="trailing" secondItem="gVd-7a-a5R" secondAttribute="trailing" id="a21-1t-OVX"/>
-                            <constraint firstItem="31d-NF-H3I" firstAttribute="top" secondItem="i7p-Vt-HmS" secondAttribute="bottom" constant="30" id="b5L-B8-yY4"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="trailing" secondItem="adC-6f-pjx" secondAttribute="trailing" id="cWS-1w-zyP"/>
                             <constraint firstItem="KeE-ba-fVC" firstAttribute="centerY" secondItem="C0H-D6-Vlh" secondAttribute="centerY" id="ghQ-yo-cQw"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="centerY" secondItem="i7p-Vt-HmS" secondAttribute="centerY" id="jU9-db-khb"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="top" secondItem="e0u-3Y-Q9S" secondAttribute="top" id="jxn-Iw-621"/>
                             <constraint firstItem="31d-NF-H3I" firstAttribute="leading" secondItem="Tr1-XT-acj" secondAttribute="leading" constant="30" id="knj-wc-tZB"/>
+                            <constraint firstAttribute="trailing" secondItem="SXn-ud-erj" secondAttribute="trailing" id="krU-K6-bwn"/>
                             <constraint firstAttribute="trailing" secondItem="KeE-ba-fVC" secondAttribute="trailing" constant="30" id="mxd-rV-yw6"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="leading" secondItem="adC-6f-pjx" secondAttribute="leading" id="ok4-Rp-zIG"/>
                             <constraint firstItem="WvE-FG-Swp" firstAttribute="centerX" secondItem="Tr1-XT-acj" secondAttribute="centerX" id="pwS-bj-1JA"/>
                             <constraint firstItem="WvE-FG-Swp" firstAttribute="centerY" secondItem="Tr1-XT-acj" secondAttribute="centerY" id="qHd-hl-69s"/>
-                            <constraint firstItem="i7p-Vt-HmS" firstAttribute="leading" secondItem="Tr1-XT-acj" secondAttribute="leading" constant="30" id="tVw-XW-FKb"/>
                             <constraint firstItem="gVd-7a-a5R" firstAttribute="leading" secondItem="Tr1-XT-acj" secondAttribute="leading" id="xHJ-c7-ldj"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="bottom" secondItem="adC-6f-pjx" secondAttribute="bottom" id="yeL-VL-EfX"/>
-                            <constraint firstItem="znj-l2-nWY" firstAttribute="top" secondItem="adC-6f-pjx" secondAttribute="top" id="zWZ-FZ-Pcn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="apP-jy-g8w"/>
@@ -648,6 +660,7 @@
                         <outlet property="pickerView" destination="6hD-GV-DeT" id="KCO-vt-5Aj"/>
                         <outlet property="selectLabel" destination="e0u-3Y-Q9S" id="8gz-y5-rcZ"/>
                         <outlet property="statusSwitch" destination="KeE-ba-fVC" id="wme-AI-AhU"/>
+                        <outlet property="subsctiptionPlanSuperView" destination="SXn-ud-erj" id="6en-dl-Wft"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F94-wf-gAk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -23,6 +23,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *selectLabel;
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(weak, nonatomic) IBOutlet UIView *subsctiptionPlanSuperView;
 
 @end
 
@@ -57,14 +58,17 @@
         count++;
     }
     self.newStatus = self.oldStatus;
+    self.subsctiptionPlanSuperView.hidden = !self.newStatus;
 }
 
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
     if (self.oldStatus) {
-        if (self.nextRenewalDate != nil) {
+        if ((self.newStatus == YES && self.nextRenewalDate != nil) || self.newStatus == NO) {
             [self.updateDelegate updateViewsWithStatus:self.newStatus subscriptionID:self.currentSubscriptionPlanID andNextRenewalDate:self.nextRenewalDate];
+        } else {
+            [self.updateDelegate updateViewsWithStatus:self.newStatus];
         }
     } else {
         [self.updateDelegate updateViewsWithStatus:self.newStatus];
@@ -88,7 +92,7 @@
         return;
     }
     [self.activityIndicator startAnimating];
-    [[RequestManager alloc]postSubscriptionWithStatus:self.newStatus andSubscriptionID:[NSString stringWithFormat:@"%ld",self.currentSubscriptionPlanID] withCompletionBlock:^(BOOL success, id response) {
+    [[RequestManager alloc]postSubscriptionWithStatus:self.newStatus andSubscriptionID:[NSString stringWithFormat:@"%ld",(long)self.currentSubscriptionPlanID] withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
             if ([response hasValueForKey:@"subscription_status"]) {
@@ -116,7 +120,7 @@
 }
 
 - (IBAction)statusSwitchTapped:(UISwitch *)sender {
-//    self.oldStatus = sender.isOn;
+    self.subsctiptionPlanSuperView.hidden = ![sender isOn];
 }
 
 #pragma mark - PickerView methods -

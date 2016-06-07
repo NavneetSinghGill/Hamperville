@@ -26,7 +26,7 @@
 - (void)setServiceWithServiceDict:(NSMutableDictionary *)serviceDict {
     self.difference = [[serviceDict valueForKey:@"day_difference"] integerValue];
     self.serviceID = [NSString stringWithFormat:@"%@",[serviceDict valueForKey:@"id"]];
-    self.serviceImageUrl = [serviceDict valueForKey:@"image_url"];
+    self.serviceImageUrl = [serviceDict valueForKey:@"image_key"];
     self.serviceName = [serviceDict valueForKey:@"name"];
     
     self.coupons = [serviceDict valueForKey:@"coupons"];
@@ -39,6 +39,7 @@
     self.serviceImageBackgroundBorderView.layer.cornerRadius = self.serviceImageBackgroundBorderView.frame.size.width / 2;
     self.serviceImageBackgroundBorderView.layer.masksToBounds = YES;
     //ImageUrl set
+    [self.serviceImageButton sd_setImageWithURL:[NSURL URLWithString:self.serviceImageUrl] forState:UIControlStateNormal];
 }
 
 - (void)setSelectionState:(BOOL)isSelected {
