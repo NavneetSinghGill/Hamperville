@@ -40,8 +40,7 @@ void uncaughtExceptionHandler(NSException *exception)
     
     //Register (APNS) Remote notification
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
-                                                                                             |UIUserNotificationTypeSound
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
                                                                                              |UIUserNotificationTypeAlert) categories:nil];
         [application registerUserNotificationSettings:settings];
     }
@@ -93,9 +92,6 @@ void uncaughtExceptionHandler(NSException *exception)
     [[SMobiLogger sharedInterface] info:@"Application registered for receiveing remote notifications." withDescription:[NSString stringWithFormat:@"At: %s, \n [Param: [Device Id: %@]]. \n  \n", __FUNCTION__, deviceTokenString]];
     
     NSLog(@"Device token: %@", deviceToken);
-    
-    // Perform device id call
-//    [self registerDeviceTokenforApp];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

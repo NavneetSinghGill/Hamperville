@@ -198,9 +198,13 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *modifiedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    textField.text = modifiedString;
-    return NO;
+    if (self.userNameTextField == textField) {
+        return YES;
+    } else {
+        NSString *modifiedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        textField.text = modifiedString;
+        return NO;
+    }
 }
 
 @end

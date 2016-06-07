@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04EA82A275AB45466DB9B180 /* libPods-Hamperville.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29CA7285666675FF78131008 /* libPods-Hamperville.a */; };
 		3B08B7DE1CBCEF69001862FF /* SchedulePickupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */; };
 		3B3022B01D00496E00C636FA /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3022AF1D00496E00C636FA /* HelpViewController.m */; };
 		3B3D630F1CF59C1600BA8F0D /* LocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D630D1CF59C1600BA8F0D /* LocationTableViewCell.m */; };
@@ -90,6 +89,7 @@
 		3BF2BED91CBE0CBA00DF6297 /* PersonalDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF2BED81CBE0CBA00DF6297 /* PersonalDetailsViewController.m */; };
 		3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFAB85C1CE9AACF002864EC /* ServiceInfo.m */; };
 		3BFB9C9A1CC0B85900B0996A /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */; };
+		F99269132159B757361CCD18 /* libPods-Hamperville.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80123942856A302805D10811 /* libPods-Hamperville.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		29CA7285666675FF78131008 /* libPods-Hamperville.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hamperville.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BD909E593FA3A419612F6C5 /* Pods-Hamperville.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.debug.xcconfig"; sourceTree = "<group>"; };
 		3B08B7DC1CBCEF69001862FF /* SchedulePickupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchedulePickupViewController.h; sourceTree = "<group>"; };
 		3B08B7DD1CBCEF69001862FF /* SchedulePickupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchedulePickupViewController.m; sourceTree = "<group>"; };
 		3B3022AE1D00496E00C636FA /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
@@ -270,8 +270,8 @@
 		3BFAB85C1CE9AACF002864EC /* ServiceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfo.m; sourceTree = "<group>"; };
 		3BFB9C981CC0B85900B0996A /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
 		3BFB9C991CC0B85900B0996A /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
-		6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.release.xcconfig"; sourceTree = "<group>"; };
-		DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.debug.xcconfig"; sourceTree = "<group>"; };
+		80123942856A302805D10811 /* libPods-Hamperville.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hamperville.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9754A2394EE50AB15EC4D7D6 /* Pods-Hamperville.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hamperville.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,7 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04EA82A275AB45466DB9B180 /* libPods-Hamperville.a in Frameworks */,
+				F99269132159B757361CCD18 /* libPods-Hamperville.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +300,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		171426A3057A48E1779BBDBB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0BD909E593FA3A419612F6C5 /* Pods-Hamperville.debug.xcconfig */,
+				9754A2394EE50AB15EC4D7D6 /* Pods-Hamperville.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3B4BB6C71CBD2961005BC322 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,8 +475,8 @@
 				3BE603E31CB5188400E0F997 /* HampervilleTests */,
 				3BE603EE1CB5188400E0F997 /* HampervilleUITests */,
 				3BE603C51CB5188400E0F997 /* Products */,
-				9462428FB116991D2A9936F4 /* Pods */,
-				AA90ADB7EC3FFB5643D79FDF /* Frameworks */,
+				171426A3057A48E1779BBDBB /* Pods */,
+				7FF6B420B82ED2E9B3B0F825 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -678,19 +687,10 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		9462428FB116991D2A9936F4 /* Pods */ = {
+		7FF6B420B82ED2E9B3B0F825 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */,
-				6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		AA90ADB7EC3FFB5643D79FDF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29CA7285666675FF78131008 /* libPods-Hamperville.a */,
+				80123942856A302805D10811 /* libPods-Hamperville.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -702,12 +702,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BE603F41CB5188500E0F997 /* Build configuration list for PBXNativeTarget "Hamperville" */;
 			buildPhases = (
-				BFF442884E5DDB4995DDDC6C /* Check Pods Manifest.lock */,
+				F839808B2B3F7D2AE328636C /* 📦 Check Pods Manifest.lock */,
 				3BE603C01CB5188400E0F997 /* Sources */,
 				3BE603C11CB5188400E0F997 /* Frameworks */,
 				3BE603C21CB5188400E0F997 /* Resources */,
-				6B33EA994B9C5C755022E6E9 /* Embed Pods Frameworks */,
-				C74B3EBFC452B75BC5651C72 /* Copy Pods Resources */,
+				7C90E09FC4716555480B9739 /* 📦 Embed Pods Frameworks */,
+				A19E25545A7C7271367E9352 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -860,14 +860,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6B33EA994B9C5C755022E6E9 /* Embed Pods Frameworks */ = {
+		7C90E09FC4716555480B9739 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -875,34 +875,34 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BFF442884E5DDB4995DDDC6C /* Check Pods Manifest.lock */ = {
+		A19E25545A7C7271367E9352 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C74B3EBFC452B75BC5651C72 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hamperville/Pods-Hamperville-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F839808B2B3F7D2AE328636C /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1115,7 +1115,7 @@
 		};
 		3BE603F51CB5188500E0F997 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAA9F62027DBBB077171C5BB /* Pods-Hamperville.debug.xcconfig */;
+			baseConfigurationReference = 0BD909E593FA3A419612F6C5 /* Pods-Hamperville.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";
@@ -1164,7 +1164,7 @@
 		};
 		3BE603F61CB5188500E0F997 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A8ED8F4D8848956B9A45128 /* Pods-Hamperville.release.xcconfig */;
+			baseConfigurationReference = 9754A2394EE50AB15EC4D7D6 /* Pods-Hamperville.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";

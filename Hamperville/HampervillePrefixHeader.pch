@@ -22,6 +22,8 @@
 #import "NetworkConstants.h"
 #import "Util.h"
 #import "SMobiLogger.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIButton+WebCache.h"
 
 #endif 
 
