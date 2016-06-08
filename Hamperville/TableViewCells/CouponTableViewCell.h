@@ -20,6 +20,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *textField;
 @property(weak, nonatomic) IBOutlet UIButton *verifyButton;
 @property(strong, nonatomic) NSString *serviceID;
+@property(strong, nonatomic) NSString *couponID;
 @property(assign, nonatomic) NSInteger index;
 
 @property(assign, nonatomic) id<CouponTableViewCellDelegate> couponTableViewCellDelegate;

@@ -19,6 +19,8 @@
 
 - (void)saveUser:(User *)user;
 
+- (UIColor *)greenColor;
+
 - (NSString *)getNumberAsStringFromString:(NSString *)string;
 
 @end

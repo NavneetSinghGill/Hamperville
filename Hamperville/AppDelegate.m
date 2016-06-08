@@ -153,14 +153,6 @@ void uncaughtExceptionHandler(NSException *exception)
     return [self showSuccessBannerOnTopWithTitle:@"Hamperville" subtitle:subtitle];
 }
 
-- (ALAlertBanner *)showFailureBannerOnTopWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
-    if (subtitle == nil) {
-        title = @"Sorry";
-        subtitle = NSLocalizedString(@"SomethingWentWrongMessage", @"");
-    }
-    return [self showBannerWithTitle:title subtitle:subtitle style:ALAlertBannerStyleNone position:ALAlertBannerPositionTop];
-}
-
 - (ALAlertBanner *)showSuccessBannerOnTopWithTitle:(NSString *)title subtitle:(NSString *)subtitle {
     return [self showBannerWithTitle:title subtitle:subtitle style:ALAlertBannerStyleNone position:ALAlertBannerPositionTop];
 }
@@ -173,31 +165,6 @@ void uncaughtExceptionHandler(NSException *exception)
                                                         title:title
                                                      subtitle:subtitle];
     [banner show];
-    return banner;
-}
-
-- (ALAlertBanner *)showNetworkFailureBanner
-{
-    ALAlertBanner *banner = [ALAlertBanner alertBannerForView:self.window
-                                                        style:ALAlertBannerStyleFailure
-                                                     position:ALAlertBannerPositionTop
-                                                        title:@"No Network Connection"
-                                                     subtitle:@"You have lost your network connection. Please check your connection and try again."];
-    banner.secondsToShow = 0;
-    
-    [banner show];
-    
-    return  banner;
-}
-
-- (ALAlertBanner *)showBannerWithTitle:(NSString *)title subtitle:(NSString *)subtitle style:(ALAlertBannerStyle)style position:(ALAlertBannerPosition)position withObject:(id)object
-{
-    ALAlertBanner *banner = [ALAlertBanner alertBannerForView:self.window style:style  position:position title:title subtitle:subtitle tappedBlock:^(ALAlertBanner *alertBanner) {
-        [alertBanner hide];
-//        [Util postNotification:LNChangeLeftMenuViewControllers withDict:object];
-    }];
-    [banner show];
-    
     return banner;
 }
 

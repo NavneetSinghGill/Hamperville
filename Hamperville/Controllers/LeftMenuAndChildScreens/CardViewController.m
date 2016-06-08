@@ -78,7 +78,7 @@
         return;
     }
     if (self.monthTextField.text.length == 0 || self.yearTextField.text.length == 0 || self.cvvTextField.text.length == 0) {
-        [self showToastWithText:@"Enter details" on:Failure];
+        [self showToastWithText:@"Enter valid details" on:Failure];
         return;
     }
     NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
@@ -101,7 +101,11 @@
             });
             _wasAdded = YES;
         } else {
-            [self showToastWithText:response on:Failure];
+            if ([response isEqualToString:kNoNetworkAvailable]) {
+                [self showToastWithText:response on:Failure];
+            } else {
+                [self showToastWithText:@"Enter valid details" on:Failure];
+            }
         }
     }];
 }

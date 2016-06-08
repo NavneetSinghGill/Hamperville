@@ -8,6 +8,8 @@
 
 #import "HelpViewController.h"
 #import "RequestManager.h"
+#import <AssetsLibrary/ALAssetsLibrary.h>
+#import <AssetsLibrary/ALAssetRepresentation.h>
 
 @interface HelpViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate> {
     NSInteger titleLabelDefaultTopConstriantValue;
@@ -19,6 +21,8 @@
 
 @property(weak, nonatomic) IBOutlet UIButton *attachLogsButton;
 @property (strong, nonatomic) UIImage *attachedScreenShot;
+
+@property(weak, nonatomic) IBOutlet UILabel *attachScreenShot;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelTopConstraint;
 
@@ -34,6 +38,14 @@
     [self initialSetup];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.attachScreenShot.text = @"Attach Snapshot";
+    [self.attachScreenShot setTextColor:[UIColor blackColor]];
+    self.attachedScreenShot = nil;
+}
+
 #pragma mark - Private methods
 
 - (void)initialSetup {
@@ -45,6 +57,8 @@
     self.descriptionTextView.textColor = [UIColor lightGrayColor];
     
     titleLabelDefaultTopConstriantValue = self.titleLabelTopConstraint.constant;
+    
+    areLogsAttached = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -152,7 +166,7 @@
             self.descriptionTextView.text = @"Write your text here";
             self.descriptionTextView.textColor = [UIColor lightGrayColor];
             self.attachLogsButton.selected = NO;
-            areLogsAttached = NO;
+//            areLogsAttached = NO;
             [self.view endEditing:YES];
         } else {
             [self showToastWithText:response on:Failure];
@@ -167,7 +181,22 @@
     self.attachedScreenShot = chosenImage;
 //    [[self attachmentButton] setImage:[UIImage imageNamed:@"popupCancel"] forState:UIControlStateNormal];
 //    [[self screenShotButton] setTitle:@"Change screenshot" forState:UIControlStateNormal];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    NSURL *refURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *imageAsset)
+    {
+        ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
+        NSLog([NSString stringWithFormat:@"%@",[imageRep filename]]);
+        self.attachScreenShot.text = [imageRep filename];
+        [self.attachScreenShot setTextColor:[UIColor colorWithRed:53/255.0f green:173/255.0f blue:71/255.0f alpha:1.f]];
+        NSLog([NSString stringWithFormat:@"%@",self.attachScreenShot.text]);
+        [self.view layoutIfNeeded];
+        [picker dismissViewControllerAnimated:YES completion:NULL];
+    };
+    
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:refURL resultBlock:resultblock failureBlock:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

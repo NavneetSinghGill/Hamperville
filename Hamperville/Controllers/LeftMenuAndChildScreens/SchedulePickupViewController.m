@@ -114,6 +114,9 @@ typedef enum {
     if (self.scrollView.hidden == NO || [ApplicationDelegate hasNetworkAvailable] == YES) {
         [self schedulePickupAPIcall];
     }
+    
+    [self setPickupEntriesForDate:[NSDate date]];
+    [self setDropOffEntriesForDate:[NSDate date]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -139,7 +142,7 @@ typedef enum {
 #pragma mark - PRIVATE METHODS -
 
 - (void)schedulePickupAPIcall {
-    self.scrollView.hidden = YES;
+    self.scrollView.hidden = NO;
     [self.activityIndicator startAnimating];
     [[RequestManager alloc] getSchedulePickup:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
@@ -232,13 +235,17 @@ typedef enum {
     }
 }
 
-- (BOOL)isCouponPresentInUniversalCouponsOfName:(NSString *)couponName {
+- (NSMutableDictionary *)isCouponPresentInUniversalCouponsOfName:(NSString *)couponName {
+    //returns Universal CouponID if valid else returns nil
     for (NSDictionary *coupon in self.universalCoupons) {
         if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
-            return YES;
+            NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
+            [dataDict setValue:[NSString stringWithFormat:@"%ld",(long)[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
+            [dataDict setValue:[NSString stringWithFormat:@"%@",couponName] forKey:@"couponName"];
+            return dataDict;
         }
     }
-    return NO;
+    return nil;
 }
 
 - (NSDictionary *)isCouponPresentInOtherCouponsOfName:(NSString *)couponName {
@@ -249,8 +256,8 @@ typedef enum {
         coupons = [service valueForKey:@"coupons"];
         for (NSDictionary *coupon in coupons) {
             if ([[coupon valueForKey:@"name"] isEqualToString:couponName]) {
-                [dataDict setValue:[NSString stringWithFormat:@"%ld",[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
-                [dataDict setValue:[NSString stringWithFormat:@"%ld",[[service valueForKey:@"id"] integerValue]] forKey:@"serviceID"];
+                [dataDict setValue:[NSString stringWithFormat:@"%ld",(long)[[coupon valueForKey:@"id"] integerValue]] forKey:@"couponID"];
+                [dataDict setValue:[NSString stringWithFormat:@"%ld",(long)[[service valueForKey:@"id"] integerValue]] forKey:@"serviceID"];
                 return dataDict;
             }
         }
@@ -593,6 +600,10 @@ typedef enum {
 #pragma mark - IBAction methods -
 
 - (IBAction)pickUpLeftArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger count = self.pickupDayCount - 1;
     if (count >= 1) {
         [self setupEntriesForDayCount:count andStartDate:[NSDate date]];
@@ -609,6 +620,10 @@ typedef enum {
 }
 
 - (IBAction)pickUpRightArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger count = self.pickupDayCount + 1;
     if (count <= 10) {
         [self setupEntriesForDayCount:count andStartDate:[NSDate date]];
@@ -625,6 +640,10 @@ typedef enum {
 }
 
 - (IBAction)pickUpUpArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger index = [self.pickupPickerView selectedRowInComponent:0];
     if (index > 0) {
         [self.pickupPickerView selectRow:index - 1 inComponent:0 animated:YES];
@@ -632,6 +651,10 @@ typedef enum {
 }
 
 - (IBAction)pickUpDownArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger index = [self.pickupPickerView selectedRowInComponent:0];
     if (index < self.pickupSlots.count - 1) {
         [self.pickupPickerView selectRow:index + 1 inComponent:0 animated:YES];
@@ -639,6 +662,10 @@ typedef enum {
 }
 
 - (IBAction)dropOffLeftArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger count = self.dropOffDayCount - 1;
     if (count >= 1) {
         [self refreshDropOffEntriesWithNextDate:self.currentPickupDate andDayCount:count];
@@ -651,6 +678,10 @@ typedef enum {
 }
 
 - (IBAction)dropOffRightArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger count = self.dropOffDayCount + 1;
     if (count <= 10) {
 //        [self setupPickupEntriesForDayCount:count];
@@ -664,6 +695,10 @@ typedef enum {
 }
 
 - (IBAction)dropOffUpArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger index = [self.dropOffPickerView selectedRowInComponent:0];
     if (index > 0) {
         [self.dropOffPickerView selectRow:index - 1 inComponent:0 animated:YES];
@@ -671,6 +706,10 @@ typedef enum {
 }
 
 - (IBAction)dropOffDownArrowButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSInteger index = [self.dropOffPickerView selectedRowInComponent:0];
     if (index < self.dropOffSlots.count - 1) {
         [self.dropOffPickerView selectRow:index + 1 inComponent:0 animated:YES];
@@ -678,8 +717,13 @@ typedef enum {
 }
 
 - (IBAction)requestPickupButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     NSMutableDictionary *dataDictionary = [NSMutableDictionary dictionary];
     
+    //Get comma seprated values of services
     NSString *commaSeparatedServiceIDs = kEmptyString;
     NSInteger count = 0;
     for (count = 0; count < self.selectedServiceIDs.count; count++) {
@@ -698,6 +742,7 @@ typedef enum {
     }
     [dataDictionary setValue:commaSeparatedServiceIDs forKey:@"service_selected"];
     
+    //Othr entries
     NSInteger selectedIndex = [self.pickupPickerView selectedRowInComponent:0];
     NSDictionary *selectedPickupTimeDictionary = [self.pickupSlots objectAtIndex:selectedIndex];
     //    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"pick_up_time"];
@@ -710,7 +755,21 @@ typedef enum {
     [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentDropOffDate timeIntervalSince1970]] forKey:@"drop_off_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"drop_off_time_slot_id"];
     
-    [dataDictionary setValue:self.appliedCouponsIDAndName forKey:@"coupon_code"];
+    //Get comma seprated coupons
+    NSString *commaSeparatedCouponIDs;
+    count = 0;
+    for (count = 0; count < self.appliedCouponsIDAndName.count; count++) {
+        if (count == 0) {
+            commaSeparatedCouponIDs = [self.appliedCouponsIDAndName[0] valueForKey:@"couponID"];
+            continue;
+        }
+        commaSeparatedCouponIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedCouponIDs,[self.appliedCouponsIDAndName[0] valueForKey:@"couponID"]];
+    }
+    if ([commaSeparatedCouponIDs isKindOfClass:[NSNumber class]]) {
+        commaSeparatedCouponIDs = [NSString stringWithFormat:@"%ld",(long)[commaSeparatedCouponIDs integerValue]];
+    }
+    
+    [dataDictionary setValue:commaSeparatedCouponIDs forKey:@"coupon_code"];
     
     [self.activityIndicator startAnimating];
     if (!self.isModifyModeOn) {
@@ -738,6 +797,10 @@ typedef enum {
                 [self showToastWithText:@"Order successfully placed." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
+                if ([response isEqualToString:kNoNetworkAvailable]) {
+                    [self setPickupEntriesForDate:[NSDate date]];
+                    [self setDropOffEntriesForDate:[NSDate date]];
+                }
             }
         }];
     } else {
@@ -852,16 +915,16 @@ typedef enum {
             }
         }
         [self.selectedServiceIDs removeObject:serviceInfoToDelete];
-        NSString *couponName = nil;
+        NSDictionary *couponIDAndName = nil;
         for (NSDictionary *coupon in cell.coupons) {
-            for (NSString *appliedCouponName in self.appliedCouponsIDAndName) {
-                if ([[coupon valueForKey:@"name"] isEqualToString:appliedCouponName]) {
-                    couponName = appliedCouponName;
+            for (NSDictionary *appliedCouponIDAndName in self.appliedCouponsIDAndName) {
+                if ([[coupon valueForKey:@"name"] isEqualToString:[appliedCouponIDAndName valueForKey:@"couponName"]]) {
+                    couponIDAndName = appliedCouponIDAndName;
                     break;
                 }
             }
         }
-        [self.appliedCouponsIDAndName removeObject:couponName];
+        [self.appliedCouponsIDAndName removeObject:couponIDAndName];
         [self.couponTableView reloadData];
     }
     NSInteger maxDifference = 1;
@@ -888,7 +951,7 @@ typedef enum {
     couponTableViewCell.index = indexPath.row;
     
     if (indexPath.row < self.appliedCouponsIDAndName.count) {
-        couponTableViewCell.textField.text = self.appliedCouponsIDAndName[indexPath.row];
+        couponTableViewCell.textField.text = [self.appliedCouponsIDAndName[indexPath.row] valueForKey:@"couponName"];
         couponTableViewCell.verifyButton.selected = YES;
 //        couponTableViewCell.verifyButton.alpha = 0.5;
         couponTableViewCell.textField.userInteractionEnabled = NO;
@@ -939,16 +1002,17 @@ typedef enum {
     if (couponCell.verifyButton.selected == NO) {
         
         if (self.appliedCouponsIDAndName.count == 0) {
-            if ([self isCouponPresentInUniversalCouponsOfName:couponCell.textField.text]) {
+            NSDictionary *universalCouponIDAndCouponName = [self isCouponPresentInUniversalCouponsOfName:couponCell.textField.text];
+            if (universalCouponIDAndCouponName) {
                 //Coupon is universal coupon
                 _isUniversalCouponApplied = YES;
-                [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                [self.appliedCouponsIDAndName addObject:universalCouponIDAndCouponName];
                 [self.couponTableView reloadData];
             }
             else {
                 NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
                 NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
-//                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
                 
                 if (serviceAndCouponIDs != nil) {
                     //Coupon is a valid coupon
@@ -961,7 +1025,13 @@ typedef enum {
                         }
                     }
                     if (isServiceSelected) {
-                        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                        
+                        NSMutableDictionary *serviceCouponIDAndCouponName = [NSMutableDictionary dictionary];
+                        [serviceCouponIDAndCouponName setValue:fetchedCouponID forKey:@"couponID"];
+                        [serviceCouponIDAndCouponName setValue:couponCell.textField.text forKey:@"couponName"];
+                        
+                        [self.appliedCouponsIDAndName addObject:serviceCouponIDAndCouponName];
+                        
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
                     } else {
@@ -979,7 +1049,7 @@ typedef enum {
             } else {
                 NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
                 NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
-//                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
+                NSString *fetchedCouponID = [serviceAndCouponIDs valueForKey:@"couponID"];
                 
                 if (serviceAndCouponIDs != nil) {
                     //Coupon is a valid coupon
@@ -992,7 +1062,13 @@ typedef enum {
                         }
                     }
                     if (isServiceSelected) {
-                        [self.appliedCouponsIDAndName addObject:couponCell.textField.text];
+                        
+                        NSMutableDictionary *serviceCouponIDAndCouponName = [NSMutableDictionary dictionary];
+                        [serviceCouponIDAndCouponName setValue:fetchedCouponID forKey:@"couponID"];
+                        [serviceCouponIDAndCouponName setValue:couponCell.textField.text forKey:@"couponName"];
+                        
+                        [self.appliedCouponsIDAndName addObject:serviceCouponIDAndCouponName];
+                        
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
                     } else {

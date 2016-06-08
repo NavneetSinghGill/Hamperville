@@ -25,6 +25,8 @@
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(weak, nonatomic) IBOutlet UIView *subsctiptionPlanSuperView;
 
+@property(strong, nonatomic) NSMutableArray *savedSubscriptions;
+
 @end
 
 @implementation ChangeSubscriptionViewController
@@ -57,8 +59,20 @@
         }
         count++;
     }
+    
     self.newStatus = self.oldStatus;
     self.subsctiptionPlanSuperView.hidden = !self.newStatus;
+    
+    [self refreshSubscriptions];
+}
+
+- (void)refreshSubscriptions {
+    self.savedSubscriptions = [NSMutableArray array];
+    for (NSDictionary *subscription in self.allSubscriptions) {
+        if (!([[[subscription valueForKey:@"subscription_plan"] valueForKey:@"id"] integerValue] == self.currentSubscriptionPlanID)) {
+            [self.savedSubscriptions addObject:subscription];
+        }
+    }
 }
 
 #pragma mark - Over ridden methods
@@ -102,6 +116,7 @@
                     self.nextRenewalDate = [NSDate dateWithTimeIntervalSince1970:[[response valueForKey:@"next_subscription_date"] integerValue]];
                 }
             }
+            [self refreshSubscriptions];
             [self showToastWithText:@"Subscription successfully updated." on:Success];
         } else {
             [self showToastWithText:response on:Failure];
@@ -114,13 +129,19 @@
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
     }];
-    NSString *amountText = [[self.allSubscriptions[[self.pickerView selectedRowInComponent:0]] valueForKey:@"subscription_plan"] valueForKey:@"amount"];
+    NSString *amountText = [[self.savedSubscriptions[[self.pickerView selectedRowInComponent:0]] valueForKey:@"subscription_plan"] valueForKey:@"amount"];
     self.selectLabel.text = [NSString stringWithFormat:@"$ %@",amountText];
-    self.currentSubscriptionPlanID = [[[self.allSubscriptions[[self.pickerView selectedRowInComponent:0]] valueForKey:@"subscription_plan"] valueForKey:@"id"] integerValue];
+    self.currentSubscriptionPlanID = [[[self.savedSubscriptions[[self.pickerView selectedRowInComponent:0]] valueForKey:@"subscription_plan"] valueForKey:@"id"] integerValue];
 }
 
 - (IBAction)statusSwitchTapped:(UISwitch *)sender {
     self.subsctiptionPlanSuperView.hidden = ![sender isOn];
+    if (self.pickerSuperViewBottomConstraint.constant == 0) {
+        self.pickerSuperViewBottomConstraint.constant = -self.pickerSuperView.frame.size.height;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
 #pragma mark - PickerView methods -
@@ -132,7 +153,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.allSubscriptions.count;
+    return self.savedSubscriptions.count;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
@@ -145,7 +166,7 @@
         tView.textAlignment = NSTextAlignmentCenter;
     }
     // Fill the label text here
-    NSDictionary *option = self.allSubscriptions[row];
+    NSDictionary *option = self.savedSubscriptions[row];
     tView.text = [[option valueForKey:@"subscription_plan"] valueForKey:@"amount"];
     return tView;
 }

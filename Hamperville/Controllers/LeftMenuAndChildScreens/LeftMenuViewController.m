@@ -52,7 +52,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.allHeadings = [NSMutableArray arrayWithObjects:@"User Name",@"Request Pickup",@"History",@"Preferences",@"Subscription",@"Settings",@"Price List",@"Coverage Area", @"Help", @"Write a Review", nil];
+    self.allHeadings = [NSMutableArray arrayWithObjects:@"User Name",@"Request Pickup",@"History",@"Preferences",@"Subscription",@"Settings",@"Price List", @"Help", nil];
     
     User *user = [[Util sharedInstance]getUser];
     NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
@@ -84,7 +84,7 @@
 #pragma mark - TableView Delegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (self.view.frame.size.height - 40 ) / 10;
+    return (self.view.frame.size.height - 40 ) / self.allHeadings.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -112,9 +112,9 @@
             [self openPriceListScreen];
             break;
         case 7:
+            [self openHelpScreen];
             break;
         case 8:
-            [self openHelpScreen];
             break;
         case 9:
             break;
@@ -130,7 +130,7 @@
 - (void)initialSetup {
     self.allHeadings = [NSMutableArray arrayWithObjects:@"User Name",@"Request Pickup",@"History",@"Preferences",@"Subscription",@"Settings",@"Price List",@"Coverage Area", @"Help", @"Write a Review", nil];
 
-    self.allImageName = [NSMutableArray arrayWithObjects:@"user", @"pickup", @"history", @"preference", @"subscription", @"setting", @"pricelist", @"coverageArea", @"help", @"review", nil];
+    self.allImageName = [NSMutableArray arrayWithObjects:@"user", @"pickup", @"history", @"preference", @"subscription", @"setting", @"pricelist", @"help", nil];
     
     User *user = [[Util sharedInstance]getUser];
     NSString *userName = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];

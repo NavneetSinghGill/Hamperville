@@ -445,7 +445,7 @@
     
     NSHTTPURLResponse *responseStatus = (NSHTTPURLResponse *)task.response;
     //    NSString *responseString = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-    NSLog(@"Success:- URL:%@\n response::%@", task.currentRequest.URL, responseObject);
+    NSLog([NSString stringWithFormat:@"Success:- URL:%@\n response::%@", task.currentRequest.URL, responseObject]);
     
     if(responseStatus.statusCode == kResponseStatusSuccess) {
         if (responseObject) {
@@ -472,12 +472,12 @@
         if([self isForbiddenResponse:responseStatus.statusCode]) {
             return;
         }
-        NSLog(@"\n Error :Failure with error: %@", [error localizedRecoverySuggestion]);
+        NSLog([NSString stringWithFormat:@"\n Error :Failure with error: %@", [error localizedRecoverySuggestion]]);
         errorResponse ? block(NO, errorResponse) : block(NO, error);
     } else if (error.localizedDescription != nil) {
-        NSLog(@"\n Error :Failure with error: %@", [error localizedDescription]);
+        NSLog([NSString stringWithFormat:@"\n Error :Failure with error: %@", [error localizedDescription]]);
         
-        NSLog(@"%@",error);
+        NSLog([NSString stringWithFormat:@"%@",error]);
         NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
         
         NSMutableDictionary *serializedData = nil;
@@ -488,7 +488,10 @@
         }
         serializedData = [serializedData mutableCopy];
         [serializedData setValue:kFailure forKey:kSuccessStatus];
-        NSLog(@"Failure error serialised - %@",serializedData);
+        NSLog([NSString stringWithFormat:@"Failure error serialised - %@",serializedData]);
+        if (!serializedData) {
+            serializedData = [NSMutableDictionary dictionaryWithObject:@"An error occured while processing your request." forKey:@"message"];
+        }
         block(NO, serializedData);
     }
     

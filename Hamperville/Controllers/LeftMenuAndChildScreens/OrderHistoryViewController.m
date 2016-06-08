@@ -106,8 +106,7 @@ NSInteger kTableViewCellLabelTag = 10;
     }
     [[RequestManager alloc] getOrderHistoryWithLimit:10 time:[NSString stringWithFormat:@"%ld",(long)self.timeStamp] andOrderOffset:[NSString stringWithFormat:@"%ld",(long)self.orderOffset] withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
-        if (success) {
-            [self.orders addObjectsFromArray:[response valueForKey:@"order_history"]];
+        if (success) {            [self.orders addObjectsFromArray:[response valueForKey:@"order_history"]];
             self.hasMore = [[response valueForKey:@"hasMore"] boolValue];
             if (self.hasMore) {
                 self.timeStamp = [[response valueForKey:@"timestamp"] integerValue];

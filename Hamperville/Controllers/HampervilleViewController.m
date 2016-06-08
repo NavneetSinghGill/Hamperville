@@ -122,6 +122,7 @@
     }
 }
 
+// method name "showToastWithText" was not change as it was used at many places
 - (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse {
     
     if ([message isEqualToString:kNoNetworkAvailable]) {

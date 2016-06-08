@@ -45,6 +45,10 @@
     [defaults synchronize];
 }
 
+- (UIColor *)greenColor {
+    return [UIColor colorWithRed:53/255.0f green:173/255.0f blue:71/255.0f alpha:1.f];
+}
+
 - (NSString *)getNumberAsStringFromString:(NSString *)string {
     NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];
     [nonNumberCharacterSet invert];

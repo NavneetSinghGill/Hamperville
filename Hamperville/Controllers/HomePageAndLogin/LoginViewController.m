@@ -46,6 +46,8 @@
         self.passwordTextField.text = [[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword];
         self.rememberMeButton.selected = YES;
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -55,6 +57,11 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark - IBAction methods
 
@@ -139,9 +146,6 @@
     self.loginButton.layer.cornerRadius = 3;
     
     kLogoTopConstraintDefaultValue = self.logoTopConstraint.constant;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark Notification Methods

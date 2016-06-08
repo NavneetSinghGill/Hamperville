@@ -13,6 +13,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 #define ApplicationDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
+#define Utils [Util sharedInstance]
 
 @property (strong, nonatomic) UIWindow *window;
 

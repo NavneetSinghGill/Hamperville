@@ -45,10 +45,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self registerNotifications];
+    
     [self setUserinteractionForTextFields];
     [self initTextFieldsWithUserInfo];
     self.saveButton.hidden = YES;
     [self getUserCall:[[Util sharedInstance]getUser].userID];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - IBAction methods
@@ -99,7 +107,10 @@
                     [self.alternativePhoneTextField.text isEqualToString:self.primaryPhoneTextField.text]) {
                     [self showToastWithText:@"Primary and alternate phone numbers can't be same" on:Failure];
                     self.saveButton.hidden = NO;
-                    self.editButton.selected = YES;
+                    
+                    self.editButton.selected = !self.editButton.selected;
+                    self.saveButton.hidden = !self.editButton.selected;
+                    [self setUserinteractionForTextFields];
                 } else {
                     [self postUserAPI];
                 }
@@ -280,7 +291,6 @@
     self.logoutButton.layer.cornerRadius = 4;
     
     self.kYourInfoTopConstraintDefault = self.yourInfoTopConstraint.constant;
-    [self registerNotifications];
     
     self.firstNameTextField.delegate = self;
     self.lastNameTextField.delegate = self;

@@ -167,28 +167,28 @@ static CGFloat const kForceHideAnimationDuration = 0.1f;
     
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13.f];
+    _titleLabel.font = [UIFont fontWithName:@"roboto-bold" size:14.f];
     _titleLabel.textColor = [UIColor colorWithWhite:1.f alpha:0.9f];
-    _titleLabel.textAlignment = NSTextAlignmentLeft;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.numberOfLines = 1;
     _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     _titleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-    _titleLabel.layer.shadowOffset = CGSizeMake(0.f, -1.f);
-    _titleLabel.layer.shadowOpacity = 0.3f;
-    _titleLabel.layer.shadowRadius = 0.f;
+//    _titleLabel.layer.shadowOffset = CGSizeMake(0.f, -1.f);
+//    _titleLabel.layer.shadowOpacity = 0.3f;
+//    _titleLabel.layer.shadowRadius = 0.f;
     [self addSubview:_titleLabel];
     
     _subtitleLabel = [[UILabel alloc] init];
     _subtitleLabel.backgroundColor = [UIColor clearColor];
-    _subtitleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.f];
+    _subtitleLabel.font = [UIFont fontWithName:@"roboto-regular" size:12.f];
     _subtitleLabel.textColor = [UIColor colorWithWhite:1.f alpha:0.9f];
-    _subtitleLabel.textAlignment = NSTextAlignmentLeft;
+    _subtitleLabel.textAlignment = NSTextAlignmentCenter;
     _subtitleLabel.numberOfLines = 0;
     _subtitleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     _subtitleLabel.layer.shadowColor = [UIColor blackColor].CGColor;
-    _subtitleLabel.layer.shadowOffset = CGSizeMake(0.f, -1.f);
-    _subtitleLabel.layer.shadowOpacity = 0.3f;
-    _subtitleLabel.layer.shadowRadius = 0.f;
+//    _subtitleLabel.layer.shadowOffset = CGSizeMake(0.f, -1.f);
+//    _subtitleLabel.layer.shadowOpacity = 0.3f;
+//    _subtitleLabel.layer.shadowRadius = 0.f;
     [self addSubview:_subtitleLabel];
 }
 
@@ -401,7 +401,7 @@ static CGFloat const kForceHideAnimationDuration = 0.1f;
     });
     
     [UIView animateWithDuration:self.fadeInDuration delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-        self.alpha = self.bannerOpacity;
+        self.alpha = 1.0;//self.bannerOpacity;
     } completion:nil];
 }
 
@@ -694,8 +694,9 @@ static CGFloat const kForceHideAnimationDuration = 0.1f;
     
     UIColor *fillColor;
     switch (self.style) {
+        case ALAlertBannerStyleNone:
         case ALAlertBannerStyleSuccess:
-            fillColor = [UIColor colorWithRed:(77/255.0) green:(175/255.0) blue:(67/255.0) alpha:1.f];
+            fillColor = [UIColor colorWithRed:(53/255.0) green:(171/255.0) blue:(73/255.0) alpha:1.f];
             break;
         case ALAlertBannerStyleFailure:
             fillColor = [UIColor colorWithRed:(173/255.0) green:(48/255.0) blue:(48/255.0) alpha:1.f];

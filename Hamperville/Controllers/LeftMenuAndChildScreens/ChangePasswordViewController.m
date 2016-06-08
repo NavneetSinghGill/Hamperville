@@ -27,6 +27,7 @@
     [super viewDidLoad];
     
     [self initialSetup];
+    self.currentPassTextField.clearsOnBeginEditing = NO;
 }
 
 #pragma mark - Private methods
@@ -53,6 +54,11 @@
 - (IBAction)savePasswordButtonTapped:(id)sender {
     if ([self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text] && self.nwPassTextField.text.length >= 8 && self.currentPassTextField.text.length >= 8 && self.reEnterNwPassTextField.text.length >= 8) {
         
+        if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
+            [self showToastWithText:@"Invalid current password" on:Failure];
+            return;
+        }
+        
         [self.activityIndicator startAnimating];
         [[RequestManager alloc] putChangePasswordWithOldPassword:self.currentPassTextField.text andNwPassword:self.nwPassTextField.text withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
@@ -71,10 +77,10 @@
         }];
     } else if (self.nwPassTextField.text.length < 8 || self.reEnterNwPassTextField.text.length < 8){
         [self showToastWithText:@"Minimum 8 characters required." on:Failure];
-    }   else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
-        [self showToastWithText:@"Passwords doesn't match" on:Failure];
     } else if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
-        [self showToastWithText:@"Incorrect password" on:Failure];
+        [self showToastWithText:@"Invalid current password" on:Failure];
+    } else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
+        [self showToastWithText:@"Passwords doesn't match" on:Failure];
     }
 }
 

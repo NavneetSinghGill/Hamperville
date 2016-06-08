@@ -53,6 +53,7 @@
 - (void)initialSetup {
     [self setNavigationBarButtonTitle:@"Price List" andColor:[UIColor colorWithRed:34/255 green:34/255 blue:34/255 alpha:1.0]];
     [self setLeftMenuButtons:[NSArray arrayWithObjects:self.menuButton, nil]];
+    [self setRightMenuButtons:[NSArray arrayWithObject:self.coverageButton]];
     
     tableviewHeight = 55;
     leftLabelTag = 10;
@@ -71,6 +72,23 @@
     tapGesture.numberOfTapsRequired = 1;
     tapGesture.delegate = self;
     [self.view addGestureRecognizer:tapGesture];
+}
+
+- (UIBarButtonItem *)coverageButton {
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 4, 34, 34)];
+    rightButton.layer.cornerRadius = rightButton.frame.size.width / 2;
+    rightButton.layer.masksToBounds = YES;
+    [rightButton setImage:[UIImage imageNamed:@"Location"] forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(redirectToCoverageAreaLink) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    return rightBarButton;
+}
+
+- (void)redirectToCoverageAreaLink {
+    NSURL *url = [NSURL URLWithString:@"http://staging.hamperville.com/coverage_areas"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 - (void)getPriceList {

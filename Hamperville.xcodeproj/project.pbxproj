@@ -39,6 +39,7 @@
 		3B6D8DBA1CBBC87900D7B208 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B6D8DB71CBBC87900D7B208 /* LoginViewController.m */; };
 		3B7197941CE4805000B102CD /* SpecialCarePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7197931CE4805000B102CD /* SpecialCarePreferencesViewController.m */; };
 		3B868AF21CF8513A001E7012 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B868AF11CF8513A001E7012 /* CardViewController.m */; };
+		3BA32F7D1D0836A4001C67C0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA32F7C1D0836A4001C67C0 /* AssetsLibrary.framework */; };
 		3BCD37C01CBE1FA200DE4E91 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */; };
 		3BCD37C41CBE270400DE4E91 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C31CBE270400DE4E91 /* User.m */; };
 		3BCD37C91CBE27ED00DE4E91 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BCD37C81CBE27ED00DE4E91 /* Util.m */; };
@@ -175,6 +176,7 @@
 		3B7197931CE4805000B102CD /* SpecialCarePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialCarePreferencesViewController.m; sourceTree = "<group>"; };
 		3B868AF01CF8513A001E7012 /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardViewController.h; sourceTree = "<group>"; };
 		3B868AF11CF8513A001E7012 /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardViewController.m; sourceTree = "<group>"; };
+		3BA32F7C1D0836A4001C67C0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		3BCD37BF1CBE1FA200DE4E91 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		3BCD37C21CBE270400DE4E91 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		3BCD37C31CBE270400DE4E91 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BA32F7D1D0836A4001C67C0 /* AssetsLibrary.framework in Frameworks */,
 				F99269132159B757361CCD18 /* libPods-Hamperville.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,6 +693,7 @@
 		7FF6B420B82ED2E9B3B0F825 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3BA32F7C1D0836A4001C67C0 /* AssetsLibrary.framework */,
 				80123942856A302805D10811 /* libPods-Hamperville.a */,
 			);
 			name = Frameworks;

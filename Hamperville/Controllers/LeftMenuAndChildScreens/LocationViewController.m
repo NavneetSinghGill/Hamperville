@@ -188,9 +188,7 @@
                 });
             }
             self.isEditionAllowed = [[response valueForKey:@"is_editable"] boolValue];
-            if (self.isEditionAllowed) {
-                self.editButton.hidden = YES;
-            }
+            self.editButton.hidden = !self.isEditionAllowed;
         } else {
             [self showToastWithText:response on:Failure];
         }
