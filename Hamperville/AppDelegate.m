@@ -142,7 +142,7 @@ void uncaughtExceptionHandler(NSException *exception)
 
 - (BOOL)hasNetworkAvailable
 {
-    NSLog(@"Info: isNetworkAvailable: %d", self.isNetworkAvailable);
+    [[SMobiLogger sharedInterface] info:[NSString stringWithFormat:@"%s", __FUNCTION__] withDescription:[NSString stringWithFormat:@"Info: isNetworkAvailable: %d", self.isNetworkAvailable]];
     return self.isNetworkAvailable;
 }
 
