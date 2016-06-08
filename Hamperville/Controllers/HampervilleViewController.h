@@ -11,9 +11,9 @@
 #import <SWRevealViewController.h>
 
 typedef enum {
-    Top = 0,
-    Bottom
-} HeaderPosition;
+    Success = 0,
+    Failure
+} HeaderResponse;
 
 @interface HampervilleViewController : UIViewController
 
@@ -30,8 +30,8 @@ typedef enum {
 - (void)centerTitleButtonTapped;
 - (void)backButtonTapped;
 
-- (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition;
-- (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition withDuration:(NSTimeInterval)duration;
+- (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse;
+- (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse withDuration:(NSTimeInterval)duration;
 - (void)closeLeftMenuIfOpen;
 
 @end

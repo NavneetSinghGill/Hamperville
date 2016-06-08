@@ -146,14 +146,14 @@
                 dataDict[@"state"] = tableViewCell.textField.text;
             }
         } else {
-            [self showToastWithText:@"Fill the remaining details" on:Top withDuration:3.0];
+            [self showToastWithText:@"Fill the remaining details" on:Failure];
             return;
         }
     }
     [dataDict setValue:[NSNumber numberWithBool:self.doorManButton.selected] forKey:@"is_doorman_building"];
     [[RequestManager alloc] postAddressWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
         if (success) {
-            [self showToastWithText:@"Address successfully updated." on:Top withDuration:1.8];
+            [self showToastWithText:@"Address successfully updated." on:Success];
             self.saveButton.hidden = YES;
             double delayInSeconds = 2.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -162,7 +162,7 @@
             });
             
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -192,7 +192,7 @@
                 self.editButton.hidden = YES;
             }
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -222,11 +222,11 @@
 
 - (IBAction)editButtonTapped:(id)sender {
     if (self.editButton.selected == NO && ![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:@"Cant't edit in offline mode" on:Top];
+        [self showToastWithText:@"Cant't edit in offline mode" on:Failure];
         return;
     }
     if (self.isEditionAllowed) {
-        [self showToastWithText:@"Address can not be updated because doorman service is active" on:Top];
+        [self showToastWithText:@"Address can not be updated because doorman service is active" on:Failure];
         return;
     }
     self.editButton.selected = !self.editButton.selected;

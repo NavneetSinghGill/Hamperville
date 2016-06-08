@@ -122,7 +122,7 @@
 
 - (IBAction)submitButtonTapped:(id)sender {
     if (self.titleTextField.text.length == 0) {
-        [self showToastWithText:@"Enter title" on:Top withDuration:1.5];
+        [self showToastWithText:@"Enter title" on:Success];
         return;
     }
     
@@ -145,7 +145,7 @@
             
             [[SMobiLogger sharedInterface] startMobiLogger];
             
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Success];
             
             self.attachedScreenShot = nil;
             self.titleTextField.text = @"";
@@ -155,7 +155,7 @@
             areLogsAttached = NO;
             [self.view endEditing:YES];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }

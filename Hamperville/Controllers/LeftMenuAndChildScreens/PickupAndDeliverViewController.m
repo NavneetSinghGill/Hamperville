@@ -62,7 +62,7 @@
                                        if (success) {
                                            [self readResponse:response];
                                        } else {
-                                           [self showToastWithText:response on:Top];
+                                           [self showToastWithText:response on:Failure];
                                        }
                                    }];
 }
@@ -118,7 +118,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:kNoNetworkAvailable on:Top];
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
         return;
     }
     NSInteger storePreviousSelection = self.selectedIndex;
@@ -131,9 +131,9 @@
                                                andMethod:method
                                      withCompletionBlock:^(BOOL success, id response) {
                                          if (success) {
-                                            [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Top withDuration:1.5];
+                                            [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Success];
                                          } else {
-                                             [self showToastWithText:response on:Top];
+                                             [self showToastWithText:response on:Failure];
                                              self.selectedIndex = storePreviousSelection;
                                              [self.tableView reloadData];
                                          }

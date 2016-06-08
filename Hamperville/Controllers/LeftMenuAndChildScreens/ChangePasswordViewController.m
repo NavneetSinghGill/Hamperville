@@ -64,17 +64,17 @@
                     [[NSUserDefaults standardUserDefaults]setValue:nil forKey:kUserID];
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 });
+                [self showToastWithText:response on:Success];
             } else {
-                
+                [self showToastWithText:response on:Failure];
             }
-            [self showToastWithText:response on:Top];
         }];
     } else if (self.nwPassTextField.text.length < 8 || self.reEnterNwPassTextField.text.length < 8){
-        [self showToastWithText:@"Minimum 8 characters required." on:Top];
+        [self showToastWithText:@"Minimum 8 characters required." on:Failure];
     }   else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
-        [self showToastWithText:@"Passwords doesn't match" on:Top];
+        [self showToastWithText:@"Passwords doesn't match" on:Failure];
     } else if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
-        [self showToastWithText:@"Incorrect password" on:Top];
+        [self showToastWithText:@"Incorrect password" on:Failure];
     }
 }
 

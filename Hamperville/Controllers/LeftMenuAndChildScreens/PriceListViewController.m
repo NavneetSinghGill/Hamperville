@@ -92,7 +92,7 @@
             [self reloadSubscriptionsTableView];
             [self reloadServiceTableView];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }

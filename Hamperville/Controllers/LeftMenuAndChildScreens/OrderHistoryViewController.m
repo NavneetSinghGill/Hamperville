@@ -93,7 +93,7 @@ NSInteger kTableViewCellLabelTag = 10;
             [self.tableView reloadData];
         } else {
             if ([response isKindOfClass:[NSString class]]) {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
             }
         }
     }];
@@ -116,7 +116,7 @@ NSInteger kTableViewCellLabelTag = 10;
             [self.tableView reloadData];
         } else {
             if ([response isKindOfClass:[NSString class]]) {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
             }
         }
         [self.refreshControl endRefreshing];

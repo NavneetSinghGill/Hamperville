@@ -30,7 +30,7 @@
 
 - (void)showPushNotificationMessage:(NSNotification *)notification {
     if (self.isViewLoaded && self.view.window && notification.userInfo != nil) {
-        [self showToastWithText:[notification.userInfo valueForKey:kPushNotificationMessage] on:Top withDuration:2.0];
+        [self showToastWithText:[notification.userInfo valueForKey:kPushNotificationMessage] on:Success];
     }
 }
 
@@ -122,58 +122,46 @@
     }
 }
 
-- (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition {
-    CSToastStyle *style = [[CSToastStyle alloc] initWithDefaultStyle];
-    style.messageFont = [UIFont fontWithName:@"roboto-regular" size:12.0];
-    style.backgroundColor = [UIColor colorWithRed:51/255.0f green:171/255.0f blue:73/255.0f alpha:1.0];
-    
-    NSValue *value = nil;
-    if (self.navigationController == nil) {
-        if (headerPosition == Top) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60)];
-        } else if (headerPosition == Bottom) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-        }
-    } else {
-        if (headerPosition == Top) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60 + 64)];
-        } else if (headerPosition == Bottom) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-        }
-    }
+- (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse {
     
     if ([message isEqualToString:kNoNetworkAvailable]) {
         [self networkAvailability];
     } else {
-        [self.view makeToast:message duration:1 position:value style:style];
+        if (headerResponse == Success) {
+            [ApplicationDelegate showSuccessBannerWithSubtitle:message];
+        } else if (headerResponse == Failure) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:message message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *alertActionDismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil ];
+            [alertController addAction:alertActionDismiss];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
     }
 }
 
-- (void)showToastWithText:(NSString *)message on:(HeaderPosition)headerPosition withDuration:(NSTimeInterval)duration{
-    CSToastStyle *style = [[CSToastStyle alloc] initWithDefaultStyle];
-    style.messageFont = [UIFont fontWithName:@"roboto-regular" size:12.0];
-    style.backgroundColor = [UIColor colorWithRed:51/255.0f green:171/255.0f blue:73/255.0f alpha:1.0];
-    
-    NSValue *value = nil;
-    if (self.navigationController == nil) {
-        if (headerPosition == Top) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60)];
-        } else if (headerPosition == Bottom) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-        }
-    } else {
-        if (headerPosition == Top) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60 + 64)];
-        } else if (headerPosition == Bottom) {
-            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-        }
-    }
-    
-    if ([message isEqualToString:kNoNetworkAvailable]) {
-        [self networkAvailability];
-    } else {
-        [self.view makeToast:message duration:duration position:value style:style];
-    }
+- (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse withDuration:(NSTimeInterval)duration{
+    [self showToastWithText:message on:headerResponse];
+//    [ApplicationDelegate showSuccessBannerOnTopWithTitle:<#(NSString *)#> subtitle:<#(NSString *)#>];
+//    
+//    NSValue *value = nil;
+//    if (self.navigationController == nil) {
+//        if (headerPosition == Top) {
+//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60)];
+//        } else if (headerPosition == Bottom) {
+//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
+//        }
+//    } else {
+//        if (headerPosition == Top) {
+//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60 + 64)];
+//        } else if (headerPosition == Bottom) {
+//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
+//        }
+//    }
+//    
+//    if ([message isEqualToString:kNoNetworkAvailable]) {
+//        [self networkAvailability];
+//    } else {
+////        [self.view makeToast:message duration:duration position:value style:style];
+//    }
 }
 
 @end

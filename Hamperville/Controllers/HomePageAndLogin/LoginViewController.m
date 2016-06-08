@@ -60,9 +60,9 @@
 
 - (IBAction)loginButtonTapped:(id)sender {
     if (self.userNameTextField.text.length < 1) {
-        [self showToastWithText:@"Enter username" on:Top];
+        [self showToastWithText:@"Enter username" on:Failure];
     } else if (self.passwordTextField.text.length < 1) {
-        [self showToastWithText:@"Enter password" on:Top];
+        [self showToastWithText:@"Enter password" on:Failure];
     } else {
         [self.activityIndicator startAnimating];
         [[RequestManager alloc] loginWithUserEmail:self.userNameTextField.text andPassword:self.passwordTextField.text withCompletionBlock:^(BOOL success, id response) {
@@ -82,7 +82,7 @@
                     
                 }];
             } else {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
                 [self.activityIndicator stopAnimating];
             }
         }];
@@ -109,7 +109,7 @@
                               [[Util sharedInstance] saveUser:user];
                               [self.navigationController dismissViewControllerAnimated:NO completion:nil];
                           } else {
-                              [self showToastWithText:response on:Top];
+                              [self showToastWithText:response on:Failure];
                           }
                       }];
 }

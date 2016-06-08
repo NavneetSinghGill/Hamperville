@@ -115,7 +115,7 @@
             
             [self parseGetResponse:response];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
             self.pickerView.hidden = YES;
             self.tableView.hidden = NO;
             self.saveButton.hidden = YES;
@@ -236,9 +236,9 @@
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
-                [self showToastWithText:@"Wash and Fold preference updated successfully." on:Top withDuration:1.5];
+                [self showToastWithText:@"Wash and Fold preference updated successfully." on:Success];
             } else {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
             }
         }];
     }

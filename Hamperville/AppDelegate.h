@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "ALAlertBanner.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -21,6 +22,11 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+- (ALAlertBanner *)showFailureBannerOnTopWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
+- (ALAlertBanner *)showSuccessBannerOnTopWithTitle:(NSString *)title subtitle:(NSString *)subtitle;
+- (ALAlertBanner *)showSuccessBannerWithSubtitle:(NSString *)subtitle;
+- (ALAlertBanner *)showSuccessBannerWithSubtitle:(NSString *)subtitle withObject:(id)object;
 
 - (BOOL)hasNetworkAvailable;
 

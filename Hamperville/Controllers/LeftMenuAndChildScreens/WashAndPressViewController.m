@@ -48,7 +48,7 @@
                 });
             }
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -108,7 +108,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:kNoNetworkAvailable on:Top];
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
         return;
     }
     self.selectedIndex = indexPath.row;
@@ -118,9 +118,9 @@
     dict[@"wash_and_press_method"] = self.options[self.selectedIndex];
     [[RequestManager alloc] postWashAndPressPreferencesWithDataDictionary:dict withCompletionBlock:^(BOOL success, id response) {
         if (success) {
-            [self showToastWithText:@"Wash and Press preference updated successfully." on:Top withDuration:1.5];
+            [self showToastWithText:@"Wash and Press preference updated successfully." on:Success];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }

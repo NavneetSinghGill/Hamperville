@@ -125,7 +125,7 @@
 
 - (IBAction)modifyOrderButtonTapped:(id)sender {
     if (![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:kNoNetworkAvailable on:Top];
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
         return;
     }
     SchedulePickupViewController *schedulePickupViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SchedulePickupViewController"];
@@ -150,9 +150,9 @@
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
-                [self showToastWithText:@"Order cancelled successfully." on:Top withDuration:1.8];
+                [self showToastWithText:@"Order cancelled successfully." on:Success];
             } else {
-                [self showToastWithText:response on:Top withDuration:1.8];
+                [self showToastWithText:response on:Failure];
             }
         }];
     }];

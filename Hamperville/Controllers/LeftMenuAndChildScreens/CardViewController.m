@@ -74,11 +74,11 @@
 
 - (IBAction)saveButtonTapped:(id)sender {
     if (self.cardType.length == 0) {
-        [self showToastWithText:@"Enter cards of type \'Visa\', \'American Express\' or \'MasterCard\'" on:Top withDuration:1.5];
+        [self showToastWithText:@"Enter cards of type \'Visa\', \'American Express\' or \'MasterCard\'" on:Failure];
         return;
     }
     if (self.monthTextField.text.length == 0 || self.yearTextField.text.length == 0 || self.cvvTextField.text.length == 0) {
-        [self showToastWithText:@"Enter details" on:Top withDuration:1.5];
+        [self showToastWithText:@"Enter details" on:Failure];
         return;
     }
     NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
@@ -93,7 +93,7 @@
         if (success) {
             [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:kChangeRefreshStatusShowCardScreen];
             
-            [self showToastWithText:@"Credit card added successfully." on:Top withDuration:1.5];
+            [self showToastWithText:@"Credit card added successfully." on:Success];
             double delayInSeconds = 1.8;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -101,7 +101,7 @@
             });
             _wasAdded = YES;
         } else {
-            [self showToastWithText:response on:Top withDuration:1.5];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }

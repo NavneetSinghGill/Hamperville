@@ -35,26 +35,16 @@
         [[RequestManager alloc] postForgotPasswordWithEmail:self.emailTextField.text withCompletionBlock:^(BOOL success, id response) {
             [self.activityIndicator stopAnimating];
             if (success) {
-                if ([self.emailTextField isFirstResponder]) {
-                    [self showToastWithText:[NSString stringWithFormat:@"Password reset link is sent to %@.",self.emailTextField.text] on:Top];
-                } else {
-                    [self showToastWithText:[NSString stringWithFormat:@"Password reset link is sent to %@.",self.emailTextField.text] on:Bottom];
-                }
+                [self showToastWithText:[NSString stringWithFormat:@"Password reset link is sent to %@.",self.emailTextField.text] on:Success];
+
                 self.emailTextField.text = kEmptyString;
+                [self.view endEditing:YES];
             } else {
-                if ([self.emailTextField isFirstResponder]) {
-                    [self showToastWithText:response on:Top];
-                } else {
-                    [self showToastWithText:response on:Bottom];
-                }
+                [self showToastWithText:response on:Failure];
             }
         }];
     } else {
-        if ([self.emailTextField isFirstResponder]) {
-            [self showToastWithText:@"Please enter correct email." on:Top];
-        } else {
-            [self showToastWithText:@"Please enter correct email." on:Bottom];
-        }
+        [self showToastWithText:@"Please enter correct email." on:Failure];
     }
     [self.emailTextField resignFirstResponder];
 }

@@ -171,7 +171,7 @@ typedef enum {
         } else if ([response isKindOfClass:[NSString class]] && [response isEqualToString:kNoNetworkAvailable]) {
             [self networkAvailability];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -690,7 +690,7 @@ typedef enum {
         commaSeparatedServiceIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedServiceIDs,self.selectedServiceIDs[count].serviceID];
     }
     if ([commaSeparatedServiceIDs isKindOfClass:[NSString class]] && [commaSeparatedServiceIDs length] == 0) {
-        [self showToastWithText:@"Select a service" on:Top];
+        [self showToastWithText:@"Select a service" on:Failure];
         return;
     }
     if ([commaSeparatedServiceIDs isKindOfClass:[NSNumber class]]) {
@@ -735,9 +735,9 @@ typedef enum {
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
                 });
-                [self showToastWithText:@"Order successfully placed." on:Top withDuration:1.5];
+                [self showToastWithText:@"Order successfully placed." on:Success];
             } else {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
             }
         }];
     } else {
@@ -754,9 +754,10 @@ typedef enum {
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
-                [self showToastWithText:@"Order modified successfully." on:Top withDuration:1.8];
+                [self showToastWithText:@"Order modified successfully." on:Success];
+            } else {
+                [self showToastWithText:response on:Failure];
             }
-            [self showToastWithText:response on:Top];
         }];
     }
 }
@@ -964,17 +965,17 @@ typedef enum {
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
                     } else {
-                        [self showToastWithText:@"Invalid coupon" on:Top];
+                        [self showToastWithText:@"Invalid coupon" on:Failure];
                     }
                 } else {
-                    [self showToastWithText:@"Invalid coupon" on:Top];
+                    [self showToastWithText:@"Invalid coupon" on:Failure];
                 }
             }
         } else {
             if ([self isCouponPresentInUniversalCouponsOfName:couponCell.textField.text]) {
                 //Coupon is universal coupon
                 _isUniversalCouponApplied = YES;
-                [self showToastWithText:@"Can't apply Universal coupon" on:Top];
+                [self showToastWithText:@"Can't apply Universal coupon" on:Failure];
             } else {
                 NSDictionary *serviceAndCouponIDs = [self isCouponPresentInOtherCouponsOfName:couponCell.textField.text];
                 NSString *fetchedServiceID = [serviceAndCouponIDs valueForKey:@"serviceID"];
@@ -995,7 +996,7 @@ typedef enum {
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
                     } else {
-                        [self showToastWithText:@"Invalid coupon" on:Top];
+                        [self showToastWithText:@"Invalid coupon" on:Failure];
                     }
                 } else {
                     

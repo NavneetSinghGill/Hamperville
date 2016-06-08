@@ -88,7 +88,7 @@
 - (IBAction)saveButtonTapped:(id)sender {
     self.newStatus = [self.statusSwitch isOn];
     if (self.newStatus == true && self.currentSubscriptionPlanID == 0) {
-        [self showToastWithText:@"Select plan" on:Top];
+        [self showToastWithText:@"Select plan" on:Failure];
         return;
     }
     [self.activityIndicator startAnimating];
@@ -102,9 +102,9 @@
                     self.nextRenewalDate = [NSDate dateWithTimeIntervalSince1970:[[response valueForKey:@"next_subscription_date"] integerValue]];
                 }
             }
-            [self showToastWithText:@"Subscription successfully updated." on:Top withDuration:1.5];
+            [self showToastWithText:@"Subscription successfully updated." on:Success];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }

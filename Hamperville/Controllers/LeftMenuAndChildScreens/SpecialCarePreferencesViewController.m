@@ -117,7 +117,7 @@
             
             [self parseGetResponse:response];
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
             self.pickerView.hidden = YES;
             self.tableView.hidden = NO;
             self.saveButton.hidden = YES;
@@ -236,9 +236,9 @@
             [self.activityIndicator stopAnimating];
             if (success) {
                 saveButton.selected = NO;
-                [self showToastWithText:@"Special care preference updated successfully." on:Top withDuration:1.5];
+                [self showToastWithText:@"Special care preference updated successfully." on:Success];
             } else {
-                [self showToastWithText:response on:Top];
+                [self showToastWithText:response on:Failure];
             }
         }];
     }
@@ -257,7 +257,7 @@
 
 - (void)dropDownTapped:(NSInteger)index {
     if (![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:kNoNetworkAvailable on:Top];
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
         return;
     }
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];

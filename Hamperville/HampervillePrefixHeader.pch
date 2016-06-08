@@ -18,12 +18,12 @@
 #import "NSDictionary+hasValueForKey.h"
 #import <UIKit/UIKit.h>
 #import "Constants.h"
-#import <UIView+Toast.h>
 #import "NetworkConstants.h"
 #import "Util.h"
 #import "SMobiLogger.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIButton+WebCache.h"
+#import <ALAlertBanner/ALAlertBanner.h>
 
 #endif 
 

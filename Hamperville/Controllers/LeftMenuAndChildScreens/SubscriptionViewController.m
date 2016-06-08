@@ -103,7 +103,7 @@
                 }
             }
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -135,7 +135,7 @@
 
 - (IBAction)changeSubscriptionButtonTapped:(id)sender {
     if (![ApplicationDelegate hasNetworkAvailable]) {
-        [self showToastWithText:kNoNetworkAvailable on:Top];
+        [self showToastWithText:kNoNetworkAvailable on:Success];
         return;
     }
     [self openChangeSubscriptionScreen];

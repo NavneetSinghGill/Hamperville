@@ -78,7 +78,7 @@
                 [self.tableView reloadData];
             }
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
             [self.tableView reloadData];
         }
     }];
@@ -137,9 +137,9 @@
     [[RequestManager alloc]postNotificationPrefWithAppNotification:_isAppNotificationOn textNotifications:_isTextNotificationOn andEmail:_isEmailNotificationOn
                                                withCompletionBlock:^(BOOL success, id response) {
                                                    if (success) {
-                                                       [self showToastWithText:@"Notification preference updated successfully." on:Top withDuration:1.5];
+                                                       [self showToastWithText:@"Notification preference updated successfully." on:Success];
                                                    } else {
-                                                       [self showToastWithText:response on:Top];
+                                                       [self showToastWithText:response on:Failure];
                                                        if (indexPath.row == 0) {
                                                            _isAppNotificationOn = !_isAppNotificationOn;
                                                        } else if (indexPath.row == 1) {

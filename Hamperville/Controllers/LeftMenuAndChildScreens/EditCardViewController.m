@@ -68,14 +68,14 @@
             [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:kChangeRefreshStatusShowCardScreen];
             
             _wasUpdated = YES;
-            [self showToastWithText:[response valueForKey:@"message"] on:Top withDuration:1.8];
+            [self showToastWithText:[response valueForKey:@"message"] on:Success];
             double delayInSeconds = 2;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
@@ -86,14 +86,14 @@
         if (success) {
             [[NSNotificationCenter defaultCenter]postNotificationName:@"changeRefreshStatusShowCardScreen" object:nil];
             _wasUpdated = YES;
-            [self showToastWithText:[response valueForKey:@"message"] on:Top withDuration:1.8];
+            [self showToastWithText:[response valueForKey:@"message"] on:Success];
             double delayInSeconds = 2;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
-            [self showToastWithText:response on:Top];
+            [self showToastWithText:response on:Failure];
         }
     }];
 }
