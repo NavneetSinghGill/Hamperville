@@ -47,9 +47,22 @@
     [self initialSetup];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self getWashAndFoldPrefs];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Private methods
@@ -95,9 +108,6 @@
     
     UINib *nib = [UINib nibWithNibName:@"DropdownTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DropdownTableViewCell"];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)getWashAndFoldPrefs {
@@ -196,14 +206,14 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
-    if (self.tableViewTopConstraint.constant < tableViewDefaultTopContraintValue) {
+//    if (self.tableViewTopConstraint.constant < tableViewDefaultTopContraintValue) {
         self.scrollView.frame = CGRectMake(self.scrollView.frame.origin.x, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.view.frame.size.height - 64); // - 64 for navigationbar height
-        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
-        [self.scrollView setContentOffset:bottomOffset animated:YES];
+//        CGPoint bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height);
+//        [self.scrollView setContentOffset:bottomOffset animated:YES];
         [UIView animateWithDuration:0.5f animations:^{
             [self.view layoutIfNeeded];
         }];
-    }
+//    }
 }
 
 - (void)dismissKeyboard {

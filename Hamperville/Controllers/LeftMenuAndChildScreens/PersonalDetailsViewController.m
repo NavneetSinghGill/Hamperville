@@ -115,7 +115,7 @@
                     [self postUserAPI];
                 }
             } else {
-                [self showToastWithText:@"Please re-check your entries" on:Failure];
+                [self showAppropriatePopup];
                 self.saveButton.hidden = NO;
                 self.editButton.selected = YES;
                 [self setUserinteractionForTextFields];
@@ -125,7 +125,7 @@
         [alertController addAction:alertActionYes];
         [self presentViewController:alertController animated:YES completion:nil];
     } else if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length != 10) {
-        [self showToastWithText:@"Please re-check your entries" on:Failure];
+        [self showAppropriatePopup];
         invalidEntries = YES;
     }
     if (!invalidEntries) {
@@ -163,7 +163,7 @@
                     [self setUserinteractionForTextFields];
                 }
             } else {
-                [self showToastWithText:@"Please re-check your entries" on:Failure];
+                [self showAppropriatePopup];
                 self.saveButton.hidden = NO;
             }
         }];
@@ -379,6 +379,19 @@
                               
                           }
                       }];
+}
+
+- (void)showAppropriatePopup {
+    if (self.firstNameTextField.text.length == 0) {
+        [self showToastWithText:@"Please enter first name" on:Failure];
+    } else if (self.lastNameTextField.text.length == 0) {
+        [self showToastWithText:@"Please enter last name" on:Failure];
+    } else if ([[Util sharedInstance]getNumberAsStringFromString:self.primaryPhoneTextField.text].length != 10) {
+        [self showToastWithText:@"Please enter primary phone number" on:Failure];
+    } else if ([[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length != 10 &&
+               [[Util sharedInstance]getNumberAsStringFromString:self.alternativePhoneTextField.text].length != 0) {
+        [self showToastWithText:@"Please enter alternative phone number (optional)" on:Failure];
+    }
 }
 
 #pragma mark - Notification methods

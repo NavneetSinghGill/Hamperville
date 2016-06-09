@@ -74,13 +74,13 @@
     } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
-        self.orderAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.order.orderAmount];
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"$ %.02f",(float)self.order.orderAmount];
         self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
         self.numberOfBagsTableViewHeightConstraint.constant = 0;
     } else {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
-        self.orderAmountLabel.text = [NSString stringWithFormat:@"%ld",(long)self.order.orderAmount];
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"$ %.02f",(float)self.order.orderAmount];
     }
 }
 

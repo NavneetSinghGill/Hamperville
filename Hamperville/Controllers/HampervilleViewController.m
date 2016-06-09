@@ -139,30 +139,4 @@
     }
 }
 
-- (void)showToastWithText:(NSString *)message on:(HeaderResponse)headerResponse withDuration:(NSTimeInterval)duration{
-    [self showToastWithText:message on:headerResponse];
-//    [ApplicationDelegate showSuccessBannerOnTopWithTitle:<#(NSString *)#> subtitle:<#(NSString *)#>];
-//    
-//    NSValue *value = nil;
-//    if (self.navigationController == nil) {
-//        if (headerPosition == Top) {
-//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60)];
-//        } else if (headerPosition == Bottom) {
-//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-//        }
-//    } else {
-//        if (headerPosition == Top) {
-//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, 60 + 64)];
-//        } else if (headerPosition == Bottom) {
-//            value = [NSValue valueWithCGPoint:CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - 60)];
-//        }
-//    }
-//    
-//    if ([message isEqualToString:kNoNetworkAvailable]) {
-//        [self networkAvailability];
-//    } else {
-////        [self.view makeToast:message duration:duration position:value style:style];
-//    }
-}
-
 @end

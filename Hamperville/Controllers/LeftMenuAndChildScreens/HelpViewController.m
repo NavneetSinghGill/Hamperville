@@ -34,16 +34,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initialSetup];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.attachScreenShot.text = @"Attach Snapshot";
-    [self.attachScreenShot setTextColor:[UIColor blackColor]];
-    self.attachedScreenShot = nil;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    if (!_imageChanged) {
+        self.attachScreenShot.text = @"Attach Snapshot";
+        [self.attachScreenShot setTextColor:[UIColor blackColor]];
+        self.attachedScreenShot = nil;
+        self.titleTextField.text = kEmptyString;
+        self.descriptionTextView.text = @"Write your text here";
+        self.descriptionTextView.textColor = [UIColor lightGrayColor];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Private methods
@@ -59,9 +73,6 @@
     titleLabelDefaultTopConstriantValue = self.titleLabelTopConstraint.constant;
     
     areLogsAttached = YES;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)selectPhoto {
@@ -135,8 +146,16 @@
 }
 
 - (IBAction)submitButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     if (self.titleTextField.text.length == 0) {
-        [self showToastWithText:@"Enter title" on:Success];
+        [self showToastWithText:@"Enter title" on:Failure];
+        return;
+    }
+    if (self.descriptionTextView.text.length == 0) {
+        [self showToastWithText:@"Enter description" on:Failure];
         return;
     }
     
@@ -189,9 +208,10 @@
         ALAssetRepresentation *imageRep = [imageAsset defaultRepresentation];
         NSLog([NSString stringWithFormat:@"%@",[imageRep filename]]);
         self.attachScreenShot.text = [imageRep filename];
-        [self.attachScreenShot setTextColor:[UIColor colorWithRed:53/255.0f green:173/255.0f blue:71/255.0f alpha:1.f]];
+        [self.attachScreenShot setTextColor:[Utils greenColor]];
         NSLog([NSString stringWithFormat:@"%@",self.attachScreenShot.text]);
-        [self.view layoutIfNeeded];
+        _imageChanged = YES;
+        
         [picker dismissViewControllerAnimated:YES completion:NULL];
     };
     

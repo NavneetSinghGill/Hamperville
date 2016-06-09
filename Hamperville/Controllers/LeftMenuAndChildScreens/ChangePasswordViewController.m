@@ -52,6 +52,10 @@
 #pragma mark - IBAction methods
 
 - (IBAction)savePasswordButtonTapped:(id)sender {
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     if ([self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text] && self.nwPassTextField.text.length >= 8 && self.currentPassTextField.text.length >= 8 && self.reEnterNwPassTextField.text.length >= 8) {
         
         if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
@@ -75,10 +79,12 @@
                 [self showToastWithText:response on:Failure];
             }
         }];
-    } else if (self.nwPassTextField.text.length < 8 || self.reEnterNwPassTextField.text.length < 8){
-        [self showToastWithText:@"Minimum 8 characters required." on:Failure];
     } else if (![self.currentPassTextField.text isEqualToString:[[NSUserDefaults standardUserDefaults]valueForKey:kUserPassword]]) {
         [self showToastWithText:@"Invalid current password" on:Failure];
+    } else if (self.nwPassTextField.text.length < 8){
+        [self showToastWithText:@"Minimum 8 characters required in New password field." on:Failure];
+    } else if (self.reEnterNwPassTextField.text.length < 8) {
+        [self showToastWithText:@"Minimum 8 characters required Re-enter new password field." on:Failure];
     } else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
         [self showToastWithText:@"Passwords doesn't match" on:Failure];
     }

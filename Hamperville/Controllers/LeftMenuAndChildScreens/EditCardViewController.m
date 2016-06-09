@@ -84,9 +84,10 @@
     [[RequestManager alloc] deleteCreditCard:self.creditCardID withCompletionBlock:^(BOOL success, id response) {
         [self.activityIndicator stopAnimating];
         if (success) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"changeRefreshStatusShowCardScreen" object:nil];
+            [[NSUserDefaults standardUserDefaults]setValue:@"1" forKey:kChangeRefreshStatusShowCardScreen];
+            
             _wasUpdated = YES;
-            [self showToastWithText:[response valueForKey:@"message"] on:Success];
+            [self showToastWithText:@"Credit Card deleted successfully." on:Success];
             double delayInSeconds = 2;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

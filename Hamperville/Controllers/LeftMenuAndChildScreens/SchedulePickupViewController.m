@@ -117,12 +117,21 @@ typedef enum {
     
     [self setPickupEntriesForDate:[NSDate date]];
     [self setDropOffEntriesForDate:[NSDate date]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     [super networkAvailability];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)networkAvailability {
@@ -166,6 +175,9 @@ typedef enum {
             self.pickupDayCount = 1;
             self.dropOffDayCount = 1;
             self.difference = 1;
+            
+            self.appliedCouponsIDAndName = [NSMutableArray array];
+            
             [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
             
             if (self.isModifyModeOn) {
@@ -218,9 +230,6 @@ typedef enum {
     self.appliedCouponsIDAndName = [NSMutableArray array];
     self.appliedCouponsServiceIDs = [NSMutableArray array];
     kCouponTableViewDefaultHeight = self.couponTableView.frame.size.height;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)dismissKeyboard {
@@ -763,7 +772,7 @@ typedef enum {
             commaSeparatedCouponIDs = [self.appliedCouponsIDAndName[0] valueForKey:@"couponID"];
             continue;
         }
-        commaSeparatedCouponIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedCouponIDs,[self.appliedCouponsIDAndName[0] valueForKey:@"couponID"]];
+        commaSeparatedCouponIDs = [NSString stringWithFormat:@"%@,%@",commaSeparatedCouponIDs,[self.appliedCouponsIDAndName[count] valueForKey:@"couponID"]];
     }
     if ([commaSeparatedCouponIDs isKindOfClass:[NSNumber class]]) {
         commaSeparatedCouponIDs = [NSString stringWithFormat:@"%ld",(long)[commaSeparatedCouponIDs integerValue]];
@@ -817,7 +826,7 @@ typedef enum {
                 dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 });
-                [self showToastWithText:@"Order modified successfully." on:Success];
+                [self showToastWithText:@"Order updated successfully." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
             }
@@ -998,7 +1007,10 @@ typedef enum {
 #pragma mark - Custom delegate methods -
 
 - (void)verifyTapped:(CouponTableViewCell *)couponCell {
-    [self.view endEditing:YES];
+    if (![ApplicationDelegate hasNetworkAvailable]) {
+        [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
     if (couponCell.verifyButton.selected == NO) {
         
         if (self.appliedCouponsIDAndName.count == 0) {
@@ -1088,6 +1100,10 @@ typedef enum {
         }
         [self resizeTableViewWithAnimation];
     }
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    [self.view endEditing:YES];
 }
 
 @end

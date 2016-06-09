@@ -236,6 +236,7 @@
         if (!self.helpViewController) {
             self.helpViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HelpViewController"];
         }
+        self.helpViewController.imageChanged = NO;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.helpViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });

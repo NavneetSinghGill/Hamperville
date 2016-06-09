@@ -22,9 +22,9 @@
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
             <string>Roboto-Light</string>
-            <string>Roboto-Light</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
+            <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
             <string>Roboto-Medium</string>
@@ -858,7 +858,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="ZgS-Ke-chr" id="o15-z5-zn1"/>
                         <outlet property="attachLogsButton" destination="wOn-Z5-vU2" id="d7E-0i-l5M"/>
-                        <outlet property="attachScreenShot" destination="BX0-j7-Wqi" id="k9a-ax-jxQ"/>
+                        <outlet property="attachScreenShot" destination="BX0-j7-Wqi" id="WBE-n2-fca"/>
                         <outlet property="descriptionTextView" destination="usk-Te-GGh" id="E3v-dB-3rc"/>
                         <outlet property="titleLabelTopConstraint" destination="Nes-JN-icm" id="0hf-RB-sJv"/>
                         <outlet property="titleTextField" destination="4bm-i1-pDs" id="HHe-PU-4LI"/>
@@ -2650,11 +2650,11 @@
                         <viewControllerLayoutGuide type="bottom" id="I1j-m6-Cvl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5HG-fp-1Ud">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xl5-tX-TUR">
-                                <rect key="frame" x="0.0" y="64" width="320" height="736"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahI-jp-Rge" userLabel="SupremeView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
@@ -2907,8 +2907,8 @@
                                     <constraint firstItem="ahI-jp-Rge" firstAttribute="centerX" secondItem="Xl5-tX-TUR" secondAttribute="centerX" id="w9G-VG-VPU"/>
                                 </constraints>
                             </scrollView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vFd-bt-c33">
-                                <rect key="frame" x="142" y="381" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vFd-bt-c33">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
                                 <color key="color" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2917,12 +2917,12 @@
                             <constraint firstItem="Xl5-tX-TUR" firstAttribute="top" secondItem="vbT-yc-jzh" secondAttribute="bottom" id="FdP-0D-f3B"/>
                             <constraint firstItem="Xl5-tX-TUR" firstAttribute="leading" secondItem="5HG-fp-1Ud" secondAttribute="leading" id="JLM-hX-iFh"/>
                             <constraint firstItem="I1j-m6-Cvl" firstAttribute="top" secondItem="Xl5-tX-TUR" secondAttribute="bottom" id="LKH-l5-XE4"/>
+                            <constraint firstItem="vFd-bt-c33" firstAttribute="centerY" secondItem="5HG-fp-1Ud" secondAttribute="centerY" id="hjR-Ex-YOU"/>
+                            <constraint firstItem="vFd-bt-c33" firstAttribute="centerX" secondItem="5HG-fp-1Ud" secondAttribute="centerX" id="tt4-o1-f0L"/>
                             <constraint firstAttribute="trailing" secondItem="Xl5-tX-TUR" secondAttribute="trailing" id="ty9-Yn-zBv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DiI-2i-bAn"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="800"/>
                     <connections>
                         <outlet property="activityIndicator" destination="vFd-bt-c33" id="CIV-bp-B23"/>
                         <outlet property="serviceTableview" destination="9rU-Lq-2jg" id="WCz-Ke-BN3"/>
@@ -3688,7 +3688,7 @@
                                     <constraint firstAttribute="width" constant="157" id="ZWZ-G9-J5e"/>
                                     <constraint firstAttribute="height" constant="25" id="hTp-Hg-lax"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="13"/>
+                                <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="13"/>
                                 <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Is Doorman Building?" image="Pref_uncheck">
                                     <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>

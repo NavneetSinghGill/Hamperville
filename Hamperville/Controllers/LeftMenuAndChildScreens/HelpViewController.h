@@ -10,4 +10,6 @@
 
 @interface HelpViewController : HampervilleViewController
 
+@property(assign, nonatomic) BOOL imageChanged;
+
 @end

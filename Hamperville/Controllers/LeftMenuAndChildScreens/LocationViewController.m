@@ -223,7 +223,7 @@
         [self showToastWithText:@"Cant't edit in offline mode" on:Failure];
         return;
     }
-    if (self.isEditionAllowed) {
+    if (!self.isEditionAllowed) {
         [self showToastWithText:@"Address can not be updated because doorman service is active" on:Failure];
         return;
     }
