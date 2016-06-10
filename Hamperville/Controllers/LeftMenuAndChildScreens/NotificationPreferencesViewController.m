@@ -91,23 +91,23 @@
 - (void)backButtonTapped {
     if (self.prefUpdated == YES) {
         [[RequestManager alloc]postNotificationPrefWithAppNotification:_isAppNotificationOn textNotifications:_isTextNotificationOn andEmail:_isEmailNotificationOn
-                                                   withCompletionBlock:^(BOOL success, id response) {
-                                                       if (success) {
-                                                           [self showToastWithText:@"Notification preference updated successfully." on:Success];
-                                                       } else {
-                                                           [self showToastWithText:response on:Failure];
-//                                                           if (indexPath.row == 0) {
-//                                                               _isAppNotificationOn = !_isAppNotificationOn;
-//                                                           } else if (indexPath.row == 1) {
-//                                                               _isTextNotificationOn = !_isTextNotificationOn;
-//                                                           } else if (indexPath.row == 2) {
-//                                                               _isEmailNotificationOn = !_isEmailNotificationOn;
-//                                                           }
-//                                                           dispatch_async(dispatch_get_main_queue(), ^{
-//                                                               [self.tableView reloadData];
-//                                                           });
-                                                       }
-                                                   }];
+            withCompletionBlock:^(BOOL success, id response) {
+                if (success) {
+                    [self showToastWithText:@"Notification preference updated successfully." on:Success];
+                } else {
+                    [self showToastWithText:response on:Success];
+//                    if (indexPath.row == 0) {
+//                        _isAppNotificationOn = !_isAppNotificationOn;
+//                    } else if (indexPath.row == 1) {
+//                        _isTextNotificationOn = !_isTextNotificationOn;
+//                    } else if (indexPath.row == 2) {
+//                        _isEmailNotificationOn = !_isEmailNotificationOn;
+//                    }
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        [self.tableView reloadData];
+//                    });
+                }
+            }];
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

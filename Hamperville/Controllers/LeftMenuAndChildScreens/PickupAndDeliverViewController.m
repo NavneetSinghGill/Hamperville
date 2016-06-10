@@ -17,6 +17,10 @@
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property(assign, nonatomic) BOOL prefUpdated;
 
+@property(assign, nonatomic) BOOL isEditionAllowed;
+@property(assign, nonatomic) BOOL isDoorManEnabled;
+@property(assign, nonatomic) BOOL isKeyEnabled;
+
 //TAGS
 @property(assign, nonatomic) NSInteger kOptionLabelTag;
 @property(assign, nonatomic) NSInteger kOptionIconButtonTag;
@@ -46,7 +50,7 @@
     self.tableView.delegate = self;
     
     self.selectedIndex = -1;
-    self.options = [NSMutableArray arrayWithObjects:@"With the doorman", @"By apartment door", @"Buzz my apartment", @"Call the phone I provide", nil];
+    self.options = [NSMutableArray arrayWithObjects:@"With the Doorman", @"By Apartment Door", @"Buzz My Apartment", @"Call the Phone I Provide", nil];
     
     //TAGS
     _kOptionIconButtonTag = 5;
@@ -77,6 +81,15 @@
             self.selectedIndex = count;
         }
     }
+    if ([response hasValueForKey:@"is_editable"]) {
+        self.isEditionAllowed = [[response valueForKey:@"is_editable"] boolValue];
+    }
+    if ([response hasValueForKey:@"is_doorman_enabled"]) {
+        self.isDoorManEnabled = [[response valueForKey:@"is_doorman_enabled"] boolValue];
+    }
+    if ([response hasValueForKey:@"is_key_enabled"]) {
+        self.isKeyEnabled = [[response valueForKey:@"is_key_enabled"] boolValue];
+    }
     [self.tableView reloadData];
 }
 
@@ -94,8 +107,8 @@
                                              if (success) {
                                                  [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Success];
                                              } else {
-                                                 [self showToastWithText:response on:Failure];
-                                                 [self.tableView reloadData];
+                                                 [self showToastWithText:response on:Success];
+//                                                 [self.tableView reloadData];
                                              }
                                          }];
     }
@@ -137,6 +150,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![ApplicationDelegate hasNetworkAvailable]) {
         [self showToastWithText:kNoNetworkAvailable on:Failure];
+        return;
+    }
+    if (!self.isEditionAllowed) {
+        if (self.isDoorManEnabled) {
+            [self showToastWithText:@"Preference can not be updated because Doorman service is active." on:Failure];
+        } else if (self.isKeyEnabled) {
+            [self showToastWithText:@"Preference can not be updated because Key Facility is active." on:Failure];
+        }
         return;
     }
 //    NSInteger storePreviousSelection = self.selectedIndex;

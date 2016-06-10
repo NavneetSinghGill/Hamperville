@@ -118,7 +118,7 @@
     id apiInteractorProvider = [[APIInteractorProvider sharedInterface] getAPIInetractor];
     [apiInteractorProvider postNotificationPreferencesWithRequest:userRequest
                                               andCompletionBlock:^(BOOL success, id response) {
-                                                  //Parse
+                                                  [self parseGeneralDataResponse:response];
                                               }];
 }
 

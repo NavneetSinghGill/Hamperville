@@ -81,7 +81,7 @@
             if (success) {
                 [self showToastWithText:@"Wash and Press preference updated successfully." on:Success];
             } else {
-                [self showToastWithText:response on:Failure];
+                [self showToastWithText:response on:Success];
             }
         }];
     }

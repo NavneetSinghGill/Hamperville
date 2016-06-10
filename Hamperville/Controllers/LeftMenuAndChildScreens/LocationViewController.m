@@ -35,6 +35,8 @@
 
 @property(strong, nonatomic) NSMutableArray *addressInfo;
 @property(assign, nonatomic) BOOL isDoorMan;
+@property(assign, nonatomic) BOOL isDoorManEnabled;
+@property(assign, nonatomic) BOOL isKeyEnabled;
 
 @property(assign, nonatomic) NSInteger selectedTextFieldCellIndex;
 @property(strong, nonatomic) NSNotification *notification;
@@ -155,7 +157,7 @@
     [dataDict setValue:[NSNumber numberWithBool:self.doorManButton.selected] forKey:@"is_doorman_building"];
     [[RequestManager alloc] postAddressWithDataDictionary:dataDict withCompletionBlock:^(BOOL success, id response) {
         if (success) {
-            [self showToastWithText:@"Address successfully updated." on:Success];
+            [self showToastWithText:@"Address updated successfully." on:Success];
             self.saveButton.hidden = YES;
             double delayInSeconds = 2.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -183,6 +185,7 @@
                 [self.addressInfo addObject:[NSString stringWithFormat:@"%ld",(long)[[address valueForKey:@"zipcode"] integerValue]]];
                 
                 self.isDoorMan = [[address valueForKey:@"is_doorman_building"] boolValue];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.tableViewHeight.constant = self.headings.count * kTableViewCellHeight;
                     [self.tableView reloadData];
@@ -190,7 +193,13 @@
                 });
             }
             self.isEditionAllowed = [[response valueForKey:@"is_editable"] boolValue];
-            self.editButton.hidden = !self.isEditionAllowed;
+            if ([response hasValueForKey:@"is_doorman_enabled"]) {
+                self.isDoorManEnabled = [[response valueForKey:@"is_doorman_enabled"] boolValue];
+            }
+            if ([response hasValueForKey:@"is_key_enabled"]) {
+                self.isKeyEnabled = [[response valueForKey:@"is_key_enabled"] boolValue];
+            }
+//            self.editButton.hidden = !self.isEditionAllowed;
         } else {
             [self showToastWithText:response on:Failure];
         }
@@ -236,7 +245,13 @@
         return;
     }
     if (!self.isEditionAllowed) {
-        [self showToastWithText:@"Address can not be updated because doorman service is active" on:Failure];
+        if (self.isDoorManEnabled) {
+            [self showToastWithText:@"Address can not be updated because Doorman service is active." on:Failure];
+        } else if (self.isKeyEnabled) {
+            [self showToastWithText:@"Address can not be updated because Key Facility is active." on:Failure];
+        } else {
+            [self showToastWithText:@"Address can not be updated." on:Failure];
+        }
         return;
     }
     self.editButton.selected = !self.editButton.selected;
@@ -244,9 +259,9 @@
     if (self.editButton.selected) {
         self.areFieldsEditable = self.doorManButton.userInteractionEnabled = self.editButton.selected;
         [self.tableView reloadData];
+        LocationTableViewCell *cell = (LocationTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [cell.textField becomeFirstResponder];
     }
-    LocationTableViewCell *cell = (LocationTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell.textField becomeFirstResponder];
 }
 
 - (IBAction)doorManButtonTapped:(id)sender {
@@ -285,6 +300,12 @@
         [locationTableViewCell.textField setTextColor:[UIColor lightGrayColor]];
     } else {
         [locationTableViewCell.textField setTextColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]];
+    }
+    
+    if (indexPath.row == self.headings.count - 2) {
+        locationTableViewCell.textField.returnKeyType = UIReturnKeyDone;
+    } else {
+        locationTableViewCell.textField.returnKeyType = UIReturnKeyNext;
     }
     
     return locationTableViewCell;

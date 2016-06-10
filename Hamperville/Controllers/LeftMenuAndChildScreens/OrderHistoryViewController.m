@@ -155,7 +155,7 @@ NSInteger kTableViewCellLabelTag = 10;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
     Order *order = [self.orders objectAtIndex:indexPath.row];
-    ((UILabel *)[cell viewWithTag:kTableViewCellLabelTag]).text = [NSString stringWithFormat:@"Order: %@",order.orderID];
+    ((UILabel *)[cell viewWithTag:kTableViewCellLabelTag]).text = [NSString stringWithFormat:@"Order: %@",order.orderNumber];
     
     return cell;
 }

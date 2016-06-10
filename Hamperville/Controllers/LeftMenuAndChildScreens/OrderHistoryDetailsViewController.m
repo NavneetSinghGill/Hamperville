@@ -108,7 +108,7 @@
     [dateFormatter setDateFormat:@"MMMM dd, yyyy"];
     
     self.orderDetailEntries = [NSMutableArray array];
-    [self.orderDetailEntries addObject:self.order.orderID];
+    [self.orderDetailEntries addObject:self.order.orderNumber];
 //    dateFormatter.dateFormat = @"";
     NSString *dateString = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:[self.order.pickupDate integerValue]]];
     [self.orderDetailEntries addObject:dateString];

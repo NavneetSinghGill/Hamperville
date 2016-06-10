@@ -168,9 +168,9 @@
 
 - (void)openSchedulePickupScreen {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.schedulePickupViewController) {
+//        if (!self.schedulePickupViewController) {
             self.schedulePickupViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SchedulePickupViewController"];
-        }
+//        }
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.schedulePickupViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];

@@ -111,6 +111,8 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+//    [self.scrollView scrollsToTop];
+    
     if (self.scrollView.hidden == NO || [ApplicationDelegate hasNetworkAvailable] == YES) {
         [self schedulePickupAPIcall];
     }
@@ -144,8 +146,8 @@ typedef enum {
 #pragma mark - Over ridden methods
 
 - (void)showOrHideLeftMenu {
-    [super showOrHideLeftMenu];
     [self.view endEditing:YES];
+    [super showOrHideLeftMenu];
 }
 
 #pragma mark - PRIVATE METHODS -
@@ -805,7 +807,7 @@ typedef enum {
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
                 });
-                [self showToastWithText:@"Order created sucessfully." on:Success];
+                [self showToastWithText:@"Order created successfully." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
                 if ([response isEqualToString:kNoNetworkAvailable]) {

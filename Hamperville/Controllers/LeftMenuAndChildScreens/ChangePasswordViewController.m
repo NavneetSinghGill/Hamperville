@@ -9,7 +9,7 @@
 #import "ChangePasswordViewController.h"
 #import "RequestManager.h"
 
-@interface ChangePasswordViewController ()
+@interface ChangePasswordViewController () <UITextFieldDelegate>
 
 @property(weak, nonatomic) IBOutlet UITextField *currentPassTextField;
 @property(weak, nonatomic) IBOutlet UITextField *nwPassTextField;
@@ -27,7 +27,6 @@
     [super viewDidLoad];
     
     [self initialSetup];
-    self.currentPassTextField.clearsOnBeginEditing = NO;
 }
 
 #pragma mark - Private methods
@@ -43,6 +42,8 @@
     self.currentPassTextField.layer.borderColor = self.nwPassTextField.layer.borderColor = self.reEnterNwPassTextField.layer.borderColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0].CGColor;
     
     self.currentPassTextField.layer.cornerRadius = self.nwPassTextField.layer.cornerRadius = self.reEnterNwPassTextField.layer.cornerRadius = 4;
+    
+    self.reEnterNwPassTextField.returnKeyType = UIReturnKeyDone;
 }
 
 - (void)backButtonTapped {
@@ -74,7 +75,7 @@
                     [[NSUserDefaults standardUserDefaults]setValue:nil forKey:kUserID];
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 });
-                [self showToastWithText:@"Password changes successfully please login with new password." on:Success];
+                [self showToastWithText:@"Password changed successfully, Please login with new password." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
             }
@@ -88,6 +89,19 @@
     } else if (![self.nwPassTextField.text isEqualToString:self.reEnterNwPassTextField.text]) {
         [self showToastWithText:@"Passwords doesn't match" on:Failure];
     }
+}
+
+#pragma mark - TextField delegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.currentPassTextField) {
+        [self.nwPassTextField becomeFirstResponder];
+    } else if (textField == self.nwPassTextField) {
+        [self.reEnterNwPassTextField becomeFirstResponder];
+    } else {
+        [self.view endEditing:YES];
+    }
+    return YES;
 }
 
 @end

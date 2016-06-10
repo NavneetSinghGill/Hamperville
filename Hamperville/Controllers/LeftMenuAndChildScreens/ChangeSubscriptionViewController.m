@@ -78,7 +78,7 @@
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
-    if (self.oldStatus) {
+    if (self.newStatus) {
         if ((self.newStatus == YES && self.nextRenewalDate != nil) || self.newStatus == NO) {
             [self.updateDelegate updateViewsWithStatus:self.newStatus subscriptionID:self.currentSubscriptionPlanID andNextRenewalDate:self.nextRenewalDate];
         } else {

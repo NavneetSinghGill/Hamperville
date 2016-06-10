@@ -22,8 +22,11 @@
     if ([dict hasValueForKey:@"total_amount"]) {
         order.orderAmount = [[dict valueForKey:@"total_amount"] integerValue];
     }
+    if ([dict hasValueForKey:@"order_number"]) {
+        order.orderNumber = [NSString stringWithFormat:@"%ld",(long)[[dict valueForKey:@"order_number"] integerValue]];
+    }
     if ([dict hasValueForKey:@"id"]) {
-        order.orderID = [NSString stringWithFormat:@"%ld",[[dict valueForKey:@"id"] integerValue]];
+        order.orderID = [NSString stringWithFormat:@"%ld",(long)[[dict valueForKey:@"id"] integerValue]];
     }
     if ([dict hasValueForKey:@"state"]) {
         order.orderStatus = [dict valueForKey:@"state"];

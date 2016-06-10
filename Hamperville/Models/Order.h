@@ -14,6 +14,7 @@
 @property(strong, nonatomic) NSString *deliveryTimeSlot;
 @property(assign, nonatomic) NSInteger orderAmount;
 @property(strong, nonatomic) NSString *orderID;
+@property(strong, nonatomic) NSString *orderNumber;
 @property(strong, nonatomic) NSString *orderStatus;
 @property(strong, nonatomic) NSString *pickupDate;
 @property(strong, nonatomic) NSString *pickupTimeSlot;
