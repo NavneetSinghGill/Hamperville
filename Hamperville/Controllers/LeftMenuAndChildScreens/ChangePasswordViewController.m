@@ -74,7 +74,7 @@
                     [[NSUserDefaults standardUserDefaults]setValue:nil forKey:kUserID];
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 });
-                [self showToastWithText:response on:Success];
+                [self showToastWithText:@"Password changes successfully please login with new password." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
             }

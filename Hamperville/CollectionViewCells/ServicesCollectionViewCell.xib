@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Medium.ttf">
@@ -22,8 +22,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <subviews>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gNk-EY-mZV" userLabel="Border View">
-                                <rect key="frame" x="23" y="14" width="54" height="54"/>
+                                <rect key="frame" x="20" y="11" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.6705882353" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkd-Ku-YqI" userLabel="White PaddingView">
+                                <rect key="frame" x="22" y="13" width="56" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="28"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circularView" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kwc-wI-6n1" userLabel="Service Image Button">
                                 <rect key="frame" x="24" y="15" width="52" height="52"/>
@@ -42,16 +52,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lkd-Ku-YqI" firstAttribute="trailing" secondItem="kwc-wI-6n1" secondAttribute="trailing" constant="2" id="1TC-bb-G0G"/>
                             <constraint firstItem="aVx-RL-z7V" firstAttribute="leading" secondItem="mvi-ZO-M4Y" secondAttribute="leading" id="5s7-U6-0px"/>
                             <constraint firstAttribute="trailing" secondItem="aVx-RL-z7V" secondAttribute="trailing" id="7ro-Lu-Rdp"/>
-                            <constraint firstItem="gNk-EY-mZV" firstAttribute="bottom" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="1" id="9mV-Yz-Upo"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="bottom" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="4" id="9mV-Yz-Upo"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="top" secondItem="mvi-ZO-M4Y" secondAttribute="top" constant="15" id="Bhf-lL-IiP"/>
                             <constraint firstAttribute="bottom" secondItem="aVx-RL-z7V" secondAttribute="bottom" id="EAF-uK-yQb"/>
-                            <constraint firstItem="gNk-EY-mZV" firstAttribute="leading" secondItem="kwc-wI-6n1" secondAttribute="leading" constant="-1" id="IR2-Kd-58s"/>
-                            <constraint firstItem="gNk-EY-mZV" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="top" constant="-1" id="LU0-gL-d6i"/>
+                            <constraint firstItem="lkd-Ku-YqI" firstAttribute="bottom" secondItem="kwc-wI-6n1" secondAttribute="bottom" constant="2" id="I0f-TL-cK1"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="leading" secondItem="kwc-wI-6n1" secondAttribute="leading" constant="-4" id="IR2-Kd-58s"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="top" constant="-4" id="LU0-gL-d6i"/>
+                            <constraint firstItem="lkd-Ku-YqI" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="top" constant="-2" id="Pfe-nd-Jg5"/>
                             <constraint firstItem="kwc-wI-6n1" firstAttribute="centerX" secondItem="mvi-ZO-M4Y" secondAttribute="centerX" id="Siv-rZ-rmH"/>
                             <constraint firstItem="aVx-RL-z7V" firstAttribute="top" secondItem="kwc-wI-6n1" secondAttribute="bottom" id="ZDT-Ix-V3O"/>
-                            <constraint firstItem="gNk-EY-mZV" firstAttribute="trailing" secondItem="kwc-wI-6n1" secondAttribute="trailing" constant="1" id="eA3-iC-HGK"/>
+                            <constraint firstItem="gNk-EY-mZV" firstAttribute="trailing" secondItem="kwc-wI-6n1" secondAttribute="trailing" constant="4" id="eA3-iC-HGK"/>
+                            <constraint firstItem="lkd-Ku-YqI" firstAttribute="leading" secondItem="kwc-wI-6n1" secondAttribute="leading" constant="-2" id="zk1-ZS-HnK"/>
                         </constraints>
                     </view>
                 </subviews>

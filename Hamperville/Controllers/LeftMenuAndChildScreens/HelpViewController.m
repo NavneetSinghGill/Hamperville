@@ -142,7 +142,7 @@
 
 - (IBAction)attachLogsButtonTapped:(id)sender {
     ((UIButton *)sender).selected = !((UIButton *)sender).selected;
-    areLogsAttached = ((UIButton *)sender).selected;
+//    areLogsAttached = ((UIButton *)sender).selected;
 }
 
 - (IBAction)submitButtonTapped:(id)sender {
@@ -154,7 +154,7 @@
         [self showToastWithText:@"Enter title" on:Failure];
         return;
     }
-    if (self.descriptionTextView.text.length == 0) {
+    if (self.descriptionTextView.text.length == 0 || [self.descriptionTextView.text isEqualToString:@"Write your text here"]) {
         [self showToastWithText:@"Enter description" on:Failure];
         return;
     }
@@ -178,14 +178,15 @@
             
             [[SMobiLogger sharedInterface] startMobiLogger];
             
-            [self showToastWithText:response on:Success];
+            [self showToastWithText:@"Request submitted successfully." on:Success];
             
             self.attachedScreenShot = nil;
             self.titleTextField.text = @"";
             self.descriptionTextView.text = @"Write your text here";
             self.descriptionTextView.textColor = [UIColor lightGrayColor];
             self.attachLogsButton.selected = NO;
-//            areLogsAttached = NO;
+            self.attachScreenShot.text = @"Attach Snapshot";
+            [self.attachScreenShot setTextColor:[UIColor blackColor]];
             [self.view endEditing:YES];
         } else {
             [self showToastWithText:response on:Failure];

@@ -15,6 +15,7 @@
 @property(strong, nonatomic) NSMutableArray *options;
 @property(assign, nonatomic) NSInteger selectedIndex;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(assign, nonatomic) BOOL prefUpdated;
 
 //TAGS
 @property(assign, nonatomic) NSInteger kOptionLabelTag;
@@ -82,6 +83,23 @@
 #pragma mark - Overridden methods
 
 - (void)backButtonTapped {
+    [self.tableView reloadData];
+    
+    if (self.prefUpdated == YES) {
+        UILabel *optionLabel = [[[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.selectedIndex inSection:0]] contentView]viewWithTag:_kOptionLabelTag];
+        NSString *method = optionLabel.text;
+        [[RequestManager alloc] postPickupAndDeliverWithUser:[[Util sharedInstance] getUser]
+                                                   andMethod:method
+                                         withCompletionBlock:^(BOOL success, id response) {
+                                             if (success) {
+                                                 [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Success];
+                                             } else {
+                                                 [self showToastWithText:response on:Failure];
+                                                 [self.tableView reloadData];
+                                             }
+                                         }];
+    }
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -121,23 +139,24 @@
         [self showToastWithText:kNoNetworkAvailable on:Failure];
         return;
     }
-    NSInteger storePreviousSelection = self.selectedIndex;
+//    NSInteger storePreviousSelection = self.selectedIndex;
     self.selectedIndex = indexPath.row;
     [self.tableView reloadData];
-    
-    UILabel *optionLabel = [[[tableView cellForRowAtIndexPath:indexPath] contentView]viewWithTag:_kOptionLabelTag];
-    NSString *method = optionLabel.text;
-    [[RequestManager alloc] postPickupAndDeliverWithUser:[[Util sharedInstance] getUser]
-                                               andMethod:method
-                                     withCompletionBlock:^(BOOL success, id response) {
-                                         if (success) {
-                                            [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Success];
-                                         } else {
-                                             [self showToastWithText:response on:Failure];
-                                             self.selectedIndex = storePreviousSelection;
-                                             [self.tableView reloadData];
-                                         }
-                                     }];
+    self.prefUpdated = YES;
+//
+//    UILabel *optionLabel = [[[tableView cellForRowAtIndexPath:indexPath] contentView]viewWithTag:_kOptionLabelTag];
+//    NSString *method = optionLabel.text;
+//    [[RequestManager alloc] postPickupAndDeliverWithUser:[[Util sharedInstance] getUser]
+//                                               andMethod:method
+//                                     withCompletionBlock:^(BOOL success, id response) {
+//                                         if (success) {
+//                                            [self showToastWithText:@"Pickup and drop off preference updated successfully." on:Success];
+//                                         } else {
+//                                             [self showToastWithText:response on:Failure];
+//                                             self.selectedIndex = storePreviousSelection;
+//                                             [self.tableView reloadData];
+//                                         }
+//                                     }];
 }
 
 @end

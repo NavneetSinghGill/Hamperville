@@ -61,6 +61,10 @@
     [self.numberOfBagsTableView registerNib:nib forCellReuseIdentifier:TVCOrderTableViewCellNibAndIdentifier];
     
     self.cellHeight = 55;
+    
+    self.order.orderStatus = [self.order.orderStatus stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    self.order.orderStatus = [[NSString stringWithFormat:@"%@%@",[[self.order.orderStatus substringToIndex:1] uppercaseString],[self.order.orderStatus substringFromIndex:1]] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    
     [self setupArrays];
     
     [self.orderDetailsTableView reloadData];
@@ -74,13 +78,13 @@
     } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
-        self.orderAmountLabel.text = [NSString stringWithFormat:@"$ %.02f",(float)self.order.orderAmount];
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"$%.02f",(float)self.order.orderAmount];
         self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
         self.numberOfBagsTableViewHeightConstraint.constant = 0;
     } else {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
-        self.orderAmountLabel.text = [NSString stringWithFormat:@"$ %.02f",(float)self.order.orderAmount];
+        self.orderAmountLabel.text = [NSString stringWithFormat:@"$%.02f",(float)self.order.orderAmount];
     }
 }
 
@@ -101,7 +105,7 @@
     self.numberOfBagsTableViewHeightConstraint.constant = _cellHeight * _numberOfBagsEntries.count;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy"];
     
     self.orderDetailEntries = [NSMutableArray array];
     [self.orderDetailEntries addObject:self.order.orderID];

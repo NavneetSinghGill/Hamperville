@@ -16,6 +16,8 @@
 @property(assign, nonatomic) NSInteger selectedIndex;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property(assign, nonatomic) BOOL prefUpdated;
+
 //TAGS
 @property(assign, nonatomic) NSInteger kOptionLabelTag;
 @property(assign, nonatomic) NSInteger kOptionIconButtonTag;
@@ -72,6 +74,17 @@
 }
 
 - (void)backButtonTapped {
+    if (_prefUpdated) {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[@"wash_and_press_method"] = self.options[self.selectedIndex];
+        [[RequestManager alloc] postWashAndPressPreferencesWithDataDictionary:dict withCompletionBlock:^(BOOL success, id response) {
+            if (success) {
+                [self showToastWithText:@"Wash and Press preference updated successfully." on:Success];
+            } else {
+                [self showToastWithText:response on:Failure];
+            }
+        }];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -114,15 +127,16 @@
     self.selectedIndex = indexPath.row;
     [self.tableView reloadData];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"wash_and_press_method"] = self.options[self.selectedIndex];
-    [[RequestManager alloc] postWashAndPressPreferencesWithDataDictionary:dict withCompletionBlock:^(BOOL success, id response) {
-        if (success) {
-            [self showToastWithText:@"Wash and Press preference updated successfully." on:Success];
-        } else {
-            [self showToastWithText:response on:Failure];
-        }
-    }];
+    self.prefUpdated = YES;
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"wash_and_press_method"] = self.options[self.selectedIndex];
+//    [[RequestManager alloc] postWashAndPressPreferencesWithDataDictionary:dict withCompletionBlock:^(BOOL success, id response) {
+//        if (success) {
+//            [self showToastWithText:@"Wash and Press preference updated successfully." on:Success];
+//        } else {
+//            [self showToastWithText:response on:Failure];
+//        }
+//    }];
 }
 
 @end

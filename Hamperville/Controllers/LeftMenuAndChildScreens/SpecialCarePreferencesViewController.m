@@ -10,7 +10,7 @@
 #import "RequestManager.h"
 #import "DropdownTableViewCell.h"
 
-@interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, DropDownDelegate> {
+@interface SpecialCarePreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, DropDownDelegate, UIScrollViewDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
     NSString *specialNotePlaceHolder;
     NSInteger pickerSuperViewDefaultBottomContraintValue;
@@ -229,6 +229,12 @@
     return YES;
 }
 
+#pragma mark  - Scrollview delegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
@@ -238,7 +244,8 @@
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
         NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"damage_id", self.selectedOptionsIDs[1], @"shirt_pressing_id", self.selectedOptionsIDs[2], @"pant_crease_id", self.selectedOptionsIDs[3], @"starch_id", nil];
-        if (self.specialNoteTextView.text.length > 0 || ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
+        self.specialNoteTextView.text = [self.specialNoteTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (self.specialNoteTextView.text.length > 0 && ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
             dataDict[@"special_instruction_care"] = self.specialNoteTextView.text;
         }
         [self.activityIndicator startAnimating];

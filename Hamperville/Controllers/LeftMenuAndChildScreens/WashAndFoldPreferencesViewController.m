@@ -10,7 +10,7 @@
 #import "DropdownTableViewCell.h"
 #import "RequestManager.h"
 
-@interface WashAndFoldPreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, DropDownDelegate> {
+@interface WashAndFoldPreferencesViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, DropDownDelegate, UIScrollViewDelegate> {
     NSInteger tableViewDefaultTopContraintValue;
     NSString *specialNotePlaceHolder;
     NSInteger pickerSuperViewDefaultBottomContraintValue;
@@ -227,6 +227,12 @@
     return YES;
 }
 
+#pragma mark  - Scrollview delegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
@@ -236,7 +242,8 @@
 - (void)saveButtonTapped:(UIButton *)saveButton {
     if (saveButton.selected == YES) {
         NSMutableDictionary *dataDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:self.selectedOptionsIDs[0], @"washer_temperature_dark_id", self.selectedOptionsIDs[1], @"washer_temperature_light_id", self.selectedOptionsIDs[2], @"washer_temperature_white_id", self.selectedOptionsIDs[3], @"dryer_temperature_id", nil];
-        if (self.specialNoteTextView.text.length > 0 || ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
+        self.specialNoteTextView.text = [self.specialNoteTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if (self.specialNoteTextView.text.length > 0 && ![self.specialNoteTextView.text isEqualToString:specialNotePlaceHolder]){
             dataDict[@"special_instruction_wdf"] = self.specialNoteTextView.text;
         } else {
             dataDict[@"special_instruction_wdf"] = kEmptyString;

@@ -93,6 +93,10 @@
 #pragma mark - IBAction methods
 
 - (IBAction)dropDownButtonTapped:(id)sender {
+    if (self.savedSubscriptions.count == 0) {
+        [self showToastWithText:@"No active subscriptions available" on:Failure];
+        return;
+    }
     self.pickerSuperViewBottomConstraint.constant = 0;
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
@@ -117,7 +121,7 @@
                 }
             }
             [self refreshSubscriptions];
-            [self showToastWithText:@"Subscription successfully updated." on:Success];
+            [self showToastWithText:@"Subscription updated successfully." on:Success];
             
             double delayInSeconds = 1.8;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));

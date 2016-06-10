@@ -31,6 +31,7 @@
 @property(assign, nonatomic) NSInteger kYourInfoTopConstraintDefault;
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(strong, nonatomic) NSNotification *notificaiton;
 
 @end
 
@@ -132,6 +133,9 @@
         self.editButton.selected = !self.editButton.selected;
         self.saveButton.hidden = !self.editButton.selected;
         [self setUserinteractionForTextFields];
+        if (self.editButton.selected == YES) {
+            [self.firstNameTextField becomeFirstResponder];
+        }
     }
 }
 
@@ -180,10 +184,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.firstNameTextField) {
         [self.lastNameTextField becomeFirstResponder];
+        [self keyboardWillShow:_notificaiton];
     } else if (textField == self.lastNameTextField) {
         [self.primaryPhoneTextField becomeFirstResponder];
+        [self keyboardWillShow:_notificaiton];
     } else if (textField == self.primaryPhoneTextField) {
         [self.alternativePhoneTextField becomeFirstResponder];
+        [self keyboardWillShow:_notificaiton];
     } else if (textField == self.alternativePhoneTextField){
         [textField resignFirstResponder];
     }
@@ -397,6 +404,7 @@
 #pragma mark - Notification methods
 
 - (void)keyboardWillShow:(NSNotification *)notificaiton {
+    _notificaiton = notificaiton;
     CGRect keyboardBounds;
     UITextField *textField = nil;
     
@@ -423,6 +431,7 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notificaiton {
+    _notificaiton = notificaiton;
     CGRect keyboardBounds;
     
     [[notificaiton.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];

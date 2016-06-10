@@ -91,7 +91,7 @@ void uncaughtExceptionHandler(NSException *exception)
     // Save response in MobiLogger
     [[SMobiLogger sharedInterface] info:@"Application registered for receiveing remote notifications." withDescription:[NSString stringWithFormat:@"At: %s, \n [Param: [Device Id: %@]]. \n  \n", __FUNCTION__, deviceTokenString]];
     
-    NSLog(@"Device token: %@", deviceToken);
+    NSLog([NSString stringWithFormat:@"Device token: %@", deviceToken]);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

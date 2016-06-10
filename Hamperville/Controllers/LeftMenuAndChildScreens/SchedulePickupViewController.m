@@ -29,7 +29,7 @@ typedef enum {
     DropOff
 }Task;
 
-@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, CouponTableViewCellDelegate> {
+@interface SchedulePickupViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, CouponTableViewCellDelegate, UIScrollViewDelegate> {
     NSInteger kCouponTableViewDefaultHeight;
     BOOL reloadCollectionViewToDefault;
     BOOL wasModifiedAtLeastOnce;
@@ -169,6 +169,9 @@ typedef enum {
             [self.collectionView reloadData];
             [self.couponTableView reloadData];
             
+            self.appliedCouponsIDAndName = [NSMutableArray array];
+            [self resizeTableViewWithAnimation];
+            
             // Setup for first pickup date
             self.pickupLeftArrowButton.hidden = YES;
             self.dropOffLeftArrowButton.hidden = YES;
@@ -176,7 +179,6 @@ typedef enum {
             self.dropOffDayCount = 1;
             self.difference = 1;
             
-            self.appliedCouponsIDAndName = [NSMutableArray array];
             
             [self setupEntriesForDayCount:self.pickupDayCount andStartDate:[NSDate date]];
             
@@ -803,7 +805,7 @@ typedef enum {
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
                 });
-                [self showToastWithText:@"Order successfully placed." on:Success];
+                [self showToastWithText:@"Order created sucessfully." on:Success];
             } else {
                 [self showToastWithText:response on:Failure];
                 if ([response isEqualToString:kNoNetworkAvailable]) {
@@ -962,12 +964,14 @@ typedef enum {
     if (indexPath.row < self.appliedCouponsIDAndName.count) {
         couponTableViewCell.textField.text = [self.appliedCouponsIDAndName[indexPath.row] valueForKey:@"couponName"];
         couponTableViewCell.verifyButton.selected = YES;
-//        couponTableViewCell.verifyButton.alpha = 0.5;
+        couponTableViewCell.verifyButton.backgroundColor = [UIColor whiteColor];
+        [couponTableViewCell.verifyButton setTitle:kEmptyString forState:UIControlStateSelected];
         couponTableViewCell.textField.userInteractionEnabled = NO;
     } else {
         couponTableViewCell.textField.text = kEmptyString;
         couponTableViewCell.verifyButton.selected = NO;
-//        couponTableViewCell.verifyButton.alpha = 1;
+        couponTableViewCell.verifyButton.backgroundColor = [Utils greenColor];
+        couponTableViewCell.verifyButton.titleLabel.text = @"Verify";
         couponTableViewCell.textField.userInteractionEnabled = YES;
     }
     
@@ -982,6 +986,14 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kCouponTableViewDefaultHeight;
+}
+
+#pragma mark - Scrollview delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.collectionView) {
+        [self.view endEditing:YES];
+    }
 }
 
 #pragma mark - Gesture delegate methods
@@ -1019,6 +1031,7 @@ typedef enum {
                 //Coupon is universal coupon
                 _isUniversalCouponApplied = YES;
                 [self.appliedCouponsIDAndName addObject:universalCouponIDAndCouponName];
+                [self showToastWithText:@"Coupon applied." on:Success];
                 [self.couponTableView reloadData];
             }
             else {
@@ -1043,6 +1056,7 @@ typedef enum {
                         [serviceCouponIDAndCouponName setValue:couponCell.textField.text forKey:@"couponName"];
                         
                         [self.appliedCouponsIDAndName addObject:serviceCouponIDAndCouponName];
+                        [self showToastWithText:@"Coupon applied." on:Success];
                         
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
@@ -1080,6 +1094,7 @@ typedef enum {
                         [serviceCouponIDAndCouponName setValue:couponCell.textField.text forKey:@"couponName"];
                         
                         [self.appliedCouponsIDAndName addObject:serviceCouponIDAndCouponName];
+                        [self showToastWithText:@"Coupon applied." on:Success];
                         
                         serviceInfoToChangeStatusOf.isApplied = YES;
                         [self.couponTableView reloadData];
@@ -1099,10 +1114,8 @@ typedef enum {
             _isUniversalCouponApplied = NO;
         }
         [self resizeTableViewWithAnimation];
+        [self showToastWithText:@"Coupon removed." on:Success];
     }
-    [UIView animateWithDuration:0.5 animations:^{
-        [self.view layoutIfNeeded];
-    }];
     [self.view endEditing:YES];
 }
 

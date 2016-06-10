@@ -2972,7 +2972,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbM-2t-Fa5" userLabel="SupremeView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="326"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yJg-zg-Qjj">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yJg-zg-Qjj">
                                                 <rect key="frame" x="0.0" y="10" width="320" height="180"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -3210,7 +3210,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P9s-Kz-m4w" userLabel="SupremeView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="326"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KvL-Kj-E9e">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KvL-Kj-E9e">
                                                 <rect key="frame" x="0.0" y="10" width="320" height="180"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -3683,7 +3683,7 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATA-Pf-fnH" userLabel="Remember me button">
-                                <rect key="frame" x="30" y="240" width="157" height="25"/>
+                                <rect key="frame" x="27" y="240" width="157" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="157" id="ZWZ-G9-J5e"/>
                                     <constraint firstAttribute="height" constant="25" id="hTp-Hg-lax"/>
@@ -3706,7 +3706,7 @@
                             <constraint firstAttribute="trailing" secondItem="H7J-TF-S9j" secondAttribute="trailing" id="PqV-5A-prM"/>
                             <constraint firstAttribute="trailing" secondItem="Oof-g8-8z0" secondAttribute="trailing" id="d8B-3A-sOL"/>
                             <constraint firstItem="Oof-g8-8z0" firstAttribute="leading" secondItem="JEt-dv-3EG" secondAttribute="leading" id="fzi-GW-CfT"/>
-                            <constraint firstItem="ATA-Pf-fnH" firstAttribute="leading" secondItem="JEt-dv-3EG" secondAttribute="leading" constant="30" id="ljD-Ek-gD7"/>
+                            <constraint firstItem="ATA-Pf-fnH" firstAttribute="leading" secondItem="JEt-dv-3EG" secondAttribute="leading" constant="27" id="ljD-Ek-gD7"/>
                             <constraint firstItem="ATA-Pf-fnH" firstAttribute="top" secondItem="H7J-TF-S9j" secondAttribute="bottom" constant="10" id="paw-W8-CdE"/>
                             <constraint firstItem="H7J-TF-S9j" firstAttribute="top" secondItem="Oof-g8-8z0" secondAttribute="bottom" constant="10" id="z5W-1w-yME"/>
                         </constraints>
@@ -3812,7 +3812,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="CVV" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CIr-I8-L1R">
                                         <rect key="frame" x="173" y="0.0" width="82" height="40"/>
                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erY-SE-spR" userLabel="/">
                                         <rect key="frame" x="46" y="0.0" width="6" height="40"/>

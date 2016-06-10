@@ -37,6 +37,7 @@
 @property(assign, nonatomic) BOOL isDoorMan;
 
 @property(assign, nonatomic) NSInteger selectedTextFieldCellIndex;
+@property(strong, nonatomic) NSNotification *notification;
 
 @end
 
@@ -91,6 +92,7 @@
 #pragma mark Notification Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
+    _notification = notification;
     CGRect keyboardBounds;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
     
@@ -98,7 +100,7 @@
     
     if (difference < 0) {
         //Note: difference is negative so it's added
-        self.headerTopConstraint.constant = kHeaderDefaultTopConstraintValue + difference - (kHeaderDefaultTopConstraintValue - self.headerTopConstraint.constant);
+        self.headerTopConstraint.constant = kHeaderDefaultTopConstraintValue + difference - (kHeaderDefaultTopConstraintValue - self.headerTopConstraint.constant) - 10;
     }
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
@@ -211,6 +213,16 @@
     }
 }
 
+- (void)fieldTextFieldReturnTapped:(UITextField *)textField {
+    if (textField.tag == 1 || textField.tag == 2 || textField.tag == 3) {
+        LocationTableViewCell *cell = (LocationTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:textField.tag inSection:0]];
+        [cell.textField becomeFirstResponder];
+        [self keyboardWillShow:_notification];
+    } else if (textField.tag == 4) {
+        [self.view endEditing:YES];
+    }
+}
+
 - (void)fieldTextFieldTapped:(UITextField *)textField {
     self.headerTopConstraint.constant = kHeaderDefaultTopConstraintValue;
     self.selectedTextFieldCellIndex = textField.tag - 1;
@@ -233,7 +245,8 @@
         self.areFieldsEditable = self.doorManButton.userInteractionEnabled = self.editButton.selected;
         [self.tableView reloadData];
     }
-    [self.view endEditing:YES];
+    LocationTableViewCell *cell = (LocationTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell.textField becomeFirstResponder];
 }
 
 - (IBAction)doorManButtonTapped:(id)sender {
@@ -260,6 +273,7 @@
     
     [locationTableViewCell.textField addTarget:self action:@selector(fieldTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     [locationTableViewCell.textField addTarget:self action:@selector(fieldTextFieldTapped:) forControlEvents:UIControlEventEditingDidBegin];
+    [locationTableViewCell.textField addTarget:self action:@selector(fieldTextFieldReturnTapped:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     locationTableViewCell.textField.placeholder = self.headings[indexPath.row];
     if (self.addressInfo && self.addressInfo.count > 0) {

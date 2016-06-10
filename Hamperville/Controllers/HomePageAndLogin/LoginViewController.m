@@ -12,6 +12,7 @@
 
 @interface LoginViewController() <UITextFieldDelegate> {
     NSInteger kLogoTopConstraintDefaultValue;
+    CGRect keyboardBounds;
 }
 
 @property(weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -26,6 +27,7 @@
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopConstraint;
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(strong, nonatomic) NSNotification *notification;
 
 @end
 
@@ -151,7 +153,7 @@
 #pragma mark Notification Methods
 
 - (void)keyboardWillShow:(NSNotification *)notification {
-    CGRect keyboardBounds;
+    _notification = notification;
     UITextField *textField = nil;
     UIView *viewOfTextField = nil;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
@@ -176,7 +178,7 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification {
-    CGRect keyboardBounds;
+    _notification = notification;
     [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardBounds];
     
     self.logoTopConstraint.constant = kLogoTopConstraintDefaultValue;
@@ -190,6 +192,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if(textField == self.userNameTextField) {
         [self.passwordTextField becomeFirstResponder];
+        [self keyboardWillShow:_notification];
     } else {
         [textField resignFirstResponder];
         [self loginButtonTapped:self.loginButton];
@@ -201,14 +204,14 @@
     [self.view endEditing:YES];
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (self.userNameTextField == textField) {
-        return YES;
-    } else {
-        NSString *modifiedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-        textField.text = modifiedString;
-        return NO;
-    }
-}
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    if (self.userNameTextField == textField) {
+//        return YES;
+//    } else {
+//        NSString *modifiedString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//        textField.text = modifiedString;
+//        return NO;
+//    }
+//}
 
 @end
