@@ -40,6 +40,9 @@
     if ([dict hasValueForKey:@"service_detail"]) {
         order.serviceDetail = [dict valueForKey:@"service_detail"];
     }
+    if ([dict hasValueForKey:@"coupons"]) {
+        order.coupons = [dict valueForKey:@"coupons"];
+    }
     return order;
 }
 
