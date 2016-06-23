@@ -78,7 +78,13 @@
                 [[Util sharedInstance]saveUser:[User new]];
                 [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
             } else {
-                [self showToastWithText:response on:Failure];
+                if ([response isEqualToString:@"You are not Login"]) {
+                    [[SignupInterface alloc] clearSavedSessionCookies];
+                    [[Util sharedInstance]saveUser:[User new]];
+                    [self.revealViewController dismissViewControllerAnimated:NO completion:nil];
+                } else {
+                    [self showToastWithText:response on:Failure];
+                }
             }
         }];
     }];

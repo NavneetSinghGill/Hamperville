@@ -70,17 +70,17 @@
     [self.orderDetailsTableView reloadData];
     [self.numberOfBagsTableView reloadData];
     
-    if ([[self.order.orderStatus lowercaseString] isEqualToString:@"pending"]) {
+    if ([[self.order.orderStatus lowercaseString] isEqualToString:@"pending"] || [[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
         self.acceptedOrderViewHeight.constant = 0;
         self.acceptedOrderView.clipsToBounds = YES;
         self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
         self.numberOfBagsTableViewHeightConstraint.constant = 0;
-    } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
-        self.pendingOrderViewHeight.constant = 0;
-        self.pendingOrderView.clipsToBounds = YES;
-        self.orderAmountLabel.text = [NSString stringWithFormat:@"$%.02f",(float)self.order.orderAmount];
-        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
-        self.numberOfBagsTableViewHeightConstraint.constant = 0;
+//    } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
+//        self.pendingOrderViewHeight.constant = 0;
+//        self.pendingOrderView.clipsToBounds = YES;
+//        self.orderAmountLabel.text = [NSString stringWithFormat:@"$%.02f",(float)self.order.orderAmount];
+//        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
+//        self.numberOfBagsTableViewHeightConstraint.constant = 0;
     } else {
         self.pendingOrderViewHeight.constant = 0;
         self.pendingOrderView.clipsToBounds = YES;
@@ -122,7 +122,11 @@
 #pragma mark - Over ridden methods
 
 - (void)backButtonTapped {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.isOpenedFromPushNotification) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - IBAction methods

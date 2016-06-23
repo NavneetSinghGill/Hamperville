@@ -12,5 +12,6 @@
 @interface OrderHistoryDetailsViewController : HampervilleViewController
 
 @property(strong, nonatomic) Order *order;
+@property(assign, nonatomic) BOOL isOpenedFromPushNotification;
 
 @end

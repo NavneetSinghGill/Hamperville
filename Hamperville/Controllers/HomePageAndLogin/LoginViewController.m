@@ -41,6 +41,10 @@
     [self initialSetup];
 }
 
+- (void)showOrderScreen:(NSNotification *)bnoti {
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([[NSUserDefaults standardUserDefaults]boolForKey:kRememberMe]) {

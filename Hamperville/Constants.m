@@ -25,6 +25,9 @@ NSString *keyDeviceToken = @"";
 NSString *kAppReceivedPushNotification = @"AppReceivedPushNotification";
 NSString *kPushNotificationMessage = @"kPushNotificationMessage";
 
+NSString *kShowOrderScreen = @"ShowOrderScreen";
+NSString *kPushNotificationData = @"PushNotificationData";
+
 #pragma mark - TableViewCell constants
 
 NSString *kLeftMenuTableViewCellNibName = @"LeftMenuTableViewCell";

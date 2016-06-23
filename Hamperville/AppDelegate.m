@@ -46,7 +46,11 @@ void uncaughtExceptionHandler(NSException *exception)
     }
     
     NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
-    
+//    [[NSUserDefaults standardUserDefaults] setObject: forKey:@"OrderForOrderHistoryScreen"]
+    NSDictionary* dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (dictionary != nil) {       
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[[dictionary valueForKey:@"aps"] valueForKey:@"data"],kPushNotificationData, nil] forKey:@"OrderForOrderHistoryScreen"];
+    }
     return YES;
 }
 
@@ -102,6 +106,8 @@ void uncaughtExceptionHandler(NSException *exception)
     if (userInfo != nil) {
         [[SMobiLogger sharedInterface] info:@"Application received remote notification." withDescription:[NSString stringWithFormat:@"At: %s, \n Aps: %@\n", __FUNCTION__, [userInfo valueForKey:@"aps"]]];
         [[NSNotificationCenter defaultCenter]postNotificationName:kAppReceivedPushNotification object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[[userInfo valueForKey:@"aps"] valueForKey:@"alert"],kPushNotificationMessage, nil]];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:kShowOrderScreen object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[[userInfo valueForKey:@"aps"] valueForKey:@"data"],kPushNotificationData, nil]];
     }
 }
 

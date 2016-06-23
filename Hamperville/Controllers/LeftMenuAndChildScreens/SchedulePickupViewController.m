@@ -807,7 +807,11 @@ typedef enum {
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
                 });
-                [self showToastWithText:@"Order created successfully." on:Success];
+                if (response == nil) {
+                    [self showToastWithText:@"Order created successfully." on:Success];
+                } else {
+                    [self showToastWithText:response on:Success];
+                }
             } else {
                 [self showToastWithText:response on:Failure];
                 if ([response isEqualToString:kNoNetworkAvailable]) {

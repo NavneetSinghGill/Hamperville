@@ -32,6 +32,9 @@ extern NSString *keyDeviceToken;
 extern NSString *kAppReceivedPushNotification;
 extern NSString *kPushNotificationMessage;
 
+extern NSString *kShowOrderScreen;
+extern NSString *kPushNotificationData;
+
 #pragma mark - TableViewCell constants
 
 extern NSString *kLeftMenuTableViewCellNibName;

@@ -8,6 +8,8 @@
 
 #import "HampervilleViewController.h"
 #import "SWRevealViewController.h"
+#import "Order.h"
+#import "OrderHistoryDetailsViewController.h"
 
 @implementation HampervilleViewController
 
@@ -17,6 +19,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(networkAvailability)
                                                  name:kNetworkAvailablability
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showOrderScreen:)
+                                                 name:kShowOrderScreen
                                                object:nil];
 }
 
@@ -31,6 +37,17 @@
 - (void)showPushNotificationMessage:(NSNotification *)notification {
     if (self.isViewLoaded && self.view.window && notification.userInfo != nil) {
         [self showToastWithText:[notification.userInfo valueForKey:kPushNotificationMessage] on:Success];
+    }
+}
+
+- (void)showOrderScreen:(NSNotification *)notification {
+    if (self.isViewLoaded && self.view.window) {
+        if (notification.userInfo != nil) {
+            Order *order = [Order getOrderFromDictionary:[notification.userInfo valueForKey:@"PushNotificationData"]];
+            OrderHistoryDetailsViewController *orderHistoryDetailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryDetailsViewController"];
+            orderHistoryDetailsViewController.order = order;
+            [self.navigationController pushViewController:orderHistoryDetailsViewController animated:YES];
+        }
     }
 }
 

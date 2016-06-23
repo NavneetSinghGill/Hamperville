@@ -19,6 +19,8 @@
 
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+@property(strong, nonatomic) NSNotification *notification;
+
 @end
 
 @implementation ChangePasswordViewController
@@ -27,6 +29,16 @@
     [super viewDidLoad];
     
     [self initialSetup];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    _notification = notification;
 }
 
 #pragma mark - Private methods
@@ -44,6 +56,10 @@
     self.currentPassTextField.layer.cornerRadius = self.nwPassTextField.layer.cornerRadius = self.reEnterNwPassTextField.layer.cornerRadius = 4;
     
     self.reEnterNwPassTextField.returnKeyType = UIReturnKeyDone;
+    
+    self.currentPassTextField.delegate = self;
+    self.nwPassTextField.delegate = self;
+    self.reEnterNwPassTextField.delegate = self;
 }
 
 - (void)backButtonTapped {
@@ -96,8 +112,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.currentPassTextField) {
         [self.nwPassTextField becomeFirstResponder];
+//        [self keyboardWillShow:_notification];
     } else if (textField == self.nwPassTextField) {
         [self.reEnterNwPassTextField becomeFirstResponder];
+//        [self keyboardWillShow:_notification];
     } else {
         [self.view endEditing:YES];
     }

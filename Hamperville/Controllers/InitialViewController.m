@@ -9,6 +9,8 @@
 #import "InitialViewController.h"
 #import "HomeViewController.h"
 #import <SWRevealViewController.h>
+#import "OrderHistoryDetailsViewController.h"
+#import "Order.h"
 
 @interface InitialViewController ()
 
@@ -28,14 +30,31 @@
 
 - (void)setAppropriateController {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
-            HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-            UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
-            navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentViewController:navController animated:YES completion:nil];
-        } else {
-            [self performSegueWithIdentifier:kToSWController sender:self];
-        }
+        
+            if ([[NSUserDefaults standardUserDefaults]objectForKey:@"OrderForOrderHistoryScreen"] != nil) {
+                Order *order = [Order getOrderFromDictionary:[[[NSUserDefaults standardUserDefaults]objectForKey:@"OrderForOrderHistoryScreen"] valueForKey:@"PushNotificationData"]];
+                
+                OrderHistoryDetailsViewController *orderHistoryDetailsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderHistoryDetailsViewController"];
+                orderHistoryDetailsViewController.order = order;
+                orderHistoryDetailsViewController.isOpenedFromPushNotification = YES;
+                
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:orderHistoryDetailsViewController];
+                navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                
+                [[NSUserDefaults standardUserDefaults]setObject:nil forKey:@"OrderForOrderHistoryScreen"];
+                
+                [self presentViewController:navController animated:YES completion:nil];
+                return ;
+            }
+            
+            if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
+                HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
+                navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                [self presentViewController:navController animated:YES completion:nil];
+            } else {
+                [self performSegueWithIdentifier:kToSWController sender:self];
+            }
     });
 }
 

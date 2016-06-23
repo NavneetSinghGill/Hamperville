@@ -17,6 +17,7 @@
 #import "SubscriptionViewController.h"
 #import "PriceListViewController.h"
 #import "HelpViewController.h"
+#import "Order.h"
 
 @interface LeftMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -240,6 +241,10 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.helpViewController];
         [self.revealViewController pushFrontViewController:navigationController animated:YES];
     });
+}
+
+- (void)showOrderScreen:(NSNotification *)notification {
+    
 }
 
 @end
