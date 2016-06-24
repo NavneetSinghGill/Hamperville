@@ -73,8 +73,8 @@
     if ([[self.order.orderStatus lowercaseString] isEqualToString:@"pending"] || [[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
         self.acceptedOrderViewHeight.constant = 0;
         self.acceptedOrderView.clipsToBounds = YES;
-        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
-        self.numberOfBagsTableViewHeightConstraint.constant = 0;
+//        self.numberOfBagsHeaderSuperViewTopConstraint.constant = -self.numberOfBagsHeaderSuperView.frame.size.height;
+//        self.numberOfBagsTableViewHeightConstraint.constant = 0;
 //    } else if ([[self.order.orderStatus lowercaseString] isEqualToString:@"accepted"]) {
 //        self.pendingOrderViewHeight.constant = 0;
 //        self.pendingOrderView.clipsToBounds = YES;
@@ -89,7 +89,7 @@
 }
 
 - (void)setupArrays {
-    self.orderDetailOptions = [NSMutableArray arrayWithObjects:@"Order ID", @"Pick up date", @"Pick up time slot", @"Delivery date", @"Delivery time slot", @"Order status", @"Coupons", nil];
+    self.orderDetailOptions = [NSMutableArray arrayWithObjects:@"Order ID", @"Pick up date", @"Pick up time slot", @"Drop Off date", @"Drop Off time slot", @"Order status", @"Coupons", nil];
     
     self.numberOfBagsOptions = [NSMutableArray array];
     for (NSDictionary *dict in self.order.serviceDetail) {

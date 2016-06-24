@@ -12,7 +12,7 @@
 
 @property(strong, nonatomic) NSString *deliveryDate;
 @property(strong, nonatomic) NSString *deliveryTimeSlot;
-@property(assign, nonatomic) NSInteger orderAmount;
+@property(assign, nonatomic) float orderAmount;
 @property(strong, nonatomic) NSString *orderID;
 @property(strong, nonatomic) NSString *orderNumber;
 @property(strong, nonatomic) NSString *orderStatus;

@@ -43,7 +43,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    self.options = [NSArray arrayWithObjects:@"How do we pickup and deliver", @"Permanent", @"Wash & Fold", @"Notification", @"Special Care", @"Wash and Press", nil];
+    self.options = [NSArray arrayWithObjects:@"How do we pickup and drop Off", @"Permanent", @"Wash & Fold", @"Notification", @"Special Care", @"Wash and Press", nil];
     self.optionImages = [NSArray arrayWithObjects:@"Pref_pickup", @"Pref_permanenent", @"Pref_wasandfold", @"Pref_notification", @"Pref_specialCare", @"washAndpress", nil];
     
     //TAGS

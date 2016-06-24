@@ -30,6 +30,10 @@
     [super viewDidLoad];
 
     [self initialSetup];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     [self.activityIndicator startAnimating];
     [[RequestManager alloc] getWashAndPressPreferences:^(BOOL success, id response) {

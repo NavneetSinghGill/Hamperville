@@ -48,6 +48,12 @@
     [self getPriceList];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [super networkAvailability];
+}
+
 #pragma mark - Private methods
 
 - (void)initialSetup {

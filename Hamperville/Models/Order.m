@@ -20,7 +20,7 @@
         order.deliveryTimeSlot = [dict valueForKey:@"delivery_time_slot"];
     }
     if ([dict hasValueForKey:@"total_amount"]) {
-        order.orderAmount = [[dict valueForKey:@"total_amount"] integerValue];
+        order.orderAmount = [[dict valueForKey:@"total_amount"] floatValue];
     }
     if ([dict hasValueForKey:@"order_number"]) {
         order.orderNumber = [NSString stringWithFormat:@"%ld",(long)[[dict valueForKey:@"order_number"] integerValue]];
@@ -47,7 +47,7 @@
 }
 
 + (void)printOrder:(Order *)order {
-    NSLog(@"\n\nOrder ID\t\t: %@ \nPickup date\t\t: %@ \nPickup timeslot\t: %@ \nDelivery date\t\t: %@ \nDelivery timeslot\t: %@ \nOrder amount\t\t: %ld \nOrder status\t\t: %@ \nOrder service detail: %@",order.orderID,order.pickupDate,order.pickupTimeSlot,order.deliveryDate,order.deliveryTimeSlot,(long)order.orderAmount,order.orderStatus,order.serviceDetail);
+    NSLog([NSString stringWithFormat:@"\n\nOrder ID\t\t: %@ \nPickup date\t\t: %@ \nPickup timeslot\t: %@ \nDelivery date\t\t: %@ \nDelivery timeslot\t: %@ \nOrder amount\t\t: %ld \nOrder status\t\t: %@ \nOrder service detail: %@",order.orderID,order.pickupDate,order.pickupTimeSlot,order.deliveryDate,order.deliveryTimeSlot,(long)order.orderAmount,order.orderStatus,order.serviceDetail]);
 }
 
 @end

@@ -121,7 +121,7 @@ typedef enum {
         [self schedulePickupAPIcall];
     }
     
-    NSDate *startDate = !_isThreshHoldTimePassed ? [NSDate date] : [[NSDate date] dateByAddingTimeInterval:_dayInSeconds];
+    NSDate *startDate = _isThreshHoldTimePassed ? [NSDate date] : [[NSDate date] dateByAddingTimeInterval:_dayInSeconds];
     [self setPickupEntriesForDate:startDate];
     [self setDropOffEntriesForDate:startDate];
     
