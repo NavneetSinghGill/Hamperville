@@ -36,6 +36,10 @@
 @property(assign, nonatomic) NSInteger selectedOptionIndex;
 
 @property(strong, nonatomic) NSMutableArray *entries;
+@property(strong, nonatomic) NSMutableArray *entryValues;
+
+@property(assign, nonatomic) NSInteger rowNumber;
+@property(assign, nonatomic) NSInteger componentNumber;
 
 @end
 
@@ -117,6 +121,7 @@
         self.allEntries = [NSMutableArray array];
         self.allOptions = [NSMutableArray array];
         self.selectedOptionsIDs = [NSMutableArray array];
+        self.entryValues = [NSMutableArray array];
         
         if (success) {
             self.pickerView.hidden = NO;
@@ -154,6 +159,7 @@
                 NSDictionary *optionsPart = option[count];
                 if ([[optionsPart valueForKey:@"is_selected"] boolValue] == YES) {
                     [self.selectedOptionsIDs addObject:[optionsPart valueForKey:@"id"]];
+                    [self.entryValues addObject:[optionsPart valueForKey:@"name"]];
                     break;
                 }
             }
@@ -186,6 +192,7 @@
     for (count = 0; count < self.singleOption.count; count++) {
         NSDictionary *optionsPart = self.singleOption[count];
         if ([[optionsPart valueForKey:@"is_selected"] boolValue] == YES) {
+            self.rowNumber = count;
             break;
         }
     }
@@ -264,6 +271,21 @@
 #pragma mark - IBaction methods
 
 - (IBAction)doneButtonTapped:(id)sender {
+    NSDictionary *optionsSelectedProduct = self.singleOption[self.rowNumber];
+    self.selectedOptionsIDs[self.selectedOptionIndex] = [optionsSelectedProduct valueForKey:@"id"];
+    self.saveButton.selected = YES;
+    
+    NSMutableArray *option = self.allOptions[self.selectedOptionIndex];
+    for (NSMutableDictionary *product in option) {
+        [product setValue:[NSNumber numberWithBool:NO] forKey:@"is_selected"];
+    }
+    NSDictionary *selectedProduct = option[self.rowNumber];
+    [selectedProduct setValue:[NSNumber numberWithBool:YES] forKey:@"is_selected"];
+    ((NSMutableArray *)self.allOptions[self.selectedOptionIndex])[self.rowNumber] = selectedProduct;
+    self.entryValues[self.selectedOptionIndex] = [selectedProduct valueForKey:@"name"];
+    
+    [self.tableView reloadData];
+    
     self.pickerSuperViewBottomConstraint.constant = pickerSuperViewDefaultBottomContraintValue;
     [UIView animateWithDuration:0.5 animations:^{
         [self.view layoutIfNeeded];
@@ -301,6 +323,7 @@
     dropdownTableViewCell.name.text = [self.entries objectAtIndex:indexPath.row];
     dropdownTableViewCell.dropDownDelegate = self;
     dropdownTableViewCell.index = indexPath.row;
+    dropdownTableViewCell.selectLabel.text = [self.entryValues objectAtIndex:indexPath.row];
     dropdownTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return dropdownTableViewCell;
@@ -340,17 +363,8 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSDictionary *optionsSelectedProduct = self.singleOption[row];
-    self.selectedOptionsIDs[self.selectedOptionIndex] = [optionsSelectedProduct valueForKey:@"id"];
-    self.saveButton.selected = YES;
-    
-    NSMutableArray *option = self.allOptions[self.selectedOptionIndex];
-    for (NSMutableDictionary *product in option) {
-        [product setValue:[NSNumber numberWithBool:NO] forKey:@"is_selected"];
-    }
-    NSDictionary *selectedProduct = option[row];
-    [selectedProduct setValue:[NSNumber numberWithBool:YES] forKey:@"is_selected"];
-    ((NSMutableArray *)self.allOptions[self.selectedOptionIndex])[row] = selectedProduct;
+    self.rowNumber = row;
+    self.componentNumber = component;
     
     [self.view endEditing:YES];
 }

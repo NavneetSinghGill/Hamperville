@@ -47,6 +47,9 @@
         if ([dataDictionary hasValueForKey:@"coupon_code"]) {
             [_parameters setValue:[dataDictionary valueForKey:@"coupon_code"] forKey:@"coupon_code"];
         }
+        if ([dataDictionary hasValueForKey:@"notes"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"notes"] forKey:@"notes"];
+        }
         self.urlPath = apiRequestPickup;
     }
     return self;
@@ -89,6 +92,9 @@
         }
         if ([dataDictionary hasValueForKey:@"drop_off_time_slot_id"]) {
             [_parameters setValue:[dataDictionary valueForKey:@"drop_off_time_slot_id"] forKey:@"drop_off_time_slot_id"];
+        }
+        if ([dataDictionary hasValueForKey:@"notes"]) {
+            [_parameters setValue:[dataDictionary valueForKey:@"notes"] forKey:@"notes"];
         }
         
         self.urlPath = apiModifyOrder;

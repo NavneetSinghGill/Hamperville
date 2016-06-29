@@ -43,6 +43,9 @@
     if ([dict hasValueForKey:@"coupons"]) {
         order.coupons = [dict valueForKey:@"coupons"];
     }
+    if ([dict hasValueForKey:@"notes"]) {
+        order.specialNotes = [dict valueForKey:@"notes"];
+    }
     return order;
 }
 

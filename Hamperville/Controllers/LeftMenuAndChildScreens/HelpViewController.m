@@ -154,7 +154,7 @@
         [self showToastWithText:@"Enter title" on:Failure];
         return;
     }
-    if (self.descriptionTextView.text.length == 0 || [self.descriptionTextView.text isEqualToString:@"Write your text here"]) {
+    if (self.descriptionTextView.text.trim.length == 0 || [self.descriptionTextView.text isEqualToString:@"Write your text here"]) {
         [self showToastWithText:@"Enter description" on:Failure];
         return;
     }

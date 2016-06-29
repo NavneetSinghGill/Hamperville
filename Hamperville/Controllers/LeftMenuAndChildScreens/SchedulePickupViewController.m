@@ -96,6 +96,8 @@ typedef enum {
 
 @property(assign, nonatomic) BOOL isUniversalCouponApplied;
 
+@property(weak, nonatomic) IBOutlet UITextView *specialNotesTextView;
+
 @end
 
 @implementation SchedulePickupViewController
@@ -234,6 +236,9 @@ typedef enum {
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    self.specialNotesTextView.text = @"Write special notes";
+    self.specialNotesTextView.textColor = [UIColor lightGrayColor];
     
     UINib *couponTableViewNib = [UINib nibWithNibName:kCouponTableViewCellNibName bundle:nil];
     [self.couponTableView registerNib:couponTableViewNib forCellReuseIdentifier:kCouponTableViewCellIdentifier];
@@ -412,6 +417,11 @@ typedef enum {
             break;
         }
     }
+    
+    self.specialNotesTextView.text = order.specialNotes;
+    [self.specialNotesTextView setTextColor:[UIColor blackColor]];
+    
+    [self scrollTextViewToBottom:self.specialNotesTextView];
     [self resizeTableViewWithAnimation];
 }
 
@@ -813,6 +823,10 @@ typedef enum {
     
     [dataDictionary setValue:commaSeparatedCouponIDs forKey:@"coupon_code"];
     
+    if (self.specialNotesTextView.text.trim.length > 0 && ![self.specialNotesTextView.text.trim isEqualToString:@"Write special notes"]) {
+        dataDictionary[@"notes"] = self.specialNotesTextView.text.trim;
+    }
+    
     [self.activityIndicator startAnimating];
     if (!self.isModifyModeOn) {
         [[RequestManager alloc] postRequestPickupWithDataDictionary:dataDictionary withCompletionBlock:^(BOOL success, id response) {
@@ -836,6 +850,9 @@ typedef enum {
                     
                     [self resizeTableViewWithAnimation];
                     reloadCollectionViewToDefault = NO;
+                    
+                    self.specialNotesTextView.text = @"Write special notes";
+                    self.specialNotesTextView.textColor = [UIColor lightGrayColor];
                 });
                 if (response == nil) {
                     [self showToastWithText:@"Order created successfully." on:Success];
@@ -848,6 +865,8 @@ typedef enum {
                     NSDate *startDate = !_isThreshHoldTimePassed ? [NSDate date] : [[NSDate date] dateByAddingTimeInterval:_dayInSeconds];
                     [self setPickupEntriesForDate:startDate];
                     [self setDropOffEntriesForDate:startDate];
+                    self.pickupRightArrowButton.hidden = NO;
+                    self.dropOffRightArrowButton.hidden = NO;
                 }
             }
         }];
@@ -1023,6 +1042,41 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return kCouponTableViewDefaultHeight;
+}
+
+#pragma mark - TextView delegate methods -
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"Write special notes"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor]; //optional
+    }
+    [textView becomeFirstResponder];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""]) {
+        textView.text = @"Write special notes";
+        textView.textColor = [UIColor lightGrayColor]; //optional
+    }
+    [textView resignFirstResponder];
+}
+
+-(void)scrollTextViewToBottom:(UITextView *)textView {
+    if(textView.text.length > 0 ) {
+        NSRange bottom = NSMakeRange(textView.text.length -1, 1);
+        [textView scrollRangeToVisible:bottom];
+    }
+    
+}
+
+#pragma mark - TextField delegate methods -
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.specialNotesTextView becomeFirstResponder];
+    return NO;
 }
 
 #pragma mark - Scrollview delegate

@@ -19,6 +19,7 @@
 		3B4C6B5E1CDBED86003B22B0 /* PermanentPreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B5D1CDBED86003B22B0 /* PermanentPreferencesViewController.m */; };
 		3B4C6B651CDBEE0B003B22B0 /* DropdownTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */; };
 		3B4C6B661CDBEE0B003B22B0 /* DropdownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */; };
+		3B4DCAAC1D23E09E008149B7 /* NSString+Properties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4DCAAB1D23E09E008149B7 /* NSString+Properties.m */; };
 		3B4DE8101D05BBD500E6AD01 /* WashAndPressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B4DE80F1D05BBD500E6AD01 /* WashAndPressViewController.m */; };
 		3B52FB891D01B57900A587DD /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB771D01B57800A587DD /* .gitignore */; };
 		3B52FB8A1D01B57900A587DD /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3B52FB781D01B57800A587DD /* LICENSE.txt */; };
@@ -140,6 +141,8 @@
 		3B4C6B621CDBEE0B003B22B0 /* DropdownTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownTableViewCell.h; sourceTree = "<group>"; };
 		3B4C6B631CDBEE0B003B22B0 /* DropdownTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownTableViewCell.m; sourceTree = "<group>"; };
 		3B4C6B641CDBEE0B003B22B0 /* DropdownTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownTableViewCell.xib; sourceTree = "<group>"; };
+		3B4DCAAA1D23E09E008149B7 /* NSString+Properties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Properties.h"; sourceTree = "<group>"; };
+		3B4DCAAB1D23E09E008149B7 /* NSString+Properties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Properties.m"; sourceTree = "<group>"; };
 		3B4DE80E1D05BBD500E6AD01 /* WashAndPressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WashAndPressViewController.h; sourceTree = "<group>"; };
 		3B4DE80F1D05BBD500E6AD01 /* WashAndPressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WashAndPressViewController.m; sourceTree = "<group>"; };
 		3B52FB771D01B57800A587DD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 			children = (
 				3BCD37C71CBE27ED00DE4E91 /* Util.h */,
 				3BCD37C81CBE27ED00DE4E91 /* Util.m */,
+				3B4DCAAA1D23E09E008149B7 /* NSString+Properties.h */,
+				3B4DCAAB1D23E09E008149B7 /* NSString+Properties.m */,
 			);
 			name = Util;
 			path = Models;
@@ -951,6 +956,7 @@
 				3BE45CA11CBF727400C03369 /* ForgotPasswordViewController.m in Sources */,
 				3BFAB85D1CE9AACF002864EC /* ServiceInfo.m in Sources */,
 				3B4DE8101D05BBD500E6AD01 /* WashAndPressViewController.m in Sources */,
+				3B4DCAAC1D23E09E008149B7 /* NSString+Properties.m in Sources */,
 				3BF182481CB64D2E00E1CB3E /* RequestManager.m in Sources */,
 				3B52FB8D1D01B57900A587DD /* SLog.m in Sources */,
 				3B69E4431CD9F9BE00F36F43 /* PickupAndDeliverViewController.m in Sources */,

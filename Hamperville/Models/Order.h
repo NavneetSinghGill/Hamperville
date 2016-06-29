@@ -20,6 +20,7 @@
 @property(strong, nonatomic) NSString *pickupTimeSlot;
 @property(strong, nonatomic) NSMutableArray *serviceDetail;
 @property(strong, nonatomic) NSString *coupons;
+@property(strong, nonatomic) NSString *specialNotes;
 
 + (Order *)getOrderFromDictionary:(NSDictionary *)dict;
 + (void)printOrder:(Order *)order;

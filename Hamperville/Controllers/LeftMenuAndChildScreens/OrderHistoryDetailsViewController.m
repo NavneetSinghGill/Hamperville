@@ -89,7 +89,7 @@
 }
 
 - (void)setupArrays {
-    self.orderDetailOptions = [NSMutableArray arrayWithObjects:@"Order ID", @"Pick up date", @"Pick up time slot", @"Drop Off date", @"Drop Off time slot", @"Order status", @"Coupons", nil];
+    self.orderDetailOptions = [NSMutableArray arrayWithObjects:@"Order ID", @"Pick up date", @"Pick up time slot", @"Drop Off date", @"Drop Off time slot", @"Order status", @"Coupons", @"Special notes", nil];
     
     self.numberOfBagsOptions = [NSMutableArray array];
     for (NSDictionary *dict in self.order.serviceDetail) {
@@ -118,6 +118,7 @@
     [self.orderDetailEntries addObject:self.order.deliveryTimeSlot];
     [self.orderDetailEntries addObject:self.order.orderStatus];
     [self.orderDetailEntries addObject:self.order.coupons];
+    [self.orderDetailEntries addObject:self.order.specialNotes ? self.order.specialNotes:@"-"];
 }
 
 #pragma mark - Over ridden methods

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Regular.ttf">
@@ -29,7 +29,7 @@
                         <state key="normal" image="Pref_dropDown"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDc-CA-b0V" userLabel="Select label">
-                        <rect key="frame" x="225" y="7" width="35" height="30"/>
+                        <rect key="frame" x="225" y="7" width="40" height="30"/>
                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -60,11 +60,12 @@
                     <constraint firstAttribute="trailing" secondItem="T0a-2W-ABT" secondAttribute="trailing" constant="30" id="ryC-3r-HI5"/>
                     <constraint firstItem="gWl-o5-FDY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="scS-gm-PYj"/>
                     <constraint firstItem="T0a-2W-ABT" firstAttribute="leading" secondItem="ukM-N2-gpT" secondAttribute="leading" id="tKf-kb-Cam"/>
-                    <constraint firstItem="T0a-2W-ABT" firstAttribute="trailing" secondItem="RDc-CA-b0V" secondAttribute="trailing" constant="30" id="xUb-Rt-JEB"/>
+                    <constraint firstItem="T0a-2W-ABT" firstAttribute="trailing" secondItem="RDc-CA-b0V" secondAttribute="trailing" constant="25" id="xUb-Rt-JEB"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="name" destination="gWl-o5-FDY" id="JgA-hj-kIu"/>
+                <outlet property="selectLabel" destination="RDc-CA-b0V" id="aVg-cn-psk"/>
             </connections>
         </tableViewCell>
     </objects>

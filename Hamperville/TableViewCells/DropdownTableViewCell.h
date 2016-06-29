@@ -18,6 +18,7 @@
 
 @property(assign, nonatomic) NSInteger index;
 @property(weak, nonatomic) IBOutlet UILabel *name;
+@property(weak, nonatomic) IBOutlet UILabel *selectLabel;
 @property(strong, nonatomic) id<DropDownDelegate> dropDownDelegate;
 
 @end
