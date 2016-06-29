@@ -97,7 +97,7 @@
 
 - (void)initialSetup {
     
-    NSArray *nameOfImages = [NSArray arrayWithObjects:@"SwipeImage1",@"SwipeImage1",@"SwipeImage1",@"SwipeImage1",@"SwipeImage1", nil];
+    NSArray *nameOfImages = [NSArray arrayWithObjects:@"SwipeImage1", nil];
     self.allImages = [NSMutableArray array];
     
     for (NSString *image in nameOfImages) {
@@ -118,6 +118,8 @@
         if(self.allImages.count > 1)
         {
             self.pageControl.hidden = NO;
+        } else {
+            self.pageControl.hidden = YES;
         }
         self.pageControl.numberOfPages = self.allImages.count;
         self.pageControl.currentPage = 0;
@@ -125,8 +127,8 @@
         if(!self.pageViewController)
         {
             self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomePageViewController"];
-            self.pageViewController.dataSource = self;
-            self.pageViewController.delegate = self;
+//            self.pageViewController.dataSource = self;
+//            self.pageViewController.delegate = self;
             _pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height + 37);
             [self addChildViewController:_pageViewController];
             [self.view addSubview:_pageViewController.view];
