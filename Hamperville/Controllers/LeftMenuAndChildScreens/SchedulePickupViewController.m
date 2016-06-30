@@ -179,6 +179,11 @@ typedef enum {
             self.isThreshHoldTimePassed = [[response valueForKey:@"is_threshold"] boolValue];
             self.oneDayDeliveryMessage.text = [NSString stringWithFormat:@"Next day Drop Off charge is $ %@",_oneDayDeliveryCharge];
             
+            if (((NSString *)[response valueForKey:@"notes"]).trim.length == 0) {
+                self.specialNotesTextView.text = @"Write special notes";
+                self.specialNotesTextView.textColor = [UIColor lightGrayColor];
+            }
+            
             [self.collectionView reloadData];
             [self.couponTableView reloadData];
             
@@ -418,8 +423,13 @@ typedef enum {
         }
     }
     
-    self.specialNotesTextView.text = order.specialNotes;
-    [self.specialNotesTextView setTextColor:[UIColor blackColor]];
+    if (order.specialNotes.trim.length != 0) {
+        self.specialNotesTextView.text = order.specialNotes;
+        [self.specialNotesTextView setTextColor:[UIColor blackColor]];
+    } else {
+        self.specialNotesTextView.text = @"Write special notes";
+        self.specialNotesTextView.textColor = [UIColor lightGrayColor];
+    }
     
     [self scrollTextViewToBottom:self.specialNotesTextView];
     [self resizeTableViewWithAnimation];
@@ -798,13 +808,13 @@ typedef enum {
     NSInteger selectedIndex = [self.pickupPickerView selectedRowInComponent:0];
     NSDictionary *selectedPickupTimeDictionary = [self.pickupSlots objectAtIndex:selectedIndex];
     //    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"pick_up_time"];
-    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentPickupDate timeIntervalSince1970]] forKey:@"pick_up_time"];
+    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentPickupDate timeIntervalSince1970]*1000] forKey:@"pick_up_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"pick_up_time_slot_id"];
     
     selectedIndex = [self.dropOffPickerView selectedRowInComponent:0];
     selectedPickupTimeDictionary = [self.dropOffSlots objectAtIndex:selectedIndex];
 //    [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"time_slot"] forKey:@"drop_off_time"];
-    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentDropOffDate timeIntervalSince1970]] forKey:@"drop_off_time"];
+    [dataDictionary setValue:[NSString stringWithFormat:@"%f",[self.currentDropOffDate timeIntervalSince1970]*1000] forKey:@"drop_off_time"];
     [dataDictionary setValue:[selectedPickupTimeDictionary valueForKey:@"id"] forKey:@"drop_off_time_slot_id"];
     
     //Get comma seprated coupons
@@ -823,7 +833,9 @@ typedef enum {
     
     [dataDictionary setValue:commaSeparatedCouponIDs forKey:@"coupon_code"];
     
-    if (self.specialNotesTextView.text.trim.length > 0 && ![self.specialNotesTextView.text.trim isEqualToString:@"Write special notes"]) {
+    if ([self.specialNotesTextView.text.trim isEqualToString:@"Write special notes"]) {
+        dataDictionary[@"notes"] = kEmptyString;
+    } else {
         dataDictionary[@"notes"] = self.specialNotesTextView.text.trim;
     }
     

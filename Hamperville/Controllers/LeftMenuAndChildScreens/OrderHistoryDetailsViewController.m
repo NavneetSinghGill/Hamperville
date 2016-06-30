@@ -118,7 +118,7 @@
     [self.orderDetailEntries addObject:self.order.deliveryTimeSlot];
     [self.orderDetailEntries addObject:self.order.orderStatus];
     [self.orderDetailEntries addObject:self.order.coupons];
-    [self.orderDetailEntries addObject:self.order.specialNotes ? self.order.specialNotes:@"-"];
+    [self.orderDetailEntries addObject:self.order.specialNotes.trim.length ? self.order.specialNotes:@"-"];
 }
 
 #pragma mark - Over ridden methods
