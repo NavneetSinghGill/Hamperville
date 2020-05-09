@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B4DF02D3042FC6788DA515DFBD355780454F47D7",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B4DF02D3042FC6788DA515DFBD355780454F47D7" : 0,
+    "2E1F3B6D184B7A33CB230734F4101D6EC9BA482C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A6A12B11-C140-4C34-836E-1FEB67B2A529",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B4DF02D3042FC6788DA515DFBD355780454F47D7" : "hamperville\/",
+    "2E1F3B6D184B7A33CB230734F4101D6EC9BA482C" : "hamperville\/SMobiLogger\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Hamperville",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Hamperville.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/zsheikh-systango\/SMobiLogger.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2E1F3B6D184B7A33CB230734F4101D6EC9BA482C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/nsgill_systango\/hamperville.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B4DF02D3042FC6788DA515DFBD355780454F47D7"
+    }
+  ]
+}

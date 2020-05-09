@@ -96,7 +96,7 @@
 
 #pragma mark - Navigation property setters
 
-- (void)setLeftMenuButtons:(NSArray *)barButtons {
+- (void)setLeftMenuButtons:(NSArray<UIBarButtonItem *> *)barButtons {
     self.navigationItem.leftBarButtonItems = barButtons;
 }
 

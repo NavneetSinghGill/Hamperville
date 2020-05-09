@@ -47,14 +47,14 @@
                 return ;
             }
             
-            if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
-                HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
-                navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-                [self presentViewController:navController animated:YES completion:nil];
-            } else {
+//            if ([[NSUserDefaults standardUserDefaults]valueForKey:kUserID] == nil) {
+//                HomeViewController *homeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+//                UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
+//                navController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//                [self presentViewController:navController animated:YES completion:nil];
+//            } else {
                 [self performSegueWithIdentifier:kToSWController sender:self];
-            }
+//            }
     });
 }
 

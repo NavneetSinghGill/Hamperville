@@ -1131,7 +1131,7 @@
 			baseConfigurationReference = 0BD909E593FA3A419612F6C5 /* Pods-Hamperville.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";
 				GCC_PREFIX_HEADER = Hamperville/HampervillePrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1170,7 +1170,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Systango.Mobile.Hamperville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8fc1f4a-bd00-490c-987d-3ba8c2cf5adc";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1180,7 +1180,7 @@
 			baseConfigurationReference = 9754A2394EE50AB15EC4D7D6 /* Pods-Hamperville.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nick Mirakov (E94VHYGLSY)";
 				GCC_PREFIX_HEADER = Hamperville/HampervillePrefixHeader.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1219,7 +1219,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Systango.Mobile.Hamperville;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a8fc1f4a-bd00-490c-987d-3ba8c2cf5adc";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
